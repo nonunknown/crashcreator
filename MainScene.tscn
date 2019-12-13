@@ -3,7 +3,7 @@
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/obj_crate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Editor/PathManager.gd" type="Script" id=3]
-[ext_resource path="res://models/levels/lv_toadvillage/model_tv_ground_t0_b0_e0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gameplay/level/tv/model_tv_ground_t0_b0_e0.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "
@@ -246,6 +246,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "S"
 
+[node name="btLoad" type="Button" parent="Control/ItemList"]
+margin_left = 51.0
+margin_right = 70.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "L"
+
 [node name="Gameplay" type="Spatial" parent="."]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299249, 0.247665, -0.293245 )
@@ -284,9 +292,16 @@ amtWumpa = 5
 transform = Transform( -0.999518, -0.0116422, 0.0287952, -0.00343725, 0.962859, 0.269983, -0.0308689, 0.269754, -0.962434, 0, 1.23022, 0.337319 )
 current = true
 script = SubResource( 1 )
+mouse_mode = 0
+mouselook = false
 
-[node name="Path" type="Spatial" parent="."]
+[node name="Level" type="Spatial" parent="." groups=[
+"gp_level",
+]]
+
+[node name="Path" type="Spatial" parent="Level"]
 script = ExtResource( 3 )
 path = ExtResource( 4 )
-[connection signal="pressed" from="Control/ItemList/btAddPath" to="Path" method="_on_btAddPath_pressed"]
-[connection signal="pressed" from="Control/ItemList/btSave" to="Path" method="_on_btSave_pressed"]
+[connection signal="pressed" from="Control/ItemList/btAddPath" to="Level/Path" method="_on_btAddPath_pressed"]
+[connection signal="pressed" from="Control/ItemList/btSave" to="Level/Path" method="_on_btSave_pressed"]
+[connection signal="pressed" from="Control/ItemList/btLoad" to="Level/Path" method="_on_btLoad_pressed"]

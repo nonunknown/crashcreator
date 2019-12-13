@@ -6,7 +6,6 @@ var velocity = Vector3()
 
 var camera
 
-
 const SPEED = 6
 
 const ACCELERATION = 3
