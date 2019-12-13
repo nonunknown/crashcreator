@@ -19,20 +19,20 @@ tracks/0/keys = {
 }
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.139342, 0.115052, 0.104857 )
+extents = Vector3( 0.133956, 0.149687, 0.0502718 )
 
-[node name="obj_Wumpa" type="Spatial"]
+[node name="obj_Wumpa" type="RigidBody"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 
 [node name="Sprite" type="Sprite3D" parent="."]
 texture = ExtResource( 1 )
 hframes = 14
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+autoplay = "anim_wumpa"
 anims/anim_wumpa = SubResource( 1 )
 
-[node name="StaticBody" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 2 )
-disabled = true

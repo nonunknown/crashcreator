@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/crate.dae-a3ea04874048d0b7885c3967957cf5f6.scn"
+path="res://.import/crate.dae-adcbbb7263c04e8309a42c7d28932c25.scn"
 
 [deps]
 
-source_file="res://models/items/crate.dae"
-dest_files=[ "res://.import/crate.dae-a3ea04874048d0b7885c3967957cf5f6.scn" ]
+source_file="res://models/items/crate/crate.dae"
+dest_files=[ "res://.import/crate.dae-adcbbb7263c04e8309a42c7d28932c25.scn" ]
 
 [params]
 

@@ -1,7 +1,6 @@
 extends "res://scripts/gameplay/ItemCrate.gd"
 
-func _ready():
-	pass
+
 
 func _on_Attacked():
 	SpawnWumpa()
@@ -11,8 +10,5 @@ func _on_Jumped():
 	_on_Attacked()
 	
 
-
-
-
-func _on_btGenMesh_pressed():
+func _on_Button_pressed():
 	_on_Attacked()

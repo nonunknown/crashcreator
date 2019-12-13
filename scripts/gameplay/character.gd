@@ -41,21 +41,25 @@ func _physics_process(delta):
  
 
 	if(Input.is_action_pressed("ui_up")):
-
+		$crashbandicoot/model.rotation_degrees = Vector3(90,180,0)
+		
 		dir += -camera.basis[2]
 
 	if(Input.is_action_pressed("ui_down")):
-
+		$crashbandicoot/model.rotation_degrees = Vector3(90,0,0)
 		dir += camera.basis[2]
 
 	if(Input.is_action_pressed("ui_left")):
+		$crashbandicoot/model.rotation_degrees = Vector3(90,-90,0)
 
 		dir += -camera.basis[0]
 
 	if(Input.is_action_pressed("ui_right")):
+		$crashbandicoot/model.rotation_degrees = Vector3(90,90,0)
 
 		dir += camera.basis[0]
-
+		
+	
  
 
 	dir.y = 0
@@ -97,3 +101,6 @@ func _physics_process(delta):
  
 
 	velocity = move_and_slide(velocity, Vector3(0,1,0))	
+	if (Input.is_action_just_pressed("ui_jump")):
+		
+		velocity.y -= 100

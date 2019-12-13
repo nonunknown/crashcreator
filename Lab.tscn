@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://gameplay/obj_crate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/obj_Wumpa.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gameplay/obj_aku.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameplay/obj_life.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gameplay/obj_tnt.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=6]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1, 0.0424342, 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Spatial
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Button2_pressed():
+	$obj_crate._on_Jumped()
+	pass # Replace with function body.
+"
+
+[node name="Lab" type="Spatial"]
+
+[node name="Button" type="Button" parent="."]
+margin_top = 43.0
+margin_right = 170.0
+margin_bottom = 70.0
+text = "Destroy"
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 2.0
+margin_top = 122.0
+margin_right = 172.0
+margin_bottom = 151.0
+text = "Jump On TNT"
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+editor/display_folded = true
+transform = Transform( 9.13981, 0, 0, 0, 9.13981, 0, 0, 0, 9.13981, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="obj_crate" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.930467, 0 )
+hasWumpa = true
+amtWumpa = 5
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.950668, 0.310209, 0, -0.310209, 0.950668, 0.92468, 4.22611, 4.40277 )
+
+[node name="obj_Wumpa" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15036, 1.52682, -0.70509 )
+
+[node name="obj_aku" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.665304, 0.50818, -2.27116 )
+
+[node name="obj_life" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236221, 0.431953, -1.15292 )
+
+[node name="obj_tnt" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44487, 0, 0 )
+script = SubResource( 3 )
+
+[node name="obj_crate" parent="obj_tnt" index="0"]
+use_jp_material = false
+
+[node name="Character" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.80869 )
+[connection signal="pressed" from="Button" to="obj_crate" method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="obj_tnt" method="_on_Button2_pressed"]
+
+[editable path="obj_tnt"]

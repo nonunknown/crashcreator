@@ -1,20 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/gameplay/ItemCrate_simple.gd" type="Script" id=1]
-[ext_resource path="res://models/items/model_crate.tscn" type="PackedScene" id=2]
-[ext_resource path="res://textures/gameplay/boxes-particles.png" type="Texture" id=3]
+[ext_resource path="res://models/items/crate/model_crate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://models/items/crate/mat_crate_side.material" type="Material" id=3]
+[ext_resource path="res://models/items/crate/mat_crate_top.material" type="Material" id=4]
+[ext_resource path="res://textures/gameplay/boxes-particles.png" type="Texture" id=5]
 
-[sub_resource type="BoxShape" id=1]
-
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 min_value = -200.0
 max_value = 200.0
 _data = [ Vector2( 0.016835, 79.2 ), 0.0, 0.0, 0, 0, Vector2( 1, 79.2 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 1.0
 spread = 169.2
@@ -24,35 +24,44 @@ initial_velocity = 2.0
 initial_velocity_random = 0.49
 angular_velocity = 1.0
 linear_accel = 2.31
-linear_accel_curve = SubResource( 3 )
+linear_accel_curve = SubResource( 2 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
 flags_unshaded = true
 params_billboard_mode = 1
 albedo_color = Color( 0.492188, 0.372051, 0.224945, 1 )
-albedo_texture = ExtResource( 3 )
+albedo_texture = ExtResource( 5 )
 
-[sub_resource type="QuadMesh" id=6]
-material = SubResource( 5 )
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 4 )
 
-[node name="obj_crate" type="Spatial"]
+[sub_resource type="BoxShape" id=6]
+
+[sub_resource type="AudioStreamGenerator" id=7]
+
+[node name="obj_crate" type="RigidBody"]
 script = ExtResource( 1 )
 
 [node name="model_crate" parent="." instance=ExtResource( 2 )]
 
-[node name="StaticBody" type="StaticBody" parent="model_crate"]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="model_crate/StaticBody"]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
-shape = SubResource( 1 )
+[node name="Cube" parent="model_crate" index="0"]
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 4 )
 
 [node name="Particles" type="Particles" parent="."]
 emitting = false
 one_shot = true
 explosiveness = 1.0
 randomness = 0.71
-process_material = SubResource( 4 )
-draw_pass_1 = SubResource( 6 )
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, 0 )
+shape = SubResource( 6 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource( 7 )
+
+[editable path="model_crate"]
