@@ -1,4 +1,6 @@
-[gd_resource type="Animation" format=2]
+[gd_resource type="Animation" load_steps=2 format=2]
+
+[ext_resource path="res://models/items/crate/mat_tnt_side.material" type="Material" id=1]
 
 [resource]
 resource_name = "anim_item_tnt_activate"
@@ -56,4 +58,16 @@ tracks/3/keys = {
 "args": [  ],
 "method": "stop"
 } ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cube:material/0")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.51 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
 }

@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 FileManager="*res://scripts/Editor/FileManager.gd"
+VarDebug="*res://scripts/Editor/VarDebug.gd"
 
 [input]
 
@@ -56,6 +57,14 @@ ui_jump={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Item"
+3d_physics/layer_4="Crate"
+3d_physics/layer_5="Path"
+3d_physics/layer_6="Enemie"
 
 [rendering]
 
