@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://gameplay/level/tv/model_tv_ground_t0_v0_b0_e0.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+const ray_length = 1000
+
+func ray(from,to):
+	var space_state = get_world().direct_space_state
+	return space_state.intersect_ray(from, to)
+	
+func _input(event):
+    if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+          var camera = $Camera
+          var from = camera.project_ray_origin(event.position)
+          var to = from + camera.project_ray_normal(event.position) * ray_length
+          print(ray(from,to))"
+
+[node name="Spatial" type="Spatial"]
+script = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.910551, 0.413396, 0, -0.413396, 0.910551, 0, 2.98401, 0 )
+
+[node name="tv_ground_t0_v0_b0_e0" parent="." instance=ExtResource( 1 )]
+script = null
+
+[node name="tv_ground_t0_v0_b0_e1" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.6993 )
+script = null

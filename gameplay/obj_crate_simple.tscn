@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/gameplay/ItemCrate_simple.gd" type="Script" id=1]
+[ext_resource path="res://gameplay/base_crate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://animations/tnt_activated.tres" type="Animation" id=3]
+[ext_resource path="res://sounds/gameplay/item/tnt.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "anim_item_tnt_idle"
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.425673, 0.40405, 0.407233 )
+
+[node name="obj_crate_simple" type="RigidBody" groups=[
+"gp_crate",
+]]
+script = ExtResource( 1 )
+
+[node name="base_crate" parent="." instance=ExtResource( 2 )]
+
+[node name="AnimationPlayer" parent="base_crate/model_crate" index="1"]
+anims/anim_item_tnt_activate = ExtResource( 3 )
+anims/anim_item_tnt_idle = SubResource( 1 )
+
+[node name="Particles" parent="base_crate" index="1"]
+visibility_aabb = AABB( -2.13662, -2.663, -1.55608, 4.27324, 5.326, 3.11216 )
+
+[node name="AudioStreamPlayer3D" parent="base_crate" index="2"]
+visible = false
+stream = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0112497, 0.402232, -0.0109216 )
+shape = SubResource( 2 )
+
+[editable path="base_crate"]
+
+[editable path="base_crate/model_crate"]
