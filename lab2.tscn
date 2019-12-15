@@ -5,18 +5,13 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
 
-const ray_length = 1000
-
-func ray(from,to):
-	var space_state = get_world().direct_space_state
-	return space_state.intersect_ray(from, to)
-	
 func _input(event):
-    if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-          var camera = $Camera
-          var from = camera.project_ray_origin(event.position)
-          var to = from + camera.project_ray_normal(event.position) * ray_length
-          print(ray(from,to))"
+	if (Utils.mouse_left_clicked(event)):
+		var r = Utils.ray_mouse_to_world(event,$Camera,get_world())
+		if (!r.empty()):
+			r.collider.set_override(true)
+
+"
 
 [node name="Spatial" type="Spatial"]
 script = SubResource( 1 )
@@ -30,3 +25,7 @@ script = null
 [node name="tv_ground_t0_v0_b0_e1" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.6993 )
 script = null
+
+[editable path="tv_ground_t0_v0_b0_e0"]
+
+[editable path="tv_ground_t0_v0_b0_e1"]

@@ -10,12 +10,12 @@ var level_data = {
 }
 
 func save_level(data):
-    level_data.paths = data
-    var save_game = File.new()
-    save_game.open(dir, File.WRITE)
-    save_game.store_line(to_json(level_data))
-    save_game.close()
-    print("saved")
+	level_data.paths = data
+	var save_game = File.new()
+	save_game.open(dir, File.WRITE)
+	save_game.store_line(to_json(level_data))
+	save_game.close()
+	print("saved")
 
 func save_path():
 	var pathList = get_tree().get_nodes_in_group("gp_path")
@@ -65,7 +65,7 @@ func reg(word,pattern):
 	regex.compile(pattern)
 	var result = regex.search(word)
 	if result:
-    	return result.get_string().replace("@","")
+		return result.get_string().replace("@","")
 	else: return word
 
 func file_insert_model_name(name):

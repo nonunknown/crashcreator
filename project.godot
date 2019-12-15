@@ -21,7 +21,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-FileManager="*res://scripts/Editor/FileManager.gd"
+Utils="*res://scripts/Singletons/Utils.gd"
+LevelFile="*res://scripts/Singletons/LevelFile.gd"
+FileManager="*res://scripts/Singletons/FileManager.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
 
 [input]

@@ -1,80 +1,89 @@
 extends Spatial
 
-class FSM:
-	func name():
-		return "define"
+enum {ST_UNSELECTED,ST_SELECTED}
 
-	func _on_enter():
-		pass
+class St_unselected extends Utils.FSM:
 	
-	func _update():
-		pass
-	
-	func _on_exit():
-		pass
-
-	
-
-class St_unselected extends FSM:
 	func name():
 		return "unselected"
 
-class St_selected extends FSM:
-	func name():
-		return "selected"
-
 	func _on_enter():
+		manager.node.get_child(0).material_override = null
+
+class St_selected extends Utils.FSM:
+	func name():
 		print("selected:  mudafucka")
 
-var states:Dictionary = {}
-var state_current = null
-enum {UNSELECTED,SELECTED}
+	func _on_enter():
+		manager.node.get_child(0).material_override = SpatialMaterial.new()
 
-func state_change(to):
-	state_current._on_exit()
-	state_current = to
-	state_current._on_enter()
-
-export var use_onready:bool
+var st_manager = null
 func _on_ready():
-	if !use_onready: return
-	SelectionManager.connect("_selection_changed",self,"_on_selection_changed")
-	states[UNSELECTED] = St_unselected.new()
-	states[SELECTED] = St_selected.new()
-	state_current = states[UNSELECTED]
+	st_manager = Utils.FSM_Manager.new()
+	st_manager.set_node(self)
+	st_manager.states[ST_UNSELECTED] = St_unselected.new()
+	st_manager.states[ST_UNSELECTED].set_manager(st_manager)
+	st_manager.states[ST_SELECTED] = St_selected.new()
+	st_manager.states[ST_SELECTED].set_manager(st_manager)
+	st_manager.current = st_manager.states[ST_UNSELECTED]
+	# manager.states[ST_SELECTED] = St_selected.new(manager)
 
-func _input(event):
-	#if state_current == states[SELECTED]: return
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and mouse_over_me:
-			SelectionManager.update_single_selection(self)
-			$Model.material_override = SpatialMaterial.new()
-			
+	# manager.current = manager.states[ST_UNSELECTED]
+# class FSM_Manager:
+# 	var states:Dictionary = {}
+# 	var state_current = null
+# 	enum {UNSELECTED,SELECTED}
 
-func _process(delta):
-	state_current._update()
+# 	func state_change(to):
+# 		state_current._on_exit()
+# 		state_current = to
+# 		state_current._on_enter()
 
-# enum STATE {UNSELECTED,SELECTED}
-# var state_machine = STATE.UNSELECTED
+# 	func _init():
+# 		#SelectionManager.connect("_selection_changed",self,"_on_selection_changed")
+# 		print(self)
+# 		states[UNSELECTED] = St_unselected.new(self)
+# 		states[SELECTED] = St_selected.new(self)
+# 		state_current = states[UNSELECTED]
 
-# func sm_transition(to):
-# 	state_machine = to
+# 	func _input(event):
+# 		state_current._input(event)
 
-# func _on_clicked():
-# 	match(state_machine):
-# 		STATE.UNSELECTED:
-# 			sm_transition(STATE.SELECTED)
-# 	pass
-func _on_selection_changed():
-	print("OnSelectionChange signal executed fine!!!")
-	if (SelectionManager.selected_single == self):
-		state_change(states[SELECTED])
-	else: $Model.material_override = null
+# class FSM:
+# 	var manager = null
+	
+# 	func _init(man):
+# 		manager = man
 
-var mouse_over_me = false
-func _on_StaticBody_mouse_entered():
-	mouse_over_me = true
+	
+# 	func name():
+# 		return "define"
 
-func _on_StaticBody_mouse_exited():
-	mouse_over_me = false
-	pass # Replace with function body.
+# 	func _on_enter():
+# 		pass
+	
+# 	func _update():
+# 		pass
+	
+# 	func _on_exit():
+# 		pass
+
+# 	func _input(event):
+# 		pass
+	
+
+
+
+# var manager = FSM_Manager.new()
+
+
+
+# func _input(event):
+# 	manager._input(event)
+
+
+# func _on_selection_changed():
+# 	print("OnSelectionChange signal executed fine!!!")
+# 	if (SelectionManager.selected_single == self):
+# 		state_change(states[SELECTED])
+# 	else: $Model.material_override = null

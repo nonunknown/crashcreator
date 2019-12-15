@@ -1,3 +1,1 @@
-#Level File Creator
-
-	
+extends Node

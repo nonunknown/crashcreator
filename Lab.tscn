@@ -27,7 +27,6 @@ margin_bottom = 151.0
 text = "Jump On TNT"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 9.13981, 0, 0, 0, 9.13981, 0, 0, 0, 9.13981, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = null
@@ -50,7 +49,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.665304, 0.50818, -2.27116 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236221, 0.431953, -1.15292 )
 
 [node name="Character" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.80869 )
 collision_layer = 2
 collision_mask = 13

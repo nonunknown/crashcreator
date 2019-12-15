@@ -1,0 +1,8 @@
+extends Node
+
+enum {GAMEMODE_EDIT,GAMEMODE_PLAY}
+
+var varGAMEMODE = GAMEMODE_EDIT
+
+func GAMEMODE_SET(GAMEMODE):
+    pass

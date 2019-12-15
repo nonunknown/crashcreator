@@ -22,7 +22,7 @@ func _ready():
 
 	# pass
 
-	camera = get_node("/root/Main/Camera").get_global_transform()
+	camera = get_viewport().get_camera().get_global_transform()
 
 
 #func _process(delta):
@@ -35,7 +35,6 @@ func _ready():
 
 
 var look_at = 0
-
 func _physics_process(delta):
 
 	var dir = Vector3()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Editor/Selectable_Path.gd" type="Script" id=1]
 [ext_resource path="res://models/levels/lv_toadvillage/mat_ground.material" type="Material" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://models/levels/lv_toadvillage/mat_wall_side.material" type="Material" id=4]
 [ext_resource path="res://models/levels/lv_toadvillage/mat_wall_top.material" type="Material" id=5]
 [ext_resource path="res://models/levels/lv_toadvillage/mat_hole.material" type="Material" id=6]
+[ext_resource path="res://scripts/Editor/Model_Info.gd" type="Script" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Plane.001"
@@ -94,8 +95,11 @@ material/2 = null
 material/3 = null
 material/4 = null
 
-[node name="StaticBody" type="StaticBody" parent="Model"]
+[node name="StaticBody" type="StaticBody" parent="Model" groups=[
+"gp_path_body",
+]]
 input_capture_on_drag = true
+script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Model/StaticBody"]
 shape = SubResource( 2 )

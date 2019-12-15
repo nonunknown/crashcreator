@@ -1,12 +1,19 @@
 extends Spatial
-
 # -- About Selection
-
+func _input(event):
+	if (Utils.mouse_left_clicked(event)):
+		var r = Utils.ray_mouse_to_world(event,get_viewport().get_camera(),get_world())
+		if not r.empty():
+			var scr = r.collider
+			if (scr.is_in_group("gp_path_body")):
+				# scr.get_mesh().material_override = SpatialMaterial.new()
+				SelectionManager.selection_set_single(scr.get_path())
 # -- END selection
 var pathList = []
 export var pa0:PackedScene
 export var pa1: PackedScene
 onready var paths = [pa0,pa1]
+
 func get_random_path():
 	paths.shuffle()
 	return paths.front().instance()
@@ -21,6 +28,7 @@ func SpawnPath(from_file=false,position=null,modelName=null):
 		instance = get_random_path()
 		instance.translation = Vector3(0,0,0+(pathList.size() * 10))
 	instance._on_ready()
+	print("instance execute onready")
 	add_child(instance)
 	pathList.append(instance)
 	

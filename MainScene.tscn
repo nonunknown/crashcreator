@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/gameplay/GameplayManager.gd" type="Script" id=1]
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
@@ -7,6 +7,14 @@
 [ext_resource path="res://gameplay/level/tv/model_tv_ground_t1_v0_b0_e0.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+
+func _ready():
+	pass
+"
+
+[sub_resource type="GDScript" id=2]
 script/source = "
 extends Camera
 
@@ -212,15 +220,20 @@ func set_smoothness(value):
 	smoothness = clamp(value, 0.001, 0.999)
 
 func set_distance(value):
-	distance = max(0, value)"
+	distance = max(0, value)
+"
 
 [node name="Main" type="Node"]
 
-[node name="Control" type="Control" parent="."]
+[node name="GUI" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ItemList" type="GridContainer" parent="Control"]
+[node name="ItemList" type="GridContainer" parent="GUI"]
 anchor_right = 1.0
 margin_left = 3.0
 margin_top = 3.4128
@@ -228,10 +241,10 @@ margin_right = 169.982
 margin_bottom = 29.4128
 columns = 5
 
-[node name="TextureButton" type="TextureButton" parent="Control/ItemList"]
+[node name="TextureButton" type="TextureButton" parent="GUI/ItemList"]
 margin_bottom = 20.0
 
-[node name="btAddPath" type="Button" parent="Control/ItemList"]
+[node name="btAddPath" type="Button" parent="GUI/ItemList"]
 margin_left = 4.0
 margin_right = 24.0
 margin_bottom = 20.0
@@ -239,7 +252,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "+"
 
-[node name="btSave" type="Button" parent="Control/ItemList"]
+[node name="btSave" type="Button" parent="GUI/ItemList"]
 margin_left = 28.0
 margin_right = 47.0
 margin_bottom = 20.0
@@ -247,7 +260,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "S"
 
-[node name="btLoad" type="Button" parent="Control/ItemList"]
+[node name="btLoad" type="Button" parent="GUI/ItemList"]
 margin_left = 51.0
 margin_right = 70.0
 margin_bottom = 20.0
@@ -255,7 +268,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "L"
 
-[node name="btPlay" type="Button" parent="Control/ItemList"]
+[node name="btPlay" type="Button" parent="GUI/ItemList"]
 margin_left = 74.0
 margin_right = 94.0
 margin_bottom = 20.0
@@ -273,7 +286,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.705, 0.858973 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -0.999518, -0.0116422, 0.0287952, -0.00343725, 0.962859, 0.269983, -0.0308689, 0.269754, -0.962434, -0.316168, 1.88757, -1.77073 )
 current = true
-script = SubResource( 1 )
+script = SubResource( 2 )
 mouse_mode = 0
 mouselook = false
 
@@ -285,7 +298,7 @@ mouselook = false
 script = ExtResource( 3 )
 pa0 = ExtResource( 4 )
 pa1 = ExtResource( 5 )
-[connection signal="pressed" from="Control/ItemList/btAddPath" to="Level/Path" method="_on_btAddPath_pressed"]
-[connection signal="pressed" from="Control/ItemList/btSave" to="Level/Path" method="_on_btSave_pressed"]
-[connection signal="pressed" from="Control/ItemList/btLoad" to="Level/Path" method="_on_btLoad_pressed"]
-[connection signal="pressed" from="Control/ItemList/btPlay" to="Gameplay/Character" method="_on_btPlay_pressed"]
+[connection signal="pressed" from="GUI/ItemList/btAddPath" to="Level/Path" method="_on_btAddPath_pressed"]
+[connection signal="pressed" from="GUI/ItemList/btSave" to="Level/Path" method="_on_btSave_pressed"]
+[connection signal="pressed" from="GUI/ItemList/btLoad" to="Level/Path" method="_on_btLoad_pressed"]
+[connection signal="pressed" from="GUI/ItemList/btPlay" to="Gameplay/Character" method="_on_btPlay_pressed"]
