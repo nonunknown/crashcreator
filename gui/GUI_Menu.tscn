@@ -1,0 +1,37 @@
+[gd_scene format=2]
+
+[node name="GUI_Menu" type="Panel"]
+anchor_right = 1.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+grow_horizontal = 0
+rect_min_size = Vector2( 30, 0 )
+rect_clip_content = true
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_edit_path" type="Button" parent="HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Path Editor"
+toggle_mode = true
+text = "("
+
+[node name="bt_edit_crate" type="Button" parent="HBoxContainer"]
+margin_left = 60.0
+margin_right = 90.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Crate Editor"
+toggle_mode = true
+text = "C"

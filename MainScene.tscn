@@ -1,20 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/gameplay/GameplayManager.gd" type="Script" id=1]
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Editor/PathManager.gd" type="Script" id=3]
 [ext_resource path="res://gameplay/level/tv/model_tv_ground_t0_v0_b0_e0.tscn" type="PackedScene" id=4]
 [ext_resource path="res://gameplay/level/tv/model_tv_ground_t1_v0_b0_e0.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/GUI/GUI_Manager.gd" type="Script" id=6]
+[ext_resource path="res://gui/GUI_path_properties.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/Editor/LevelManager.gd" type="Script" id=8]
+[ext_resource path="res://gui/GUI_Menu.tscn" type="PackedScene" id=9]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends Control
-
-
-func _ready():
-	pass
-"
-
-[sub_resource type="GDScript" id=2]
 script/source = "
 extends Camera
 
@@ -226,9 +222,10 @@ func set_distance(value):
 [node name="Main" type="Node"]
 
 [node name="GUI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-script = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -236,10 +233,15 @@ __meta__ = {
 [node name="ItemList" type="GridContainer" parent="GUI"]
 anchor_right = 1.0
 margin_left = 3.0
-margin_top = 3.4128
+margin_top = 40.1823
 margin_right = 169.982
-margin_bottom = 29.4128
+margin_bottom = 66.1823
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 columns = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureButton" type="TextureButton" parent="GUI/ItemList"]
 margin_bottom = 20.0
@@ -276,6 +278,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "P"
 
+[node name="GUI_Menu" parent="GUI" instance=ExtResource( 9 )]
+
+[node name="GUI_path_properties" parent="GUI" instance=ExtResource( 7 )]
+visible = false
+mouse_default_cursor_shape = 2
+
 [node name="Gameplay" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299249, 0.247665, -0.293245 )
 script = ExtResource( 1 )
@@ -286,13 +294,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.705, 0.858973 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -0.999518, -0.0116422, 0.0287952, -0.00343725, 0.962859, 0.269983, -0.0308689, 0.269754, -0.962434, -0.316168, 1.88757, -1.77073 )
 current = true
-script = SubResource( 2 )
+script = SubResource( 1 )
 mouse_mode = 0
 mouselook = false
 
 [node name="Level" type="Spatial" parent="." groups=[
 "gp_level",
 ]]
+script = ExtResource( 8 )
 
 [node name="Path" type="Spatial" parent="Level"]
 script = ExtResource( 3 )

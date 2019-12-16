@@ -26,6 +26,13 @@ LevelFile="*res://scripts/Singletons/LevelFile.gd"
 FileManager="*res://scripts/Singletons/FileManager.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
 
+[display]
+
+window/size/width=720
+window/size/height=480
+window/size/resizable=false
+window/vsync/use_vsync=false
+
 [input]
 
 ui_left={
