@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/gui/btgp_path_models.tres" type="ButtonGroup" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+var model_name:String = \"\"
+onready var path_manager = get_node(\"/root/Main/Level/Path\")
+func start(model_name):
+	self.text = path_manager.get_model_show_name(model_name)
+	self.model_name = model_name
+	pass
+
+
+func _on_bt_base_toggled(button_pressed):
+	if (button_pressed):
+		path_manager.set_selected_model(model_name)
+	pass # Replace with function body.
+"
+
+[node name="bt_base" type="Button"]
+margin_right = 95.0
+margin_bottom = 20.0
+toggle_mode = true
+group = ExtResource( 1 )
+text = "model_name"
+flat = true
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+[connection signal="toggled" from="." to="." method="_on_bt_base_toggled"]

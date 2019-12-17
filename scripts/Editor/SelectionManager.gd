@@ -2,6 +2,8 @@ extends Node
 
 var selected_single = null
 var selected_multi = []
+
+onready var path_manager = get_node("/root/Main/Level/Path")
 onready var gui = get_node("/root/Main/GUI")
 func selection_set_single(path):
 	print("clicked")
@@ -9,7 +11,7 @@ func selection_set_single(path):
 		selection_clear_single()
 	if (path == null): 
 
-		gui.gui_path.visible = false
+		gui.gui_path_tools.visible = false
 		selected_single = null
 
 	else:
@@ -24,4 +26,3 @@ func selection_get_single():
 
 func selection_clear_single():
 	selected_single.st_manager.change_state(selected_single.st_manager.states[selected_single.ST_UNSELECTED])
-	

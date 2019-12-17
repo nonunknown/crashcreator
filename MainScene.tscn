@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/gameplay/GameplayManager.gd" type="Script" id=1]
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
@@ -9,8 +9,14 @@
 [ext_resource path="res://gui/GUI_path_properties.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/Editor/LevelManager.gd" type="Script" id=8]
 [ext_resource path="res://gui/GUI_Menu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://gui/GUI_tools_path.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/gui/bt_gp_menu.tres" type="ButtonGroup" id=11]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="ButtonGroup" id=2]
+
+[sub_resource type="GDScript" id=3]
 script/source = "
 extends Camera
 
@@ -229,8 +235,10 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+bts_menu = ExtResource( 11 )
 
 [node name="ItemList" type="GridContainer" parent="GUI"]
+visible = false
 anchor_right = 1.0
 margin_left = 3.0
 margin_top = 40.1823
@@ -243,36 +251,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="GUI/ItemList"]
-margin_bottom = 20.0
-
 [node name="btAddPath" type="Button" parent="GUI/ItemList"]
-margin_left = 4.0
-margin_right = 24.0
+margin_right = 20.0
 margin_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "+"
 
 [node name="btSave" type="Button" parent="GUI/ItemList"]
-margin_left = 28.0
-margin_right = 47.0
+margin_left = 24.0
+margin_right = 43.0
 margin_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "S"
 
 [node name="btLoad" type="Button" parent="GUI/ItemList"]
-margin_left = 51.0
-margin_right = 70.0
+margin_left = 47.0
+margin_right = 66.0
 margin_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "L"
 
 [node name="btPlay" type="Button" parent="GUI/ItemList"]
-margin_left = 74.0
-margin_right = 94.0
+margin_left = 70.0
+margin_right = 90.0
 margin_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -280,9 +284,22 @@ text = "P"
 
 [node name="GUI_Menu" parent="GUI" instance=ExtResource( 9 )]
 
+[node name="bt_edit_path" parent="GUI/GUI_Menu/HBoxContainer" index="0"]
+group = SubResource( 1 )
+
+[node name="bt_edit_crate" parent="GUI/GUI_Menu/HBoxContainer" index="1"]
+group = SubResource( 1 )
+
 [node name="GUI_path_properties" parent="GUI" instance=ExtResource( 7 )]
 visible = false
 mouse_default_cursor_shape = 2
+
+[node name="GUI_tools_path" parent="GUI" instance=ExtResource( 10 )]
+visible = false
+margin_top = 27.0
+
+[node name="bt_base" parent="GUI/GUI_tools_path/TabContainer/Built-in/GridContainer" index="0"]
+group = SubResource( 2 )
 
 [node name="Gameplay" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299249, 0.247665, -0.293245 )
@@ -294,7 +311,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.705, 0.858973 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -0.999518, -0.0116422, 0.0287952, -0.00343725, 0.962859, 0.269983, -0.0308689, 0.269754, -0.962434, -0.316168, 1.88757, -1.77073 )
 current = true
-script = SubResource( 1 )
+script = SubResource( 3 )
 mouse_mode = 0
 mouselook = false
 
@@ -311,3 +328,10 @@ pa1 = ExtResource( 5 )
 [connection signal="pressed" from="GUI/ItemList/btSave" to="Level/Path" method="_on_btSave_pressed"]
 [connection signal="pressed" from="GUI/ItemList/btLoad" to="Level/Path" method="_on_btLoad_pressed"]
 [connection signal="pressed" from="GUI/ItemList/btPlay" to="Gameplay/Character" method="_on_btPlay_pressed"]
+[connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_path" to="GUI" method="_on_bt_edit_path_toggled"]
+[connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_crate" to="GUI" method="_on_bt_edit_crate_toggled"]
+[connection signal="pressed" from="GUI/GUI_tools_path/Panel/VBoxContainer/bt_add" to="Level/Path" method="_on_bt_add_pressed"]
+
+[editable path="GUI/GUI_Menu"]
+
+[editable path="GUI/GUI_tools_path"]

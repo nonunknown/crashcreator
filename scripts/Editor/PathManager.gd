@@ -6,19 +6,19 @@ var pathList = []
 export var pa0:PackedScene
 export var pa1: PackedScene
 onready var paths = [pa0,pa1]
-
+var selected_model:String = ""
 func get_random_path():
 	paths.shuffle()
 	return paths.front().instance()
 
 func SpawnPath(from_file=false,position=null,modelName=null):
 	var instance = null
+	print(modelName)
+	instance = import_model(modelName).instance()
 	
 	if from_file:
-		instance = import_model(modelName).instance()
 		instance.translation = position		
 	else:
-		instance = get_random_path()
 		instance.translation = Vector3(0,0,0+(pathList.size() * 10))
 	instance._on_ready()
 	print("instance execute onready")
@@ -36,11 +36,26 @@ func generate_area(data):
 		
 		pass
 
-func import_model(modelName):
+
+func get_model_show_name(modelName):
+	return import_model(modelName).instance().show_name
+func get_model_dir(modelName,extension_included=true):
 	var prefix:String = FileManager.reg(modelName,".+?(?=_)")
-	var p = "res://gameplay/level/"+prefix+"/model_"+modelName+".tscn"
-	#print(p)
+	if not extension_included:
+		modelName = modelName+".tscn"
+	return "res://gameplay/level/tv/"+modelName
+
+func import_model(modelName):
+	var p = get_model_dir(modelName)
+	print(p)
 	return load(p)
+
+func get_all_paths():
+	return ["path0","path1"]
+
+func set_selected_model(model_name):
+	selected_model = model_name
+
 
 func _on_btAddPath_pressed():
 	SpawnPath()
@@ -50,3 +65,8 @@ func _on_btSave_pressed():
 
 func _on_btLoad_pressed():
 	FileManager.load_level()
+
+
+func _on_bt_add_pressed():
+	SpawnPath(false,null,selected_model)
+	pass # Replace with function body.

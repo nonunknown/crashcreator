@@ -95,6 +95,7 @@ data = PoolVector3Array( 1.4388, 0.0322, -5.9084, -0.6646, 0.029, -5.6736, -0.39
 "gp_path",
 ]]
 script = ExtResource( 1 )
+show_name = "Ground Basic"
 
 [node name="Model" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -1 )

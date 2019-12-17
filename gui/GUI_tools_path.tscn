@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/GUI/GUI_tools_path.gd" type="Script" id=1]
+[ext_resource path="res://gui/base/bt_model.tscn" type="PackedScene" id=2]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[node name="GUI_tools_path" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.280872
+margin_bottom = -0.280884
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+bt_base_model = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_bottom = 1.0
+margin_right = 25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 20.0
+margin_right = -2.0
+margin_bottom = 10.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_add" type="Button" parent="Panel/VBoxContainer"]
+margin_right = 21.0
+margin_bottom = 20.0
+text = "+"
+expand_icon = true
+
+[node name="bt_remove" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 30.0
+margin_right = 21.0
+margin_bottom = 50.0
+text = "-"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -139.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Built-in" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+scrolling_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Built-in"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 7.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_base" parent="TabContainer/Built-in/GridContainer" instance=ExtResource( 2 )]
+visible = false
+group = SubResource( 1 )
+[connection signal="visibility_changed" from="." to="." method="_on_GUI_tools_path_visibility_changed"]

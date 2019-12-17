@@ -86,6 +86,7 @@ extents = Vector3( 1.54907, 0.176096, 4.33385 )
 "gp_path",
 ]]
 script = ExtResource( 1 )
+show_name = "Ground Hole 0"
 
 [node name="Model" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

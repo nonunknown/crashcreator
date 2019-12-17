@@ -1,5 +1,7 @@
 extends Spatial
 
+export var show_name:String = "Define_selectable_name"
+
 enum {ST_UNSELECTED,ST_SELECTED}
 
 class St_unselected extends Utils.FSM:
