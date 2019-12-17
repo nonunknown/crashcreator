@@ -11,14 +11,14 @@ func selection_set_single(path):
 		selection_clear_single()
 	if (path == null): 
 
-		gui.gui_path_tools.visible = false
+		gui.gui_path_properties.visible = false
 		selected_single = null
 
 	else:
 		
 		selected_single = path
 		selected_single.st_manager.change_state(selected_single.st_manager.states[selected_single.ST_SELECTED])
-		gui.gui_path.visible = true
+		gui.gui_path_properties.visible = true
 	
 
 func selection_get_single():

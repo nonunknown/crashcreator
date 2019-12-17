@@ -292,11 +292,14 @@ group = SubResource( 1 )
 
 [node name="GUI_path_properties" parent="GUI" instance=ExtResource( 7 )]
 visible = false
+margin_top = 30.0
+margin_bottom = -115.0
 mouse_default_cursor_shape = 2
 
 [node name="GUI_tools_path" parent="GUI" instance=ExtResource( 10 )]
 visible = false
 margin_top = 27.0
+mouse_filter = 2
 
 [node name="bt_base" parent="GUI/GUI_tools_path/TabContainer/Built-in/GridContainer" index="0"]
 group = SubResource( 2 )

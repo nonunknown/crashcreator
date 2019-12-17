@@ -19,7 +19,17 @@ func SpawnPath(from_file=false,position=null,modelName=null):
 	if from_file:
 		instance.translation = position		
 	else:
-		instance.translation = Vector3(0,0,0+(pathList.size() * 10))
+		if (pathList.size() == 0):
+			instance.translation = Vector3.ZERO
+		else:
+			print("pathlist:")
+			print(pathList)
+			print("last from pathList")
+			print(pathList.size()-1)
+			print("pos:")
+			var pos = pathList[pathList.size()-1].get_node("PosEnd")
+			print(pos.get_global_transform())
+			instance.translation = pos.get_global_transform().origin
 	instance._on_ready()
 	print("instance execute onready")
 	add_child(instance)

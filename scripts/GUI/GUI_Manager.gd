@@ -4,7 +4,6 @@ export var bts_menu:ButtonGroup
 
 onready var gui_path_properties:Control = $GUI_path_properties
 onready var gui_path_tools:Control = $GUI_tools_path
-
 var tool_windows = []
 
 func _ready():

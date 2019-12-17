@@ -88,7 +88,8 @@ cam_right={
 3d_physics/layer_3="Item"
 3d_physics/layer_4="Crate"
 3d_physics/layer_5="Path"
-3d_physics/layer_6="Enemie"
+3d_physics/layer_6="Enemies"
+3d_physics/layer_7="Selectable"
 
 [rendering]
 

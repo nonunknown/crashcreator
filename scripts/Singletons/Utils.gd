@@ -31,7 +31,7 @@ const ray_length = 1000
 
 func ray(world,from,to) -> RayCast:
 	var space_state = world.direct_space_state
-	return space_state.intersect_ray(from, to)
+	return space_state.intersect_ray(from, to,[],0x00000007)
 	
 	
 func ray_mouse_to_world(event,camera,world) -> RayCast:
