@@ -1,0 +1,353 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scripts/gameplay/GameplayManager.gd" type="Script" id=1]
+[ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Editor/PathManager.gd" type="Script" id=3]
+[ext_resource path="res://gameplay/level/tv/model_tv_ground_t0_v0_b0_e0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gameplay/level/tv/model_tv_ground_t1_v0_b0_e0.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/GUI/GUI_Manager.gd" type="Script" id=6]
+[ext_resource path="res://gui/GUI_path_properties.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/Editor/LevelManager.gd" type="Script" id=8]
+[ext_resource path="res://gui/GUI_Menu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://gui/GUI_tools_path.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/gui/bt_gp_menu.tres" type="ButtonGroup" id=11]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Button
+
+func _ready():
+	pass
+"
+
+[sub_resource type="ButtonGroup" id=3]
+
+[sub_resource type="GDScript" id=4]
+script/source = "
+extends Camera
+
+# User settings:
+# General settings
+export var enabled = true setget set_enabled
+export(int, \"Visible\", \"Hidden\", \"Caputered, Confined\") var mouse_mode = 2
+
+# Mouslook settings
+export var mouselook = true
+export (float, 0.0, 1.0) var sensitivity = 0.5
+export (float, 0.0, 0.999, 0.001) var smoothness = 0.5 setget set_smoothness
+export(NodePath) var privot setget set_privot
+export var distance = 5.0 setget set_distance
+export var rotate_privot = false
+export var collisions = true setget set_collisions
+export (int, 0, 360) var yaw_limit = 360
+export (int, 0, 360) var pitch_limit = 360
+
+# Movement settings
+export var movement = true
+export (float, 0.0, 1.0) var acceleration = 1.0
+export (float, 0.0, 0.0, 1.0) var deceleration = 0.1
+export var max_speed = Vector3(1.0, 1.0, 1.0)
+export var local = true
+export var forward_action = \"cam_fw\"
+export var backward_action = \"ui_down\"
+export var left_action = \"cam_left\"
+export var right_action = \"cam_right\"
+export var up_action = \"ui_page_up\"
+export var down_action = \"ui_page_down\"
+
+# Gui settings
+export var use_gui = true
+export var gui_action = \"ui_cancel\"
+
+# Intern variables.
+var _mouse_position = Vector2(0.0, 0.0)
+var _yaw = 0.0
+var _pitch = 0.0
+var _total_yaw = 0.0
+var _total_pitch = 0.0
+
+var _direction = Vector3(0.0, 0.0, 0.0)
+var _speed = Vector3(0.0, 0.0, 0.0)
+var _gui
+
+func _ready():
+	_check_actions([forward_action, backward_action, left_action, right_action, gui_action, up_action, down_action])
+
+	if privot:
+		privot = get_node(privot)
+	else:
+		privot = null
+
+	set_enabled(enabled)
+
+	if use_gui:
+		_gui = preload(\"../camera_control_gui.gd\")
+		_gui = _gui.new(self, gui_action)
+		add_child(_gui)
+
+func _input(event):
+	if mouselook:
+		if event is InputEventMouseMotion:
+			_mouse_position = event.relative
+
+	if movement:
+		if event.is_action_pressed(forward_action):
+			_direction.z = -1
+		elif event.is_action_pressed(backward_action):
+			_direction.z = 1
+		elif not Input.is_action_pressed(forward_action) and not Input.is_action_pressed(backward_action):
+			_direction.z = 0
+
+		if event.is_action_pressed(left_action):
+			_direction.x = -1
+		elif event.is_action_pressed(right_action):
+			_direction.x = 1
+		elif not Input.is_action_pressed(left_action) and not Input.is_action_pressed(right_action):
+			_direction.x = 0
+			
+		if event.is_action_pressed(up_action):
+			_direction.y = 1
+		if event.is_action_pressed(down_action):
+			_direction.y = -1
+		elif not Input.is_action_pressed(up_action) and not Input.is_action_pressed(down_action):
+			_direction.y = 0
+
+func _process(delta):
+	if privot:
+		_update_distance()
+	if mouselook:
+		_update_mouselook()
+	if movement:
+		_update_movement(delta)
+
+func _physics_process(delta):
+	# Called when collision are enabled
+	_update_distance()
+	if mouselook:
+		_update_mouselook()
+
+	var space_state = get_world().get_direct_space_state()
+	var obstacle = space_state.intersect_ray(privot.get_translation(),  get_translation())
+	if not obstacle.empty():
+		set_translation(obstacle.position)
+
+func _update_movement(delta):
+	var offset = max_speed * acceleration * _direction
+	
+	_speed.x = clamp(_speed.x + offset.x, -max_speed.x, max_speed.x)
+	_speed.y = clamp(_speed.y + offset.y, -max_speed.y, max_speed.y)
+	_speed.z = clamp(_speed.z + offset.z, -max_speed.z, max_speed.z)
+	
+	# Apply deceleration if no input
+	if _direction.x == 0:
+		_speed.x *= (1.0 - deceleration)
+	if _direction.y == 0:
+		_speed.y *= (1.0 - deceleration)
+	if _direction.z == 0:
+		_speed.z *= (1.0 - deceleration)
+
+	if local:
+		translate(_speed * delta)
+	else:
+		global_translate(_speed * delta)
+
+func _update_mouselook():
+	_mouse_position *= sensitivity
+	_yaw = _yaw * smoothness + _mouse_position.x * (1.0 - smoothness)
+	_pitch = _pitch * smoothness + _mouse_position.y * (1.0 - smoothness)
+	_mouse_position = Vector2(0, 0)
+
+	if yaw_limit < 360:
+		_yaw = clamp(_yaw, -yaw_limit - _total_yaw, yaw_limit - _total_yaw)
+	if pitch_limit < 360:
+		_pitch = clamp(_pitch, -pitch_limit - _total_pitch, pitch_limit - _total_pitch)
+
+	_total_yaw += _yaw
+	_total_pitch += _pitch
+
+	if privot:
+		var target = privot.get_translation()
+		var offset = get_translation().distance_to(target)
+
+		set_translation(target)
+		rotate_y(deg2rad(-_yaw))
+		rotate_object_local(Vector3(1,0,0), deg2rad(-_pitch))
+		translate(Vector3(0.0, 0.0, offset))
+
+		if rotate_privot:
+			privot.rotate_y(deg2rad(-_yaw))
+	else:
+		rotate_y(deg2rad(-_yaw))
+		rotate_object_local(Vector3(1,0,0), deg2rad(-_pitch))
+
+func _update_distance():
+	var t = privot.get_translation()
+	t.z -= distance
+	set_translation(t)
+
+func _update_process_func():
+	# Use physics process if collision are enabled
+	if collisions and privot:
+		set_physics_process(true)
+		set_process(false)
+	else:
+		set_physics_process(false)
+		set_process(true)
+
+func _check_actions(actions=[]):
+	if OS.is_debug_build():
+		for action in actions:
+			if not InputMap.has_action(action):
+				print('WARNING: No action \"' + action + '\"')
+
+func set_privot(value):
+	privot = value
+	# TODO: fix parenting.
+#	if privot:
+#		if get_parent():
+#			get_parent().remove_child(self)
+#		privot.add_child(self)
+	_update_process_func()
+
+func set_collisions(value):
+	collisions = value
+	_update_process_func()
+
+func set_enabled(value):
+	enabled = value
+	if enabled:
+		Input.set_mouse_mode(mouse_mode)
+		set_process_input(true)
+		_update_process_func()
+	else:
+		set_process(false)
+		set_process_input(false)
+		set_physics_process(false)
+
+func set_smoothness(value):
+	smoothness = clamp(value, 0.001, 0.999)
+
+func set_distance(value):
+	distance = max(0, value)
+"
+
+[node name="Main" type="Node"]
+
+[node name="GUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+bts_menu = ExtResource( 11 )
+
+[node name="ItemList" type="GridContainer" parent="GUI"]
+anchor_right = 1.0
+margin_left = 3.0
+margin_top = 40.1823
+margin_right = 169.982
+margin_bottom = 66.1823
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+columns = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btAddPath" type="Button" parent="GUI/ItemList"]
+margin_right = 20.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "+"
+
+[node name="btSave" type="Button" parent="GUI/ItemList"]
+margin_left = 24.0
+margin_right = 43.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "S"
+
+[node name="btLoad" type="Button" parent="GUI/ItemList"]
+margin_left = 47.0
+margin_right = 66.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "L"
+
+[node name="btPlay" type="Button" parent="GUI/ItemList"]
+margin_left = 70.0
+margin_right = 90.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "P"
+
+[node name="GUI_Menu" parent="GUI" instance=ExtResource( 9 )]
+
+[node name="bt_edit_path" parent="GUI/GUI_Menu/HBoxContainer" index="0"]
+group = SubResource( 1 )
+
+[node name="bt_edit_crate" parent="GUI/GUI_Menu/HBoxContainer" index="1"]
+group = SubResource( 1 )
+
+[node name="Button" type="Button" parent="GUI/GUI_Menu/HBoxContainer" index="2"]
+margin_left = 78.0
+margin_right = 205.0
+margin_bottom = 22.0
+text = "Build Level & Play"
+script = SubResource( 2 )
+
+[node name="GUI_path_properties" parent="GUI" instance=ExtResource( 7 )]
+visible = false
+margin_top = 30.0
+margin_bottom = -115.0
+mouse_default_cursor_shape = 2
+
+[node name="GUI_tools_path" parent="GUI" instance=ExtResource( 10 )]
+visible = false
+margin_top = 27.0
+mouse_filter = 2
+
+[node name="bt_base" parent="GUI/GUI_tools_path/TabContainer/Built-in/GridContainer" index="0"]
+group = SubResource( 3 )
+
+[node name="Gameplay" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299249, 0.247665, -0.293245 )
+script = ExtResource( 1 )
+
+[node name="Character" parent="Gameplay" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.705, 0.858973 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.999518, -0.0116422, 0.0287952, -0.00343725, 0.962859, 0.269983, -0.0308689, 0.269754, -0.962434, -0.316168, 1.88757, -1.77073 )
+current = true
+script = SubResource( 4 )
+mouse_mode = 0
+mouselook = false
+
+[node name="Level" type="Spatial" parent="." groups=[
+"gp_level",
+]]
+script = ExtResource( 8 )
+
+[node name="Path" type="Spatial" parent="Level"]
+script = ExtResource( 3 )
+pa0 = ExtResource( 4 )
+pa1 = ExtResource( 5 )
+[connection signal="pressed" from="GUI/ItemList/btAddPath" to="Level/Path" method="_on_btAddPath_pressed"]
+[connection signal="pressed" from="GUI/ItemList/btSave" to="Level/Path" method="_on_btSave_pressed"]
+[connection signal="pressed" from="GUI/ItemList/btLoad" to="Level/Path" method="_on_btLoad_pressed"]
+[connection signal="pressed" from="GUI/ItemList/btPlay" to="Gameplay/Character" method="_on_btPlay_pressed"]
+[connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_path" to="GUI" method="_on_bt_edit_path_toggled"]
+[connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_crate" to="GUI" method="_on_bt_edit_crate_toggled"]
+[connection signal="pressed" from="GUI/GUI_tools_path/Panel/VBoxContainer/bt_add" to="Level/Path" method="_on_bt_add_pressed"]
+
+[editable path="GUI/GUI_Menu"]
+
+[editable path="GUI/GUI_tools_path"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+onready var base:Label = get_node(\"ItemList/GridContainer/Label\")
+
+var labels = {}
+
+func _ready():
+	print(\"debug initialized\")
+
+func set_text(id,text):
+	labels[id].text = text
+	pass
+
+func add_text(id):
+	var n = base.duplicate()
+	labels[id] = n
+	$ItemList/GridContainer.add_child(n,true)
+	n.visible = true
+"
+
+[node name="DebugText" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="."]
+self_modulate = Color( 1, 1, 1, 0.278431 )
+anchor_bottom = 1.0
+margin_right = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="ItemList"]
+anchor_bottom = 1.0
+margin_right = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ItemList/GridContainer"]
+visible = false
+margin_right = 27.0
+margin_bottom = 14.0
+text = "Test"
+__meta__ = {
+"_edit_use_anchors_": false
+}

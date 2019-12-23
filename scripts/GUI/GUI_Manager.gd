@@ -21,8 +21,6 @@ func _on_bt_edit_path_toggled(button_pressed):
 		clear(gui_path_tools)
 		gui_path_tools.visible = true
 
-
-
 func _on_bt_edit_crate_toggled(button_pressed):
 	clear()
 	pass # Replace with function body.

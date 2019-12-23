@@ -4,6 +4,27 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 early alpha - means not playable... yet!
 
+### Alpha 0.8.5 - The Aku Update
+    - Added visual debug text on screen
+    - Implemented TNT
+    - Crates now has a base crate node, due to facility to create new ones and edit them
+    - Added Aku aku system (Best one)
+    - Did almost all crash animations (not the best thing in the world but for a programmer...)
+        - TODO: Solve non animating bug (try to export GLTF)
+    - Implemented Wumpa
+
+### Alpha 0.8.4
+    - Improved Selection
+    - Improved collision
+    - Updated Utils.gd
+        - file_exists(path)
+        - enum MASK
+        - function ray() now has a collision_mask param
+    - Important
+        The old save/load system was changed from *.JSON to *.SCN(built-in) due to facility of
+        building user made levels
+
+
 ### Alpha 0.8.3
     - Added new Level model
     - Improved Path System

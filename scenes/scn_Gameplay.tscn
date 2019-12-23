@@ -1,0 +1,15 @@
+[gd_scene format=2]
+
+[node name="Gameplay" type="Spatial"]
+
+[node name="Path" type="Spatial" parent="."]
+
+[node name="Items" type="Spatial" parent="."]
+
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Player" type="Spatial" parent="."]
+
+[node name="Obstacles" type="Spatial" parent="."]
+
+[node name="Events" type="Spatial" parent="."]

@@ -8,23 +8,35 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Character",
+"language": "GDScript",
+"path": "res://scripts/gameplay/character.gd"
+}, {
+"base": "Spatial",
+"class": "Explosion",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Explosion.gd"
+} ]
 _global_script_class_icons={
-
+"Character": "",
+"Explosion": ""
 }
 
 [application]
 
 config/name="CrashCreator"
-run/main_scene="res://MainScene.tscn"
+run/main_scene="res://scenes/scn_LevelEditor.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
+GameManager="*res://scripts/Singletons/GameManager.gd"
 Utils="*res://scripts/Singletons/Utils.gd"
 LevelFile="*res://scripts/Singletons/LevelFile.gd"
-FileManager="*res://scripts/Singletons/FileManager.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
+FileManager="*res://scripts/Singletons/FileManager.gd"
 
 [display]
 
@@ -84,12 +96,15 @@ cam_right={
 
 [layer_names]
 
+3d_physics/layer_1="Solid"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Item"
 3d_physics/layer_4="Crate"
 3d_physics/layer_5="Path"
 3d_physics/layer_6="Enemies"
 3d_physics/layer_7="Selectable"
+3d_physics/layer_8="KillZone"
+3d_physics/layer_9="Area"
 
 [rendering]
 

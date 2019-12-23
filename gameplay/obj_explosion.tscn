@@ -1,0 +1,174 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://textures/fx/bright_smoke.png" type="Texture" id=1]
+[ext_resource path="res://textures/fx/explosion.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Utils/Destroy.gd" type="Script" id=3]
+
+[sub_resource type="SphereShape" id=16]
+radius = 3.39935
+
+[sub_resource type="Animation" id=17]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Area_explosion/CollisionShape:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.146191, 3.39935 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles/Particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Area_explosion/CollisionShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "destroy"
+} ]
+}
+
+[sub_resource type="Gradient" id=18]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=19]
+gradient = SubResource( 18 )
+
+[sub_resource type="Curve" id=20]
+_data = [ Vector2( 0, 1 ), 0.0, 0.258987, 0, 0, Vector2( 1, 0.7112 ), -0.432325, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=21]
+curve = SubResource( 20 )
+
+[sub_resource type="ParticlesMaterial" id=22]
+gravity = Vector3( 0, 0, 0 )
+scale = 5.0
+scale_curve = SubResource( 21 )
+color_ramp = SubResource( 19 )
+
+[sub_resource type="SpatialMaterial" id=23]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.992157, 0.490196, 0, 0.796078 )
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=24]
+material = SubResource( 23 )
+
+[sub_resource type="Gradient" id=25]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.34902, 0.00784314, 1 )
+
+[sub_resource type="GradientTexture" id=26]
+gradient = SubResource( 25 )
+width = 128
+
+[sub_resource type="ParticlesMaterial" id=27]
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+flatness = 0.27
+gravity = Vector3( 0, 3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.34
+angular_velocity = 1.0
+angular_velocity_random = 1.0
+scale = 2.0
+color_ramp = SubResource( 26 )
+
+[sub_resource type="SpatialMaterial" id=14]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=15]
+material = SubResource( 14 )
+
+[node name="Explosion" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Area_explosion" type="Area" parent="." groups=[
+"explosion",
+]]
+collision_layer = 128
+collision_mask = 10
+
+[node name="CollisionShape" type="CollisionShape" parent="Area_explosion"]
+shape = SubResource( 16 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "anim_explosion"
+anims/anim_explosion = SubResource( 17 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.966729, 0 )
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource( 22 )
+draw_passes = 2
+draw_pass_1 = SubResource( 24 )
+draw_pass_2 = null
+
+[node name="Particles" type="Particles" parent="Particles"]
+emitting = false
+amount = 14
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 27 )
+draw_pass_1 = SubResource( 15 )
