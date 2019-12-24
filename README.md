@@ -4,6 +4,13 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 early alpha - means not playable... yet!
 
+### Alpha 0.8.6 - The Crash Update
+    - Updated visual debug (just call set_text now)
+    - Added More animations to crash
+    - Remove the BUG where crash animations doesnt play
+    - other minor adjustments on crates 
+    - Updated Character.gd code (more organized and implemented new features)
+
 ### Alpha 0.8.5 - The Aku Update
     - Added visual debug text on screen
     - Implemented TNT

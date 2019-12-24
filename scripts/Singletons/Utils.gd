@@ -62,3 +62,9 @@ func file_exists(path:String,fileName:String,delete:bool=false):
 	else:
 		print("An error occurred when trying to access the path.")
 		return false
+
+func wait(time:float,caller:Node,method:String):
+	var timer = Timer.new()
+	get_tree().get_child(0).add_child(timer)
+	timer.start(time)
+	timer.connect("timeout",caller,method)

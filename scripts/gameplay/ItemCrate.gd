@@ -1,7 +1,7 @@
 extends Spatial
 
+export var wood_crate:bool = true
 export var startGravity:bool = true
-
 export var affectedByExplosion:bool
 
 # ---- WUMPA
@@ -26,6 +26,7 @@ func wumpa_ready():
 			objWumpa = preload("res://gameplay/obj_Wumpa.tscn")
 
 func SpawnWumpa():
+	if (!hasWumpa): return
 	var cratePos = get_translation()
 	
 	if (!wumpaCollection):
@@ -39,6 +40,12 @@ func SpawnWumpa():
 		instance.translation = cratePos
 
 func Destroy():
+	if (wood_crate):
+		var audio:AudioStreamPlayer3D = get_node("base_crate/Audio")
+		audio.play()
+		visible = false
+
+		
 	
 	#var part = $Particles.duplicate()
 	#get_parent().add_child(part)

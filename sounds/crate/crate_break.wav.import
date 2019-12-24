@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/crate_break.wav-b15a996791163b5d6bfa74ac4c438c48.sample"
+
+[deps]
+
+source_file="res://sounds/crate/crate_break.wav"
+dest_files=[ "res://.import/crate_break.wav-b15a996791163b5d6bfa74ac4c438c48.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

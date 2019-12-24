@@ -1,51 +1,113 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/gameplay/ItemCrate_tnt.gd" type="Script" id=1]
-[ext_resource path="res://gameplay/base_crate.tscn" type="PackedScene" id=2]
-[ext_resource path="res://models/items/crate/mat_tnt_side.material" type="Material" id=3]
-[ext_resource path="res://models/items/crate/mat_tnt_top.material" type="Material" id=4]
+[ext_resource path="res://models/items/crate/model_crate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://textures/gameplay/boxes-particles.png" type="Texture" id=3]
+[ext_resource path="res://sounds/gameplay/item/tnt.ogg" type="AudioStream" id=4]
 [ext_resource path="res://animations/tnt_activated.tres" type="Animation" id=5]
-[ext_resource path="res://sounds/gameplay/item/tnt.ogg" type="AudioStream" id=6]
+[ext_resource path="res://textures/gameplay/boxes-tnt-side.png" type="Texture" id=6]
+[ext_resource path="res://textures/gameplay/boxes-tnt-jp.png" type="Texture" id=7]
 
-[sub_resource type="Animation" id=1]
-resource_name = "anim_item_tnt_idle"
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 7 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 6 )
+
+[sub_resource type="Animation" id=3]
+
+[sub_resource type="Curve" id=4]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0.016835, 79.2 ), 0.0, 0.0, 0, 0, Vector2( 1, 79.2 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 169.2
+flatness = 0.51
+gravity = Vector3( 0, -10, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 0.49
+angular_velocity = 1.0
+linear_accel = 2.31
+linear_accel_curve = SubResource( 5 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+params_billboard_mode = 1
+albedo_color = Color( 0.492188, 0.372051, 0.224945, 1 )
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( 2, 1, 1 )
+
+[sub_resource type="QuadMesh" id=8]
+material = SubResource( 7 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.494565, 0.103121, 0.4698 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.518806, 0.53886, 0.512976 )
+
+[sub_resource type="BoxShape" id=11]
 extents = Vector3( 0.516887, 0.529563, 0.52046 )
 
-[node name="obj_tnt" type="RigidBody" groups=[
+[node name="obj_tnt" type="Spatial" groups=[
 "gp_crate",
 ]]
-collision_layer = 8
-collision_mask = 18
 script = ExtResource( 1 )
+affectedByExplosion = false
+hasWumpa = false
+amtWumpa = 0
+wumpaCollection = false
+jp_material = SubResource( 1 )
+material = SubResource( 2 )
 
-[node name="base_crate" parent="." instance=ExtResource( 2 )]
+[node name="base_crate" type="RigidBody" parent="."]
+collision_layer = 8
+collision_mask = 2
+mode = 3
 
-[node name="Cube" parent="base_crate/model_crate" index="0"]
-material/0 = ExtResource( 3 )
-material/1 = ExtResource( 4 )
+[node name="model_crate" parent="base_crate" instance=ExtResource( 2 )]
+transform = Transform( 1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0 )
 
 [node name="AnimationPlayer" parent="base_crate/model_crate" index="1"]
 anims/anim_item_tnt_activate = ExtResource( 5 )
-anims/anim_item_tnt_idle = SubResource( 1 )
+anims/anim_item_tnt_idle = SubResource( 3 )
 
-[node name="Particles" parent="base_crate" index="1"]
+[node name="Particles" type="Particles" parent="base_crate"]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+randomness = 0.71
 visibility_aabb = AABB( -2.13662, -2.663, -1.55608, 4.27324, 5.326, 3.11216 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 8 )
 
-[node name="AudioStreamPlayer3D" parent="base_crate" index="2"]
-visible = false
-stream = ExtResource( 6 )
+[node name="Audio" type="AudioStreamPlayer3D" parent="base_crate"]
+stream = ExtResource( 4 )
 
-[node name="Area" parent="base_crate" index="3"]
-monitoring = true
+[node name="Area" type="Area" parent="base_crate" groups=[
+"area_crate",
+]]
+collision_layer = 256
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="base_crate/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01462, 0 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="base_crate"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501299, 0 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.520112, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 11 )
 [connection signal="animation_finished" from="base_crate/model_crate/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="area_entered" from="base_crate/Area" to="." method="_on_Area_area_entered" flags=6]
-
-[editable path="base_crate"]
+[connection signal="area_entered" from="base_crate/Area" to="." method="_on_Area_area_entered"]
 
 [editable path="base_crate/model_crate"]

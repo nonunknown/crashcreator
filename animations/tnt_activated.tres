@@ -39,10 +39,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.51, 1.31, 2.15, 2.93 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.31, 2.15, 2.93 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 1 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]
+"values": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Cube:material/0:emission_energy")
@@ -56,34 +56,31 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0, 0.4, 0.0, 0.0, 0.4, 0.0, 0.0, 0.4, 0.0, 0.0, 0.4, 0.0, 0.0, 0.4, 0.0, 0.0, 0.4, 0.0 ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath("../AudioStreamPlayer3D")
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../CollisionShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 5.56 ),
+"times": PoolRealArray( 0.01, 3.49 ),
 "transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-}, {
-"args": [  ],
-"method": "stop"
-} ]
+"update": 1,
+"values": [ false, true ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("../../CollisionShape:disabled")
+tracks/5/type = "method"
+tracks/5/path = NodePath("../Audio")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.01, 3.49 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
 }
 tracks/6/type = "method"
 tracks/6/path = NodePath("../..")
@@ -92,7 +89,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 3.4 ),
+"times": PoolRealArray( 3.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],

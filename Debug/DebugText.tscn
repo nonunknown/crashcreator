@@ -11,8 +11,11 @@ func _ready():
 	print(\"debug initialized\")
 
 func set_text(id,text):
-	labels[id].text = text
-	pass
+	if not labels.has(id):
+		add_text(id)
+	else:
+		labels[id].text = str(id)+\": \"+text
+
 
 func add_text(id):
 	var n = base.duplicate()

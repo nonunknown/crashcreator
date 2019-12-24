@@ -1,7 +1,7 @@
 extends Spatial
 class_name Explosion
 
-var effect = preload("res://gameplay/obj_explosion.tscn")
+var effect = preload("res://resources/gameplay/explosion.tscn")
 	
 func _init(parent):
 	var explosion_fx = effect.instance()
