@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/boxes-tnt-top.png-262361d0ce3d254b0a2c3de562b24169.stex"
+path="res://.import/gold_block.png-1e3b3fdde16f16f1b341f33ddbb70c6a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/items/crate/boxes-tnt-top.png"
-dest_files=[ "res://.import/boxes-tnt-top.png-262361d0ce3d254b0a2c3de562b24169.stex" ]
+source_file="res://models/levels/lv_toadvillage/gold_block.png"
+dest_files=[ "res://.import/gold_block.png-1e3b3fdde16f16f1b341f33ddbb70c6a.stex" ]
 
 [params]
 

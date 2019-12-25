@@ -1,36 +1,22 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://gameplay/obj_Wumpa.tscn" type="PackedScene" id=1]
-[ext_resource path="res://gameplay/obj_aku.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gameplay/obj_item_aku.tscn" type="PackedScene" id=2]
 [ext_resource path="res://gameplay/obj_life.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=4]
-[ext_resource path="res://gameplay/obj_crate_simple.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/crates/obj_crate_tnt.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Debug/DebugText.tscn" type="PackedScene" id=6]
-[ext_resource path="res://gameplay/obj_crate_tnt.tscn" type="PackedScene" id=7]
-[ext_resource path="res://gameplay/obj_akuaku.tscn" type="PackedScene" id=8]
 [ext_resource path="res://textures/lv_toadvillage/tex_ground.png" type="Texture" id=9]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 9 )
+uv1_scale = Vector3( 20, 20, 1 )
 
 [sub_resource type="PlaneMesh" id=2]
 material = SubResource( 1 )
+size = Vector2( 3, 3 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 0.0424342, 1 )
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends Area
-
-func _ready():
-	pass
-
-
-func _on_Area_body_entered(body):
-	print(str( body.name))
-"
-
-[sub_resource type="BoxShape" id=5]
 
 [node name="Lab" type="Spatial" groups=[
 "scene",
@@ -50,8 +36,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="akuaku" parent="." instance=ExtResource( 8 )]
-transform = Transform( -0.289778, 0, -0.0776457, 0, 0.3, 0, 0.0776457, 0, -0.289778, -2.19839, 1.11021, 1.83365 )
+[node name="Button3" type="Button" parent="."]
+margin_left = 121.0
+margin_top = 38.0
+margin_right = 189.0
+margin_bottom = 67.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Decrease"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 1.69407e-21, 3.25841e-07, 1.32064e-07, 0.914183, 0.405301, -2.97879e-07, 0.405301, -0.914183, 0, 3.58321, -4.86615 )
@@ -63,7 +58,7 @@ collision_mask = 190
 [node name="Level" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="Level"]
-transform = Transform( 9.13981, 0, 0, 0, 9.13981, 0, 0, 0, 9.13981, 0, 0, 0 )
+transform = Transform( 9.13981, 0, 0, 0, 9.13981, 0, 0, 0, 9.13981, -0.00161552, 0.0171592, 0.0097127 )
 mesh = SubResource( 2 )
 material/0 = null
 
@@ -74,41 +69,21 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Level/MeshInstance/StaticBody"]
 shape = SubResource( 3 )
 
-[node name="obj_Wumpa" parent="Level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4312, 1.52682, -0.70509 )
-
-[node name="obj_aku" parent="Level" instance=ExtResource( 2 )]
-transform = Transform( -0.998424, 0, 0.0561178, 0, 1, 0, -0.0561178, 0, -0.998424, -0.665304, 0.50818, -2.27116 )
-
 [node name="obj_life" parent="Level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236221, 0.431953, -1.15292 )
 
-[node name="obj_tnt" parent="Level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.155, 0, 1.68733 )
-use_jp_material = true
+[node name="obj_item_aku" parent="Level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.319266, -2.75605 )
 
-[node name="obj_crate_simple" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50118, 0.2, 0.173394 )
-hasWumpa = true
+[node name="obj_crate_tnt" parent="Level" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.882291, 0.21716, 0.213712 )
 
-[node name="obj_crate_simple2" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83444, 0.2, 0.46238 )
+[node name="obj_crate_tnt2" parent="Level" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.614008, 0.21716, 3.88778 )
 
-[node name="base_crate" parent="Level/obj_crate_simple2" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.45494 )
-collision_mask = 26
-
-[node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.23563, 1.11307, 3.00406 )
-collision_layer = 256
-collision_mask = 514
-script = SubResource( 4 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 5 )
+[node name="obj_crate_tnt3" parent="Level" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.698083, 0.217159, 1.86545 )
 [connection signal="pressed" from="Button2" to="obj_Character" method="_on_Button2_pressed"]
-[connection signal="body_entered" from="Area" to="Area" method="_on_Area_body_entered"]
+[connection signal="pressed" from="Button3" to="obj_Character" method="_on_Button3_pressed"]
 
 [editable path="DebugText"]
-
-[editable path="Level/obj_crate_simple2"]

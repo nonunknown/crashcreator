@@ -1,4 +1,4 @@
-extends Spatial
+extends RigidBody
 
 export var wood_crate:bool = true
 export var startGravity:bool = true
@@ -14,7 +14,7 @@ var objWumpa
 
 func _ready():
 	if startGravity:
-		get_child(0).sleeping = false
+		sleeping = false
 	wumpa_ready()
 	
 	
@@ -40,19 +40,17 @@ func SpawnWumpa():
 		instance.translation = cratePos
 
 func Destroy():
-	if (wood_crate):
-		var audio:AudioStreamPlayer3D = get_node("base_crate/Audio")
-		audio.play()
-		visible = false
-
-		
+	$CollisionShape.disabled = true
 	
-	#var part = $Particles.duplicate()
-	#get_parent().add_child(part)
-	#$Particles.queue_free()
-	#part.emitting = true
-	#todo free part
-	print("particle System to implement and sound")
+	if (wood_crate):
+		var audio:AudioStreamPlayer3D = get_node("sfx")
+		var p:Particles = get_node("Particle")
+		audio.play()
+		p.emitting = true
+		get_node("model").visible = false
+		yield(get_tree().create_timer(audio.stream.get_length(),false),"timeout")
+		
+	visible = false	
 	queue_free()
 
 			

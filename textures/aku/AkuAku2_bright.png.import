@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/ground.png-31eb6544a25f54cc633b1a1ff706adbf.s3tc.stex"
-path.etc2="res://.import/ground.png-31eb6544a25f54cc633b1a1ff706adbf.etc2.stex"
+path.s3tc="res://.import/AkuAku2_bright.png-8edf37fb345f8d45c52f0192dc23ab16.s3tc.stex"
+path.etc2="res://.import/AkuAku2_bright.png-8edf37fb345f8d45c52f0192dc23ab16.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/levels/lv_toadvillage/ground.png"
-dest_files=[ "res://.import/ground.png-31eb6544a25f54cc633b1a1ff706adbf.s3tc.stex", "res://.import/ground.png-31eb6544a25f54cc633b1a1ff706adbf.etc2.stex" ]
+source_file="res://textures/aku/AkuAku2_bright.png"
+dest_files=[ "res://.import/AkuAku2_bright.png-8edf37fb345f8d45c52f0192dc23ab16.s3tc.stex", "res://.import/AkuAku2_bright.png-8edf37fb345f8d45c52f0192dc23ab16.etc2.stex" ]
 
 [params]
 

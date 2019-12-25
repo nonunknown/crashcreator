@@ -4,6 +4,12 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 early alpha - means not playable... yet!
 
+### Alpha 0.8.7
+    - Updated Crash & Aku as health system
+    - Remade crate box system
+    - Remodeled crate, due to inverted UV and added bounce shape key
+    - Updated Explosion resource
+
 ### Alpha 0.8.6 - The Crash Update
     - Updated visual debug (just call set_text now)
     - Added More animations to crash

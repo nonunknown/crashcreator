@@ -1,12 +1,18 @@
 extends KinematicBody
 class_name Character
 
+signal increased_health(amt)
+signal decreased_health(amt)
+
+
 var is_grounded:bool = false
 var velocity = Vector3()
 var camera
 var look_at = 0
-
-
+var dashing = false
+var health = 1
+var obj_aku = preload("res://gameplay/obj_akuaku.tscn")
+var aku:Node
 
 export var gravity:float = -20
 export var jump_force:int = 9
@@ -18,9 +24,9 @@ export var speed:int = 4
 export var power_double_jump:bool = false
 
 onready var debug = get_parent().get_node("DebugText")
-onready var anim = get_node("AnimationTree")
-onready var power = Power.new()
-
+onready var anim:AnimationTree = get_node("AnimationTree")
+onready var power:Power = Power.new()
+onready var initial_speed:int = speed
 #PowerStuff
 var jumps:int = 1
 var jumps_actual:int = 0
@@ -33,7 +39,6 @@ func power_init():
 	
 	for i in power.list:
 		power.list[i].start()
-	
 	jumps_actual = jumps
 
 # Functions
@@ -43,6 +48,7 @@ func kill():
 	
 func ressurect():
 	set_physics_process(true)
+	health_increase()
 	visible = true
 
 var last_frame:bool = false
@@ -52,18 +58,27 @@ func check_grounded():
 		if (last_frame == false):
 			jumps_actual = jumps
 			last_frame = true
-		
 #		print($RayCast.get_collider())
 	else: 
 		is_grounded = false
 		last_frame = false
 		
-
+		0
 func check_jump():
 	if (Input.is_action_just_pressed("ui_jump") && jumps_actual >= 1):
 		if (jumps > 1 && jumps_actual == jumps): #avoid spamming jump
 			do_jump()
 		elif (velocity.y < 1): do_jump() #velocity < 1 means falling
+		
+		
+
+func check_dash():
+	if (Input.is_action_just_pressed("cmd_dash") && !dashing):
+		speed = initial_speed * 4
+		dashing = true
+		yield(get_tree().create_timer(dash_duration,false),"timeout")
+		dashing = false
+		speed = initial_speed
 		
 
 func do_jump():
@@ -71,6 +86,7 @@ func do_jump():
 	jumps_actual -= 1
 
 func move_calculation(delta):
+	
 	var dir = Vector3()
 	rotation.y = lerp_angle(rotation.y,look_at,0.25)
 		
@@ -105,17 +121,39 @@ func move_calculation(delta):
 	velocity.z = hv.z
 	velocity = move_and_slide(velocity, Vector3(0,1,0),false,4,PI/4,false)	
 
+func health_increase():
+	if (health + 1 <= 3):
+		health += 1
+		aku._on_char_health_increased(health)
+
+func health_decrease():
+	if (health - 1 >= 0 ):
+		health -= 1
+		if health == 0:
+			kill()
+			return
+		else: do_jump()
+			
+		aku._on_char_health_decreased(health)
+		
+
+
 func _ready():
 	set_physics_process(true)
+	aku = obj_aku.instance()
+	aku.visible = false
+	get_parent().call_deferred("add_child",aku)
 	camera = get_viewport().get_camera().get_global_transform()
 	power_init()
 
 func _physics_process(delta):
 	debug.set_text("velocityY",str(velocity.y))
 	debug.set_text("jumpCount",str(jumps_actual))
+	debug.set_text("health",str(health))
 	check_grounded()
 	move_calculation(delta)
 	check_jump()
+	check_dash()
 
 
 	
@@ -127,46 +165,19 @@ func short_angle_dist(from, to):
 	var difference = fmod(to - from, max_angle)
 	return fmod(2 * difference, max_angle) - difference
 
-func _on_AreaFeet_body_entered(body):
-	if (body.is_in_group("gp_crate")):
-		print("colided crate")
-		body._on_Jumped()
-		velocity.y = 7
-	pass # Replace with function body.
-
-
-func _on_AreaBody_body_entered(body):
-	if (body.is_in_group("gp_item")):
-		body._on_Picked()
-	pass # Replace with function body.
-
-var process = false
-func _on_btPlay_pressed():
-	process = !process
-	set_physics_process(process)
-	pass # Replace with function body.
-
-
-func _on_Feet_area_shape_entered(area_id, area, area_shape, self_shape):
-	print(area)
-	if (area.is_in_group("area_crate")):
-		velocity.y = jump_force * 1.2
-		area.get_parent().get_parent()._on_Jumped()
-		
-	pass # Replace with function body.
-
-
-func _on_Body_area_entered(area):
-	if (area.is_in_group("explosion")):
-		kill()
 
 func _on_Button2_pressed():
 	ressurect()
 	pass # Replace with function body.
 
 
-func _on_Body_body_entered(body):
-	if (body.is_in_group("gp_item")):
-		
-		pass
+func _on_Feet_area_entered(area):
+	if (area.is_in_group("area_crate")):
+		do_jump()
+		var crate = area.get_parent()
+		crate._on_Jumped()
+
+
+func _on_Button3_pressed():
+	health_decrease()
 	pass # Replace with function body.

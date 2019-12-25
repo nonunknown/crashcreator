@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://models/aku/mat_aku.material" type="Material" id=1]
 [ext_resource path="res://models/aku/mat_aku_pena.material" type="Material" id=2]
 [ext_resource path="res://scripts/gameplay/AkuAku.gd" type="Script" id=3]
+[ext_resource path="res://sounds/gameplay/aku/com_aku_lose_01.ogg" type="AudioStream" id=4]
+[ext_resource path="res://textures/aku/AkuAku2.png" type="Texture" id=5]
+[ext_resource path="res://textures/aku/AkuAku2_bright.png" type="Texture" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "AkuAku"
@@ -350,9 +353,12 @@ tracks/12/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0416667, 1
 
 [node name="obj_akuaku" type="Spatial"]
 script = ExtResource( 3 )
-duration = 0.1
+duration = 1.0
+material_pena_n = ExtResource( 5 )
+material_pena_g = ExtResource( 6 )
 
 [node name="Armature" type="Spatial" parent="."]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="Armature"]
 bones/0/name = "master"
@@ -424,8 +430,8 @@ bones/12/bound_children = [  ]
 [node name="AkuAku" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 1 )
 skin = SubResource( 2 )
-material/0 = null
-material/1 = null
+material/0 = ExtResource( 1 )
+material/1 = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -436,3 +442,17 @@ anims/null = SubResource( 5 )
 [node name="Tween" type="Tween" parent="."]
 repeat = true
 playback/repeat = true
+
+[node name="sfx_lose" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="light" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.392481, 0.506608 )
+visible = false
+layers = 5
+light_color = Color( 1, 0.960784, 0, 1 )
+light_energy = 2.89
+light_indirect_energy = 0.83
+light_specular = 0.48
+spot_range = 0.985381
+spot_angle = 60.3776

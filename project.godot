@@ -123,8 +123,8 @@ cmd_dash={
 3d_physics/layer_6="Enemies"
 3d_physics/layer_7="Selectable"
 3d_physics/layer_8="KillZone"
-3d_physics/layer_9="Area"
-3d_physics/layer_10="Base_Crate"
+3d_physics/layer_9="Crash_Feet"
+3d_physics/layer_10="Body_Crate"
 
 [rendering]
 
