@@ -1,4 +1,7 @@
 extends RigidBody
+class_name Crate
+
+export var ID:int
 
 export var wood_crate:bool = true
 export var startGravity:bool = true
@@ -12,9 +15,12 @@ var objWumpa
 
 # ----------------------
 
+onready var character:Character = get_tree().get_nodes_in_group("player")[0]
+
 func _ready():
-	if startGravity:
-		sleeping = false
+	if !startGravity:
+		sleeping = true
+		
 	wumpa_ready()
 	
 	

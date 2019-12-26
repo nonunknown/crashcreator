@@ -26,6 +26,7 @@ export var power_double_jump:bool = false
 onready var debug = get_parent().get_node("DebugText")
 onready var anim:AnimationTree = get_node("AnimationTree")
 onready var power:Power = Power.new()
+onready var iventory:Iventory = Iventory.new()
 onready var initial_speed:int = speed
 #PowerStuff
 var jumps:int = 1
@@ -43,13 +44,16 @@ func power_init():
 
 # Functions
 func kill():
-	set_physics_process(false)
 	visible = false
+	health = 0
+	set_physics_process(false)
+	
 	
 func ressurect():
 	set_physics_process(true)
-	health_increase()
+	health_increase(1)
 	visible = true
+	aku.visible = false
 
 var last_frame:bool = false
 func check_grounded():
@@ -69,9 +73,6 @@ func check_jump():
 		if (jumps > 1 && jumps_actual == jumps): #avoid spamming jump
 			do_jump()
 		elif (velocity.y < 1): do_jump() #velocity < 1 means falling
-		
-		
-
 func check_dash():
 	if (Input.is_action_just_pressed("cmd_dash") && !dashing):
 		speed = initial_speed * 4
@@ -121,21 +122,19 @@ func move_calculation(delta):
 	velocity.z = hv.z
 	velocity = move_and_slide(velocity, Vector3(0,1,0),false,4,PI/4,false)	
 
-func health_increase():
+func health_increase(value:int=1):
 	if (health + 1 <= 3):
-		health += 1
+		health += value
 		aku._on_char_health_increased(health)
 
 func health_decrease():
-	if (health - 1 >= 0 ):
-		health -= 1
-		if health == 0:
-			kill()
-			return
-		else: do_jump()
-			
-		aku._on_char_health_decreased(health)
-		
+	if (health <= 0): return
+	health -= 1
+	if health <= 0:
+		kill()
+	else: 
+		do_jump()
+	aku._on_char_health_decreased(health)
 
 
 func _ready():
@@ -146,10 +145,13 @@ func _ready():
 	camera = get_viewport().get_camera().get_global_transform()
 	power_init()
 
-func _physics_process(delta):
+func _process(_delta):
 	debug.set_text("velocityY",str(velocity.y))
 	debug.set_text("jumpCount",str(jumps_actual))
 	debug.set_text("health",str(health))
+	debug.set_text("wumpa",str(iventory.wumpa))
+
+func _physics_process(delta):
 	check_grounded()
 	move_calculation(delta)
 	check_jump()

@@ -1,4 +1,4 @@
-extends "res://scripts/gameplay/ItemPickable.gd"
+extends Item
 
 var character:Character
 

@@ -14,10 +14,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/character.gd"
 }, {
+"base": "RigidBody",
+"class": "Crate",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate.gd"
+}, {
 "base": "Spatial",
 "class": "Explosion",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Explosion.gd"
+}, {
+"base": "Node",
+"class": "Item",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Item.gd"
+}, {
+"base": "Node",
+"class": "Iventory",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Iventory.gd"
 }, {
 "base": "Reference",
 "class": "Power",
@@ -26,7 +41,10 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Character": "",
+"Crate": "",
 "Explosion": "",
+"Item": "",
+"Iventory": "",
 "Power": ""
 }
 

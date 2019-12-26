@@ -1,6 +1,4 @@
-extends "res://scripts/gameplay/ItemCrate.gd"
-
-
+extends Crate
 
 func _on_Attacked():
 	SpawnWumpa()

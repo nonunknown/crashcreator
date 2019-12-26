@@ -10,19 +10,14 @@ export var material_pena_g:Texture
 
 func _ready():
 	aku_pos = get_tree().get_nodes_in_group("player")[0].get_node("AkuPos")
-	print(aku_pos.translation)
-	print(aku_pos.global_transform.origin)
+	set_process(false)
 func _process(delta):
-	target_pos = aku_pos.global_transform.originBR
-
-	tween.interpolate_property(self,"translation",self.translation,target_pos,duration,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
-	tween.start()
-
-func kill():
-	#play lose sound
-	#yield when sound finish
-	queue_free()
-
+	target_pos = aku_pos.global_transform.origin
+	var target_rot = aku_pos.get_parent().rotation.y
+	self.translation = lerp(self.translation,target_pos,.03)
+	self.rotation.y = lerp(self.rotation.y,target_rot,0.01)
+#	tween.interpolate_property(self,"translation",self.translation,target_pos,duration,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+#	tween.start()
 
 func to_gold():
 	var mat:Node = $Armature/Skeleton/AkuAku
@@ -30,7 +25,9 @@ func to_gold():
 	$light.visible = true
 
 func _on_char_health_increased(health):
-	self.visible = true
+	if (health > 1):
+		self.visible = true
+		set_process(true)
 
 	match health:
 		3:
@@ -46,6 +43,11 @@ func _on_char_health_decreased(health):
 			pass
 		1:
 			self.visible = false
+			set_process(false)
+	if (health > 0):
+		$sfx_lose.play()
 	
-	$sfx_lose.play()
+	
+	
+	
 		

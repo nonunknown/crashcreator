@@ -1,4 +1,5 @@
 extends Node
+class_name Item
 
 export var attackable:bool = false
 

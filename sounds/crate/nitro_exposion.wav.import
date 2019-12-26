@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/nitro_exposion.wav-832c4d2aa4e8d8454f1899530be6cc57.sample"
+
+[deps]
+
+source_file="res://sounds/crate/nitro_exposion.wav"
+dest_files=[ "res://.import/nitro_exposion.wav-832c4d2aa4e8d8454f1899530be6cc57.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

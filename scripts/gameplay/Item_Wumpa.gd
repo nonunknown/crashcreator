@@ -1,4 +1,4 @@
-extends "res://scripts/gameplay/ItemPickable.gd"
+extends Item
 
 
 func picked_overload():

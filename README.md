@@ -4,6 +4,15 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 early alpha - means not playable... yet!
 
+### Alpha 0.8.8
+    - Updated Aku (Performance reasons)
+    - Added Crates:
+        - Nitro
+        - Bounce
+    - Created Iventory for crash(wumpa,life,crates)
+    - Added more sounds
+
+
 ### Alpha 0.8.7
     - Updated Crash & Aku as health system
     - Remade crate box system

@@ -1,8 +1,7 @@
-extends "res://scripts/gameplay/ItemCrate.gd"
+extends Crate
 
 export var use_jp_material:bool = false
 export var jp_texture:Texture
-onready var anim = get_node("base_crate/model_crate/AnimationPlayer")
 # Called when the node enters the scene tree for the first time.
 
 func _ready():

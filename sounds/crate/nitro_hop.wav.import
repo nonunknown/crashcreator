@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/nitro_hop.wav-164d6ba5a1e9646778cb604b5a3feb17.sample"
+
+[deps]
+
+source_file="res://sounds/crate/nitro_hop.wav"
+dest_files=[ "res://.import/nitro_hop.wav-164d6ba5a1e9646778cb604b5a3feb17.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
