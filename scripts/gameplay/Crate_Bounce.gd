@@ -6,6 +6,7 @@ func decrease_health():
 	health -= 1
 	character.iventory.add_wumpa(2)
 	$Anim.play("bounce")
+	print("bounce")
 	$sfx_bounce.play()
 	$sfx_bounce.pitch_scale += 0.02
 	if (health <= 0):
@@ -20,6 +21,7 @@ func _on_Attacked():
 	queue_free()
 	
 func _on_Jumped():
+	print("jumped")
 	decrease_health()
 	
 

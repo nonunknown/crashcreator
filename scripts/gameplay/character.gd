@@ -10,6 +10,7 @@ var velocity = Vector3()
 var camera
 var look_at = 0
 var dashing = false
+var attacking:bool = false
 var health = 1
 var obj_aku = preload("res://gameplay/obj_akuaku.tscn")
 var aku:Node
@@ -28,6 +29,7 @@ onready var anim:AnimationTree = get_node("AnimationTree")
 onready var power:Power = Power.new()
 onready var iventory:Iventory = Iventory.new()
 onready var initial_speed:int = speed
+
 #PowerStuff
 var jumps:int = 1
 var jumps_actual:int = 0
@@ -45,6 +47,7 @@ func power_init():
 # Functions
 func kill():
 	visible = false
+	$sfx/death_woah.play()
 	health = 0
 	set_physics_process(false)
 	
@@ -54,8 +57,10 @@ func ressurect():
 	health_increase(1)
 	visible = true
 	aku.visible = false
-
+	
+var last_dir:Vector3 = Vector3.ZERO
 var last_frame:bool = false
+
 func check_grounded():
 	if ($RayCast.is_colliding()): 
 		is_grounded = true
@@ -74,29 +79,43 @@ func check_jump():
 			do_jump()
 		elif (velocity.y < 1): do_jump() #velocity < 1 means falling
 func check_dash():
-	if (Input.is_action_just_pressed("cmd_dash") && !dashing):
+	if (Input.is_action_just_pressed("cmd_dash") && !dashing && velocity_median() > 1 && is_grounded):
 		speed = initial_speed * 4
+		
 		dashing = true
 		yield(get_tree().create_timer(dash_duration,false),"timeout")
 		dashing = false
 		speed = initial_speed
-		
+	
+	if (dashing):
+		dir += last_dir
+	else: dir = Vector3.ZERO
+func check_attack():
+	if (is_grounded && Input.is_action_just_pressed("cmd_attack")):
+		if (!attacking):
+			attacking = true
+			$sfx/twist.play()
+			yield(get_tree().create_timer(1,false),"timeout");
+			attacking = false
+		else:
+			$sfx/twist_fail.play();
+
 
 func do_jump():
 	velocity.y = jump_force
 	jumps_actual -= 1
+	
 
+var dir = Vector3()
 func move_calculation(delta):
 	
-	var dir = Vector3()
 	rotation.y = lerp_angle(rotation.y,look_at,0.25)
-		
 	if(Input.is_action_pressed("ui_up")):
 		look_at = 0
 		dir += -camera.basis[2]
 		
 	if(Input.is_action_pressed("ui_down")):
-		look_at = -3
+		look_at = 3
 		dir += camera.basis[2]
 
 	if(Input.is_action_pressed("ui_left")):
@@ -110,6 +129,7 @@ func move_calculation(delta):
 		
 	dir.y = 0
 	dir = dir.normalized()
+	last_dir = dir
 	velocity.y += delta * gravity
 	var hv = velocity
 	hv.y = 0
@@ -121,6 +141,10 @@ func move_calculation(delta):
 	velocity.x = hv.x
 	velocity.z = hv.z
 	velocity = move_and_slide(velocity, Vector3(0,1,0),false,4,PI/4,false)	
+
+func velocity_median() -> float:
+	return (abs(velocity.x) + abs(velocity.z)) * 0.5
+
 
 func health_increase(value:int=1):
 	if (health + 1 <= 3):
@@ -150,14 +174,15 @@ func _process(_delta):
 	debug.set_text("jumpCount",str(jumps_actual))
 	debug.set_text("health",str(health))
 	debug.set_text("wumpa",str(iventory.wumpa))
+	debug.set_text("dir",str(dir))
+	debug.set_text("dashing",str(dashing))
 
 func _physics_process(delta):
 	check_grounded()
 	move_calculation(delta)
 	check_jump()
 	check_dash()
-
-
+	check_attack()
 	
 func lerp_angle(from, to, weight):
 	return from + short_angle_dist(from, to) * weight
@@ -174,12 +199,21 @@ func _on_Button2_pressed():
 
 
 func _on_Feet_area_entered(area):
-	if (area.is_in_group("area_crate")):
+	if (area.is_in_group("area_crate") && velocity.y < 1.3):
 		do_jump()
-		var crate = area.get_parent()
-		crate._on_Jumped()
+		crate_collided(area)
+		
 
+func _on_Head_area_entered(area):
+	if (area.is_in_group("area_crate")):
+		crate_collided(area)
+	
+	pass # Replace with function body.
 
 func _on_Button3_pressed():
 	health_decrease()
 	pass # Replace with function body.
+
+func crate_collided(area):
+	var crate = area.get_parent()
+	crate._on_Jumped()

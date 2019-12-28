@@ -11,8 +11,6 @@
 [ext_resource path="res://textures/gameplay/materials/mat_tnt_side_3.material" type="Material" id=9]
 [ext_resource path="res://textures/gameplay/materials/mat_tnt_side.material" type="Material" id=10]
 
-
-
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "crate"
 blend_shape_mode = 0
@@ -43,27 +41,27 @@ surfaces/1 = {
 "vertex_count": 8
 }
 
-[sub_resource type="BoxShape" id=14]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.42963, 0.97037 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=13]
-gradient = SubResource( 12 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 width = 128
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=5]
 spread = 169.2
 flatness = 0.51
 gravity = Vector3( 0, 3, 0 )
 initial_velocity = 12.0
-color_ramp = SubResource( 13 )
+color_ramp = SubResource( 4 )
 anim_speed = 1.0
 anim_speed_random = 1.0
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=6]
 flags_transparent = true
 vertex_color_use_as_albedo = true
 params_billboard_mode = 3
@@ -81,13 +79,13 @@ emission_operator = 0
 emission_on_uv2 = false
 uv1_scale = Vector3( 2, 1, 1 )
 
-[sub_resource type="QuadMesh" id=5]
-material = SubResource( 4 )
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.494565, 0.0116764, 0.4698 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=9]
 resource_name = "activate"
 length = 3.26
 step = 0.01
@@ -108,7 +106,7 @@ tracks/0/keys = {
 "crate",
 ]]
 collision_layer = 512
-collision_mask = 528
+collision_mask = 530
 script = ExtResource( 5 )
 wood_crate = false
 affectedByExplosion = true
@@ -123,7 +121,7 @@ material/1 = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-shape = SubResource( 14 )
+shape = SubResource( 2 )
 
 [node name="Particle" type="Particles" parent="."]
 emitting = false
@@ -131,8 +129,8 @@ amount = 12
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 10 )
-draw_pass_1 = SubResource( 5 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
 
 [node name="sfx" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 1 )
@@ -146,7 +144,7 @@ collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01462, -0.00259399 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/activate = SubResource( 15 )
+anims/activate = SubResource( 9 )

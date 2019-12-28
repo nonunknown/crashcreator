@@ -4,6 +4,15 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 early alpha - means not playable... yet!
 
+### Alpha 0.8.9
+    - Corrected some character bugs
+    - Added Head collision check with crates
+    - Added twist animation to crash
+    - adjusted crash animations (a lot to do yet)
+    - Added more sounds
+
+
+
 ### Alpha 0.8.8
     - Updated Aku (Performance reasons)
     - Added Crates:

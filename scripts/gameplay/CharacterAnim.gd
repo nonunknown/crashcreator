@@ -6,27 +6,33 @@ onready var animPlayer:AnimationPlayer = get_node(self.get_animation_player())#g
 
 onready var debug = get_parent().get_parent().get_node("DebugText")
 
-func _process(delta):
-	set("parameters/OnGround/move/blend_amount",velocity_median())
-	set("parameters/OnGround/walk_speed/scale",velocity_median() * 1.4)
-	set("parameters/conditions/c_jump",is_moving_y())
-	set("parameters/OnAir/conditions/c_start_fall",(character.velocity.y <= -1))
+func _process(_delta):
 	set("parameters/OnAir/conditions/c_is_grounded",character.is_grounded)
 	set("parameters/conditions/c_is_grounded",character.is_grounded)
-	set("parameters/OnAir/conditions/c_is_moving",(velocity_median() > 1))
-	set("parameters/conditions/c_is_moving",(velocity_median() > 1))
-	debug.set_text("startfall",str( get("parameters/OnAir/conditions/c_start_fall")))
+	set("parameters/OnGround/move/blend_amount",character.velocity_median())
+	set("parameters/OnGround/walk_speed/scale",character.velocity_median() * 1.4)
+	
+	set("parameters/OnAir/conditions/c_is_moving",(character.velocity_median() > 1))
+	set("parameters/conditions/c_is_moving",(character.velocity_median() > 1))
+	
+	set("parameters/conditions/c_jump",is_moving_y())
+	set("parameters/OnAir/conditions/c_start_fall",(character.velocity.y <= -1))
+	
+	set("parameters/conditions/c_dash",character.dashing == true)
+	set("parameters/conditions/c_dash_end",character.dashing == false)
+	set("parameters/conditions/c_crouch",Input.is_action_just_pressed("cmd_dash") && character.velocity_median() < 1)
+	set("parameters/conditions/c_wake_up",Input.is_action_just_released("cmd_dash"))
+	
+	set("parameters/conditions/c_attack",character.attacking)
+	
+	
 	debug.set_text("grounded",str( character.is_grounded))
 	
-	set("parameters/conditions/c_moving_dash",Input.is_action_just_pressed("cmd_dash") && velocity_median() > 1)
-	set("parameters/conditions/c_idle_dash",Input.is_action_just_pressed("cmd_dash") && velocity_median() < 1)
-	set("parameters/conditions/c_wake_up",Input.is_action_just_released("cmd_dash"))
+
 	#Todo: c_dash_end
-func velocity_median() -> float:
-	return (abs(character.velocity.x) + abs(character.velocity.z)) * 0.5
 
 func is_moving_y()->bool:
 	if (character.velocity.y > 1):
 		return true 
 	else: 
-		return false 
+		return false

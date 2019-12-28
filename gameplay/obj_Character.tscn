@@ -1,223 +1,243 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scripts/gameplay/character.gd" type="Script" id=1]
 [ext_resource path="res://resources/gameplay/crash.res" type="PackedScene" id=2]
 [ext_resource path="res://scripts/gameplay/CharacterAnim.gd" type="Script" id=3]
+[ext_resource path="res://sounds/crash/woah.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/crash/twist.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/crash/twist_fail.wav" type="AudioStream" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.415174, 0.761578, 0.264996 )
 
 [sub_resource type="AnimationNodeAnimation" id=2]
-animation = "crouch-loop"
+animation = "Attack"
 
 [sub_resource type="AnimationNodeAnimation" id=3]
+animation = "crouch-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "crouch"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=4]
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=5]
-states/crouch/node = SubResource( 3 )
+[sub_resource type="AnimationNodeStateMachine" id=6]
+states/crouch/node = SubResource( 4 )
 states/crouch/position = Vector2( 266, 75 )
-states/crouch-loop/node = SubResource( 2 )
+states/crouch-loop/node = SubResource( 3 )
 states/crouch-loop/position = Vector2( 334, 160 )
-transitions = [ "crouch", "crouch-loop", SubResource( 4 ) ]
+transitions = [ "crouch", "crouch-loop", SubResource( 5 ) ]
 start_node = "crouch"
 end_node = "crouch-loop"
 graph_offset = Vector2( 9, 14 )
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Dash-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Dash"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "FallGround"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Idle"
-
 [sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Fall"
+animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Fall"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Fall"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "FallGround"
 
-[sub_resource type="AnimationNodeTimeScale" id=13]
+[sub_resource type="AnimationNodeTimeScale" id=14]
 
-[sub_resource type="AnimationNodeBlendTree" id=14]
+[sub_resource type="AnimationNodeBlendTree" id=15]
 graph_offset = Vector2( -111, 111 )
-nodes/Animation/node = SubResource( 12 )
+nodes/Animation/node = SubResource( 13 )
 nodes/Animation/position = Vector2( -40, 160 )
 nodes/output/position = Vector2( 360, 140 )
-nodes/speed/node = SubResource( 13 )
+nodes/speed/node = SubResource( 14 )
 nodes/speed/position = Vector2( 140, 180 )
 node_connections = [ "speed", 0, "Animation", "output", 0, "speed" ]
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Jump"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "JumpFall"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "jump-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Jump-move"
 
-[sub_resource type="AnimationNodeTimeScale" id=19]
+[sub_resource type="AnimationNodeTimeScale" id=20]
 
-[sub_resource type="AnimationNodeBlendTree" id=20]
+[sub_resource type="AnimationNodeBlendTree" id=21]
 graph_offset = Vector2( 50, -14 )
-nodes/Animation/node = SubResource( 18 )
+nodes/Animation/node = SubResource( 19 )
 nodes/Animation/position = Vector2( 120, 80 )
 nodes/output/position = Vector2( 560, 60 )
-nodes/speed/node = SubResource( 19 )
+nodes/speed/node = SubResource( 20 )
 nodes/speed/position = Vector2( 340, 60 )
 node_connections = [ "speed", 0, "Animation", "output", 0, "speed" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
-advance_condition = "c_start_fall"
-priority = 0
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
-auto_advance = true
-xfade_time = 0.3
+advance_condition = "c_start_fall"
 priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
-advance_condition = "c_start_fall"
+auto_advance = true
+xfade_time = 0.3
+priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
-advance_condition = "c_is_moving"
-xfade_time = 0.3
+advance_condition = "c_start_fall"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
+advance_condition = "c_is_moving"
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 advance_condition = "c_is_grounded"
 
-[sub_resource type="AnimationNodeStateMachine" id=28]
-states/Fall/node = SubResource( 11 )
+[sub_resource type="AnimationNodeStateMachine" id=29]
+states/Fall/node = SubResource( 12 )
 states/Fall/position = Vector2( 638, 50 )
-"states/Fall 2/node" = SubResource( 10 )
+"states/Fall 2/node" = SubResource( 11 )
 "states/Fall 2/position" = Vector2( 651, -26 )
-states/FallGround/node = SubResource( 14 )
+states/FallGround/node = SubResource( 15 )
 states/FallGround/position = Vector2( 827, 28 )
-states/Jump/node = SubResource( 15 )
+states/Jump/node = SubResource( 16 )
 states/Jump/position = Vector2( 187, 98 )
-states/JumpFall/node = SubResource( 16 )
+states/JumpFall/node = SubResource( 17 )
 states/JumpFall/position = Vector2( 498, 155 )
-states/jump-loop/node = SubResource( 17 )
+states/jump-loop/node = SubResource( 18 )
 states/jump-loop/position = Vector2( 424, 50 )
-states/jumpmove/node = SubResource( 20 )
+states/jumpmove/node = SubResource( 21 )
 states/jumpmove/position = Vector2( 630, 254 )
-transitions = [ "Jump", "jump-loop", SubResource( 21 ), "jump-loop", "JumpFall", SubResource( 22 ), "JumpFall", "Fall", SubResource( 23 ), "Jump", "JumpFall", SubResource( 24 ), "Jump", "jumpmove", SubResource( 25 ), "jumpmove", "Fall", SubResource( 26 ), "Fall", "Fall 2", SubResource( 27 ) ]
+transitions = [ "Jump", "jump-loop", SubResource( 22 ), "jump-loop", "JumpFall", SubResource( 23 ), "JumpFall", "Fall", SubResource( 24 ), "Jump", "JumpFall", SubResource( 25 ), "Jump", "jumpmove", SubResource( 26 ), "jumpmove", "Fall", SubResource( 27 ), "Fall", "Fall 2", SubResource( 28 ) ]
 start_node = "Jump"
 end_node = "Fall 2"
-graph_offset = Vector2( 212, 34 )
-
-[sub_resource type="AnimationNodeAnimation" id=29]
-animation = "Idle"
+graph_offset = Vector2( 114, 14 )
 
 [sub_resource type="AnimationNodeAnimation" id=30]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "Walk"
 
-[sub_resource type="AnimationNodeBlend2" id=31]
+[sub_resource type="AnimationNodeBlend2" id=32]
 filters = [ "Armature/Skeleton:Base.Pole" ]
 
-[sub_resource type="AnimationNodeTimeScale" id=32]
+[sub_resource type="AnimationNodeTimeScale" id=33]
 
-[sub_resource type="AnimationNodeBlendTree" id=33]
+[sub_resource type="AnimationNodeBlendTree" id=34]
 graph_offset = Vector2( 96, -4 )
-nodes/Idle/node = SubResource( 29 )
+nodes/Idle/node = SubResource( 30 )
 nodes/Idle/position = Vector2( 0, 100 )
-nodes/Walk/node = SubResource( 30 )
+nodes/Walk/node = SubResource( 31 )
 nodes/Walk/position = Vector2( -140, 240 )
-nodes/move/node = SubResource( 31 )
+nodes/move/node = SubResource( 32 )
 nodes/move/position = Vector2( 200, 140 )
 nodes/output/position = Vector2( 500, 80 )
-nodes/walk_speed/node = SubResource( 32 )
+nodes/walk_speed/node = SubResource( 33 )
 nodes/walk_speed/position = Vector2( 40, 220 )
 node_connections = [ "output", 0, "move", "walk_speed", 0, "Walk", "move", 0, "Idle", "move", 1, "walk_speed" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
 advance_condition = "c_jump"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
 advance_condition = "c_is_grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=37]
+switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=38]
-advance_condition = "c_is_moving"
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
-advance_condition = "c_idle_dash"
+advance_condition = "c_is_moving"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
+advance_condition = "c_crouch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
 advance_condition = "c_wake_up"
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
 advance_condition = "c_jump"
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
-advance_condition = "c_moving_dash"
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+advance_condition = "c_dash"
 xfade_time = 0.05
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+advance_condition = "c_dash_end"
+xfade_time = 0.25
 
-[sub_resource type="AnimationNodeStateMachine" id=45]
-states/Crouch/node = SubResource( 5 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+advance_condition = "c_jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+advance_condition = "c_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=49]
+states/Attack/node = SubResource( 2 )
+states/Attack/position = Vector2( -6, 121 )
+states/Crouch/node = SubResource( 6 )
 states/Crouch/position = Vector2( 486, -98 )
-states/Dash/node = SubResource( 7 )
+states/Dash/node = SubResource( 8 )
 states/Dash/position = Vector2( 54, 19 )
-states/Dash-loop/node = SubResource( 6 )
+states/Dash-loop/node = SubResource( 7 )
 states/Dash-loop/position = Vector2( 92, -88 )
-states/FallGround/node = SubResource( 8 )
+states/FallGround/node = SubResource( 9 )
 states/FallGround/position = Vector2( 486, 162 )
-states/Idle/node = SubResource( 9 )
+states/Idle/node = SubResource( 10 )
 states/Idle/position = Vector2( 261, 162 )
-states/OnAir/node = SubResource( 28 )
+states/OnAir/node = SubResource( 29 )
 states/OnAir/position = Vector2( 486, 56 )
-states/OnGround/node = SubResource( 33 )
+states/OnGround/node = SubResource( 34 )
 states/OnGround/position = Vector2( 268, 56 )
-transitions = [ "OnGround", "OnAir", SubResource( 34 ), "OnAir", "FallGround", SubResource( 35 ), "FallGround", "Idle", SubResource( 36 ), "Idle", "OnGround", SubResource( 37 ), "FallGround", "OnGround", SubResource( 38 ), "OnGround", "Crouch", SubResource( 39 ), "Crouch", "OnGround", SubResource( 40 ), "Crouch", "OnAir", SubResource( 41 ), "OnGround", "Dash", SubResource( 42 ), "Dash", "Dash-loop", SubResource( 43 ), "Dash-loop", "OnGround", SubResource( 44 ) ]
+transitions = [ "OnGround", "OnAir", SubResource( 35 ), "OnAir", "FallGround", SubResource( 36 ), "FallGround", "Idle", SubResource( 37 ), "Idle", "OnGround", SubResource( 38 ), "FallGround", "OnGround", SubResource( 39 ), "OnGround", "Crouch", SubResource( 40 ), "Crouch", "OnGround", SubResource( 41 ), "Crouch", "OnAir", SubResource( 42 ), "OnGround", "Dash", SubResource( 43 ), "Dash", "Dash-loop", SubResource( 44 ), "Dash-loop", "OnGround", SubResource( 45 ), "Dash-loop", "OnAir", SubResource( 46 ), "OnGround", "Attack", SubResource( 47 ), "Attack", "OnGround", SubResource( 48 ) ]
 start_node = "OnGround"
-graph_offset = Vector2( -79, -137 )
+graph_offset = Vector2( -126, -48 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=46]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=50]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=47]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=51]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=48]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=52]
 
-[sub_resource type="BoxShape" id=49]
+[sub_resource type="BoxShape" id=53]
 extents = Vector3( 0.393768, 0.0169715, 0.235733 )
 
 [node name="obj_Character" type="KinematicBody" groups=[
@@ -230,25 +250,30 @@ dash_duration = 0.3
 
 [node name="crashbandicoot" parent="." instance=ExtResource( 2 )]
 
+[node name="twistcrash" parent="crashbandicoot" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74906, 0 )
 shape = SubResource( 1 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 45 )
+tree_root = SubResource( 49 )
 anim_player = NodePath("../crashbandicoot/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 46 )
-parameters/conditions/c_idle_dash = false
+parameters/playback = SubResource( 50 )
+parameters/conditions/c_attack = false
+parameters/conditions/c_crouch = false
+parameters/conditions/c_dash = false
+parameters/conditions/c_dash_end = false
 parameters/conditions/c_is_grounded = false
-parameters/conditions/c_is_moving = false
-parameters/conditions/c_jump = false
-parameters/conditions/c_moving_dash = false
+parameters/conditions/c_is_moving = true
+parameters/conditions/c_jump = true
 parameters/conditions/c_wake_up = false
-parameters/Crouch/playback = SubResource( 47 )
-parameters/OnAir/playback = SubResource( 48 )
+parameters/Crouch/playback = SubResource( 51 )
+parameters/OnAir/playback = SubResource( 52 )
 parameters/OnAir/conditions/c_is_grounded = false
-parameters/OnAir/conditions/c_is_moving = false
+parameters/OnAir/conditions/c_is_moving = true
 parameters/OnAir/conditions/c_start_fall = false
 parameters/OnAir/FallGround/speed/scale = 2.0
 parameters/OnAir/jumpmove/speed/scale = 3.0
@@ -269,7 +294,7 @@ collision_mask = 256
 
 [node name="CollisionShape" type="CollisionShape" parent="Feet"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00185171, 0 )
-shape = SubResource( 49 )
+shape = SubResource( 53 )
 
 [node name="Head" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49772, 0 )
@@ -278,11 +303,22 @@ collision_mask = 256
 
 [node name="CollisionShape" type="CollisionShape" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00185171, 0 )
-shape = SubResource( 49 )
+shape = SubResource( 53 )
 
 [node name="AkuPos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08183, 1.41054, 0 )
+
+[node name="sfx" type="Node" parent="."]
+
+[node name="twist" type="AudioStreamPlayer3D" parent="sfx"]
+stream = ExtResource( 8 )
+
+[node name="twist_fail" type="AudioStreamPlayer3D" parent="sfx"]
+stream = ExtResource( 9 )
+
+[node name="death_woah" type="AudioStreamPlayer3D" parent="sfx"]
+stream = ExtResource( 4 )
 [connection signal="area_entered" from="Feet" to="." method="_on_Feet_area_entered"]
-[connection signal="area_entered" from="Head" to="." method="_on_Feet_area_entered"]
+[connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 
 [editable path="crashbandicoot"]
