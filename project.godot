@@ -69,6 +69,13 @@ window/size/height=480
 window/size/resizable=false
 window/vsync/use_vsync=false
 
+[importer_defaults]
+
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
+}
+
 [input]
 
 ui_accept={

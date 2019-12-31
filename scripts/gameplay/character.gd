@@ -29,6 +29,7 @@ onready var anim:AnimationTree = get_node("AnimationTree")
 onready var power:Power = Power.new()
 onready var iventory:Iventory = Iventory.new()
 onready var initial_speed:int = speed
+onready var look_target:Node = get_node("../LookMe")
 
 #PowerStuff
 var jumps:int = 1
@@ -89,7 +90,7 @@ func check_dash():
 	
 	if (dashing):
 		dir += last_dir
-	else: dir = Vector3.ZERO
+#	else: dir = Vector3.ZERO
 func check_attack():
 	if (is_grounded && Input.is_action_just_pressed("cmd_attack")):
 		if (!attacking):
@@ -100,7 +101,14 @@ func check_attack():
 		else:
 			$sfx/twist_fail.play();
 
-
+func check_input():
+	var inputs = [Input.is_action_pressed("ui_up"),Input.is_action_pressed("ui_right"),Input.is_action_pressed("ui_left"),Input.is_action_pressed("ui_down")]
+	for input in inputs:
+		if (input): 
+			speed = initial_speed
+			break
+		else:
+			speed = 0
 func do_jump():
 	velocity.y = jump_force
 	jumps_actual -= 1
@@ -108,28 +116,37 @@ func do_jump():
 
 var dir = Vector3()
 func move_calculation(delta):
+	dir = Vector3.ZERO
 	
-	rotation.y = lerp_angle(rotation.y,look_at,0.25)
+	
 	if(Input.is_action_pressed("ui_up")):
-		look_at = 0
+		
 		dir += -camera.basis[2]
 		
 	if(Input.is_action_pressed("ui_down")):
-		look_at = 3
+		
 		dir += camera.basis[2]
 
 	if(Input.is_action_pressed("ui_left")):
-		look_at = 1.5
+		
 
 		dir += -camera.basis[0]
 
 	if(Input.is_action_pressed("ui_right")):
-		look_at = -1.5
+		
 		dir += camera.basis[0]
 		
 	dir.y = 0
 	dir = dir.normalized()
 	last_dir = dir
+	
+	if (dir != Vector3.ZERO):
+		look_at = dir.x
+	rotation.y = lerp_angle(rotation.y,look_at,0.25)
+	
+	
+	check_input()
+	
 	velocity.y += delta * gravity
 	var hv = velocity
 	hv.y = 0
@@ -140,7 +157,8 @@ func move_calculation(delta):
 	hv = hv.linear_interpolate(new_pos, accel * delta)
 	velocity.x = hv.x
 	velocity.z = hv.z
-	velocity = move_and_slide(velocity, Vector3(0,1,0),false,4,PI/4,false)	
+	velocity = move_and_slide(velocity, Vector3(0,1,0),false,4,PI/4,false)
+	
 
 func velocity_median() -> float:
 	return (abs(velocity.x) + abs(velocity.z)) * 0.5
@@ -160,13 +178,19 @@ func health_decrease():
 		do_jump()
 	aku._on_char_health_decreased(health)
 
+func look_system():
+	var pos:Vector3 = look_target.get_global_transform().origin
+	var char_pos:Vector3 = get_global_transform().origin
+	var theta:float = atan2(pos.x-char_pos.x, pos.z-char_pos.z)
+#	set_rotation(Vector3(0, theta, 0))
+	rotation = lerp(rotation,Vector3(0, theta, 0),.25)
 
 func _ready():
 	set_physics_process(true)
 	aku = obj_aku.instance()
 	aku.visible = false
 	get_parent().call_deferred("add_child",aku)
-	camera = get_viewport().get_camera().get_global_transform()
+	
 	power_init()
 
 func _process(_delta):
@@ -175,11 +199,15 @@ func _process(_delta):
 	debug.set_text("health",str(health))
 	debug.set_text("wumpa",str(iventory.wumpa))
 	debug.set_text("dir",str(dir))
-	debug.set_text("dashing",str(dashing))
+	debug.set_text("cam",str(dashing))
+	
+	camera = get_viewport().get_camera().get_global_transform()
+	
 
 func _physics_process(delta):
 	check_grounded()
 	move_calculation(delta)
+	look_system()
 	check_jump()
 	check_dash()
 	check_attack()

@@ -250,9 +250,6 @@ dash_duration = 0.3
 
 [node name="crashbandicoot" parent="." instance=ExtResource( 2 )]
 
-[node name="twistcrash" parent="crashbandicoot" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74906, 0 )
 shape = SubResource( 1 )

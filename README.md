@@ -1,8 +1,17 @@
 # crashcreator
 a game for crash fans to create and play on their own levels, and free source code ;)
 
+# Working Godot Version
+    - 3.2 beta 4 - Standard
+
 # WARNING
 early alpha - means not playable... yet!
+
+### Alpha 0.9.0 - Beta here we go \o/
+    - Started implementing the warp room
+    - Crash now has footsteps(TODO: add each ground tipe sound)
+    - Some improvements on camera and crash anims
+    - Godot version added
 
 ### Alpha 0.8.9
     - Corrected some character bugs
