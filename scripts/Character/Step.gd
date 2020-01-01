@@ -12,9 +12,9 @@ func _ready():
 
 var last_n = 0
 func play_step():
-	var n:int = rand_range(0,len(sounds))
+	var n:int = int(rand_range(0,len(sounds)))
 	while(n == last_n):
-		n = rand_range(0,len(sounds))
+		n = int( rand_range(0,len(sounds)))
 	
 	get_node(sounds[n]).play()
 	pass

@@ -2,28 +2,59 @@ extends Node
 
 class FSM_Manager:
 	var current:FSM = null
-	var states = {}
-
+	var states:Dictionary = {}
+	var state_list:Dictionary
+	var go_next_state:bool = false
+	var next_state:FSM = null
+	var target:Node = null
+	
+	func _init(state_list:Dictionary,target:Node):
+		self.state_list = state_list
+		self.target = target
+		
+		pass
 	func change_state(to):
 		current._on_exit()
 		current = to
 		current._on_enter()
+		go_next_state = false
+		next_state = null
+		
+	func set_next_state(state:FSM):
+		next_state = state
+		go_next_state = true
 
-	var node = null
-
-	func set_node(n):
-		node = n
+	func add_state(state:FSM):
+		states[state.id] = state
+	
+	func start():
+		current = states[0]
+		pass
+		
+	func update(delta):
+		current._update(delta)
+		if (go_next_state):
+			change_state(next_state)
 		
 class FSM:
-	var manager = null
+	var manager:FSM_Manager = null
+	var id:int = -1
 
-	func set_manager(m):
-		manager = m
+	func _init(id:int,manager:FSM_Manager):
+		self.manager = manager
+		self.id = id
+		
+		print("SELF: "+str(self))
+		self.manager.add_state(self)
+
 
 	func _on_enter():
 		pass
 
 	func _on_exit():
+		pass
+
+	func _update(delta):
 		pass
 	
 

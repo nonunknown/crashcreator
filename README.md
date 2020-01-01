@@ -7,6 +7,23 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 early alpha - means not playable... yet!
 
+
+### Alpha 0.9.2 - The 2nd BIG Crash update
+    - Added a performance like state machine to player
+        - can be found at character.gd
+        - the Utils state machine is no longer used (deleted soon)
+    - Finally done correct rotation to character (lot of research)
+        -refer to https://github.com/godotengine/godot-demo-projects/pull/369
+    - 90% done the character just a few more animations (made yet but not programmed)
+    - Added LabGameplay scene just to test character and camera
+    - Camera now look at the player smoothly
+
+### Alpha 0.9.1
+    - More Animations to crash
+        - Run
+        - Barricata
+        - Portal Jump
+
 ### Alpha 0.9.0 - Beta here we go \o/
     - Started implementing the warp room
     - Crash now has footsteps(TODO: add each ground tipe sound)
@@ -19,7 +36,6 @@ early alpha - means not playable... yet!
     - Added twist animation to crash
     - adjusted crash animations (a lot to do yet)
     - Added more sounds
-
 
 
 ### Alpha 0.8.8
