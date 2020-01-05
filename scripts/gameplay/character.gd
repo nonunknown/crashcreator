@@ -17,6 +17,7 @@ var aku:Node
 var can_move = true
 var disable_jump = false
 
+export var use_debugger:bool = false
 export var blend_time:float = .1
 export var gravity:float = -20
 export var jump_force:int = 9
@@ -27,7 +28,7 @@ export var speed:int = 4
 
 export var power_double_jump:bool = false
 
-onready var debug = get_parent().get_node("DebugText")
+var debug = null
 #onready var anim:AnimationTree = get_node("AnimationTree")
 onready var power:Power = Power.new()
 onready var iventory:Iventory = Iventory.new()
@@ -80,13 +81,13 @@ func change_state(to):
 	machine.state = to
 	if machine.funcs.init.has(machine.state):	
 		machine.funcs.init[to].call_func() #call the init function of next states
-	using_state_queue = false
+#	using_state_queue = false
 	
-var using_state_queue:bool = false
-func change_state_async(to):
-	using_state_queue = true
-	yield(get_tree().create_timer(current_animation_length(),true),"timeout")
-	change_state(to)
+#var using_state_queue:bool = false
+#func change_state_async(to):
+#	using_state_queue = true
+#	yield(get_tree().create_timer(current_animation_length(),true),"timeout")
+#	change_state(to)
 
 func st_init_idle():
 	animator.play("Idle",blend_time)
@@ -226,9 +227,9 @@ func st_init_falling():
 func st_update_falling():
 	if (is_grounded):
 		animator.play("FallGround",blend_time)
-		if (velocity_median() < 1 && !using_state_queue):
-			change_state_async(STATE.IDLE)
-		elif !using_state_queue:
+		if (velocity_median() < 1):
+			change_state(STATE.IDLE)
+		else:
 			change_state(STATE.WALK)
 	pass
 func st_exit_falling():
@@ -258,6 +259,8 @@ func check_move_keys() -> bool:
 	return false
 
 func _ready():
+		
+	if (use_debugger): get_parent().get_node("DebugText")
 	register_machine()
 	set_physics_process(true)
 	aku = obj_aku.instance()
@@ -268,14 +271,15 @@ func _ready():
 
 
 func _process(delta):
-	debug.set_text("velocityY",str(velocity.y))
-	debug.set_text("jumpCount",str(jumps_actual))
-	debug.set_text("health",str(health))
-	debug.set_text("wumpa",str(iventory.wumpa))
-	debug.set_text("dir",str(dir))
-	debug.set_text("cam",str(dashing))
-	debug.set_text("state",str(STATE.keys()[machine.state]))
-	debug.set_text("upBasis: ",str(camera))
+	if (use_debugger):
+		debug.set_text("velocityY",str(velocity.y))
+		debug.set_text("jumpCount",str(jumps_actual))
+		debug.set_text("health",str(health))
+		debug.set_text("wumpa",str(iventory.wumpa))
+		debug.set_text("dir",str(dir))
+		debug.set_text("cam",str(dashing))
+		debug.set_text("state",str(STATE.keys()[machine.state]))
+		debug.set_text("upBasis: ",str(camera))
 	input_move_keys = [Input.is_action_pressed("ui_left"),Input.is_action_pressed("ui_up"),Input.is_action_pressed("ui_down"),Input.is_action_pressed("ui_right")]
 	camera = get_viewport().get_camera().get_global_transform()
 	
@@ -326,15 +330,24 @@ var last_dir:Vector3 = Vector3.ZERO
 var last_frame:bool = false
 
 func check_grounded():
-	if ($RayCast.is_colliding()): 
+	is_grounded = is_on_floor()
+	if is_on_floor():
 		is_grounded = true
 		if (last_frame == false):
 			jumps_actual = jumps
 			last_frame = true
-#		print($RayCast.get_collider())
-	else: 
+	else:
 		is_grounded = false
 		last_frame = false
+#	if ($RayCast.is_colliding()): 
+#		is_grounded = true
+#		if (last_frame == false):
+#			jumps_actual = jumps
+#			last_frame = true
+##		print($RayCast.get_collider())
+#	else: 
+#		is_grounded = false
+#		last_frame = false
 		
 
 func check_jump():

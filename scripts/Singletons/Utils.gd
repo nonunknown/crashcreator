@@ -1,62 +1,32 @@
 extends Node
 
-class FSM_Manager:
-	var current:FSM = null
-	var states:Dictionary = {}
-	var state_list:Dictionary
-	var go_next_state:bool = false
-	var next_state:FSM = null
-	var target:Node = null
+class MachineManager:
+	var machine:Dictionary = {
+		state=null,
+		funcs={
+			init={},
+			update={},
+			exit={}
+			}
+		}
+			
+	func register_state(target,state_const:int,name:String,has_init:bool=true,has_exit:bool=false):
+		if (has_init):
+			machine.funcs.init[state_const] = funcref(target,"st_init_"+name)
+		machine.funcs.update[state_const] = funcref(target,"st_update_"+name)
+		if (has_exit):
+			machine.funcs.exit[state_const] = funcref(target,"st_exit_"+name)
+			
+	func machine_update():
+		machine.funcs.update[machine.state].call_func()
 	
-	func _init(state_list:Dictionary,target:Node):
-		self.state_list = state_list
-		self.target = target
-		
-		pass
 	func change_state(to):
-		current._on_exit()
-		current = to
-		current._on_enter()
-		go_next_state = false
-		next_state = null
+		if machine.funcs.exit.has(machine.state):
+			machine.funcs.exit[machine.state].call_func()
+		machine.state = to
+		if machine.funcs.init.has(machine.state):
+			machine.funcs.init[to].call_func() #call the init function of next states
 		
-	func set_next_state(state:FSM):
-		next_state = state
-		go_next_state = true
-
-	func add_state(state:FSM):
-		states[state.id] = state
-	
-	func start():
-		current = states[0]
-		pass
-		
-	func update(delta):
-		current._update(delta)
-		if (go_next_state):
-			change_state(next_state)
-		
-class FSM:
-	var manager:FSM_Manager = null
-	var id:int = -1
-
-	func _init(id:int,manager:FSM_Manager):
-		self.manager = manager
-		self.id = id
-		
-		print("SELF: "+str(self))
-		self.manager.add_state(self)
-
-
-	func _on_enter():
-		pass
-
-	func _on_exit():
-		pass
-
-	func _update(delta):
-		pass
-	
 
 const ray_length = 1000
 enum MASK {Selectable=64}

@@ -2,14 +2,22 @@ extends Spatial
 # -- About Selection
 
 # -- END selection
-var pathList = []
-export var pa0:PackedScene
-export var pa1: PackedScene
-onready var paths = [pa0,pa1]
 var selected_model:String = ""
-func get_random_path():
-	paths.shuffle()
-	return paths.front().instance()
+var pathList = []
+var ID = 0
+#export var pa0:PackedScene
+#export var pa1: PackedScene
+#onready var paths = [pa0,pa1]
+#func get_random_path():
+#	paths.shuffle()
+#	return paths.front().instance()
+
+
+func _start():
+	pass
+	
+func _exit():
+	pass
 
 func SpawnPath(from_file=false,position=null,modelName=null):
 	var instance = null
@@ -22,14 +30,9 @@ func SpawnPath(from_file=false,position=null,modelName=null):
 		if (pathList.size() == 0):
 			instance.translation = Vector3.ZERO
 		else:
-			print("pathlist:")
-			print(pathList)
-			print("last from pathList")
-			print(pathList.size()-1)
-			print("pos:")
 			var pos = pathList[pathList.size()-1].get_node("PosEnd")
-			print(pos.get_global_transform())
-			instance.translation = pos.get_global_transform().origin
+			instance.translation += pos.get_global_transform().origin
+			
 	instance._on_ready()
 	print("instance execute onready")
 	add_child(instance)
@@ -49,6 +52,7 @@ func generate_area(data):
 
 func get_model_show_name(modelName):
 	return import_model(modelName).instance().show_name
+
 func get_model_dir(modelName,extension_included=true):
 	var prefix:String = FileManager.reg(modelName,".+?(?=_)")
 	if not extension_included:

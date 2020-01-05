@@ -1,0 +1,35 @@
+# Blender MTL File: 'untitled.blend1'
+# Material Count: 3
+
+newmtl mat_ground
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd /home/nonunknown/Desktop/crash-creator/textures/lv_toadvillage/tex_ground.png
+
+newmtl mat_groundwall
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd texture/stone_ground.png
+
+newmtl mat_stonewall
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd /home/nonunknown/Desktop/crash-creator/textures/lv_toadvillage/tex_stone_wall.png

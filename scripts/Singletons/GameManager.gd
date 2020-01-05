@@ -2,13 +2,13 @@ extends Node
 
 
 
-enum {GAMEMODE_EDIT,GAMEMODE_PLAY}
+enum GAMEMODE {EDIT,PLAY}
+enum EDITMODE {PATH,CRATE}
+var GAME_MODE:int = GAMEMODE.EDIT
 
-var varGAMEMODE = GAMEMODE_EDIT
+func GAMEMODE_SET(mode:int):
+		GAME_MODE = mode
 
-func GAMEMODE_SET(GAMEMODE):
-	pass
-	
 onready var scn:PackedScene = preload("res://scenes/scn_Gameplay.tscn")
 func _ready():
 	print(scn)

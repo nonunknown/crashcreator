@@ -1,35 +1,33 @@
 extends Spatial
+class_name Selectable
 
 export var show_name:String = "Define_selectable_name"
+export var mat_selection:SpatialMaterial = load("res://models/levels/shared/mat_selection.material")
+enum ST {UNSELECTED,SELECTED}
 
-enum {ST_UNSELECTED,ST_SELECTED}
 
-class St_unselected extends Utils.FSM:
+
+
+func st_init_unselected():
+	$model.set_material_override(null)
+
+func st_init_selected():
+	print("selected")
+	$model.set_material_override(mat_selection)
 	
-	func name():
-		return "unselected"
-
-	func _on_enter():
-		manager.node.get_child(0).material_override = null
-
-class St_selected extends Utils.FSM:
-	func name():
-		print("selected:  mudafucka")
-
-	func _on_enter():
-		manager.node.get_child(0).material_override = SpatialMaterial.new()
-
-var st_manager = null
+var manager:Utils.MachineManager
 func _on_ready():
-	st_manager = Utils.FSM_Manager.new()
-	st_manager.set_node(self)
-	st_manager.states[ST_UNSELECTED] = St_unselected.new()
-	st_manager.states[ST_UNSELECTED].set_manager(st_manager)
-	st_manager.states[ST_SELECTED] = St_selected.new()
-	st_manager.states[ST_SELECTED].set_manager(st_manager)
-	st_manager.current = st_manager.states[ST_UNSELECTED]
+	manager = Utils.MachineManager.new()
+	manager.register_state(self,ST.SELECTED,"selected")
+	manager.register_state(self,ST.UNSELECTED,"unselected")
+	
 	# manager.states[ST_SELECTED] = St_selected.new(manager)
 
+func to_selected():
+	manager.change_state(ST.SELECTED)
+	
+func to_unselected():
+	manager.change_state(ST.UNSELECTED)
 	# manager.current = manager.states[ST_UNSELECTED]
 # class FSM_Manager:
 # 	var states:Dictionary = {}

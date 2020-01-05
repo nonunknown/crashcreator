@@ -5,8 +5,14 @@ a game for crash fans to create and play on their own levels, and free source co
     - 3.2 beta 4 - Standard
 
 # WARNING
-early alpha - means not playable... yet!
+alpha - means not playable... yet!
 
+### Alpha 0.9.3 - The Level Editor update
+    - Added all buttons refering to tools
+    - Added 15 differents paths for toad village
+    - Added crate editor
+    - Changed the editor managing system
+    - levels now can go upwards and downwards
 
 ### Alpha 0.9.2 - The 2nd BIG Crash update
     - Added a performance like state machine to player

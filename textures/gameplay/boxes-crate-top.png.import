@@ -2,31 +2,29 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/boxes-crate-top.png-f3928af48a483a5241c24f92b608ec4d.s3tc.stex"
-path.etc2="res://.import/boxes-crate-top.png-f3928af48a483a5241c24f92b608ec4d.etc2.stex"
+path="res://.import/boxes-crate-top.png-f3928af48a483a5241c24f92b608ec4d.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://textures/gameplay/boxes-crate-top.png"
-dest_files=[ "res://.import/boxes-crate-top.png-f3928af48a483a5241c24f92b608ec4d.s3tc.stex", "res://.import/boxes-crate-top.png-f3928af48a483a5241c24f92b608ec4d.etc2.stex" ]
+dest_files=[ "res://.import/boxes-crate-top.png-f3928af48a483a5241c24f92b608ec4d.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=0
-flags/repeat=true
-flags/filter=true
-flags/mipmaps=true
+compress/normal_map=2
+flags/repeat=1
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=1
-process/fix_alpha_border=true
+flags/srgb=2
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

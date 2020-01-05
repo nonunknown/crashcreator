@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.81.16 commit date:2019-11-20, commit time:14:27, hash:26bd5ebd42e3</authoring_tool>
+    </contributor>
+    <created>2020-01-05T10:02:33</created>
+    <modified>2020-01-05T10:02:33</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="mat_brdge-effect">
+      <profile_COMMON>
+        <newparam sid="bridge_png-surface">
+          <surface type="2D">
+            <init_from>bridge_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="bridge_png-sampler">
+          <sampler2D>
+            <source>bridge_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="bridge_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="bridge_png" name="bridge_png">
+      <init_from>/home/nonunknown/Desktop/crash-creator/models/levels/lv_toadvillage/texture/bridge.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="mat_brdge-material" name="mat_brdge">
+      <instance_effect url="#mat_brdge-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="tv_t3b0e0v1_Plane_000-mesh" name="tv_t3b0e0v1_Plane.000">
+      <mesh>
+        <source id="tv_t3b0e0v1_Plane_000-mesh-positions">
+          <float_array id="tv_t3b0e0v1_Plane_000-mesh-positions-array" count="60">1.04547e-4 -6.05464e-4 -5.61291e-4 3.000103 -6.05464e-4 -5.61291e-4 3.000103 -6.05464e-4 -1.58389 1.04547e-4 -6.05464e-4 -1.58389 3.000103 -6.05464e-4 -23.16722 1.04547e-4 -6.05464e-4 -23.16722 3.000103 -6.05464e-4 -24.75056 1.04547e-4 -6.05464e-4 -24.75056 -2.869128 -6.05464e-4 -5.61291e-4 -2.869128 -6.05464e-4 -1.58389 -2.869128 -6.05464e-4 -23.16722 -2.869128 -6.05464e-4 -24.75056 -2.869128 9.999395 -24.75056 -2.869128 9.999395 -23.16722 -2.869128 9.999395 -1.583891 -2.869128 9.999395 -5.62384e-4 3.000103 9.999395 -24.75056 3.000103 9.999395 -23.16722 3.000103 9.999395 -1.583891 3.000103 9.999395 -5.62384e-4</float_array>
+          <technique_common>
+            <accessor source="#tv_t3b0e0v1_Plane_000-mesh-positions-array" count="20" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tv_t3b0e0v1_Plane_000-mesh-normals">
+          <float_array id="tv_t3b0e0v1_Plane_000-mesh-normals-array" count="51">0 1 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#tv_t3b0e0v1_Plane_000-mesh-normals-array" count="17" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tv_t3b0e0v1_Plane_000-mesh-map-0">
+          <float_array id="tv_t3b0e0v1_Plane_000-mesh-map-0-array" count="144">0.3571429 2.322917 0.5669643 2.072917 0.5669643 2.322917 0.3571429 2.072917 0.5669643 -1.447917 0.5669643 2.072917 0.3571429 -1.447917 0.5669643 -1.697917 0.5669643 -1.447917 0.5669643 2.322917 0.7678571 2.072917 0.7678571 2.322917 0.5669643 2.072917 0.7678571 -1.447917 0.7678571 2.072917 0.5669643 -1.447917 0.7678571 -1.697917 0.7678571 -1.447917 0.7678571 -1.697917 0.7678571 -1.447917 0.7678571 -1.447917 0.3571429 -1.697917 0.3571429 -1.447917 0.3571429 -1.697917 0.7678571 2.072917 0.7678571 2.322917 0.7678571 2.322917 0.3571429 -1.447917 0.3571429 2.072917 0.3571429 -1.447917 0.3571429 2.072917 0.3571429 2.322917 0.3571429 2.072917 0.7678571 -1.447917 0.7678571 2.072917 0.7678571 2.072917 0.3571429 2.322917 0.3571429 2.072917 0.5669643 2.072917 0.3571429 2.072917 0.3571429 -1.447917 0.5669643 -1.447917 0.3571429 -1.447917 0.3571429 -1.697917 0.5669643 -1.697917 0.5669643 2.322917 0.5669643 2.072917 0.7678571 2.072917 0.5669643 2.072917 0.5669643 -1.447917 0.7678571 -1.447917 0.5669643 -1.447917 0.5669643 -1.697917 0.7678571 -1.697917 0.7678571 -1.697917 0.7678571 -1.697917 0.7678571 -1.447917 0.3571429 -1.697917 0.3571429 -1.447917 0.3571429 -1.447917 0.7678571 2.072917 0.7678571 2.072917 0.7678571 2.322917 0.3571429 -1.447917 0.3571429 2.072917 0.3571429 2.072917 0.3571429 2.072917 0.3571429 2.322917 0.3571429 2.322917 0.7678571 -1.447917 0.7678571 -1.447917 0.7678571 2.072917</float_array>
+          <technique_common>
+            <accessor source="#tv_t3b0e0v1_Plane_000-mesh-map-0-array" count="72" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="tv_t3b0e0v1_Plane_000-mesh-vertices">
+          <input semantic="POSITION" source="#tv_t3b0e0v1_Plane_000-mesh-positions"/>
+        </vertices>
+        <triangles count="24">
+          <input semantic="VERTEX" source="#tv_t3b0e0v1_Plane_000-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#tv_t3b0e0v1_Plane_000-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#tv_t3b0e0v1_Plane_000-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 2 0 3 5 0 4 3 0 5 4 0 6 7 0 7 5 0 8 0 0 9 9 0 10 8 0 11 3 0 12 10 0 13 9 0 14 5 0 15 11 0 16 10 0 17 11 1 18 13 2 19 10 3 20 6 4 21 17 5 22 16 6 23 9 7 24 15 8 25 8 9 26 4 10 27 18 11 28 17 5 29 2 12 30 19 13 31 18 11 32 10 3 33 14 14 34 9 7 35 1 0 36 2 0 37 3 0 38 2 0 39 4 0 40 5 0 41 4 0 42 6 0 43 7 0 44 0 0 45 3 0 46 9 0 47 3 0 48 5 0 49 10 0 50 5 0 51 7 0 52 11 0 53 11 1 54 12 15 55 13 2 56 6 4 57 4 10 58 17 5 59 9 7 60 14 14 61 15 8 62 4 10 63 2 12 64 18 11 65 2 12 66 1 16 67 19 13 68 10 3 69 13 2 70 14 14 71</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="tv_t3b0e0v1_Plane_012-mesh" name="tv_t3b0e0v1_Plane.012">
+      <mesh>
+        <source id="tv_t3b0e0v1_Plane_012-mesh-positions">
+          <float_array id="tv_t3b0e0v1_Plane_012-mesh-positions-array" count="108">1.04547e-4 -6.05464e-4 -5.61291e-4 3.000103 -6.05464e-4 -5.61291e-4 3.000103 -6.05464e-4 -1.58389 1.04547e-4 -6.05464e-4 -1.58389 3.000103 -6.05464e-4 -23.16722 1.04547e-4 -6.05464e-4 -23.16722 3.000103 -6.05464e-4 -24.75056 1.04547e-4 -6.05464e-4 -24.75056 -2.869128 -6.05464e-4 -5.61291e-4 -2.869128 -6.05464e-4 -1.58389 -2.869128 -6.05464e-4 -23.16722 -2.869128 -6.05464e-4 -24.75056 3.000103 1.401277 -5.91809e-4 3.000103 1.401277 -1.58392 3.000103 1.401277 -23.16725 3.000103 1.401277 -24.75059 -3.999896 -6.05464e-4 -5.91809e-4 -3.999896 1.401277 -5.91809e-4 -3.999896 1.401277 -1.58392 -3.999896 -6.05464e-4 -1.58392 -3.999896 1.401277 -23.16725 -3.999896 -6.05464e-4 -23.16725 -3.999896 1.401277 -24.75059 -3.999896 -6.05464e-4 -24.75059 -2.999896 1.401277 -5.91809e-4 -2.999896 1.401277 -1.58392 -2.999896 1.401277 -23.16725 -2.999896 1.401277 -24.75059 4.000104 1.401277 -5.91809e-4 4.000104 1.401277 -1.58392 4.000104 1.401277 -23.16725 4.000104 1.401277 -24.75059 4.000104 -6.05464e-4 -5.61291e-4 4.000104 -6.05464e-4 -1.58389 4.000104 -6.05464e-4 -23.16722 4.000104 -6.05464e-4 -24.75056</float_array>
+          <technique_common>
+            <accessor source="#tv_t3b0e0v1_Plane_012-mesh-positions-array" count="36" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tv_t3b0e0v1_Plane_012-mesh-normals">
+          <float_array id="tv_t3b0e0v1_Plane_012-mesh-normals-array" count="75">0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0.9956777 0.09287655 0 0.9956777 0.09287661 0 0.9956777 0.09287661 0 0.9956777 0.09287655 0 0.9956777 0.09287655 0 0.9956777 0.09287637 0 0.9956777 0.09287643 0 -1 0 0 1 0 0 0.9956777 0.09287649 0</float_array>
+          <technique_common>
+            <accessor source="#tv_t3b0e0v1_Plane_012-mesh-normals-array" count="25" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tv_t3b0e0v1_Plane_012-mesh-map-0">
+          <float_array id="tv_t3b0e0v1_Plane_012-mesh-map-0-array" count="288">0.3571429 2.322917 0.5669643 2.072917 0.5669643 2.322917 0.3571429 2.072917 0.5669643 -1.447917 0.5669643 2.072917 0.3571429 -1.447917 0.5669643 -1.697917 0.5669643 -1.447917 0.5669643 2.322917 0.7678571 2.072917 0.7678571 2.322917 0.5669643 2.072917 0.7678571 -1.447917 0.7678571 2.072917 0.5669643 -1.447917 0.7678571 -1.697917 0.7678571 -1.447917 0.2589285 2.322917 0.3571429 2.072917 0.3571429 2.322917 0.2589285 2.072917 0.3571429 -1.447917 0.3571429 2.072917 0.2589285 -1.447917 0.3571429 -1.697917 0.3571429 -1.447917 0.9375 2.322917 1.035714 2.072917 1.035714 2.322917 0.9375 2.072917 1.035714 -1.447917 1.035714 2.072917 0.9375 -1.447917 1.035714 -1.697917 1.035714 -1.447917 0.8660714 2.322917 0.9375 2.072917 0.9375 2.322917 0.8660714 2.072917 0.9375 -1.447917 0.9375 2.072917 0.8660714 -1.447917 0.9375 -1.697917 0.9375 -1.447917 0.1919643 2.322917 0.2589285 2.072917 0.2589285 2.322917 0.1919643 2.072917 0.2589285 -1.447917 0.2589285 2.072917 0.1919643 -1.447917 0.2589285 -1.697917 0.2589285 -1.447917 0.1919643 2.322917 0.09375 2.072917 0.1919643 2.072917 0.1919643 2.072917 0.09375 -1.447917 0.1919643 -1.447917 0.1919643 -1.447917 0.09375 -1.697917 0.1919643 -1.697917 0.8660714 2.322917 0.7678571 2.072917 0.8660714 2.072917 0.8660714 2.072917 0.7678571 -1.447917 0.8660714 -1.447917 0.8660714 -1.447917 0.7678571 -1.697917 0.8660714 -1.697917 0.3571429 2.322917 0.3571429 2.072917 0.5669643 2.072917 0.3571429 2.072917 0.3571429 -1.447917 0.5669643 -1.447917 0.3571429 -1.447917 0.3571429 -1.697917 0.5669643 -1.697917 0.5669643 2.322917 0.5669643 2.072917 0.7678571 2.072917 0.5669643 2.072917 0.5669643 -1.447917 0.7678571 -1.447917 0.5669643 -1.447917 0.5669643 -1.697917 0.7678571 -1.697917 0.2589285 2.322917 0.2589285 2.072917 0.3571429 2.072917 0.2589285 2.072917 0.2589285 -1.447917 0.3571429 -1.447917 0.2589285 -1.447917 0.2589285 -1.697917 0.3571429 -1.697917 0.9375 2.322917 0.9375 2.072917 1.035714 2.072917 0.9375 2.072917 0.9375 -1.447917 1.035714 -1.447917 0.9375 -1.447917 0.9375 -1.697917 1.035714 -1.697917 0.8660714 2.322917 0.8660714 2.072917 0.9375 2.072917 0.8660714 2.072917 0.8660714 -1.447917 0.9375 -1.447917 0.8660714 -1.447917 0.8660714 -1.697917 0.9375 -1.697917 0.1919643 2.322917 0.1919643 2.072917 0.2589285 2.072917 0.1919643 2.072917 0.1919643 -1.447917 0.2589285 -1.447917 0.1919643 -1.447917 0.1919643 -1.697917 0.2589285 -1.697917 0.1919643 2.322917 0.09375 2.322917 0.09375 2.072917 0.1919643 2.072917 0.09375 2.072917 0.09375 -1.447917 0.1919643 -1.447917 0.09375 -1.447917 0.09375 -1.697917 0.8660714 2.322917 0.7678571 2.322917 0.7678571 2.072917 0.8660714 2.072917 0.7678571 2.072917 0.7678571 -1.447917 0.8660714 -1.447917 0.7678571 -1.447917 0.7678571 -1.697917</float_array>
+          <technique_common>
+            <accessor source="#tv_t3b0e0v1_Plane_012-mesh-map-0-array" count="144" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="tv_t3b0e0v1_Plane_012-mesh-vertices">
+          <input semantic="POSITION" source="#tv_t3b0e0v1_Plane_012-mesh-positions"/>
+        </vertices>
+        <triangles material="mat_brdge-material" count="48">
+          <input semantic="VERTEX" source="#tv_t3b0e0v1_Plane_012-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#tv_t3b0e0v1_Plane_012-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#tv_t3b0e0v1_Plane_012-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 2 0 3 5 0 4 3 0 5 4 0 6 7 0 7 5 0 8 0 0 9 9 0 10 8 0 11 3 0 12 10 0 13 9 0 14 5 0 15 11 0 16 10 0 17 12 1 18 2 2 19 1 3 20 13 4 21 4 5 22 2 2 23 14 6 24 6 7 25 4 5 26 17 3 27 19 3 28 16 3 29 18 3 30 21 3 31 19 3 32 20 3 33 23 3 34 21 3 35 24 0 36 18 0 37 17 0 38 25 0 39 20 0 40 18 0 41 26 0 42 22 0 43 20 0 44 28 0 45 13 0 46 12 0 47 29 0 48 14 0 49 13 0 50 30 0 51 15 0 52 14 0 53 28 8 54 33 9 55 29 10 56 29 10 57 34 11 58 30 12 59 30 12 60 35 13 61 31 14 62 24 15 63 9 16 64 25 17 65 25 17 66 10 18 67 26 19 68 26 19 69 11 20 70 27 21 71 1 0 72 2 0 73 3 0 74 2 0 75 4 0 76 5 0 77 4 0 78 6 0 79 7 0 80 0 0 81 3 0 82 9 0 83 3 0 84 5 0 85 10 0 86 5 0 87 7 0 88 11 0 89 12 1 90 13 4 91 2 2 92 13 4 93 14 6 94 4 5 95 14 6 96 15 22 97 6 7 98 17 3 99 18 3 100 19 3 101 18 3 102 20 3 103 21 3 104 20 3 105 22 3 106 23 3 107 24 0 108 25 0 109 18 0 110 25 0 111 26 0 112 20 0 113 26 0 114 27 0 115 22 0 116 28 0 117 29 0 118 13 0 119 29 0 120 30 0 121 14 0 122 30 0 123 31 0 124 15 0 125 28 8 126 32 23 127 33 9 128 29 10 129 33 9 130 34 11 131 30 12 132 34 11 133 35 13 134 24 15 135 8 24 136 9 16 137 25 17 138 9 16 139 10 18 140 26 19 141 10 18 142 11 20 143</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="tv_t3b0e0v1-colonly" name="tv_t3b0e0v1-colonly" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 -4.37114e-8 -0.4 0 0 1 -1.74846e-8 0 0 0 0 1</matrix>
+        <instance_geometry url="#tv_t3b0e0v1_Plane_000-mesh" name="tv_t3b0e0v1-colonly"/>
+      </node>
+      <node id="tv_t3b0e0v1" name="tv_t3b0e0v1" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 -4.37114e-8 -0.4 0 0 1 -1.74846e-8 0 0 0 0 1</matrix>
+        <instance_geometry url="#tv_t3b0e0v1_Plane_012-mesh" name="tv_t3b0e0v1">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="mat_brdge-material" target="#mat_brdge-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

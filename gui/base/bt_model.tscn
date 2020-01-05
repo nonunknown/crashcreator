@@ -16,6 +16,7 @@ func start(model_name):
 func _on_bt_base_toggled(button_pressed):
 	if (button_pressed):
 		path_manager.set_selected_model(model_name)
+		get_node(\"/root/Main/GUI/GUI_tools_path\").toggle_bt_add(false)		
 	pass # Replace with function body.
 "
 

@@ -4,4 +4,4 @@ func get_mesh():
 	return get_parent()
 
 func get_path():
-	return get_parent().get_parent()
+	return get_parent()

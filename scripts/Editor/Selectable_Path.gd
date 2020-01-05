@@ -1,4 +1,4 @@
-extends "res://scripts/Editor/Selectable.gd"
+extends Selectable
 
 func test():
 	
