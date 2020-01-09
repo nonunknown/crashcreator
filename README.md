@@ -12,6 +12,8 @@ alpha - means not playable... yet!
     - Added Entity Editor (place where level start and finish)
     - Made the level build system to test
     - Some adjustments to level models
+    - About the Addon/cw_pathgen
+        - https://github.com/nonunknown/crashcreator/wiki/Addon-PathGen
 
 ### Alpha 0.9.3 - The Level Editor update
     - Added all buttons refering to tools
