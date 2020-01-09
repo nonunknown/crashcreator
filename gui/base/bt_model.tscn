@@ -7,16 +7,18 @@ script/source = "extends Button
 
 var model_name:String = \"\"
 onready var path_manager = get_node(\"/root/Main/Level/Path\")
-func start(model_name):
-	self.text = path_manager.get_model_show_name(model_name)
-	self.model_name = model_name
-	pass
-
-
+#func start(model_name):
+#	self.text = path_manager.get_model_show_name(model_name)
+#	self.model_name = model_name
+#	pass
+func _ready():
+	connect(\"set_path_to_spawn\",path_manager,\"_on_set_path_to_spawn\")
+	
+signal set_path_to_spawn
 func _on_bt_base_toggled(button_pressed):
 	if (button_pressed):
-		path_manager.set_selected_model(model_name)
-		get_node(\"/root/Main/GUI/GUI_tools_path\").toggle_bt_add(false)		
+		emit_signal(\"set_path_to_spawn\",text)
+		get_node(\"/root/Main/GUI/GUI_tools_path\").toggle_bt_add(false)
 	pass # Replace with function body.
 "
 

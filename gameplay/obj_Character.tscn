@@ -85,6 +85,7 @@ stream = ExtResource( 4 )
 
 [node name="lookme" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3801, 0 )
+visible = false
 material_override = SubResource( 3 )
 texture = ExtResource( 3 )
 [connection signal="area_entered" from="Feet" to="." method="_on_Feet_area_entered"]

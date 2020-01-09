@@ -17,6 +17,7 @@ var aku:Node
 var can_move = true
 var disable_jump = false
 
+
 export var use_debugger:bool = false
 export var blend_time:float = .1
 export var gravity:float = -20

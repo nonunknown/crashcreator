@@ -1,60 +1,67 @@
 [gd_scene load_steps=3 format=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Control
+[ext_resource path="res://scripts/Editor/ButtonMesh.gd" type="Script" id=1]
+[ext_resource path="res://test_mesh.mesh" type="ArrayMesh" id=2]
 
+[node name="ButtonMesh" type="Control"]
+anchor_right = 0.14
+anchor_bottom = 0.185
+margin_right = 0.199997
+margin_bottom = 0.199997
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+[node name="Background" type="Panel" parent="."]
+margin_right = 101.0
+margin_bottom = 89.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_left = 9.50021
+margin_top = 7.20705
+margin_right = 729.5
+margin_bottom = 487.207
+rect_scale = Vector2( 0.107445, 0.107445 )
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	
-	pass # Replace with function body.
-func _on_test(b:bool):
-	print(\"worked? \"+str(b))
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 720, 480 )
+handle_input_locally = false
+hdr = false
+usage = 3
+render_target_update_mode = 0
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
+[node name="MeshInstance" type="MeshInstance" parent="ViewportContainer/Viewport"]
+transform = Transform( -1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, 0 )
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
 
-[sub_resource type="GDScript" id=2]
-script/source = "extends Button
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport"]
+transform = Transform( -0.796361, 0.349354, -0.493721, -5.04968e-08, 0.816309, 0.577615, 0.604822, 0.45999, -0.650077, -5.86653, 5.84964, -3.65835 )
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-signal test
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	connect(\"test\",get_parent(),\"_on_test\")
-	emit_signal(\"test\",true)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
-
-[node name="Control" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = SubResource( 1 )
+[node name="Name" type="Label" parent="."]
+margin_top = 65.0
+margin_right = 101.0
+margin_bottom = 79.0
+text = "name"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="."]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "test"
-script = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+anchor_right = 1.0
+anchor_bottom = 1.0
+toggle_mode = true
+flat = true

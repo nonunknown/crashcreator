@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://textures/gameplay/boxes-crate-top.png" type="Texture" id=1]
 [ext_resource path="res://textures/gameplay/boxes-crate-side.png" type="Texture" id=2]
 [ext_resource path="res://resources/gui/bt_gp_crates.res" type="ButtonGroup" id=3]
 [ext_resource path="res://scripts/GUI/GUI_tools_crate.gd" type="Script" id=4]
 [ext_resource path="res://scripts/GUI/bt_crate.gd" type="Script" id=5]
+[ext_resource path="res://textures/gameplay/boxes-enforced.png" type="Texture" id=6]
+[ext_resource path="res://textures/gameplay/boxes-wumpa.png" type="Texture" id=7]
+[ext_resource path="res://textures/gameplay/boxes-crate-jump.png" type="Texture" id=8]
+[ext_resource path="res://textures/gameplay/boxes-checkpoint-crate.png" type="Texture" id=9]
+[ext_resource path="res://textures/gameplay/boxes-tnt-side.png" type="Texture" id=10]
+[ext_resource path="res://textures/gameplay/boxes-aku.png" type="Texture" id=11]
+[ext_resource path="res://textures/gameplay/boxes-nitro-side.png" type="Texture" id=12]
+[ext_resource path="res://textures/gameplay/boxes-life.png" type="Texture" id=13]
 
 [node name="GUI_tools_crate" type="Control"]
 anchor_right = 1.0
@@ -66,8 +74,55 @@ script = ExtResource( 5 )
 ID = 1
 texture = ExtResource( 2 )
 
+[node name="bt_crate_checkpoint" type="TextureButton" parent="TabContainer/basic/GridContainer"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 2
+texture = ExtResource( 9 )
+
+[node name="bt_crate_jump" type="TextureButton" parent="TabContainer/basic/GridContainer"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 3
+texture = ExtResource( 8 )
+
+[node name="bt_crate_enforced" type="TextureButton" parent="TabContainer/basic/GridContainer"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 4
+texture = ExtResource( 6 )
+
+[node name="bt_crate_wumpa" type="TextureButton" parent="TabContainer/basic/GridContainer"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 5
+texture = ExtResource( 7 )
+
 [node name="items" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -77,9 +132,39 @@ margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/items"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_crate_aku" type="TextureButton" parent="TabContainer/items/GridContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 6
+texture = ExtResource( 11 )
+
+[node name="bt_crate_life" type="TextureButton" parent="TabContainer/items/GridContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 7
+texture = ExtResource( 13 )
 
 [node name="explosives" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -90,8 +175,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GridContainer" type="GridContainer" parent="TabContainer/explosives"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_crate_tnt" type="TextureButton" parent="TabContainer/explosives/GridContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 8
+texture = ExtResource( 10 )
+
+[node name="bt_crate_nitro" type="TextureButton" parent="TabContainer/explosives/GridContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 3 )
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+ID = 9
+texture = ExtResource( 12 )
+
 [node name="activation" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

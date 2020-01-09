@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "ButtonMesh",
+"language": "GDScript",
+"path": "res://scripts/Editor/ButtonMesh.gd"
+}, {
 "base": "KinematicBody",
 "class": "Character",
 "language": "GDScript",
@@ -19,15 +24,45 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/Crate.gd"
 }, {
+"base": "Spatial",
+"class": "CrateManager",
+"language": "GDScript",
+"path": "res://scripts/Editor/CrateManager.gd"
+}, {
+"base": "Spatial",
+"class": "EditorCrate",
+"language": "GDScript",
+"path": "res://scripts/Editor/EditorCrate.gd"
+}, {
 "base": "Node",
 "class": "EditorManager",
 "language": "GDScript",
 "path": "res://scripts/Editor/EditorManager.gd"
 }, {
+"base": "Node",
+"class": "EditorState",
+"language": "GDScript",
+"path": "res://scripts/Editor/EditorState.gd"
+}, {
+"base": "Spatial",
+"class": "EntityManager",
+"language": "GDScript",
+"path": "res://scripts/Editor/EntityManager.gd"
+}, {
 "base": "Spatial",
 "class": "Explosion",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Explosion.gd"
+}, {
+"base": "Node",
+"class": "GUI_tools_Manager",
+"language": "GDScript",
+"path": "res://scripts/Editor/GUI_tools_Manager.gd"
+}, {
+"base": "Control",
+"class": "GuiToolsBase",
+"language": "GDScript",
+"path": "res://scripts/Editor/GuiToolsBase.gd"
 }, {
 "base": "Node",
 "class": "Item",
@@ -38,6 +73,26 @@ _global_script_classes=[ {
 "class": "Iventory",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Iventory.gd"
+}, {
+"base": "Node",
+"class": "LevelBuilder",
+"language": "GDScript",
+"path": "res://scripts/Editor/LevelBuilder.gd"
+}, {
+"base": "Resource",
+"class": "PathBase",
+"language": "GDScript",
+"path": "res://addons/cw_pathgen/PathBase.gd"
+}, {
+"base": "Spatial",
+"class": "PathManager",
+"language": "GDScript",
+"path": "res://scripts/Editor/PathManager.gd"
+}, {
+"base": "Spatial",
+"class": "Placeable",
+"language": "GDScript",
+"path": "res://scripts/Editor/Placeable.gd"
 }, {
 "base": "Reference",
 "class": "Power",
@@ -50,12 +105,23 @@ _global_script_classes=[ {
 "path": "res://scripts/Editor/Selectable.gd"
 } ]
 _global_script_class_icons={
+"ButtonMesh": "",
 "Character": "",
 "Crate": "",
+"CrateManager": "",
+"EditorCrate": "",
 "EditorManager": "",
+"EditorState": "",
+"EntityManager": "",
 "Explosion": "",
+"GUI_tools_Manager": "",
+"GuiToolsBase": "",
 "Item": "",
 "Iventory": "",
+"LevelBuilder": "",
+"PathBase": "",
+"PathManager": "",
+"Placeable": "",
 "Power": "",
 "Selectable": ""
 }
@@ -73,6 +139,7 @@ Utils="*res://scripts/Singletons/Utils.gd"
 LevelFile="*res://scripts/Singletons/LevelFile.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
 FileManager="*res://scripts/Singletons/FileManager.gd"
+IDTable="*res://scripts/Singletons/IDTable.gd"
 
 [display]
 

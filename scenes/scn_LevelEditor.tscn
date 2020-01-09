@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://gui/GUI_tools_crate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Editor/CrateManager.gd" type="Script" id=2]
@@ -12,18 +12,55 @@
 [ext_resource path="res://gui/GUI_tools_path.tscn" type="PackedScene" id=10]
 [ext_resource path="res://resources/gui/bt_gp_menu.tres" type="ButtonGroup" id=11]
 [ext_resource path="res://scripts/GUI/GUI_Menu.gd" type="Script" id=12]
-
-[sub_resource type="ButtonGroup" id=1]
+[ext_resource path="res://scripts/Editor/ProjectSave.gd" type="Script" id=13]
+[ext_resource path="res://scripts/Editor/ProjectLoad.gd" type="Script" id=14]
+[ext_resource path="res://scripts/Editor/ProjectNew.gd" type="Script" id=15]
+[ext_resource path="res://scripts/Editor/EntityManager.gd" type="Script" id=16]
+[ext_resource path="res://level_editor/entities/ent_end.tscn" type="PackedScene" id=17]
+[ext_resource path="res://level_editor/entities/ent_start.tscn" type="PackedScene" id=18]
+[ext_resource path="res://gui/GUI_tools_entity.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scripts/Editor/GUI_tools_entity.gd" type="Script" id=20]
+[ext_resource path="res://scenes/bt_entity.gd" type="Script" id=21]
+[ext_resource path="res://scripts/Editor/LevelBuilder.gd" type="Script" id=22]
 
 [sub_resource type="ButtonGroup" id=2]
 
 [sub_resource type="ButtonGroup" id=3]
 
 [sub_resource type="ButtonGroup" id=4]
+resource_name = "gp_menu"
 
 [sub_resource type="ButtonGroup" id=5]
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=10]
+script/source = "extends Button
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"pressed\",self,\"_on_pressed\")
+	pass # Replace with function body.
+
+func _on_pressed():
+#	get_tree().change_scene(\"res://Lab.tscn\")
+	get_node(\"/root/Main/Builder\").start()
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="ButtonGroup" id=6]
+
+[sub_resource type="ButtonGroup" id=7]
+
+[sub_resource type="ButtonGroup" id=9]
+
+[sub_resource type="GDScript" id=8]
 script/source = "
 extends Camera
 
@@ -235,6 +272,9 @@ func set_distance(value):
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
 
+[node name="Builder" type="Node" parent="."]
+script = ExtResource( 22 )
+
 [node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -245,85 +285,62 @@ __meta__ = {
 }
 bts_menu = ExtResource( 11 )
 
-[node name="ItemList" type="GridContainer" parent="GUI"]
-visible = false
-anchor_right = 1.0
-margin_left = 3.0
-margin_top = 40.1823
-margin_right = 169.982
-margin_bottom = 66.1823
-mouse_filter = 0
-mouse_default_cursor_shape = 2
-columns = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="btAddPath" type="Button" parent="GUI/ItemList"]
-margin_right = 20.0
-margin_bottom = 20.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "+"
-
-[node name="btSave" type="Button" parent="GUI/ItemList"]
-margin_left = 24.0
-margin_right = 43.0
-margin_bottom = 20.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "S"
-
-[node name="btLoad" type="Button" parent="GUI/ItemList"]
-margin_left = 47.0
-margin_right = 66.0
-margin_bottom = 20.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "L"
-
-[node name="btPlay" type="Button" parent="GUI/ItemList"]
-margin_left = 70.0
-margin_right = 90.0
-margin_bottom = 20.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "P"
-
 [node name="GUI_Menu" parent="GUI" instance=ExtResource( 9 )]
 script = ExtResource( 12 )
 
+[node name="bt_edit_new" parent="GUI/GUI_Menu/HBoxContainer" index="0" groups=[
+"project_new",
+]]
+disabled = false
+script = ExtResource( 15 )
+
+[node name="bt_edit_save" parent="GUI/GUI_Menu/HBoxContainer" index="1" groups=[
+"project_save",
+]]
+disabled = false
+script = ExtResource( 13 )
+
+[node name="bt_edit_load" parent="GUI/GUI_Menu/HBoxContainer" index="2" groups=[
+"project_load",
+]]
+disabled = false
+script = ExtResource( 14 )
+
 [node name="bt_edit_path" parent="GUI/GUI_Menu/HBoxContainer" index="4"]
-group = SubResource( 1 )
+group = SubResource( 2 )
 
 [node name="bt_edit_crate" parent="GUI/GUI_Menu/HBoxContainer" index="5"]
-group = SubResource( 1 )
+group = SubResource( 2 )
 
 [node name="bt_edit_item" parent="GUI/GUI_Menu/HBoxContainer" index="6"]
-group = SubResource( 2 )
-
-[node name="bt_edit_enemy" parent="GUI/GUI_Menu/HBoxContainer" index="7"]
-group = SubResource( 2 )
-
-[node name="bt_edit_time" parent="GUI/GUI_Menu/HBoxContainer" index="8"]
-group = SubResource( 2 )
-
-[node name="bt_edit_light" parent="GUI/GUI_Menu/HBoxContainer" index="10"]
-group = SubResource( 2 )
-
-[node name="bt_edit_play" parent="GUI/GUI_Menu/HBoxContainer" index="11"]
 group = SubResource( 3 )
 
-[node name="bt_edit_export" parent="GUI/GUI_Menu/HBoxContainer" index="12"]
+[node name="bt_edit_entity" parent="GUI/GUI_Menu/HBoxContainer" index="7"]
+group = SubResource( 4 )
+
+[node name="bt_edit_enemy" parent="GUI/GUI_Menu/HBoxContainer" index="8"]
 group = SubResource( 3 )
 
-[node name="bt_edit_settings" parent="GUI/GUI_Menu/HBoxContainer" index="14"]
-group = SubResource( 2 )
+[node name="bt_edit_time" parent="GUI/GUI_Menu/HBoxContainer" index="9"]
+group = SubResource( 3 )
+
+[node name="bt_edit_light" parent="GUI/GUI_Menu/HBoxContainer" index="11"]
+group = SubResource( 3 )
+
+[node name="bt_edit_play" parent="GUI/GUI_Menu/HBoxContainer" index="12"]
+disabled = false
+group = SubResource( 5 )
+script = SubResource( 10 )
+
+[node name="bt_edit_export" parent="GUI/GUI_Menu/HBoxContainer" index="13"]
+group = SubResource( 5 )
+
+[node name="bt_edit_settings" parent="GUI/GUI_Menu/HBoxContainer" index="15"]
+group = SubResource( 3 )
 
 [node name="GUI_path_properties" parent="GUI" instance=ExtResource( 7 )]
 visible = false
-margin_top = 30.0
-margin_bottom = -115.0
+margin_top = 29.0
 mouse_default_cursor_shape = 2
 
 [node name="GUI_tools_path" parent="GUI" groups=[
@@ -332,6 +349,7 @@ mouse_default_cursor_shape = 2
 visible = false
 margin_top = 27.0
 mouse_filter = 2
+tool_id = 3
 
 [node name="bt_add" parent="GUI/GUI_tools_path/Panel/VBoxContainer" index="0"]
 disabled = true
@@ -339,24 +357,73 @@ disabled = true
 [node name="bt_remove" parent="GUI/GUI_tools_path/Panel/VBoxContainer" index="1"]
 disabled = true
 
-[node name="bt_base" parent="GUI/GUI_tools_path/TabContainer/Built-in/GridContainer" index="0"]
-group = SubResource( 4 )
+[node name="bt_base" parent="GUI/GUI_tools_path/TabContainer/Built-in/VBoxContainer/GridContainer" index="0"]
+group = SubResource( 6 )
 
 [node name="GUI_tools_crate" parent="GUI" groups=[
-"gui_tool_crate",
+"gui_tool",
 ] instance=ExtResource( 1 )]
 visible = false
 
 [node name="bt_crate_base" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="0"]
-group = SubResource( 5 )
+group = SubResource( 7 )
 
 [node name="bt_crate_normal" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="1"]
-group = SubResource( 5 )
+group = SubResource( 7 )
 
-[node name="Camera" type="Camera" parent="."]
+[node name="bt_crate_checkpoint" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="2"]
+group = SubResource( 9 )
+
+[node name="bt_crate_jump" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="3"]
+group = SubResource( 9 )
+
+[node name="bt_crate_enforced" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="4"]
+group = SubResource( 9 )
+
+[node name="bt_crate_wumpa" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="5"]
+group = SubResource( 9 )
+
+[node name="items" parent="GUI/GUI_tools_crate/TabContainer" index="1"]
+visible = false
+
+[node name="bt_crate_aku" parent="GUI/GUI_tools_crate/TabContainer/items/GridContainer" index="0"]
+group = SubResource( 9 )
+
+[node name="bt_crate_life" parent="GUI/GUI_tools_crate/TabContainer/items/GridContainer" index="1"]
+group = SubResource( 9 )
+
+[node name="explosives" parent="GUI/GUI_tools_crate/TabContainer" index="2"]
+visible = false
+
+[node name="bt_crate_tnt" parent="GUI/GUI_tools_crate/TabContainer/explosives/GridContainer" index="0"]
+group = SubResource( 9 )
+
+[node name="bt_crate_nitro" parent="GUI/GUI_tools_crate/TabContainer/explosives/GridContainer" index="1"]
+group = SubResource( 9 )
+
+[node name="activation" parent="GUI/GUI_tools_crate/TabContainer" index="3"]
+visible = false
+
+[node name="GUI_tools_entity" parent="GUI" instance=ExtResource( 19 )]
+visible = false
+margin_top = 29.0
+margin_bottom = 0.0
+script = ExtResource( 20 )
+
+[node name="bt_entity_start" parent="GUI/GUI_tools_entity/VBoxContainer" index="0"]
+script = ExtResource( 21 )
+_ID = 0
+
+[node name="bt_entity_end" parent="GUI/GUI_tools_entity/VBoxContainer" index="1"]
+script = ExtResource( 21 )
+_ID = 1
+
+[node name="Camera" type="Camera" parent="." groups=[
+"dont_save",
+]]
 transform = Transform( -0.999518, -0.0116422, 0.0287952, -0.00343725, 0.962859, 0.269983, -0.0308689, 0.269754, -0.962434, -0.316168, 1.88757, -1.77073 )
 current = true
-script = SubResource( 6 )
+script = SubResource( 8 )
 mouse_mode = 0
 mouselook = false
 
@@ -365,20 +432,32 @@ mouselook = false
 ]]
 script = ExtResource( 8 )
 
-[node name="Path" type="Spatial" parent="Level"]
+[node name="Path" type="Spatial" parent="Level" groups=[
+"path_manager",
+"save",
+]]
 script = ExtResource( 3 )
 
 [node name="Crate" type="Spatial" parent="Level" groups=[
 "crate_manager",
+"save",
 ]]
 script = ExtResource( 2 )
 crate_model = ExtResource( 4 )
-[connection signal="pressed" from="GUI/ItemList/btAddPath" to="Level/Path" method="_on_btAddPath_pressed"]
-[connection signal="pressed" from="GUI/ItemList/btSave" to="Level/Path" method="_on_btSave_pressed"]
-[connection signal="pressed" from="GUI/ItemList/btLoad" to="Level/Path" method="_on_btLoad_pressed"]
+
+[node name="Entity" type="Spatial" parent="Level" groups=[
+"entity_manager",
+]]
+script = ExtResource( 16 )
+entity_start = ExtResource( 18 )
+entity_finish = ExtResource( 17 )
+[connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_new" to="GUI/GUI_Menu" method="_on_bt_edit_new_pressed"]
+[connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_save" to="GUI/GUI_Menu" method="_on_bt_edit_save_pressed"]
+[connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_load" to="GUI/GUI_Menu" method="_on_bt_edit_load_pressed"]
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_path" to="GUI/GUI_Menu" method="_on_bt_edit_path_toggled"]
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_crate" to="GUI/GUI_Menu" method="_on_bt_edit_crate_toggled"]
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_item" to="GUI/GUI_Menu" method="_on_bt_edit_item_toggled"]
+[connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_entity" to="GUI/GUI_Menu" method="_on_bt_edit_entity_toggled"]
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_enemy" to="GUI/GUI_Menu" method="_on_bt_edit_enemy_toggled"]
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_time" to="GUI/GUI_Menu" method="_on_bt_edit_time_toggled"]
 [connection signal="pressed" from="GUI/GUI_tools_path/Panel/VBoxContainer/bt_add" to="Level/Path" method="_on_bt_add_pressed"]
@@ -388,3 +467,5 @@ crate_model = ExtResource( 4 )
 [editable path="GUI/GUI_tools_path"]
 
 [editable path="GUI/GUI_tools_crate"]
+
+[editable path="GUI/GUI_tools_entity"]

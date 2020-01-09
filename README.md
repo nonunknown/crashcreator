@@ -7,6 +7,12 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.4
+    - Remade all level editor system
+    - Added Entity Editor (place where level start and finish)
+    - Made the level build system to test
+    - Some adjustments to level models
+
 ### Alpha 0.9.3 - The Level Editor update
     - Added all buttons refering to tools
     - Added 15 differents paths for toad village

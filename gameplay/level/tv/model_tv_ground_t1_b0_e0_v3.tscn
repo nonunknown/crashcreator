@@ -67,6 +67,7 @@ data = PoolVector3Array( 5.9328, 13.9215, 0.2772, 1.9328, 13.9215, 0.2772, 1.932
 [node name="model_tv_t1b0e0v3" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.06746, 0.27703, 15.3489 )
 script = ExtResource( 5 )
+show_name = "Water Middle"
 
 [node name="MouseBody" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

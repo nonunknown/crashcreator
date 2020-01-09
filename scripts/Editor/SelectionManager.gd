@@ -7,6 +7,10 @@ onready var path_manager = get_node("/root/Main/Level/Path")
 onready var crate_manager = get_node("/root/Main/Level/Crate")
 
 onready var gui = get_node("/root/Main/GUI")
+
+func _ready():
+	Utils.connect("mouse_left_clicked",self,"_on_mouse_left_clicked")
+
 func selection_set_single(selection):
 	if (selected_single != null):
 		selection_clear_single()
@@ -27,3 +31,5 @@ func selection_get_single():
 
 func selection_clear_single():
 	selected_single.to_unselected()
+	
+

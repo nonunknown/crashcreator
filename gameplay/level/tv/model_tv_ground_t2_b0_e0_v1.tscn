@@ -70,6 +70,7 @@ data = PoolVector3Array( -1.0917, 13.8712, -0.4411, -1.1535, 12.8598, -0.7677, 2
 [node name="model_tv_t2b0e0v1" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78094, -0.439994, 16.1276 )
 script = ExtResource( 5 )
+show_name = "Hole UL"
 
 [node name="killzone" type="StaticBody" parent="."]
 transform = Transform( 12.1703, 0, 0, 0, 0.666418, 0, 0, 0, -11.451, 0.652129, -6.82182, 4.41618 )

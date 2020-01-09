@@ -53,6 +53,7 @@ data = PoolVector3Array( 5, 0, -0.9992, 4, 0, -0.9992, 4, -1, -0.9992, -3.899, 0
 [node name="model_t3b0e0v0" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000871055, 0, 8.27573 )
 script = ExtResource( 3 )
+show_name = "Bridge End/Start"
 
 [node name="MouseBody" type="StaticBody" parent="." groups=[
 "build_delete",

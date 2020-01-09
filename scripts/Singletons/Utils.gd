@@ -1,4 +1,6 @@
-extends Node
+extends Spatial
+
+enum EDITOR_STATE {NEW,SAVE,LOAD,PATH,CRATE,ITEM,ENTITY,ENEMY,TIME,LIGHT,TEST,BUILD,SETTINGS}
 
 class MachineManager:
 	var machine:Dictionary = {
@@ -9,14 +11,18 @@ class MachineManager:
 			exit={}
 			}
 		}
-			
+
 	func register_state(target,state_const:int,name:String,has_init:bool=true,has_exit:bool=false):
 		if (has_init):
 			machine.funcs.init[state_const] = funcref(target,"st_init_"+name)
 		machine.funcs.update[state_const] = funcref(target,"st_update_"+name)
 		if (has_exit):
 			machine.funcs.exit[state_const] = funcref(target,"st_exit_"+name)
-			
+	
+	func register_state_array(target,states_const:Array,names:Array):
+		for i in states_const.size():
+			register_state(target,states_const[i],names[i],true,true)
+	
 	func machine_update():
 		machine.funcs.update[machine.state].call_func()
 	
@@ -27,6 +33,8 @@ class MachineManager:
 		if machine.funcs.init.has(machine.state):
 			machine.funcs.init[to].call_func() #call the init function of next states
 		
+	
+	func get_current_state() -> int: return machine.state
 
 const ray_length = 1000
 enum MASK {Selectable=64}
@@ -64,10 +72,33 @@ func file_exists(path:String,fileName:String,delete:bool=false):
 		print("An error occurred when trying to access the path.")
 		return false
 
+func list_directory(path:String) -> Array:
+	var dir = Directory.new()
+	var file_list = []
+	if dir.open(path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while (file_name != ""):
+			if not dir.current_is_dir():
+				print("Found file: " + file_name)
+				file_list.append(str(path)+str(file_name))
+			file_name = dir.get_next()
+		return file_list
+	else:
+		print("An error occurred when trying to access the path.")
+		return []
 
 func wait_for_seconds(time:float):
 	yield(get_tree().create_timer(time,false),"timeout")
 
-func destroy_after(time:float):
+func destroy_after(time:float,target:Node):
 	wait_for_seconds(time)
-	queue_free()
+	target.queue_free()
+
+var ray_dict = {}
+signal mouse_left_clicked
+func _unhandled_input(event):
+	if (event is InputEventMouseMotion):
+		ray_dict = ray_mouse_to_world(event,get_viewport().get_camera(),get_world(),MASK.Selectable)
+	if (Utils.mouse_left_clicked(event)):
+		emit_signal("mouse_left_clicked")

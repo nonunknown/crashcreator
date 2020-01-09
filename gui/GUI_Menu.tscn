@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://sprites/GUI/segment-path.png" type="Texture" id=1]
 [ext_resource path="res://sprites/GUI/crate.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://sprites/GUI/new.png" type="Texture" id=11]
 [ext_resource path="res://sprites/GUI/open.png" type="Texture" id=12]
 [ext_resource path="res://sprites/GUI/save.png" type="Texture" id=13]
+[ext_resource path="res://sprites/GUI/entity.png" type="Texture" id=14]
 
 [node name="GUI_Menu" type="Panel"]
 anchor_right = 1.0
@@ -107,9 +108,20 @@ group = ExtResource( 3 )
 icon = ExtResource( 6 )
 clip_text = true
 
-[node name="bt_edit_enemy" type="Button" parent="HBoxContainer"]
+[node name="bt_edit_entity" type="Button" parent="HBoxContainer"]
 margin_left = 242.0
 margin_right = 270.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Entity Editor"
+toggle_mode = true
+group = ExtResource( 3 )
+icon = ExtResource( 14 )
+clip_text = true
+
+[node name="bt_edit_enemy" type="Button" parent="HBoxContainer"]
+margin_left = 280.0
+margin_right = 308.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Enemy Editor"
@@ -120,8 +132,8 @@ icon = ExtResource( 4 )
 clip_text = true
 
 [node name="bt_edit_time" type="Button" parent="HBoxContainer"]
-margin_left = 280.0
-margin_right = 308.0
+margin_left = 318.0
+margin_right = 346.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Time Trial Editor"
@@ -132,13 +144,13 @@ icon = ExtResource( 8 )
 clip_text = true
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-margin_left = 318.0
-margin_right = 322.0
+margin_left = 356.0
+margin_right = 360.0
 margin_bottom = 22.0
 
 [node name="bt_edit_light" type="Button" parent="HBoxContainer"]
-margin_left = 332.0
-margin_right = 360.0
+margin_left = 370.0
+margin_right = 398.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Level Light Settings"
@@ -147,8 +159,8 @@ icon = ExtResource( 7 )
 clip_text = true
 
 [node name="bt_edit_play" type="Button" parent="HBoxContainer"]
-margin_left = 370.0
-margin_right = 398.0
+margin_left = 408.0
+margin_right = 436.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Test Level"
@@ -160,8 +172,8 @@ __meta__ = {
 }
 
 [node name="bt_edit_export" type="Button" parent="HBoxContainer"]
-margin_left = 408.0
-margin_right = 436.0
+margin_left = 446.0
+margin_right = 474.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Level Export"
@@ -170,13 +182,13 @@ icon = ExtResource( 9 )
 clip_text = true
 
 [node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
-margin_left = 446.0
-margin_right = 450.0
+margin_left = 484.0
+margin_right = 488.0
 margin_bottom = 22.0
 
 [node name="bt_edit_settings" type="Button" parent="HBoxContainer"]
-margin_left = 460.0
-margin_right = 488.0
+margin_left = 498.0
+margin_right = 526.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Level Settings"

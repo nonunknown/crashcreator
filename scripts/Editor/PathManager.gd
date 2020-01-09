@@ -1,86 +1,67 @@
 extends Spatial
+class_name PathManager
 # -- About Selection
 
 # -- END selection
 var selected_model:String = ""
 var pathList = []
 var ID = 0
-#export var pa0:PackedScene
-#export var pa1: PackedScene
-#onready var paths = [pa0,pa1]
-#func get_random_path():
-#	paths.shuffle()
-#	return paths.front().instance()
+var editor_state:EditorState
+var path_to_spawn = null
 
-
-func _start():
-	pass
+func _ready():
+	editor_state = EditorState.new(Utils.EDITOR_STATE.PATH,self)
+	get_tree().get_nodes_in_group("project_new")[0].connect("project_new",self,"_on_project_new")
 	
+func _enter():
+	print("started path")
+	list_level_models()
+	pass
+
+func _update():
+	pass
+
 func _exit():
+	print("path exit")
 	pass
 
-func SpawnPath(from_file=false,position=null,modelName=null):
-	var instance = null
-	print(modelName)
-	instance = import_model(modelName).instance()
-	
-	if from_file:
-		instance.translation = position		
+signal generate_path_buttons
+var loaded:bool = false
+var path_loaded:Array = []
+var path_list:Array = []
+
+func list_level_models():
+	if loaded: return
+	path_list = Utils.list_directory("res://gameplay/level/tv/")
+	for path in path_list:
+		path_loaded.append(load(path))
+	emit_signal("generate_path_buttons",path_loaded)
+	loaded = true
+
+func SpawnPath():
+	var instance = path_to_spawn.instance()
+#	instance = import_model(modelName).instance()
+	if (pathList.size() == 0):
+		instance.translation = Vector3.ZERO
 	else:
-		if (pathList.size() == 0):
-			instance.translation = Vector3.ZERO
-		else:
-			var pos = pathList[pathList.size()-1].get_node("PosEnd")
-			instance.translation += pos.get_global_transform().origin
-			
+		var pos = pathList[pathList.size()-1].get_node("PosEnd")
+		instance.translation += pos.get_global_transform().origin
+
 	instance._on_ready()
-	print("instance execute onready")
 	add_child(instance)
+	instance.set_owner(self)
 	pathList.append(instance)
-	
-func generate_area(data):
-		pathList = []
-		print("loading:")
-		print(data)
-		for i in data:
-			var info = data[i]
-			var pos:Vector3 = Vector3(info.posX,info.posY,info.posZ)
-			SpawnPath(true,pos,info.mName)
-		
-		pass
 
-
-func get_model_show_name(modelName):
-	return import_model(modelName).instance().show_name
-
-func get_model_dir(modelName,extension_included=true):
-	var prefix:String = FileManager.reg(modelName,".+?(?=_)")
-	if not extension_included:
-		modelName = modelName+".tscn"
-	return "res://gameplay/level/tv/"+modelName
-
-func import_model(modelName):
-	var p = get_model_dir(modelName)
-	print(p)
-	return load(p)
-
-func get_all_paths():
-	return ["path0","path1"]
-
-func set_selected_model(model_name):
-	selected_model = model_name
-
-
-func _on_btAddPath_pressed():
-	SpawnPath()
-
-func _on_btSave_pressed():
-	FileManager.save_path()
-
-func _on_btLoad_pressed():
-	FileManager.load_level()
 
 
 func _on_bt_add_pressed():
-	SpawnPath(false,null,selected_model)
-	pass # Replace with function body.
+	SpawnPath()
+
+func _on_project_new():
+	pathList = []
+
+func _on_set_path_to_spawn(name):
+	for path in path_loaded:
+		if (path.instance().show_name == name):
+			path_to_spawn = path
+			break
