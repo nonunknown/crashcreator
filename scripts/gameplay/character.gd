@@ -23,7 +23,7 @@ export var blend_time:float = .1
 export var gravity:float = -20
 export var jump_force:int = 9
 export var dash_duration:float = 1.5
-export var acceleration:int = 9
+export var acceleration:int = 20
 export var de_acceleration:int = 10
 export var speed:int = 4
 
@@ -43,7 +43,7 @@ var jumps:int = 1
 var jumps_actual:int = 0
 
 #State Machine
-enum STATE {IDLE,WALK,RUN,JUMP,CROUCH,DASH,JUMP_MOVE,BODY_SLAM,FALLING}
+enum STATE {IDLE,WALK,RUN,JUMP,CROUCH,DASH,JUMP_MOVE,BODY_SLAM,FALLING,ATTACK}
 var machine:Dictionary = {
 	state=null,
 	funcs={
@@ -70,6 +70,7 @@ func register_machine():
 	insert_state_info(STATE.CROUCH,"crouch",true,true)
 	insert_state_info(STATE.DASH,"dash",true,true)
 	insert_state_info(STATE.FALLING,"falling",true,true)
+	insert_state_info(STATE.ATTACK,"attack",true,true)
 	change_state(STATE.IDLE)
 	pass
 	
@@ -101,24 +102,30 @@ func st_update_idle():
 		change_state(STATE.JUMP)
 	elif Input.is_action_just_pressed("cmd_dash"):
 		change_state(STATE.CROUCH)
+	elif Input.is_action_just_pressed("cmd_attack"):
+		change_state(STATE.ATTACK)
 
 func st_init_walk():
 	animator.play("Walk",blend_time)
-	animator.playback_speed = 5
+	animator.playback_speed = 7
 	
 func st_update_walk():
+	
 	if (velocity_median() < .1 && !check_move_keys()):
 		change_state(STATE.IDLE)
 	elif velocity.y > .3:
 		change_state(STATE.JUMP)
 	elif Input.is_action_just_pressed("cmd_dash"):
 		change_state(STATE.DASH)
+	elif Input.is_action_just_pressed("cmd_attack"):
+		change_state(STATE.ATTACK)
 	
 func st_init_jump():
 	animator.play("Jump",blend_time)
 	animator.playback_speed = 1
-	
+	$crashbandicoot/Sounds/jump.play()
 func st_update_jump():
+	
 	if (velocity_median() > 1 and velocity.y < 1):
 		animator.play("Jump-move",.3)
 		animator.playback_speed = 4
@@ -236,6 +243,18 @@ func st_update_falling():
 func st_exit_falling():
 	pass
 
+func st_init_attack():
+	animator.play("Attack",blend_time)
+	animator.playback_speed = 1
+	pass
+func st_update_attack():
+	if animator.current_animation_position == animator.current_animation_length:
+		change_state(STATE.IDLE)
+	
+	pass
+func st_exit_attack():
+	pass
+
 #func st_init_():
 #	pass
 #func st_update_():
@@ -260,8 +279,7 @@ func check_move_keys() -> bool:
 	return false
 
 func _ready():
-		
-	if (use_debugger): get_parent().get_node("DebugText")
+	if (use_debugger): debug = get_node("../DebugText")
 	register_machine()
 	set_physics_process(true)
 	aku = obj_aku.instance()
@@ -333,24 +351,12 @@ var last_frame:bool = false
 func check_grounded():
 	is_grounded = is_on_floor()
 	if is_on_floor():
-		is_grounded = true
 		if (last_frame == false):
 			jumps_actual = jumps
 			last_frame = true
 	else:
-		is_grounded = false
 		last_frame = false
-#	if ($RayCast.is_colliding()): 
-#		is_grounded = true
-#		if (last_frame == false):
-#			jumps_actual = jumps
-#			last_frame = true
-##		print($RayCast.get_collider())
-#	else: 
-#		is_grounded = false
-#		last_frame = false
 		
-
 func check_jump():
 	if (disable_jump): return
 	if (Input.is_action_just_pressed("ui_jump") && jumps_actual >= 1):
@@ -421,8 +427,10 @@ func move_calculation(delta):
 	hv = hv.linear_interpolate(new_pos, accel * delta)
 	velocity.x = hv.x
 	velocity.z = hv.z
-	velocity = move_and_slide(velocity, Vector3(0,1,0),false,4,PI/4,false)
-
+	var snap_vector = Vector3(0,15,0)
+	velocity = move_and_slide(velocity, Vector3(0,1,0),true,1,1.0472,false)
+#		velocity = move_and_slide_with_snap(velocity,snap_vector,Vector3.UP,true)
+#		velocity = move_and_collide(velocity)
 	var input:Vector3 = Vector3.ZERO
 
 var new_angle:float = 0
@@ -487,3 +495,9 @@ func _on_Button3_pressed():
 func crate_collided(area):
 	var crate = area.get_parent()
 	crate._on_Jumped()
+
+
+func _on_ItemBody_area_entered(item):
+	if item.is_in_group("item"):
+		item._on_Picked(self)
+	pass # Replace with function body.

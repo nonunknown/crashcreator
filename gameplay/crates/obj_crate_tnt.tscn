@@ -104,10 +104,12 @@ tracks/0/keys = {
 
 [node name="obj_crate_tnt" type="RigidBody" groups=[
 "crate",
+"explosive",
 ]]
 collision_layer = 512
 collision_mask = 530
 script = ExtResource( 5 )
+ID = 8
 wood_crate = false
 affectedByExplosion = true
 

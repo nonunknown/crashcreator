@@ -2,7 +2,7 @@ extends Item
 
 var character:Character
 
-func _on_Picked():
+func _on_Picked(player):
 	if !picked: picked = true
 	else: return
 	self.visible = false
@@ -15,5 +15,5 @@ func _on_Picked():
 
 func _on_Area_body_entered(body):
 	character = body
-	_on_Picked()
+	_on_Picked(character)
 	pass # Replace with function body.

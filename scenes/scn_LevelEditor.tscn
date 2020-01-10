@@ -23,16 +23,16 @@
 [ext_resource path="res://scenes/bt_entity.gd" type="Script" id=21]
 [ext_resource path="res://scripts/Editor/LevelBuilder.gd" type="Script" id=22]
 
+[sub_resource type="ButtonGroup" id=1]
+
 [sub_resource type="ButtonGroup" id=2]
 
 [sub_resource type="ButtonGroup" id=3]
-
-[sub_resource type="ButtonGroup" id=4]
 resource_name = "gp_menu"
 
-[sub_resource type="ButtonGroup" id=5]
+[sub_resource type="ButtonGroup" id=4]
 
-[sub_resource type="GDScript" id=10]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Button
 
 
@@ -58,9 +58,9 @@ func _on_pressed():
 
 [sub_resource type="ButtonGroup" id=7]
 
-[sub_resource type="ButtonGroup" id=9]
+[sub_resource type="ButtonGroup" id=8]
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=9]
 script/source = "
 extends Camera
 
@@ -307,36 +307,36 @@ disabled = false
 script = ExtResource( 14 )
 
 [node name="bt_edit_path" parent="GUI/GUI_Menu/HBoxContainer" index="4"]
-group = SubResource( 2 )
+group = SubResource( 1 )
 
 [node name="bt_edit_crate" parent="GUI/GUI_Menu/HBoxContainer" index="5"]
-group = SubResource( 2 )
+group = SubResource( 1 )
 
 [node name="bt_edit_item" parent="GUI/GUI_Menu/HBoxContainer" index="6"]
-group = SubResource( 3 )
+group = SubResource( 2 )
 
 [node name="bt_edit_entity" parent="GUI/GUI_Menu/HBoxContainer" index="7"]
-group = SubResource( 4 )
+group = SubResource( 3 )
 
 [node name="bt_edit_enemy" parent="GUI/GUI_Menu/HBoxContainer" index="8"]
-group = SubResource( 3 )
+group = SubResource( 2 )
 
 [node name="bt_edit_time" parent="GUI/GUI_Menu/HBoxContainer" index="9"]
-group = SubResource( 3 )
+group = SubResource( 2 )
 
 [node name="bt_edit_light" parent="GUI/GUI_Menu/HBoxContainer" index="11"]
-group = SubResource( 3 )
+group = SubResource( 2 )
 
 [node name="bt_edit_play" parent="GUI/GUI_Menu/HBoxContainer" index="12"]
 disabled = false
-group = SubResource( 5 )
-script = SubResource( 10 )
+group = SubResource( 4 )
+script = SubResource( 5 )
 
 [node name="bt_edit_export" parent="GUI/GUI_Menu/HBoxContainer" index="13"]
-group = SubResource( 5 )
+group = SubResource( 4 )
 
 [node name="bt_edit_settings" parent="GUI/GUI_Menu/HBoxContainer" index="15"]
-group = SubResource( 3 )
+group = SubResource( 2 )
 
 [node name="GUI_path_properties" parent="GUI" instance=ExtResource( 7 )]
 visible = false
@@ -372,34 +372,34 @@ group = SubResource( 7 )
 group = SubResource( 7 )
 
 [node name="bt_crate_checkpoint" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="2"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="bt_crate_jump" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="3"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="bt_crate_enforced" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="4"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="bt_crate_wumpa" parent="GUI/GUI_tools_crate/TabContainer/basic/GridContainer" index="5"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="items" parent="GUI/GUI_tools_crate/TabContainer" index="1"]
 visible = false
 
 [node name="bt_crate_aku" parent="GUI/GUI_tools_crate/TabContainer/items/GridContainer" index="0"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="bt_crate_life" parent="GUI/GUI_tools_crate/TabContainer/items/GridContainer" index="1"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="explosives" parent="GUI/GUI_tools_crate/TabContainer" index="2"]
 visible = false
 
 [node name="bt_crate_tnt" parent="GUI/GUI_tools_crate/TabContainer/explosives/GridContainer" index="0"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="bt_crate_nitro" parent="GUI/GUI_tools_crate/TabContainer/explosives/GridContainer" index="1"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="activation" parent="GUI/GUI_tools_crate/TabContainer" index="3"]
 visible = false
@@ -423,7 +423,7 @@ _ID = 1
 ]]
 transform = Transform( -0.999518, -0.0116422, 0.0287952, -0.00343725, 0.962859, 0.269983, -0.0308689, 0.269754, -0.962434, -0.316168, 1.88757, -1.77073 )
 current = true
-script = SubResource( 8 )
+script = SubResource( 9 )
 mouse_mode = 0
 mouselook = false
 

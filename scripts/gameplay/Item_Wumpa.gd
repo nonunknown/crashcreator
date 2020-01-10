@@ -1,17 +1,9 @@
 extends Item
 
 
-func picked_overload():
-	#TODO: Add to players wumpa count
+func _player_picked(player:Character):
+	player.iventory.add_wumpa(1)
 	pass
-	
-
-func _on_Area_body_entered(body):
-	if (body.collision_layer == 2):
-		_on_Picked()
-	pass # Replace with function body.
-
-
 
 func _on_Area_area_entered(area):
 	print("area of wumpa")

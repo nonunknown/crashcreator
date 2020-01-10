@@ -21,5 +21,8 @@ func _on_Exploded():
 	yield(get_tree().create_timer(3,false),"timeout")
 	queue_free()
 
+func _on_Attacked():
+	_on_Exploded()
+
 func _on_Area_body_entered(body):
 	_on_Exploded()

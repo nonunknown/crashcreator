@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/life.wav-fafb536c8df5a621f583cb2b98de3b58.sample"
+
+[deps]
+
+source_file="res://sounds/crash/life.wav"
+dest_files=[ "res://.import/life.wav-fafb536c8df5a621f583cb2b98de3b58.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

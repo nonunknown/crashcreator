@@ -33,7 +33,7 @@ func wumpa_ready():
 
 func SpawnWumpa():
 	if (!hasWumpa): return
-	var cratePos = get_translation()
+	var cratePos = translation
 	
 	if (!wumpaCollection):
 		for n in amtWumpa:
@@ -49,14 +49,12 @@ func Destroy():
 	$CollisionShape.disabled = true
 	
 	if (wood_crate):
-		var audio:AudioStreamPlayer3D = get_node("sfx")
-		var p:Particles = get_node("Particle")
-		audio.play()
-		p.emitting = true
-		get_node("model").visible = false
-		yield(get_tree().create_timer(audio.stream.get_length(),false),"timeout")
+		$sfx.play()
+		$Particle.emitting = true
+		$model.visible = false
+		yield(get_tree().create_timer($sfx.stream.get_length(),false),"timeout")
 		
-	visible = false	
+	visible = false
 	queue_free()
 
 			

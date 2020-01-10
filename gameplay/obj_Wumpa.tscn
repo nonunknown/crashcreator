@@ -4,10 +4,8 @@
 [ext_resource path="res://sprites/wumpa.png" type="Texture" id=2]
 [ext_resource path="res://sounds/gameplay/item/item_wumpa_collect.wav" type="AudioStream" id=3]
 
-
-
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.153724, 0.149687, 0.135888 )
+extents = Vector3( 0.247564, 0.248654, 0.219727 )
 
 [sub_resource type="Animation" id=2]
 loop = true
@@ -40,6 +38,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite3D" parent="."]
+transform = Transform( 1.64161, 0, 0, 0, 1.64161, 0, 0, 0, 1.64161, 0, 0, 0 )
 billboard = 1
 double_sided = false
 texture = ExtResource( 2 )

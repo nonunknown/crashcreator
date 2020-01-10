@@ -8,7 +8,7 @@ func decrease_health():
 	$Anim.play("bounce")
 	print("bounce")
 	$sfx_bounce.play()
-	$sfx_bounce.pitch_scale += 0.02
+	$sfx_bounce.pitch_scale += 0.08
 	if (health <= 0):
 		_on_Attacked()
 

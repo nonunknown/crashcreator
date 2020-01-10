@@ -7,6 +7,21 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.5 - Before migrating to Godot 3.2 beta 5
+    - last 3.2 beta 4 push
+    - Added more crates (list at wiki/idtable)
+        - aku aku
+        - checkpoint
+        - enforced
+        - life
+        - question
+        - wood jump
+    - Added spin attack to crash
+    - Added official crash font
+    - Added Crash's HUD
+    - Some adjustments to crate and item classes
+    - messing with footstepsounds
+
 ### Alpha 0.9.4
     - Remade all level editor system
     - Added Entity Editor (place where level start and finish)

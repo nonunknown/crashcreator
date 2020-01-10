@@ -1,0 +1,152 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/wumpa.png" type="Texture" id=1]
+[ext_resource path="res://textures/gameplay/item_life.png" type="Texture" id=2]
+[ext_resource path="res://textures/gameplay/boxes-crate-top.png" type="Texture" id=3]
+[ext_resource path="res://font/dyn_crash.res" type="DynamicFont" id=4]
+[ext_resource path="res://scripts/GUI/GUi_Iventory.gd" type="Script" id=5]
+
+[node name="GUI_Iventory" type="Control"]
+anchor_right = 1.0
+margin_bottom = 82.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+g_wumpa = NodePath("GridContainer/Wumpa/amt")
+g_life = NodePath("GridContainer/Life/amt")
+g_crate = NodePath("GridContainer/Crate/amt")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+custom_constants/hseparation = 287
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wumpa" type="Control" parent="GridContainer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="amt" type="Label" parent="GridContainer/Wumpa"]
+margin_left = 59.8689
+margin_top = 0.773781
+margin_right = 125.869
+margin_bottom = 68.7738
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0.470588, 0, 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/Wumpa"]
+margin_top = 16.0933
+margin_right = 38.0
+margin_bottom = 47.0933
+rect_scale = Vector2( 1.43742, 1.43742 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Crate" type="Control" parent="GridContainer"]
+margin_left = 287.0
+margin_right = 287.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="amt" type="Label" parent="GridContainer/Crate"]
+margin_left = 59.8689
+margin_top = 0.773781
+margin_right = 125.869
+margin_bottom = 68.7738
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.435294, 0.196078, 0.0235294, 1 )
+text = "000"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="total" type="Label" parent="GridContainer/Crate"]
+anchor_left = 1.05263
+anchor_right = 1.05263
+margin_left = 164.267
+margin_top = 32.1422
+margin_right = 260.267
+margin_bottom = 100.142
+rect_scale = Vector2( 0.449139, 0.449139 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.435294, 0.196078, 0.0235294, 1 )
+text = "000"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="slash" type="Label" parent="GridContainer/Crate"]
+anchor_left = 1.05263
+anchor_top = -1.90735e-07
+anchor_right = 1.05263
+margin_left = 125.132
+margin_top = 28.1422
+margin_right = 191.132
+margin_bottom = 96.1422
+rect_scale = Vector2( 0.562651, 0.560309 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.435294, 0.196078, 0.0235294, 1 )
+text = "/"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/Crate"]
+margin_left = -10.0
+margin_top = 5.0
+margin_right = 28.0
+margin_bottom = 37.0
+rect_scale = Vector2( 1.87878, 1.96291 )
+texture = ExtResource( 3 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Life" type="Control" parent="GridContainer"]
+margin_left = 574.0
+margin_right = 574.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="amt" type="Label" parent="GridContainer/Life"]
+margin_left = 59.8689
+margin_top = 0.773781
+margin_right = 125.869
+margin_bottom = 68.7738
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.247059, 0.301961, 0.0235294, 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/Life"]
+margin_left = -15.0
+margin_right = 23.0
+margin_bottom = 31.0
+rect_scale = Vector2( 2.0299, 2.28839 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}

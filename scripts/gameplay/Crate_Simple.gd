@@ -10,4 +10,3 @@ func _on_Jumped():
 
 func _on_Exploded():
 	_on_Attacked()
-

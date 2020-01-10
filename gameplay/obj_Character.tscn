@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/gameplay/character.gd" type="Script" id=1]
 [ext_resource path="res://resources/gameplay/crash.res" type="PackedScene" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://sounds/crash/woah.wav" type="AudioStream" id=4]
 [ext_resource path="res://models/characters/crashbandicoot/barricata-ground.anim" type="Animation" id=5]
 [ext_resource path="res://models/characters/crashbandicoot/Jump-portal.anim" type="Animation" id=6]
@@ -12,17 +11,46 @@
 [ext_resource path="res://models/characters/crashbandicoot/Jump-top.anim" type="Animation" id=10]
 [ext_resource path="res://models/characters/crashbandicoot/barricata.anim" type="Animation" id=11]
 
+[sub_resource type="GDScript" id=3]
+script/source = "extends Spatial
+
+
+var col:CollisionShape
+func _ready():
+	connect(\"visibility_changed\",self,\"_on_visible\")
+	col = $Area/CollisionShape
+	col.disabled = true
+func _on_visible():
+	if visible:
+		col.disabled = false
+	else:
+		col.disabled = true
+	pass
+"
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Area
+
+func _ready():
+	connect(\"body_entered\",self,\"_on_body_entered\")
+	
+func _on_body_entered(body:Node):
+	print(\"attacked: \",str(body.name))
+	if (body.is_in_group(\"crate\")):
+		body._on_Attacked()
+"
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1, 0.289767, 1 )
+
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.415174, 0.761578, 0.264996 )
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.393768, 0.0169715, 0.235733 )
 
-[sub_resource type="SpatialMaterial" id=3]
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.51274, 1.21507, 0.475687 )
 
 [node name="obj_Character" type="KinematicBody" groups=[
 "player",
@@ -34,6 +62,18 @@ dash_duration = 0.3
 
 [node name="crashbandicoot" parent="." instance=ExtResource( 2 )]
 
+[node name="twistcrash" parent="crashbandicoot" index="1"]
+script = SubResource( 3 )
+
+[node name="Area" type="Area" parent="crashbandicoot/twistcrash" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94023, 0 )
+collision_layer = 2048
+collision_mask = 556
+script = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="crashbandicoot/twistcrash/Area"]
+shape = SubResource( 4 )
+
 [node name="AnimationPlayer" parent="crashbandicoot" index="2"]
 anims/Jump-portal = ExtResource( 6 )
 anims/Jump-top = ExtResource( 10 )
@@ -44,13 +84,6 @@ anims/barricata-ground = ExtResource( 5 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74906, 0 )
 shape = SubResource( 1 )
-
-[node name="RayCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0544803 )
-enabled = true
-cast_to = Vector3( 0, -0.1, 0 )
-collision_mask = 793
-collide_with_areas = true
 
 [node name="Feet" type="Area" parent="."]
 collision_layer = 256
@@ -83,12 +116,14 @@ stream = ExtResource( 9 )
 [node name="death_woah" type="AudioStreamPlayer3D" parent="sfx"]
 stream = ExtResource( 4 )
 
-[node name="lookme" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3801, 0 )
-visible = false
-material_override = SubResource( 3 )
-texture = ExtResource( 3 )
+[node name="ItemBody" type="Area" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="ItemBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12689, 0 )
+shape = SubResource( 6 )
 [connection signal="area_entered" from="Feet" to="." method="_on_Feet_area_entered"]
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
+[connection signal="area_entered" from="ItemBody" to="." method="_on_ItemBody_area_entered"]
 
 [editable path="crashbandicoot"]

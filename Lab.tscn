@@ -1,14 +1,21 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://gameplay/crates/obj_crate_nitro.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/obj_item_aku.tscn" type="PackedScene" id=2]
-[ext_resource path="res://gameplay/obj_life.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameplay/crates/obj_crate_checkpoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=4]
-[ext_resource path="res://gameplay/crates/obj_crate_tnt.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/crates/obj_crate_wood_jump.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Debug/DebugText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://gameplay/crates/obj_crate_bounce.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/gameplay/GameplayCamera.gd" type="Script" id=8]
 [ext_resource path="res://textures/lv_toadvillage/tex_ground.png" type="Texture" id=9]
+[ext_resource path="res://gameplay/crates/obj_crate_enforced.tscn" type="PackedScene" id=10]
+[ext_resource path="res://gameplay/crates/obj_crate_question.tscn" type="PackedScene" id=11]
+[ext_resource path="res://gameplay/crates/obj_crate_life.tscn" type="PackedScene" id=12]
+[ext_resource path="res://gameplay/crates/obj_crate_simple.tscn" type="PackedScene" id=13]
+[ext_resource path="res://gameplay/crates/obj_crate_aku.tscn" type="PackedScene" id=14]
+[ext_resource path="res://textures/gameplay/boxes-tnt-jp.png" type="Texture" id=15]
+[ext_resource path="res://gameplay/crates/obj_crate_tnt.tscn" type="PackedScene" id=16]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 9 )
@@ -89,8 +96,10 @@ script = ExtResource( 8 )
 [node name="obj_Character" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35639, 0.54602, 2.58163 )
 collision_mask = 190
+use_debugger = true
 
 [node name="Level" type="Spatial" parent="."]
+transform = Transform( 1.01525, 0, 0, 0, 1.01525, 0, 0, 0, 1.01525, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Level"]
 transform = Transform( 9.13981, 0, 0, 0, 9.13981, 0, 0, 0, 9.13981, -0.00161552, 0.0171592, 0.0097127 )
@@ -98,82 +107,70 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Level/MeshInstance"]
-collision_layer = 16
+collision_layer = 17
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/MeshInstance/StaticBody"]
 shape = SubResource( 3 )
 
-[node name="obj_life" parent="Level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236221, 0.431953, -1.15292 )
-
 [node name="obj_item_aku" parent="Level" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.319266, -2.75605 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88368, 0.319266, -7.68546 )
 
-[node name="obj_crate_tnt" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.882291, 0.21716, 0.213712 )
+[node name="obj_item_aku2" parent="Level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33408, 0.319266, -6.67051 )
 
-[node name="obj_crate_tnt2" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.614008, 0.21716, 3.88778 )
-affectedByExplosion = false
-
-[node name="obj_crate_tnt3" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.698083, 0.217159, 1.86545 )
+[node name="obj_item_aku3" parent="Level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51824, 0.319266, -6.60693 )
 
 [node name="obj_crate_nitro" parent="Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4084, 0.217159, -1.93808 )
 
 [node name="obj_crate_nitro2" parent="Level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66084, 0.217159, 1.41688 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13955, 0.217159, -1.58752 )
+
+[node name="obj_crate_nitro3" parent="Level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86045, 0.217159, 1.41248 )
+
+[node name="obj_crate_nitro4" parent="Level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86045, 0.217159, 4.41248 )
+
+[node name="obj_crate_nitro5" parent="Level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.04433, 0.217159, 4.33093 )
+
+[node name="obj_crate_nitro6" parent="Level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8563, 0.217159, 6.50918 )
+
+[node name="obj_crate_nitro7" parent="Level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25034, 0.217159, -0.157588 )
 
 [node name="obj_crate_bounce" parent="Level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00927, 0.217159, 2.994 )
 script = SubResource( 4 )
 
-[node name="obj_crate_bounce2" parent="Level" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80312, 4.13513, 2.71289 )
-startGravity = false
+[node name="obj_crate_checkpoint" parent="Level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.783866, 0.21716, 5.88085 )
 
-[node name="obj_crate_tnt4" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02411, 0.217159, -0.603093 )
+[node name="obj_crate_wood_jump" parent="Level" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.22165, 0.217159, 0.768173 )
 
-[node name="obj_crate_tnt5" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1 )
+[node name="obj_crate_simple" parent="Level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.734314, 0.21716, 4.18282 )
 
-[node name="obj_crate_tnt6" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
+[node name="obj_crate_question" parent="Level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75651, 0.21716, 0.83259 )
 
-[node name="obj_crate_tnt7" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 1 )
+[node name="obj_crate_life" parent="Level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.62224, 0.217159, -4.0079 )
 
-[node name="obj_crate_tnt8" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
+[node name="obj_crate_enforced" parent="Level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.299033, 0.217159, -3.05081 )
 
-[node name="obj_crate_tnt9" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -1 )
+[node name="obj_crate_simple2" parent="Level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33509, 0.217159, -2.90587 )
 
-[node name="obj_crate_tnt10" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 0 )
-
-[node name="obj_crate_tnt11" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 5 )
-
-[node name="obj_crate_tnt12" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 5 )
-
-[node name="obj_crate_tnt13" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 4 )
-
-[node name="obj_crate_tnt14" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5 )
-
-[node name="obj_crate_tnt15" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 5 )
-
-[node name="obj_crate_tnt16" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93341, 2.20875, 5.32771 )
-
-[node name="obj_crate_tnt17" parent="Level" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5 )
+[node name="obj_crate_tnt" parent="Level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12278, 0.214154, -0.0171937 )
+use_jp_material = true
+jp_texture = ExtResource( 15 )
 [connection signal="pressed" from="Button2" to="obj_Character" method="_on_Button2_pressed"]
 [connection signal="pressed" from="Button3" to="obj_Character" method="_on_Button3_pressed"]
 

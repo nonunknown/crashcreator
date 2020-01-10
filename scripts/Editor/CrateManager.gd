@@ -56,7 +56,7 @@ func spawn_crate():
 	s.set_script(EditorCrate)
 	s._ID = selected_crate_id
 	print(s.get_data())
-	s.translation = crate.translation
+	s.translation = crate.translation + ( Vector3.UP * 0.05)
 	add_child(s)
 	s.set_owner(self)
 	
