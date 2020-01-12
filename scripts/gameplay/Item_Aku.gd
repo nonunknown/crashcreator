@@ -1,4 +1,5 @@
 extends Item
+class_name ItemAku
 
 var character:Character
 

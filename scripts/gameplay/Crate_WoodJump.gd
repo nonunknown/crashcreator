@@ -1,4 +1,5 @@
 extends Crate
+class_name CrateWoodJump
 
 func _on_Attacked():
 	SpawnWumpa()

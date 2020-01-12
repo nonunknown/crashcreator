@@ -11,8 +11,8 @@ var registered_managers = {}
 
 func _ready():
 	smachine.register_state_array(self,[Utils.EDITOR_STATE.PATH,
-	Utils.EDITOR_STATE.CRATE,Utils.EDITOR_STATE.ENTITY],
-	["path","crate","entity"])
+	Utils.EDITOR_STATE.CRATE,Utils.EDITOR_STATE.ENTITY,Utils.EDITOR_STATE.TIME],
+	["path","crate","entity","time"])
 	connect("change_mode",self,"_on_change_mode")
 	emit_signal("change_mode",Utils.EDITOR_STATE.PATH)
 
@@ -53,7 +53,6 @@ func st_exit_crate():
 	pass
 
 func st_init_entity():
-	print("from manager entity enter")
 	registered_managers[Utils.EDITOR_STATE.ENTITY]._enter()
 	pass
 
@@ -63,7 +62,20 @@ func st_update_entity():
 	pass
 
 func st_exit_entity():
-	print("from manager entity exit")
+
 	
 	registered_managers[Utils.EDITOR_STATE.ENTITY]._exit()
+	pass
+
+func st_init_time():
+	registered_managers[Utils.EDITOR_STATE.TIME]._enter()
+	pass
+
+func st_update_time():
+	
+	registered_managers[Utils.EDITOR_STATE.TIME]._update()
+	pass
+
+func st_exit_time():
+	registered_managers[Utils.EDITOR_STATE.TIME]._exit()
 	pass

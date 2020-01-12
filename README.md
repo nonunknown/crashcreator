@@ -2,10 +2,18 @@
 a game for crash fans to create and play on their own levels, and free source code ;)
 
 # Working Godot Version
-    - 3.2 beta 4 - Standard
+    - 3.2 beta 5 - Standard
 
 # WARNING
 alpha - means not playable... yet!
+
+### Alpha 0.9.6 - Time trial update
+    - Source now runs on godot 3.2 beta 5
+    - Implemented the time trial editor
+    - Added some stylish mouse pointer
+    - Implemented level builder (due to play test)
+    - Added more ids to IDTable
+    - Updated crates
 
 ### Alpha 0.9.5 - Before migrating to Godot 3.2 beta 5
     - last 3.2 beta 4 push

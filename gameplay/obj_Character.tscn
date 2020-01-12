@@ -11,7 +11,7 @@
 [ext_resource path="res://models/characters/crashbandicoot/Jump-top.anim" type="Animation" id=10]
 [ext_resource path="res://models/characters/crashbandicoot/barricata.anim" type="Animation" id=11]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
 
 
@@ -28,7 +28,7 @@ func _on_visible():
 	pass
 "
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Area
 
 func _ready():
@@ -40,13 +40,13 @@ func _on_body_entered(body:Node):
 		body._on_Attacked()
 "
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 0.289767, 1 )
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.415174, 0.761578, 0.264996 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.393768, 0.0169715, 0.235733 )
 
 [sub_resource type="BoxShape" id=6]
@@ -63,16 +63,16 @@ dash_duration = 0.3
 [node name="crashbandicoot" parent="." instance=ExtResource( 2 )]
 
 [node name="twistcrash" parent="crashbandicoot" index="1"]
-script = SubResource( 3 )
+script = SubResource( 1 )
 
 [node name="Area" type="Area" parent="crashbandicoot/twistcrash" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94023, 0 )
 collision_layer = 2048
 collision_mask = 556
-script = SubResource( 5 )
+script = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="crashbandicoot/twistcrash/Area"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="AnimationPlayer" parent="crashbandicoot" index="2"]
 anims/Jump-portal = ExtResource( 6 )
@@ -83,7 +83,7 @@ anims/barricata-ground = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74906, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Feet" type="Area" parent="."]
 collision_layer = 256
@@ -91,7 +91,7 @@ collision_mask = 256
 
 [node name="CollisionShape" type="CollisionShape" parent="Feet"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00185171, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="Head" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49772, 0 )
@@ -100,7 +100,7 @@ collision_mask = 256
 
 [node name="CollisionShape" type="CollisionShape" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00185171, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="AkuPos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08183, 1.41054, 0 )

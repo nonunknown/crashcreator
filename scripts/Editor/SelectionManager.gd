@@ -9,8 +9,9 @@ onready var crate_manager = get_node("/root/Main/Level/Crate")
 onready var gui = get_node("/root/Main/GUI")
 
 func _ready():
-	Utils.connect("mouse_left_clicked",self,"_on_mouse_left_clicked")
-
+#	Utils.connect("mouse_left_clicked",self,"_on_mouse_left_clicked")
+	pass
+	
 func selection_set_single(selection):
 	if (selected_single != null):
 		selection_clear_single()

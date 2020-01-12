@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://gameplay/crates/obj_crate_nitro.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/obj_item_aku.tscn" type="PackedScene" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://gameplay/crates/obj_crate_aku.tscn" type="PackedScene" id=14]
 [ext_resource path="res://textures/gameplay/boxes-tnt-jp.png" type="Texture" id=15]
 [ext_resource path="res://gameplay/crates/obj_crate_tnt.tscn" type="PackedScene" id=16]
+[ext_resource path="res://gameplay/obj_item_clock.tscn" type="PackedScene" id=17]
+[ext_resource path="res://gui/gameplay/GUI_Clock.tscn" type="PackedScene" id=18]
+[ext_resource path="res://gameplay/crates/obj_crate_time.tscn" type="PackedScene" id=19]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 9 )
@@ -61,6 +64,25 @@ func _on_Jumped():
 [node name="Lab" type="Spatial" groups=[
 "scene",
 ]]
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GUI_Clock" parent="HUD" groups=[
+"hud",
+] instance=ExtResource( 18 )]
+visible = false
+margin_left = -10.0702
+margin_top = 367.054
+margin_right = -10.0702
+margin_bottom = 443.054
+
+[node name="obj_crate_time" parent="HUD/GUI_Clock" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96987, 0.217421, 3.4736 )
 
 [node name="DebugText" parent="." instance=ExtResource( 6 )]
 
@@ -171,6 +193,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33509, 0.217159, -2.90587 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12278, 0.214154, -0.0171937 )
 use_jp_material = true
 jp_texture = ExtResource( 15 )
+
+[node name="obj_item_clock" parent="." instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21561, 0.217421, -1.28501 )
 [connection signal="pressed" from="Button2" to="obj_Character" method="_on_Button2_pressed"]
 [connection signal="pressed" from="Button3" to="obj_Character" method="_on_Button3_pressed"]
 

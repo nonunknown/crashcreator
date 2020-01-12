@@ -10,11 +10,13 @@ export var g_crate:NodePath
 var t_wumpa:Label
 var t_life:Label
 var t_crate:Label
+
 func _ready():
+	add_to_group("gameplay_ready")
+
+func _gameplay_ready():
 	if !character_exists():
 		return
-	
-	
 	t_wumpa = get_node(g_wumpa)
 	t_life = get_node(g_life)
 	t_crate = get_node(g_crate)
@@ -28,6 +30,7 @@ func _ready():
 func character_exists() -> bool:
 	if get_tree().get_nodes_in_group("player").size() > 0:
 		iventory = get_tree().get_nodes_in_group("player")[0].iventory
+		print("iventory got")
 		return true
 	printerr("AT IVENTORY GUI: CHARACTER NOT FOUND")
 	return false

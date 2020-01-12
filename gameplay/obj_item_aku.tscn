@@ -128,7 +128,7 @@ stream = ExtResource( 4 )
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0247816 )

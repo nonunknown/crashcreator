@@ -1,5 +1,5 @@
 extends Item
-
+class_name ItemWumpa
 
 func _player_picked(player:Character):
 	player.iventory.add_wumpa(1)

@@ -24,10 +24,45 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/Crate.gd"
 }, {
+"base": "Crate",
+"class": "CrateBounce",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_Bounce.gd"
+}, {
+"base": "Crate",
+"class": "CrateCheckpoint",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_Checkpoint.gd"
+}, {
 "base": "Spatial",
 "class": "CrateManager",
 "language": "GDScript",
 "path": "res://scripts/Editor/CrateManager.gd"
+}, {
+"base": "Crate",
+"class": "CrateNitro",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_Nitro.gd"
+}, {
+"base": "Crate",
+"class": "CrateSimple",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_Simple.gd"
+}, {
+"base": "Crate",
+"class": "CrateTNT",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_TNT.gd"
+}, {
+"base": "Crate",
+"class": "CrateTime",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_Time.gd"
+}, {
+"base": "Crate",
+"class": "CrateWoodJump",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_WoodJump.gd"
 }, {
 "base": "Spatial",
 "class": "EditorCrate",
@@ -69,6 +104,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/Item.gd"
 }, {
+"base": "Item",
+"class": "ItemAku",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Item_Aku.gd"
+}, {
+"base": "Item",
+"class": "ItemClock",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Item_Clock.gd"
+}, {
+"base": "Item",
+"class": "ItemWumpa",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Item_Wumpa.gd"
+}, {
 "base": "Node",
 "class": "Iventory",
 "language": "GDScript",
@@ -103,12 +153,24 @@ _global_script_classes=[ {
 "class": "Selectable",
 "language": "GDScript",
 "path": "res://scripts/Editor/Selectable.gd"
+}, {
+"base": "Node",
+"class": "TimeTrial",
+"language": "GDScript",
+"path": "res://scripts/gameplay/TimeTrial.gd"
 } ]
 _global_script_class_icons={
 "ButtonMesh": "",
 "Character": "",
 "Crate": "",
+"CrateBounce": "",
+"CrateCheckpoint": "",
 "CrateManager": "",
+"CrateNitro": "",
+"CrateSimple": "",
+"CrateTNT": "",
+"CrateTime": "",
+"CrateWoodJump": "",
 "EditorCrate": "",
 "EditorManager": "",
 "EditorState": "",
@@ -117,13 +179,17 @@ _global_script_class_icons={
 "GUI_tools_Manager": "",
 "GuiToolsBase": "",
 "Item": "",
+"ItemAku": "",
+"ItemClock": "",
+"ItemWumpa": "",
 "Iventory": "",
 "LevelBuilder": "",
 "PathBase": "",
 "PathManager": "",
 "Placeable": "",
 "Power": "",
-"Selectable": ""
+"Selectable": "",
+"TimeTrial": ""
 }
 
 [application]
@@ -224,6 +290,26 @@ cmd_attack={
 cam_bk={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
+zero={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":48,"unicode":0,"echo":false,"script":null)
+ ]
+}
+one={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"unicode":0,"echo":false,"script":null)
+ ]
+}
+two={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"unicode":0,"echo":false,"script":null)
+ ]
+}
+three={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
  ]
 }
 

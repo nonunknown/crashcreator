@@ -9,7 +9,6 @@ var first_load = true
 
 func _ready():
 	editor_state = EditorState.new(Utils.EDITOR_STATE.CRATE,self)
-	Utils.connect("mouse_left_clicked",self,"_on_mouse_left_clicked")
 
 
 func _on_changed_mode(_tool):
@@ -36,8 +35,12 @@ func _update():
 	crate.translation = pos
 	
 	last_pos = pos
-	pass
 	
+	if Utils.mouse_left_clicked() and selected_crate_id != -1:
+		spawn_crate()
+	
+	pass
+
 func _exit():
 	print("crate exit")
 	
@@ -54,12 +57,20 @@ func _exit():
 func spawn_crate():
 	var s:Node = crate.duplicate(8)
 	s.set_script(EditorCrate)
-	s._ID = selected_crate_id
-	print(s.get_data())
+	s.configure(selected_crate_id)
+	if is_timeable(s._ID):
+		s.add_to_group("timeable")
 	s.translation = crate.translation + ( Vector3.UP * 0.05)
 	add_child(s)
 	s.set_owner(self)
-	
+
+#check if is changed by timetrial
+func is_timeable(id):
+	for n in IDTable.timeable_crates:
+		if n == id:
+			return true
+			break
+	return false
 #received signal from: bt_crate
 var selected_crate_id:int = -1
 func _on_changed_crate(id:int,texture:Texture):
@@ -72,6 +83,4 @@ func _on_changed_crate(id:int,texture:Texture):
 #	inst.set_surface_material(1,mat)
 
 
-func _on_mouse_left_clicked():
-	if editor_state.get_current_state() == Utils.EDITOR_STATE.CRATE && selected_crate_id != -1:
-		spawn_crate()
+

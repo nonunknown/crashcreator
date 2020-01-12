@@ -1,28 +1,22 @@
 extends Node
 
+enum MODE {EDIT,PLAY}
 
+var GAME_MODE:int = MODE.EDIT
 
-enum GAMEMODE {EDIT,PLAY}
-enum EDITMODE {PATH,CRATE}
-var GAME_MODE:int = GAMEMODE.EDIT
-
-func GAMEMODE_SET(mode:int):
+func set_gamemode(mode:int):
+		print("last mode: "+str(MODE.keys()[GAME_MODE]))
 		GAME_MODE = mode
+		print("new mode: "+str(MODE.keys()[GAME_MODE]))
+		
+func is_mode_play()->bool:
+	if GAME_MODE == MODE.PLAY: return true
+	return false
 
-onready var scn:PackedScene = preload("res://scenes/scn_Gameplay.tscn")
-func _ready():
-	print(scn)
+func change_scene(actual_scene_name:String,new_scene:PackedScene):
+	var root = get_tree().get_root()
+	print(new_scene)
+	print("changing scene")
+#	root.call_deferred("add_child",new_scene.instance())
+	root.call_deferred("remove_child",root.get_node(actual_scene_name))
 	
-#	var s = PackedScene.new()
-#
-#	var n = Node.new()
-#	var ss = Spatial.new()
-#	n.add_child(ss)
-#	ss.set_owner(n)
-#	n.name = "ok"
-#	var result = s.pack(n)
-#	print(result)
-#	if (result == OK):
-#		ResourceSaver.save("res://custom_scenes/test.scn",s,64)
-	
-

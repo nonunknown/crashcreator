@@ -1,2 +1,2 @@
 extends Crate
-
+class_name CrateCheckpoint

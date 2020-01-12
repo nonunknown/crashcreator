@@ -1,4 +1,5 @@
 extends Crate
+class_name CrateBounce
 
 var health:int = 5
 

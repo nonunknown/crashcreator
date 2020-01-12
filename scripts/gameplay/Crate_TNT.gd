@@ -1,5 +1,5 @@
 extends Crate
-
+class_name CrateTNT
 export var use_jp_material:bool = false
 export var jp_texture:Texture
 # Called when the node enters the scene tree for the first time.

@@ -37,22 +37,28 @@ class MachineManager:
 	func get_current_state() -> int: return machine.state
 
 const ray_length = 1000
-enum MASK {Selectable=64}
 func ray(world,from,to,collision_mask) -> RayCast:
 	var space_state = world.direct_space_state
 	return space_state.intersect_ray(from, to,[],collision_mask)
 	
 	
 func ray_mouse_to_world(event,camera,world,collision_mask=1) -> RayCast:
+	if camera == null: return null
 	var from = camera.project_ray_origin(event.position)
 	var to = from + camera.project_ray_normal(event.position) * ray_length
 	return ray(world,from,to,collision_mask)
 	# result.collider.get_parent().material_override = SpatialMaterial.new()
 	 
-func mouse_left_clicked(event) -> bool:
-	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		return true 
-	else: return false
+var _event = null
+var last_frame_pressed = false
+func mouse_left_clicked() -> bool:
+	if _event is InputEventMouseButton and _event.pressed and _event.button_index == 1 and not last_frame_pressed:
+		last_frame_pressed = true
+		return true
+	elif _event is InputEventMouseButton and not _event.pressed and _event.button_index == 1: 
+		last_frame_pressed = false
+	return false
+
 
 func file_exists(path:String,fileName:String,delete:bool=false):
 	var dir = Directory.new()
@@ -96,9 +102,22 @@ func destroy_after(time:float,target:Node):
 	target.queue_free()
 
 var ray_dict = {}
-signal mouse_left_clicked
+
+enum MASK {Selectable=64,Selectable_crate=1024}
+var mouse_mask = MASK.Selectable
+func set_mouse_mask(mask:int):
+	mouse_mask = mask
+
 func _unhandled_input(event):
+	_event = event
 	if (event is InputEventMouseMotion):
-		ray_dict = ray_mouse_to_world(event,get_viewport().get_camera(),get_world(),MASK.Selectable)
-	if (Utils.mouse_left_clicked(event)):
-		emit_signal("mouse_left_clicked")
+		ray_dict = ray_mouse_to_world(event,get_viewport().get_camera(),get_world(),mouse_mask)
+#		emit_signal("mouse_left_clicked")
+
+func find_node_in_group(group_name:String,node_name:String) -> Node:
+	if get_tree().get_nodes_in_group(group_name).size() > 0:
+		for node in get_tree().get_nodes_in_group(group_name):
+			if node.name == node_name:
+				return node
+				break
+	return null

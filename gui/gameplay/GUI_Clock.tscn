@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://models/clock/Texture.png" type="Texture" id=1]
+[ext_resource path="res://font/dyn_crash.res" type="DynamicFont" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+func set_time(time):
+	$GridContainer/clock/amt.text = \"%s:%s:%s\" % [minutes(time),seconds(time),str(time).right(4)]
+
+func minutes(time) -> String: return \"%2d\" % (time / 60)
+func seconds(time) -> String: return \"%02d\" % fmod(time,60)
+
+func _gameplay_ready():
+	var gameplay_manager = get_tree().get_nodes_in_group(\"gameplay_manager\")[0]
+	print(\"connected to gameplaymanager: \"+str ( gameplay_manager))
+	gameplay_manager.connect(\"time_trial_activated\",self,\"_on_time_activated\")
+	
+func _on_time_activated():
+	print(\"clock gui true\")
+	visible = true
+	pass
+"
+
+[node name="GUI_Clock" type="Control" groups=[
+"gameplay_ready",
+]]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.27209
+margin_top = -76.0
+margin_right = -2.27209
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 515.823
+margin_top = 38.6779
+margin_right = 15.8228
+margin_bottom = 38.6779
+custom_constants/hseparation = 287
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clock" type="Control" parent="GridContainer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="amt" type="Label" parent="GridContainer/clock"]
+margin_left = 59.8689
+margin_top = 0.773781
+margin_right = 125.869
+margin_bottom = 68.7738
+rect_scale = Vector2( 0.473546, 0.473546 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.615686, 0.486275, 0.101961, 1 )
+text = "00:00:00"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/clock"]
+visible = false
+margin_left = -15.0
+margin_right = 23.0
+margin_bottom = 31.0
+rect_scale = Vector2( 2.0299, 2.28839 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}

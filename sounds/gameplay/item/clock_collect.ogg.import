@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/clock_collect.ogg-85df8b562052156dc20ef9fa5b9966cd.oggstr"
+
+[deps]
+
+source_file="res://sounds/gameplay/item/clock_collect.ogg"
+dest_files=[ "res://.import/clock_collect.ogg-85df8b562052156dc20ef9fa5b9966cd.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -9,10 +9,11 @@ func _on_Picked(player):
 	if !picked: picked = true
 	else: return
 	$sfx.play()
+	$Area/CollisionShape.disabled = true
 	_player_picked(player)
 	self.visible = false
-	Utils.wait_for_seconds($sfx.stream.get_length())
-	queue_free()
+#	Utils.wait_for_seconds($sfx.stream.get_length())
+#	queue_free()
 	
 func _on_Attacked():
 	pass

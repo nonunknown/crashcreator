@@ -1,5 +1,5 @@
 extends Crate
-
+class_name CrateNitro
 func _ready():
 	if (startGravity):
 		nitro_hop()

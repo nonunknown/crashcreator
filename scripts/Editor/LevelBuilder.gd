@@ -1,6 +1,7 @@
 extends Node
 class_name LevelBuilder
 
+
 func start():
 	if !level_is_valid(): 
 		printerr("LEVEL VALIDATION ERROR")
@@ -27,7 +28,7 @@ func level_is_valid() -> bool:
 	return true
 	
 func entity_is_valid() -> bool:
-	if get_tree().get_nodes_in_group("entity_manager")[0].get_child_count() != 2:
+	if get_tree().get_nodes_in_group("entity_manager")[0].get_child_count() < 2:
 		printerr("At Builder: "+"please place start and finish entities")
 		return false
 	return true
@@ -48,22 +49,28 @@ func create_game_level() -> bool:
 	var editor_level = get_node("/root/Main/Level")
 	editor_level.visible = false
 	add_child(game_level)
+	build_entity()
 	build_path()
 	build_crate()
 	return true
 
 func save_game_level() -> bool:
 	var packed_scene:PackedScene = PackedScene.new()
+	remove_child(game_level)
+	get_tree().root.add_child(game_level)
 	packed_scene.pack(game_level)
 	var err = ResourceSaver.save("user://temp.tscn",packed_scene)
 	if (err == OK):
 		print("SAVED FILE SUCCESSFULLY")
+		
 		return true
 	printerr("at builder's save game level: SAVE ERROR: "+str(err))
 	return false
 
 func load_generated_file():
-	get_tree().change_scene("user://temp.tscn")
+	GameManager.set_gamemode(GameManager.MODE.PLAY)
+	GameManager.change_scene("Main",game_level)
+	
 
 func build_path():
 	var paths = get_tree().get_nodes_in_group("path_manager")[0].get_children()
@@ -85,3 +92,13 @@ func build_crate():
 		inst.set_owner(game_level)
 		pass
 	pass
+
+func build_entity():
+	var entities = get_tree().get_nodes_in_group("entity_manager")[0].get_children()
+	var entity_manager = game_level.get_node("Entities")
+	for entity in entities:
+		var game_entity:PackedScene = IDTable.entities[entity._ID]
+		var instance = game_entity.instance()
+		instance.translation = entity.translation
+		entity_manager.add_child(instance)
+		instance.set_owner(game_level)

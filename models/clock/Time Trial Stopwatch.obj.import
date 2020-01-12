@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Time Trial Stopwatch.obj-0d5c9d608579a2a2a7bd0b56d2188531.mesh"
+
+[deps]
+
+files=[ "res://.import/Time Trial Stopwatch.obj-0d5c9d608579a2a2a7bd0b56d2188531.mesh" ]
+
+source_file="res://models/clock/Time Trial Stopwatch.obj"
+dest_files=[ "res://.import/Time Trial Stopwatch.obj-0d5c9d608579a2a2a7bd0b56d2188531.mesh", "res://.import/Time Trial Stopwatch.obj-0d5c9d608579a2a2a7bd0b56d2188531.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
