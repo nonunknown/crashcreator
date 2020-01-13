@@ -7,6 +7,9 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.6.1 - Output update
+    - Gives uses visual feedback from what is happenning inside the editor
+
 ### Alpha 0.9.6 - Time trial update
     - Source now runs on godot 3.2 beta 5
     - Implemented the time trial editor

@@ -279,7 +279,7 @@ func check_move_keys() -> bool:
 	return false
 
 func _ready():
-	if (use_debugger): debug = get_node("../DebugText")
+	if (use_debugger): debug = get_tree().get_nodes_in_group("debug")[0]
 	register_machine()
 	set_physics_process(true)
 	aku = obj_aku.instance()

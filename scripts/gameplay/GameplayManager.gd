@@ -7,7 +7,7 @@ func event_time_activate():
 	emit_signal("time_trial_activated")
 	print("activated")
 	
-func event_time_free(time):
+func event_time_freeze(time):
 	emit_signal("time_trial_freeze",time)
 
 func _gameplay_ready():
@@ -17,6 +17,7 @@ func _enter_tree():
 	name = "Gameplay"
 
 func _ready():
+	print(name)
 	if (GameManager.is_mode_play()):
 		print("configuring gameplay ready method")
 		var nodes = get_tree().get_nodes_in_group("gameplay_ready")

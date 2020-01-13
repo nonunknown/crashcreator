@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://gameplay/crates/obj_crate_nitro.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/obj_item_aku.tscn" type="PackedScene" id=2]
@@ -19,19 +19,65 @@
 [ext_resource path="res://gameplay/obj_item_clock.tscn" type="PackedScene" id=17]
 [ext_resource path="res://gui/gameplay/GUI_Clock.tscn" type="PackedScene" id=18]
 [ext_resource path="res://gameplay/crates/obj_crate_time.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scripts/gameplay/GameplayManager.gd" type="Script" id=20]
+[ext_resource path="res://gui/gameplay/GUI_Iventory.tscn" type="PackedScene" id=21]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+func _ready():
+	GameManager.set_gamemode(GameManager.MODE.PLAY)
+	print(name)
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Spatial
+
+func _ready():
+	GameManager.set_gamemode(GameManager.MODE.PLAY)
+	print(name)
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Spatial
+
+export var p_character:PackedScene
+export var p_camera:Script
+# Called when the node enters the scene tree for the first time.
+func _ready():
+#	var character = p_character.instance()
+#	add_child(character)
+#	character.add_to_group(\"player\")
+#	var cam = Camera.new()
+#	add_child(cam)
+#	cam.set_script(p_camera)
+#	print(str(character.get_groups()))
+#	cam.config()
+#	var cam = Camera.new()
+#	add_child(cam)
+##	cam.set_script(p_camera)
+#	cam.translation = Vector3(0,5,0)
+#
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 9 )
 uv1_scale = Vector3( 20, 20, 1 )
 
-[sub_resource type="PlaneMesh" id=2]
-material = SubResource( 1 )
+[sub_resource type="PlaneMesh" id=5]
+material = SubResource( 4 )
 size = Vector2( 3, 3 )
 
-[sub_resource type="ConcavePolygonShape" id=3]
+[sub_resource type="ConcavePolygonShape" id=6]
 data = PoolVector3Array( 1.5, 0, 1.5, -1.5, 0, 1.5, 1.5, 0, -1.5, -1.5, 0, 1.5, -1.5, 0, -1.5, 1.5, 0, -1.5 )
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Crate
 
 var health:int = 5
@@ -64,29 +110,45 @@ func _on_Jumped():
 [node name="Lab" type="Spatial" groups=[
 "scene",
 ]]
+script = SubResource( 1 )
 
-[node name="HUD" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Start" type="Spatial" parent="."]
+script = SubResource( 2 )
+
+[node name="Gameplay" type="Spatial" parent="." groups=[
+"gameplay_manager",
+"gameplay_ready",
+]]
+script = ExtResource( 20 )
+
+[node name="Player" type="Spatial" parent="Gameplay"]
+script = SubResource( 3 )
+p_character = ExtResource( 4 )
+p_camera = ExtResource( 8 )
+
+[node name="HUD" type="Control" parent="Gameplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GUI_Clock" parent="HUD" groups=[
+[node name="GUI_Iventory" parent="Gameplay/HUD" groups=[
+"hud",
+] instance=ExtResource( 21 )]
+visible = false
+
+[node name="GUI_Clock" parent="Gameplay/HUD" groups=[
 "hud",
 ] instance=ExtResource( 18 )]
 visible = false
-margin_left = -10.0702
-margin_top = 367.054
-margin_right = -10.0702
-margin_bottom = 443.054
 
-[node name="obj_crate_time" parent="HUD/GUI_Clock" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96987, 0.217421, 3.4736 )
+[node name="DebugText" parent="Gameplay/HUD" groups=[
+"debug",
+] instance=ExtResource( 6 )]
+visible = false
 
-[node name="DebugText" parent="." instance=ExtResource( 6 )]
-
-[node name="Button2" type="Button" parent="."]
+[node name="Button2" type="Button" parent="Gameplay/HUD/DebugText"]
 margin_left = 213.0
 margin_top = 4.0
 margin_right = 281.0
@@ -98,7 +160,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button3" type="Button" parent="."]
+[node name="Button3" type="Button" parent="Gameplay/HUD/DebugText"]
 margin_left = 213.0
 margin_top = 33.0
 margin_right = 285.0
@@ -110,93 +172,104 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.21982, 3.69873, 8.73469 )
-size = 7.79504
-script = ExtResource( 8 )
+[node name="Path" type="Spatial" parent="Gameplay"]
 
-[node name="obj_Character" parent="." instance=ExtResource( 4 )]
+[node name="MeshInstance" type="MeshInstance" parent="Gameplay"]
+transform = Transform( 9.27919, 0, 0, 0, 9.27919, 0, 0, 0, 9.27919, -0.00164016, 0.0174209, 0.00986082 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/MeshInstance"]
+collision_layer = 17
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/MeshInstance/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Items" type="Spatial" parent="Gameplay"]
+
+[node name="Enemies" type="Spatial" parent="Gameplay"]
+
+[node name="Entities" type="Spatial" parent="Gameplay"]
+
+[node name="obj_Character" parent="Gameplay/Entities" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35639, 0.54602, 2.58163 )
 collision_mask = 190
 use_debugger = true
 
-[node name="Level" type="Spatial" parent="."]
+[node name="Camera" type="Camera" parent="Gameplay/Entities"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.21982, 3.69873, 8.73469 )
+size = 7.79504
+script = ExtResource( 8 )
+
+[node name="obj_item_clock" parent="Gameplay/Entities" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21561, 0.217421, -1.28501 )
+
+[node name="Crate" type="Spatial" parent="Gameplay"]
+
+[node name="Level" type="Spatial" parent="Gameplay/Crate"]
 transform = Transform( 1.01525, 0, 0, 0, 1.01525, 0, 0, 0, 1.01525, 0, 0, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Level"]
-transform = Transform( 9.13981, 0, 0, 0, 9.13981, 0, 0, 0, 9.13981, -0.00161552, 0.0171592, 0.0097127 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Level/MeshInstance"]
-collision_layer = 17
-
-[node name="CollisionShape" type="CollisionShape" parent="Level/MeshInstance/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="obj_item_aku" parent="Level" instance=ExtResource( 2 )]
+[node name="obj_item_aku" parent="Gameplay/Crate/Level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88368, 0.319266, -7.68546 )
 
-[node name="obj_item_aku2" parent="Level" instance=ExtResource( 2 )]
+[node name="obj_item_aku2" parent="Gameplay/Crate/Level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33408, 0.319266, -6.67051 )
 
-[node name="obj_item_aku3" parent="Level" instance=ExtResource( 2 )]
+[node name="obj_item_aku3" parent="Gameplay/Crate/Level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51824, 0.319266, -6.60693 )
 
-[node name="obj_crate_nitro" parent="Level" instance=ExtResource( 1 )]
+[node name="obj_crate_nitro" parent="Gameplay/Crate/Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4084, 0.217159, -1.93808 )
 
-[node name="obj_crate_nitro2" parent="Level" instance=ExtResource( 1 )]
+[node name="obj_crate_nitro2" parent="Gameplay/Crate/Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13955, 0.217159, -1.58752 )
 
-[node name="obj_crate_nitro3" parent="Level" instance=ExtResource( 1 )]
+[node name="obj_crate_nitro3" parent="Gameplay/Crate/Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86045, 0.217159, 1.41248 )
 
-[node name="obj_crate_nitro4" parent="Level" instance=ExtResource( 1 )]
+[node name="obj_crate_nitro4" parent="Gameplay/Crate/Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86045, 0.217159, 4.41248 )
 
-[node name="obj_crate_nitro5" parent="Level" instance=ExtResource( 1 )]
+[node name="obj_crate_nitro5" parent="Gameplay/Crate/Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.04433, 0.217159, 4.33093 )
 
-[node name="obj_crate_nitro6" parent="Level" instance=ExtResource( 1 )]
+[node name="obj_crate_nitro6" parent="Gameplay/Crate/Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8563, 0.217159, 6.50918 )
 
-[node name="obj_crate_nitro7" parent="Level" instance=ExtResource( 1 )]
+[node name="obj_crate_nitro7" parent="Gameplay/Crate/Level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25034, 0.217159, -0.157588 )
 
-[node name="obj_crate_bounce" parent="Level" instance=ExtResource( 7 )]
+[node name="obj_crate_bounce" parent="Gameplay/Crate/Level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00927, 0.217159, 2.994 )
-script = SubResource( 4 )
+script = SubResource( 7 )
 
-[node name="obj_crate_checkpoint" parent="Level" instance=ExtResource( 3 )]
+[node name="obj_crate_checkpoint" parent="Gameplay/Crate/Level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.783866, 0.21716, 5.88085 )
 
-[node name="obj_crate_wood_jump" parent="Level" instance=ExtResource( 5 )]
+[node name="obj_crate_wood_jump" parent="Gameplay/Crate/Level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.22165, 0.217159, 0.768173 )
 
-[node name="obj_crate_simple" parent="Level" instance=ExtResource( 13 )]
+[node name="obj_crate_simple" parent="Gameplay/Crate/Level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.734314, 0.21716, 4.18282 )
 
-[node name="obj_crate_question" parent="Level" instance=ExtResource( 11 )]
+[node name="obj_crate_question" parent="Gameplay/Crate/Level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75651, 0.21716, 0.83259 )
 
-[node name="obj_crate_life" parent="Level" instance=ExtResource( 12 )]
+[node name="obj_crate_life" parent="Gameplay/Crate/Level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.62224, 0.217159, -4.0079 )
 
-[node name="obj_crate_enforced" parent="Level" instance=ExtResource( 10 )]
+[node name="obj_crate_enforced" parent="Gameplay/Crate/Level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.299033, 0.217159, -3.05081 )
 
-[node name="obj_crate_simple2" parent="Level" instance=ExtResource( 14 )]
+[node name="obj_crate_simple2" parent="Gameplay/Crate/Level" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33509, 0.217159, -2.90587 )
 
-[node name="obj_crate_tnt" parent="Level" instance=ExtResource( 16 )]
+[node name="obj_crate_tnt" parent="Gameplay/Crate/Level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12278, 0.214154, -0.0171937 )
 use_jp_material = true
 jp_texture = ExtResource( 15 )
 
-[node name="obj_item_clock" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21561, 0.217421, -1.28501 )
-[connection signal="pressed" from="Button2" to="obj_Character" method="_on_Button2_pressed"]
-[connection signal="pressed" from="Button3" to="obj_Character" method="_on_Button3_pressed"]
-
-[editable path="DebugText"]
+[node name="obj_crate_time" parent="Gameplay/Crate/Level" instance=ExtResource( 19 )]
+transform = Transform( 0.984979, 0, 0, 0, 0.984979, 0, 0, 0, 0.984979, -5.8802, 0.214155, 3.42142 )
+[connection signal="pressed" from="Gameplay/HUD/DebugText/Button2" to="Gameplay/Entities/obj_Character" method="_on_Button2_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/DebugText/Button3" to="Gameplay/Entities/obj_Character" method="_on_Button3_pressed"]

@@ -28,6 +28,8 @@ func _on_change_mode(_tool):
 #func change_tool(_tool):
 #	smachine.change_state(_tool)
 
+func get_logger() -> TextEdit: return get_node("GUI/GUI_Logger/Logger") as TextEdit
+
 func st_init_path():
 	registered_managers[Utils.EDITOR_STATE.PATH]._enter()
 	pass

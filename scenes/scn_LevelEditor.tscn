@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://level_editor/entities/ent_clock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Editor/CrateManager.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://scripts/Editor/LevelBuilder.gd" type="Script" id=22]
 [ext_resource path="res://scripts/Editor/TimeManager.gd" type="Script" id=23]
 [ext_resource path="res://gui/GUI_tools_crate.tscn" type="PackedScene" id=24]
+[ext_resource path="res://gui/GUI_Logger.tscn" type="PackedScene" id=25]
 [ext_resource path="res://textures/gameplay/materials/mat_time_zero.material" type="Material" id=26]
 [ext_resource path="res://textures/gameplay/materials/mat_time_one.material" type="Material" id=27]
 [ext_resource path="res://textures/gameplay/materials/mat_time_three.material" type="Material" id=28]
@@ -58,6 +59,23 @@ func _on_pressed():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+"
+
+[sub_resource type="GDScript" id=10]
+script/source = "extends Button
+
+
+export var gui_logger:NodePath
+var logger
+func _ready():
+	connect(\"toggled\",self,\"_on_toggled\")
+	logger = get_node(gui_logger)
+	
+func _on_toggled(pressed):
+	if pressed:
+		logger.popup()
+	else:
+		logger.visible = false
 "
 
 [sub_resource type="ButtonGroup" id=6]
@@ -345,6 +363,10 @@ group = SubResource( 4 )
 [node name="bt_edit_settings" parent="GUI/GUI_Menu/HBoxContainer" index="15"]
 group = SubResource( 2 )
 
+[node name="bt_output" parent="GUI/GUI_Menu/HBoxContainer" index="16"]
+script = SubResource( 10 )
+gui_logger = NodePath("../../../GUI_Logger")
+
 [node name="GUI_path_properties" parent="GUI" instance=ExtResource( 7 )]
 visible = false
 margin_top = 29.0
@@ -427,6 +449,12 @@ _ID = 1
 [node name="bt_entity_time" parent="GUI/GUI_tools_entity/VBoxContainer" index="2"]
 script = ExtResource( 21 )
 _ID = 2
+
+[node name="GUI_Logger" parent="GUI" instance=ExtResource( 25 )]
+margin_left = -120.5
+margin_top = -109.0
+margin_right = 120.5
+margin_bottom = 109.0
 
 [node name="Camera" type="Camera" parent="." groups=[
 "dont_save",

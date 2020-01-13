@@ -50,6 +50,7 @@ func SpawnWumpa():
 		instance.translation = cratePos
 
 func Destroy(free:bool=true):
+	print("destroying: "+name)
 	$CollisionShape.disabled = true
 	$sfx.play()
 	$Particle.emitting = true
@@ -75,6 +76,7 @@ func _on_Exploded():
 func _on_time_trial_activated():
 	print("time crate 2")
 	var time_crate = IDTable.crates[10].instance()
+	time_crate.set_crate_time(_timeID)
 	var pos = translation
 	Destroy(false)
 	get_parent().add_child(time_crate)
