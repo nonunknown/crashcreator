@@ -1,8 +1,10 @@
 extends Node
 
-enum MODE {EDIT,PLAY}
+enum MODE {EDIT,PLAY,LOAD}
 
 var GAME_MODE:int = MODE.EDIT
+var path_to_project:String = ""
+
 
 func set_gamemode(mode:int):
 		print("last mode: "+str(MODE.keys()[GAME_MODE]))
@@ -20,3 +22,16 @@ func change_scene(actual_scene_name:String,new_scene:PackedScene):
 #	root.call_deferred("add_child",new_scene.instance())
 	root.call_deferred("remove_child",root.get_node(actual_scene_name))
 	
+func change_scene_forced(path:String,to_gamemode:int):
+	set_gamemode(to_gamemode)
+	get_tree().change_scene(path)
+	pass
+
+func load_project(dir:String):
+	var manager_editor = get_tree().get_root().get_node("/root/Main")
+	manager_editor.emit_signal("change_mode",Utils.EDITOR_STATE.NEW)
+	set_gamemode(MODE.LOAD)
+	path_to_project = dir
+	manager_editor.emit_signal("change_mode",Utils.EDITOR_STATE.LOAD)
+	
+	pass

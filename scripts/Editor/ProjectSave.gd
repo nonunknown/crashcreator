@@ -13,11 +13,13 @@ func start():
 	
 	pass
 
+
+func update():
+	pass
+
 func exit():
 	pass
 	
-func update():
-	pass
 
 func save_scene():
 	var packed_scene = PackedScene.new()

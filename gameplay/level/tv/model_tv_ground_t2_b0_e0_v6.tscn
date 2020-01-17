@@ -70,6 +70,7 @@ data = PoolVector3Array( -0.2072, 5.7894, -0.6628, -4.0764, 5.7894, -0.6628, -4.
 [node name="model_tv_t2b0e0v6" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.210436, -0.666766, 6.20953 )
 script = ExtResource( 5 )
+file_path = "res://gameplay/level/tv/model_tv_ground_t2_b0_e0_v6.tscn"
 show_name = "Little Hole 3"
 
 [node name="MouseBody" type="StaticBody" parent="." groups=[

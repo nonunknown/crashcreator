@@ -1,0 +1,196 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+onready var project_name = $SaveDialog/Control/le_proj_name
+
+enum MODE {SAVE,LOAD}
+var mode:int = MODE.SAVE
+
+func _ready():
+	$LoadDialog.show()
+	load_project_files()
+
+# SAVE ----
+var overwrite:bool = false
+var output:String = \"\"
+
+func is_project_name_valid()->bool:
+	if project_name.text.length() == 0:
+		output += \"\\nProject Name cant be empty!\"
+		return false
+	if project_name.text.length() < 4:
+		output += \"\\nProject name needs at least 4 characters!\"
+		return false
+	for letter in project_name.text:
+		if letter == \" \":
+			output += \"\\n Project name cant contain spaces!\"
+			return false
+	return true
+
+func save_file():
+	var name = project_name.text + \".tscn\"
+	var packed_scene:PackedScene = PackedScene.new()
+	var err = ResourceSaver.save(\"user://projects/\"+name,packed_scene)
+	if (err == OK):
+		return true
+	output += \"\\n ERROR SAVING: \"+str(err)
+	return false
+
+func _on_SaveDialog_confirmed():
+	if !is_project_name_valid():
+		return
+	if !save_file():
+		return
+	output += \"\\n Done - Project Saved\"
+	pass # Replace with function body.
+
+func _on_CheckBox_toggled(button_pressed):
+	overwrite = button_pressed
+	pass # Replace with function body.
+
+## END SAVE
+
+##LOAD
+
+onready var item_list:ItemList = $LoadDialog/Control/ProjectList
+
+func load_project_files():
+	print(\"loading\")
+	var dir:Directory = Directory.new()
+	if dir.open(\"user://projects\") == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while (file_name != \"\"):
+			print(\"iteration\")
+			if not dir.current_is_dir():
+				add_item(file_name)
+			file_name = dir.get_next()
+	else:
+		print(\"An error occurred when trying to access the path.\")
+
+func add_item(name):
+	item_list.add_item(name)
+	pass
+	
+	
+
+func _on_LoadDialog_about_to_show():
+	print(\"startign loading\")
+	load_project_files()
+	pass # Replace with function body.
+
+
+func _on_LoadDialog_confirmed():
+	pass # Replace with function body.
+
+
+func _on_ProjectList_item_selected(index):
+	pass # Replace with function body.
+"
+
+[node name="GUI_SaveLoad" type="Control"]
+anchor_top = 0.00310135
+anchor_right = 1.0
+anchor_bottom = 1.0031
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="SaveDialog" type="ConfirmationDialog" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 189.0
+margin_top = 191.0
+margin_right = -210.0
+margin_bottom = -162.0
+popup_exclusive = true
+window_title = "Save Project"
+resizable = true
+dialog_hide_on_ok = false
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="SaveDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="SaveDialog/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 49.0
+margin_right = -121.0
+margin_bottom = -8.0
+text = "Overwrite existing one."
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label2" type="Label" parent="SaveDialog/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.23294
+margin_top = 13.9773
+margin_right = -205.767
+margin_bottom = -55.0227
+text = "Project Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="le_proj_name" type="LineEdit" parent="SaveDialog/Control"]
+anchor_right = 1.0
+margin_left = 106.706
+margin_top = 9.42857
+margin_right = -10.6706
+margin_bottom = 30.0
+max_length = 20
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LoadDialog" type="AcceptDialog" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 90.0
+margin_top = 51.5
+margin_right = -90.0
+margin_bottom = -51.5
+popup_exclusive = true
+window_title = "Load Project"
+dialog_hide_on_ok = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="LoadDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProjectList" type="ItemList" parent="LoadDialog/Control"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 532.0
+margin_bottom = 335.0
+same_column_width = true
+[connection signal="confirmed" from="SaveDialog" to="." method="_on_SaveDialog_confirmed"]
+[connection signal="toggled" from="SaveDialog/Control/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="confirmed" from="LoadDialog" to="." method="_on_LoadDialog_confirmed"]
+[connection signal="item_selected" from="LoadDialog/Control/ProjectList" to="." method="_on_ProjectList_item_selected"]

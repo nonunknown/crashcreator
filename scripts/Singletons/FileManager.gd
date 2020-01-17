@@ -1,79 +1,50 @@
 extends Node
 
-var dir = "user://level.json"
-var level_data = {
-	paths = {},
-	models = [],
-	crates = {},
-	character = {},
-	config = {}
-}
+var project_dir = "user://projects/"
 
-func save_level(data):
-	level_data.paths = data
-	var save_game = File.new()
-	save_game.open(dir, File.WRITE)
-	save_game.store_line(to_json(level_data))
-	save_game.close()
-	print("saved")
 
-func save_path():
-	var pathList = get_tree().get_nodes_in_group("gp_path")
+func save_level(project_name:String, paths:Array,crates:Array,entities:Array):
+	var project:Project = Project.new()
+	save_path(project,paths)
+#	save_crates(project,crates)
+#	save_entities(project,entities)
+	var save_dir = project_dir+project_name+".tres"
 	
-	var pathDataArray = {}
-	var i:int = 0
-	for path in pathList:
-		var model_name = reg(path.name,"@([^)]+)@")
-		file_insert_model_name(model_name)
-		var data = {
-			"mName": model_name,
-			"posX": path.translation.x,
-			"posY": path.translation.y,
-			"posZ": path.translation.z
-		}
-		pathDataArray[i] = data
-		i += 1
-	print(pathDataArray)
-	print(level_data)
-	save_level(pathDataArray)
+	var err = ResourceSaver.save(save_dir,project)
+	if err == OK:
+		print("saved")
+	else:
+		print("Error saving: "+str(err) )
+#	level_data.paths = paths
+#	var save_game = File.new()
+#	save_game.open(project_dir+project_name+".proj", File.WRITE)
+#	save_game.store_line(to_json(level_data))
+#	save_game.close()
 
-func load_level():
-	clear_actual_level()
-	var save_game = File.new()
-	if not save_game.file_exists(dir):
-		print("no save-file found!")
-		pass
-	save_game.open(dir, File.READ)
-	while not save_game.eof_reached():
-		var data = parse_json(save_game.get_line())
-		if data == null: pass
-		else: 
-			var n = get_node("/root/Main/Level/Path")
-			n.generate_area(data.paths)
-		
-	save_game.close()
-
-func clear_actual_level():
-	var level = get_tree().get_nodes_in_group("gp_level")[0].get_children()
-	for child in level:
-		var c = child.get_children()
-		for i in c:
-			i.queue_free()
-			
-func reg(word,pattern):
-	var regex = RegEx.new()
-	regex.compile(pattern)
-	var result = regex.search(word)
-	if result:
-		return result.get_string().replace("@","")
-	else: return word
-
-func file_insert_model_name(name):
-	for i in range(level_data.models.size()):
-		if (level_data.models[i] == name):
-			return
-	level_data.models.append(name)
-			
+func save_path(project:Project, paths:Array):
+	if paths.size() == 0: return
+	print(paths.size())
+	for path in paths:
+		var dir = path.file_path
+		project.path_models.append(dir)
+	pass
+	
+func save_crates(project:Project, crates:Array):
+	if crates.size() == 0: return
+	for crate in crates:
+		project.crate_ids.append( crate.ID)
+		project.crate_pos.append( crate.translation )
+		project.crate_time_ids.append(crate._timeID )
 	pass
 
+func save_entities(project:Project, entities:Array):
+	if entities.size() == 0: return
+	for entity in entities:
+		project.entity_ids.append(entity._ID)
+		project.entity_pos.append(entity.translation)
+	pass
 
+func load_project(file_path:String):
+	var project:Project = ResourceLoader.load(file_path)
+	
+	pass

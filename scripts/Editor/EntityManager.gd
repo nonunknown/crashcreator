@@ -12,19 +12,19 @@ var holding_entity = null
 var editor_state:EditorState
 #var placed_entities = {start=null,end=null}
 
-var logger
+var manager_editor:EditorManager
 
 func _ready():
 	editor_state = EditorState.new(Utils.EDITOR_STATE.ENTITY,self)
 	entities_instance = [entity_start.instance(),entity_finish.instance(),entity_clock.instance()]
-	logger = editor_state.manager_editor.get_logger()
+	manager_editor = editor_state.manager_editor
 
 func set_entity(id):
 	holding_entity = entities_instance[id]
 	add_child(holding_entity)
 
 func _enter():
-	logger.text += "Editing: Entities"
+	manager_editor.logger.logg("Editing: Entities")
 	pass
 
 func _update():

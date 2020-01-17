@@ -7,6 +7,9 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.7
+    - Added Save/Load Project System (some bugs to solve yet...)
+
 ### Alpha 0.9.6.1 - Output update
     - Gives uses visual feedback from what is happenning inside the editor
 

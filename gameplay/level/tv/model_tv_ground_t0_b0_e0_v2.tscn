@@ -53,6 +53,7 @@ surfaces/2 = {
 [node name="model_tv_t0b0e0v2" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021419, -1.59599, 7.63042 )
 script = ExtResource( 4 )
+file_path = "res://gameplay/level/tv/model_tv_ground_t0_b0_e0_v2.tscn"
 show_name = "Downwards"
 
 [node name="StaticBody" type="StaticBody" parent="."]

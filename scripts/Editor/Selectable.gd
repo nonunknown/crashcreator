@@ -1,11 +1,10 @@
 extends Spatial
 class_name Selectable
 
+export var file_path:String
 export var show_name:String = "Define_selectable_name"
 export var mat_selection:SpatialMaterial = load("res://models/levels/shared/mat_selection.material")
 enum ST {UNSELECTED,SELECTED}
-
-
 
 
 func st_init_unselected():

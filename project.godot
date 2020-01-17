@@ -129,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Editor/LevelBuilder.gd"
 }, {
+"base": "TextEdit",
+"class": "Logger",
+"language": "GDScript",
+"path": "res://scripts/Editor/Logger.gd"
+}, {
 "base": "Resource",
 "class": "PathBase",
 "language": "GDScript",
@@ -148,6 +153,11 @@ _global_script_classes=[ {
 "class": "Power",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Power.gd"
+}, {
+"base": "Resource",
+"class": "Project",
+"language": "GDScript",
+"path": "res://resources/editor/Project.gd"
 }, {
 "base": "Spatial",
 "class": "Selectable",
@@ -184,10 +194,12 @@ _global_script_class_icons={
 "ItemWumpa": "",
 "Iventory": "",
 "LevelBuilder": "",
+"Logger": "",
 "PathBase": "",
 "PathManager": "",
 "Placeable": "",
 "Power": "",
+"Project": "",
 "Selectable": "",
 "TimeTrial": ""
 }
@@ -195,7 +207,7 @@ _global_script_class_icons={
 [application]
 
 config/name="CrashCreator"
-run/main_scene="res://Lab.tscn"
+run/main_scene="res://scenes/scn_LevelEditor.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -213,6 +225,7 @@ window/size/width=720
 window/size/height=480
 window/size/resizable=false
 window/vsync/use_vsync=false
+window/stretch/aspect="keep"
 
 [importer_defaults]
 

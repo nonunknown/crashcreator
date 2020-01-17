@@ -83,6 +83,7 @@ data = PoolVector3Array( -3.3079, 14.0766, 0.3899, -7.1771, 14.0766, 0.3899, -7.
 [node name="model_tv_t0b0e0v1" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21608, 0.390919, 15.9234 )
 script = ExtResource( 4 )
+file_path = "res://gameplay/level/tv/model_tv_ground_t0_b0_e0_v1.tscn"
 show_name = "Normal"
 
 [node name="model" type="MeshInstance" parent="."]

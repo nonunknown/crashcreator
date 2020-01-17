@@ -13,12 +13,13 @@ func start():
 		return
 	print("SUCCESS - LEVEL CREATED")
 	
-	if (!save_game_level()):
-		printerr("LEVEL FILE SAVE ERROR")
-		return
-	print("SUCCESS - LEVEL FILE CREATED")
+	compile_and_play()
+#	if (!save_game_level()):
+#		printerr("LEVEL FILE SAVE ERROR")
+#		return
+#	print("SUCCESS - LEVEL FILE CREATED")
 	
-	load_generated_file()
+#	load_generated_file()
 	
 	
 func level_is_valid() -> bool:
@@ -44,7 +45,7 @@ func crate_is_valid() -> bool:
 
 var game_level = null
 func create_game_level() -> bool:
-	var to_load = load("res://scenes/scn_Gameplay.tscn")#get_node("/root/Main/Level").duplicate(8)
+	var to_load = load("res://scenes/scn_Gameplay.tscn")
 	game_level = to_load.instance()
 	var editor_level = get_node("/root/Main/Level")
 	editor_level.visible = false
@@ -54,22 +55,31 @@ func create_game_level() -> bool:
 	build_crate()
 	return true
 
-func save_game_level() -> bool:
-	var packed_scene:PackedScene = PackedScene.new()
+#func save_game_level() -> bool:
+#	var packed_scene:PackedScene = PackedScene.new()
+#	remove_child(game_level)
+#	get_tree().root.add_child(game_level)
+#	packed_scene.pack(game_level)
+#	var err = ResourceSaver.save("user://temp.tscn",packed_scene)
+#	if (err == OK):
+#		get_tree().root.remove_child(get_tree().root.get_node("Main"))
+#		game_level._gameplay_ready()
+#		print("SAVED FILE SUCCESSFULLY")
+#
+#		return true
+#	printerr("at builder's save game level: SAVE ERROR: "+str(err))
+#	return false
+#
+#func load_generated_file():
+#	GameManager.set_gamemode(GameManager.MODE.PLAY)
+#	GameManager.change_scene("Main",game_level)
+	
+func compile_and_play():
 	remove_child(game_level)
 	get_tree().root.add_child(game_level)
-	packed_scene.pack(game_level)
-	var err = ResourceSaver.save("user://temp.tscn",packed_scene)
-	if (err == OK):
-		print("SAVED FILE SUCCESSFULLY")
-		
-		return true
-	printerr("at builder's save game level: SAVE ERROR: "+str(err))
-	return false
-
-func load_generated_file():
+	get_tree().root.remove_child(get_tree().root.get_node("Main"))
 	GameManager.set_gamemode(GameManager.MODE.PLAY)
-	GameManager.change_scene("Main",game_level)
+	game_level._gameplay_ready()
 	
 
 func build_path():
@@ -88,6 +98,7 @@ func build_crate():
 		var game_crate:PackedScene = IDTable.crates[crate._ID]
 		var inst = game_crate.instance()
 		inst.translation = crate.translation
+		inst._timeID = crate._time_ID
 		crate_manager.add_child(inst)
 		inst.set_owner(game_level)
 		pass

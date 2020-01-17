@@ -5,6 +5,7 @@ var manager_editor:EditorManager
 var _toolID = -1
 var target = null
 
+
 func _init(toolID,_target):
 	self.target = _target
 	manager_editor = target.get_node("/root/Main")	
@@ -13,6 +14,8 @@ func _init(toolID,_target):
 
 	
 func get_current_state() -> int: return manager_editor.smachine.get_current_state()
+
+
 #func _start():
 #	print("implement me: start")
 #

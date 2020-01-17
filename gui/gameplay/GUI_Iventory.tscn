@@ -21,7 +21,7 @@ g_crate = NodePath("GridContainer/Crate/amt")
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
-custom_constants/hseparation = 287
+custom_constants/hseparation = 284
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -57,8 +57,8 @@ __meta__ = {
 }
 
 [node name="Crate" type="Control" parent="GridContainer"]
-margin_left = 287.0
-margin_right = 287.0
+margin_left = 284.0
+margin_right = 284.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -121,8 +121,8 @@ __meta__ = {
 }
 
 [node name="Life" type="Control" parent="GridContainer"]
-margin_left = 574.0
-margin_right = 574.0
+margin_left = 568.0
+margin_right = 568.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
