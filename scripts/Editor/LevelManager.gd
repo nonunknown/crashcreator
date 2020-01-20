@@ -1,33 +1,34 @@
 extends Spatial
+class_name LevelManager
 
-#onready var manager_editor:EditorManager = get_node("/root/Main")
-#var _tool:int = 0
-#
-#enum {PATH,CRATE}
-#
-#func _ready():
-#	manager_editor.connect("change_mode",self,"tool_changed")
-#
-##
-#func _unhandled_input(event):
-#	match _tool:
-#		PATH: path_event(event)
-#		CRATE: crate_event(event)
-#
-#func tool_changed(toolID):
-#	self._tool = toolID
-#
-#func path_event(event):
-#
-#	if (Utils.mouse_left_clicked(event)):
-#		print("clicked")
-#		var r = Utils.ray_mouse_to_world(event,get_viewport().get_camera(),get_world(),Utils.MASK.Selectable)
-#		var result = null
-#		if (!r.empty()):
-#			result = r.collider.get_path()
-#		SelectionManager.selection_set_single(result)
+onready var path_manager:PathManager = $Path
+onready var crate_manager:CrateManager = $Crate
+onready var entity_manager:EntityManager = $Entity
+var project:Project = null
 
-#func crate_event(event):
-##	if (Utils.mouse_left_clicked(event)):
-##		print("crate clicked")
-#	pass
+func insert_stuff(_project:Project):
+	self.project = _project
+	path_insertion()
+	crate_insertion()
+	entity_insertion()
+
+func path_insertion():
+	path_manager.reset()
+	for path_dir in project.path_models:
+		path_manager.auto_spawn_path(path_dir)
+
+func crate_insertion():
+	crate_manager.reset()
+	for i in project.crate_ids.size():
+		print("crate_insertion: "+str(i))
+		
+		print(str(project.crate_ids[i]))
+		print(str(project.crate_time_ids[i]))
+		print(str(project.crate_pos[i]))
+		crate_manager.spawn_crate(project.crate_ids[i],project.crate_time_ids[i],project.crate_pos[i])
+
+func entity_insertion():
+	entity_manager.reset()
+	for i in project.entity_ids.size():
+		entity_manager.set_entity(project.entity_ids[i], project.entity_pos[i])
+	pass

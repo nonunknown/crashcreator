@@ -24,7 +24,9 @@ func add_text(id):
 	n.visible = true
 "
 
-[node name="DebugText" type="Control"]
+[node name="DebugText" type="Control" groups=[
+"debug",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = SubResource( 1 )

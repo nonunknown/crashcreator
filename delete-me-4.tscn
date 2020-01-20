@@ -1,14 +1,22 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://models/items/crate/crate_top.material" type="Material" id=1]
 [ext_resource path="res://models/items/crate/crate_side.material" type="Material" id=2]
-[ext_resource path="res://textures/gameplay/boxes-particles.png" type="Texture" id=3]
-[ext_resource path="res://sounds/crate/crate_break.wav" type="AudioStream" id=4]
-[ext_resource path="res://textures/gameplay/materials/mat_bounce_side.material" type="Material" id=5]
-[ext_resource path="res://scripts/gameplay/Crate_Bounce.gd" type="Script" id=6]
-[ext_resource path="res://sounds/crate/bounce.wav" type="AudioStream" id=7]
 
-[sub_resource type="ArrayMesh" id=2]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+func _ready():
+	var mat = SpatialMaterial.new()
+	mat.set_texture(SpatialMaterial.TEXTURE_ALBEDO,load(\"res://textures/gameplay/boxes-checkpoint-crate.png\"))
+	$crate.set_material_override(mat)
+	
+	pass
+"
+
+[sub_resource type="SpatialMaterial" id=4]
+
+[sub_resource type="ArrayMesh" id=3]
 blend_shape_mode = 0
 blend_shape/names = PoolStringArray( "bounce" )
 blend_shape/mode = 0
@@ -37,119 +45,28 @@ surfaces/1 = {
 "vertex_count": 8
 }
 
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.5, 0.5, 0.5 )
+[sub_resource type="BoxShape" id=2]
 
-[sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0.42963, 0.97037 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[node name="Spatial" type="Spatial"]
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
-width = 128
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.696533, 2.32202 )
 
-[sub_resource type="ParticlesMaterial" id=6]
-spread = 169.2
-flatness = 0.51
-gravity = Vector3( 0, 3, 0 )
-initial_velocity = 12.0
-color_ramp = SubResource( 5 )
-anim_speed = 1.0
-anim_speed_random = 1.0
+[node name="crate" type="Spatial" parent="."]
+script = SubResource( 1 )
 
-[sub_resource type="SpatialMaterial" id=7]
-flags_transparent = true
-vertex_color_use_as_albedo = true
-params_billboard_mode = 3
-params_billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 3
-particles_anim_loop = false
-albedo_color = Color( 0.670588, 0.411765, 0.0431373, 1 )
-albedo_texture = ExtResource( 3 )
-metallic_specular = 0.0
-emission_enabled = true
-emission = Color( 0.266667, 0.0901961, 0, 1 )
-emission_energy = 1.0
-emission_operator = 0
-emission_on_uv2 = false
-uv1_scale = Vector3( 2, 1, 1 )
-
-[sub_resource type="QuadMesh" id=8]
-material = SubResource( 7 )
-
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 0.494565, 0.0116764, 0.4698 )
-
-[sub_resource type="Animation" id=10]
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("model:blend_shapes/bounce")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0, 0.0 ]
-}
-
-[node name="obj_crate_bounce" type="RigidBody" groups=[
-"crate",
-]]
-collision_layer = 512
-collision_mask = 18
-script = ExtResource( 6 )
-
-[node name="model" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.508749, 0 )
-mesh = SubResource( 2 )
+[node name="crate" type="MeshInstance" parent="crate"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0 )
+material_override = SubResource( 4 )
+mesh = SubResource( 3 )
 blend_shapes/bounce = 0.0
-material/0 = ExtResource( 5 )
-material/1 = ExtResource( 1 )
+material/0 = null
+material/1 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-shape = SubResource( 3 )
+[node name="ColShape" type="StaticBody" parent="crate"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0 )
+collision_layer = 1024
+collision_mask = 0
 
-[node name="Particle" type="Particles" parent="."]
-emitting = false
-amount = 12
-lifetime = 0.3
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource( 6 )
-draw_pass_1 = SubResource( 8 )
-
-[node name="sfx_bounce" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 7 )
-
-[node name="sfx" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 4 )
-
-[node name="AreaTop" type="Area" parent="." groups=[
-"area_crate",
-]]
-monitoring = false
-collision_layer = 256
-collision_mask = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="AreaTop"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01462, -0.00259399 )
-shape = SubResource( 9 )
-
-[node name="AreaBottom" type="Area" parent="." groups=[
-"area_crate",
-]]
-monitoring = false
-collision_layer = 256
-collision_mask = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="AreaBottom"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00977413, -0.00259399 )
-shape = SubResource( 9 )
-
-[node name="Anim" type="AnimationPlayer" parent="."]
-anims/bounce = SubResource( 10 )
+[node name="CollisionShape" type="CollisionShape" parent="crate/ColShape"]
+shape = SubResource( 2 )

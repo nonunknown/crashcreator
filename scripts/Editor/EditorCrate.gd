@@ -9,4 +9,4 @@ func configure(id):
 	_ID = id
 	editor_material = get_child(0).get_material_override()
 
-func get_data() -> Dictionary: return {id=_ID,time_id=_time_ID,pos=translation}
+#func get_data() -> Dictionary: return {id=_ID,time_id=_time_ID,pos=translation}

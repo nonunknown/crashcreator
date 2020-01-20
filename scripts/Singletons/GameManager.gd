@@ -28,6 +28,7 @@ func change_scene_forced(path:String,to_gamemode:int):
 	pass
 
 func load_project(dir:String):
+	print("loading")
 	var manager_editor = get_tree().get_root().get_node("/root/Main")
 	manager_editor.emit_signal("change_mode",Utils.EDITOR_STATE.NEW)
 	set_gamemode(MODE.LOAD)

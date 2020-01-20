@@ -12,16 +12,21 @@ export var hasWumpa:bool
 export var amtWumpa:int
 export var wumpaCollection:bool
 var objWumpa
-
+var destroyed:bool = false
 # ----------------------
 
 onready var character:Character = get_tree().get_nodes_in_group("player")[0]
+
+func _init():
+	add_to_group("gameplay_ready")
+
 
 func _ready():
 	if !startGravity:
 		sleeping = true
 	if hasWumpa: wumpa_ready()
-	add_to_group("gameplay_ready")
+	print(str( get_groups() ))
+
 
 
 func _gameplay_ready():
@@ -49,15 +54,22 @@ func SpawnWumpa():
 		get_parent().add_child(instance)
 		instance.translation = cratePos
 
-func Destroy(free:bool=true):
+func Destroy(change_visibility:bool=true):
 	print("destroying: "+name)
 	$CollisionShape.disabled = true
-	$sfx.play()
+	if ($sfx != null): $sfx.play()
 	$Particle.emitting = true
-	$model.visible = false
-	if free:
-		yield(get_tree().create_timer($sfx.stream.get_length(),false),"timeout")
-		queue_free()
+	$model.visible = !change_visibility
+	destroyed = true
+	print("destroyed: "+name)
+#		yield(get_tree().create_timer($sfx.stream.get_length(),false),"timeout")
+#		queue_free()
+
+func revive():
+	$CollisionShape.disabled = false
+	$Particle.emitting = false
+	$model.visible = true
+	destroyed = false
 
 func configure_time_crate():
 	var game_manager = get_tree().get_nodes_in_group("gameplay_manager")[0]
@@ -74,11 +86,12 @@ func _on_Exploded():
 	print("not affected by explosion")
 
 func _on_time_trial_activated():
+	if (destroyed): return;
 	print("time crate 2")
 	var time_crate = IDTable.crates[10].instance()
 	time_crate.set_crate_time(_timeID)
 	var pos = translation
-	Destroy(false)
+	Destroy()
 	get_parent().add_child(time_crate)
 	time_crate.translation = pos
 	queue_free()

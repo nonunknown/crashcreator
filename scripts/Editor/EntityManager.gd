@@ -19,9 +19,12 @@ func _ready():
 	entities_instance = [entity_start.instance(),entity_finish.instance(),entity_clock.instance()]
 	manager_editor = editor_state.manager_editor
 
-func set_entity(id):
+func set_entity(id:int, pos:Vector3=Vector3.ZERO):
 	holding_entity = entities_instance[id]
 	add_child(holding_entity)
+	if pos != Vector3.ZERO:
+		holding_entity.translation = pos
+	
 
 func _enter():
 	manager_editor.logger.logg("Editing: Entities")
@@ -40,3 +43,10 @@ func _exit():
 
 func spawn_entity():
 	holding_entity = null
+	
+func reset():
+	var children = get_children()
+	for child in children:
+		child.queue_free()
+	holding_entity = null
+	

@@ -24,19 +24,25 @@ func _ready():
 #		pass
 
 func _on_Jumped():
+	Destroy()
 	$Area/CollisionShape.disabled = true
-	$sfx.play()
+#	$sfx.play()
 	$AnimationPlayer.play("activate")
 	yield(get_tree().create_timer(3.52,false),"timeout")
 	Explosion.new(get_parent(),self.global_transform.origin)
 	visible = false	
-	yield(get_tree().create_timer($sfx.stream.get_length()-3.52,false),"timeout")
-	queue_free()
+#	yield(get_tree().create_timer($sfx.stream.get_length()-3.52,false),"timeout")
+#	queue_free()
+
+func revive():
+	.revive()
+	$Area/CollisionShape.disabled = false
+	visible = true
 
 func _on_Exploded():
 	visible = false
 	Explosion.new(get_parent(),self.global_transform.origin)
-	queue_free()
+#	queue_free()
 	pass
 
 

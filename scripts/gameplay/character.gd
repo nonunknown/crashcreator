@@ -113,7 +113,7 @@ func st_update_walk():
 	
 	if (velocity_median() < .1 && !check_move_keys()):
 		change_state(STATE.IDLE)
-	elif velocity.y > .3:
+	elif velocity.y > .3 && !is_grounded:
 		change_state(STATE.JUMP)
 	elif Input.is_action_just_pressed("cmd_dash"):
 		change_state(STATE.DASH)
@@ -287,7 +287,8 @@ func _ready():
 	get_parent().call_deferred("add_child",aku)
 	power_init()
 
-
+func _on_game_restart():
+	print("Restart crash dude")
 
 func _process(delta):
 	if (use_debugger):
@@ -427,9 +428,7 @@ func move_calculation(delta):
 	hv = hv.linear_interpolate(new_pos, accel * delta)
 	velocity.x = hv.x
 	velocity.z = hv.z
-	var snap_vector = Vector3(0,15,0)
-	velocity = move_and_slide(velocity, Vector3(0,1,0),true,1,1.0472,false)
-#		velocity = move_and_slide_with_snap(velocity,snap_vector,Vector3.UP,true)
+	velocity = move_and_slide(velocity, Vector3(0,1,0),true,4,0.79,false)
 #		velocity = move_and_collide(velocity)
 	var input:Vector3 = Vector3.ZERO
 

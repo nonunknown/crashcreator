@@ -11,11 +11,8 @@ func _ready():
 	item_list.connect("item_selected",self,"_on_selected")
 	
 func _enter():
-	if not GameManager.GAME_MODE == GameManager.MODE.LOAD:
-		load_project_files()
-		show()
-	else:
-		load_project_into_editor()
+	load_project_files()
+	show()
 	pass
 	
 func _update():
@@ -42,15 +39,17 @@ func add_item(name):
 	item_list.add_item(name)
 	pass
 
-func load_project():
-	var dir = "user://projects/"+selected_item
-	GameManager.load_project(dir)
+#func load_project():
+#	var dir = "user://projects/"+selected_item
+#	GameManager.load_project(dir)
 	
 func _on_confirmed():
 	if selected_item == "":
 		editor_state.manager_editor.logger.logg("Error: There is no selected project")
 		return
-	load_project()
+	load_project_into_editor()
+	print("cant show me two times")
+	hide()
 	
 	pass
 	
@@ -62,5 +61,16 @@ func _on_selected(index:int):
 func load_project_into_editor():
 	print("loading into editor")
 	editor_state.manager_editor.logger.logg("Loading: project into directory")
-	FileManager.load_project(GameManager.path_to_project)
+	var project:Project = Project.new()
+	var file = File.new()
+	var dir = "user://projects/"+selected_item
+	file.open(dir, file.READ)
+	var json = JSON.parse(file.get_as_text())
+	var content:Dictionary = json.result
+	project.from_dict(content)
+	file.close()
+#	editor_state.manager_editor.emit_signal("change_mode",Utils.EDITOR_STATE.NEW)
+	var level_manager:LevelManager = get_node("/root/Main/Level")
+	project.pretty_print()
+	level_manager.insert_stuff(project)
 	pass

@@ -7,6 +7,11 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.8 - Last Godot 3.2 beta 5 source
+    - Finished save/load project system
+    - Changes to Managers
+    - Dealing with checkpoint system (saving game state)
+    - gameplay improvements
 ### Alpha 0.9.7
     - Added Save/Load Project System (some bugs to solve yet...)
 

@@ -86,7 +86,7 @@ func list_directory(path:String) -> Array:
 		var file_name = dir.get_next()
 		while (file_name != ""):
 			if not dir.current_is_dir():
-				print("Found file: " + file_name)
+#				print("Found file: " + file_name)
 				file_list.append(str(path)+str(file_name))
 			file_name = dir.get_next()
 		return file_list

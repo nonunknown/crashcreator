@@ -1,0 +1,419 @@
+[gd_scene load_steps=1 format=2]
+
+[ext_resource id=1 path="Image_0.png" type="Texture"]
+
+[ext_resource id=2 path="Image_1.png" type="Texture"]
+
+[sub_resource id=1 type="Shader"]
+
+resource_name = "Shader Nodetree"
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_always, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform sampler2D texture_0;
+
+
+void node_bsdf_principled(vec4 color, float subsurface, vec4 subsurface_color,
+        float metallic, float specular, float roughness, float clearcoat,
+        float clearcoat_roughness, float anisotropy, float transmission,
+        float IOR, out vec3 albedo, out float sss_strength_out,
+        out float metallic_out, out float specular_out,
+        out float roughness_out, out float clearcoat_out,
+        out float clearcoat_gloss_out, out float anisotropy_out,
+        out float transmission_out, out float ior) {
+    metallic = clamp(metallic, 0.0, 1.0);
+    transmission = clamp(transmission, 0.0, 1.0);
+
+    subsurface = subsurface * (1.0 - metallic);
+
+    albedo = mix(color.rgb, subsurface_color.rgb, subsurface);
+    sss_strength_out = subsurface;
+    metallic_out = metallic;
+    specular_out = pow((IOR - 1.0)/(IOR + 1.0), 2)/0.08;
+    roughness_out = roughness;
+    clearcoat_out = clearcoat * (1.0 - transmission);
+    clearcoat_gloss_out = 1.0 - clearcoat_roughness;
+    anisotropy_out = clamp(anisotropy, 0.0, 1.0);
+    transmission_out = (1.0 - transmission) * (1.0 - metallic);
+    ior = IOR;
+}
+
+
+void node_mapping(vec3 vec, mat4 mat, vec3 minvec, vec3 maxvec, float domin,
+        float domax, out vec3 outvec) {
+    outvec = (mat * vec4(vec, 1.0)).xyz;
+    if (domin == 1.0) {
+        outvec = max(outvec, minvec);
+    }
+    if (domax == 1.0) {
+        outvec = min(outvec, maxvec);
+    }
+}
+
+
+void node_tex_image(vec3 co, sampler2D ima, out vec4 color, out float alpha) {
+    color = texture(ima, co.xy);
+    alpha = color.a;
+}
+
+void vertex () {
+}
+
+void fragment () {
+	
+	// node: 'UV Map'
+	// type: 'ShaderNodeUVMap'
+	// input sockets handling
+	// output sockets definitions
+	vec3 node0_out0_uv;
+	
+	node0_out0_uv = vec3(UV, 0.0);
+	
+	
+	// node: 'Mapping'
+	// type: 'ShaderNodeMapping'
+	// input sockets handling
+	vec3 node1_in0_vector = node0_out0_uv;
+	// output sockets definitions
+	vec3 node1_out0_vector;
+	
+	// Mapping type: POINT
+	node_mapping(node1_in0_vector, mat4(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.0, 1.0,
+		0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0)), vec3(0.0, 0.0,
+		0.0), vec3(1.0, 1.0, 1.0), 0.0, 0.0, node1_out0_vector);
+	
+	
+	// node: 'Image Texture'
+	// type: 'ShaderNodeTexImage'
+	// input sockets handling
+	vec3 node2_in0_vector = node1_out0_vector;
+	// output sockets definitions
+	vec4 node2_out0_color;
+	float node2_out1_alpha;
+	
+	node_tex_image(node2_in0_vector, texture_0, node2_out0_color, node2_out1_alpha);
+	
+	
+	// node: 'Principled BSDF'
+	// type: 'ShaderNodeBsdfPrincipled'
+	// input sockets handling
+	vec4 node3_in0_basecolor = node2_out0_color;
+	float node3_in1_subsurface = float(0.0);
+	vec3 node3_in2_subsurfaceradius = vec3(1.0, 0.20000000298023224,
+		0.10000000149011612);
+	vec4 node3_in3_subsurfacecolor = vec4(0.800000011920929, 0.800000011920929,
+		0.800000011920929, 1.0);
+	float node3_in4_metallic = float(0.0);
+	float node3_in5_specular = float(0.5);
+	float node3_in6_speculartint = float(0.0);
+	float node3_in7_roughness = float(0.4000000059604645);
+	float node3_in8_anisotropic = float(0.0);
+	float node3_in9_anisotropicrotation = float(0.0);
+	float node3_in10_sheen = float(0.0);
+	float node3_in11_sheentint = float(0.5);
+	float node3_in12_clearcoat = float(0.0);
+	float node3_in13_clearcoatroughness = float(0.029999999329447746);
+	float node3_in14_ior = float(1.4500000476837158);
+	float node3_in15_transmission = float(0.0);
+	float node3_in16_transmissionroughness = float(0.0);
+	vec4 node3_in17_emission = vec4(0.0, 0.0, 0.0, 1.0);
+	float node3_in18_alpha = float(1.0);
+	vec3 node3_in19_normal = NORMAL;
+	vec3 node3_in20_clearcoatnormal = vec3(0.0, 0.0, 0.0);
+	vec3 node3_in21_tangent = TANGENT;
+	// output sockets definitions
+	vec3 node3_bsdf_out0_albedo;
+	float node3_bsdf_out1_sss_strength;
+	float node3_bsdf_out3_specular;
+	float node3_bsdf_out2_metallic;
+	float node3_bsdf_out4_roughness;
+	float node3_bsdf_out5_clearcoat;
+	float node3_bsdf_out6_clearcoat_gloss;
+	float node3_bsdf_out7_anisotropy;
+	float node3_bsdf_out8_transmission;
+	float node3_bsdf_out9_ior;
+	
+	node_bsdf_principled(node3_in0_basecolor, node3_in1_subsurface,
+		node3_in3_subsurfacecolor, node3_in4_metallic, node3_in5_specular,
+		node3_in7_roughness, node3_in12_clearcoat, node3_in13_clearcoatroughness,
+		node3_in8_anisotropic, node3_in15_transmission, node3_in14_ior,
+		node3_bsdf_out0_albedo, node3_bsdf_out1_sss_strength, node3_bsdf_out2_metallic,
+		node3_bsdf_out3_specular, node3_bsdf_out4_roughness, node3_bsdf_out5_clearcoat,
+		node3_bsdf_out6_clearcoat_gloss, node3_bsdf_out7_anisotropy,
+		node3_bsdf_out8_transmission, node3_bsdf_out9_ior);
+	
+	
+	ALBEDO = node3_bsdf_out0_albedo;
+	SSS_STRENGTH = node3_bsdf_out1_sss_strength;
+	SPECULAR = node3_bsdf_out3_specular;
+	METALLIC = node3_bsdf_out2_metallic;
+	ROUGHNESS = node3_bsdf_out4_roughness;
+	CLEARCOAT = node3_bsdf_out5_clearcoat;
+	CLEARCOAT_GLOSS = node3_bsdf_out6_clearcoat_gloss;
+	NORMAL = node3_in19_normal;
+	// uncomment it when you need it
+	// TRANSMISSION = vec3(1.0, 1.0, 1.0) * node3_bsdf_out8_transmission;
+	TANGENT = normalize(cross(cross(node3_in21_tangent, NORMAL), NORMAL));
+	BINORMAL = cross(TANGENT, NORMAL);
+	ANISOTROPY = node3_bsdf_out7_anisotropy;
+}
+"
+
+[sub_resource id=2 type="ShaderMaterial"]
+
+resource_name = ""
+shader = SubResource(1)
+shader_param/texture_0 = ExtResource(1)
+
+[sub_resource id=3 type="Shader"]
+
+resource_name = "Shader Nodetree"
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_always, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform sampler2D texture_0;
+
+
+void node_bsdf_principled(vec4 color, float subsurface, vec4 subsurface_color,
+        float metallic, float specular, float roughness, float clearcoat,
+        float clearcoat_roughness, float anisotropy, float transmission,
+        float IOR, out vec3 albedo, out float sss_strength_out,
+        out float metallic_out, out float specular_out,
+        out float roughness_out, out float clearcoat_out,
+        out float clearcoat_gloss_out, out float anisotropy_out,
+        out float transmission_out, out float ior) {
+    metallic = clamp(metallic, 0.0, 1.0);
+    transmission = clamp(transmission, 0.0, 1.0);
+
+    subsurface = subsurface * (1.0 - metallic);
+
+    albedo = mix(color.rgb, subsurface_color.rgb, subsurface);
+    sss_strength_out = subsurface;
+    metallic_out = metallic;
+    specular_out = pow((IOR - 1.0)/(IOR + 1.0), 2)/0.08;
+    roughness_out = roughness;
+    clearcoat_out = clearcoat * (1.0 - transmission);
+    clearcoat_gloss_out = 1.0 - clearcoat_roughness;
+    anisotropy_out = clamp(anisotropy, 0.0, 1.0);
+    transmission_out = (1.0 - transmission) * (1.0 - metallic);
+    ior = IOR;
+}
+
+
+void node_mapping(vec3 vec, mat4 mat, vec3 minvec, vec3 maxvec, float domin,
+        float domax, out vec3 outvec) {
+    outvec = (mat * vec4(vec, 1.0)).xyz;
+    if (domin == 1.0) {
+        outvec = max(outvec, minvec);
+    }
+    if (domax == 1.0) {
+        outvec = min(outvec, maxvec);
+    }
+}
+
+
+void node_tex_image(vec3 co, sampler2D ima, out vec4 color, out float alpha) {
+    color = texture(ima, co.xy);
+    alpha = color.a;
+}
+
+void vertex () {
+}
+
+void fragment () {
+	
+	// node: 'UV Map'
+	// type: 'ShaderNodeUVMap'
+	// input sockets handling
+	// output sockets definitions
+	vec3 node0_out0_uv;
+	
+	node0_out0_uv = vec3(UV, 0.0);
+	
+	
+	// node: 'Mapping'
+	// type: 'ShaderNodeMapping'
+	// input sockets handling
+	vec3 node1_in0_vector = node0_out0_uv;
+	// output sockets definitions
+	vec3 node1_out0_vector;
+	
+	// Mapping type: POINT
+	node_mapping(node1_in0_vector, mat4(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.0, 1.0,
+		0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0)), vec3(0.0, 0.0,
+		0.0), vec3(1.0, 1.0, 1.0), 0.0, 0.0, node1_out0_vector);
+	
+	
+	// node: 'Image Texture'
+	// type: 'ShaderNodeTexImage'
+	// input sockets handling
+	vec3 node2_in0_vector = node1_out0_vector;
+	// output sockets definitions
+	vec4 node2_out0_color;
+	float node2_out1_alpha;
+	
+	node_tex_image(node2_in0_vector, texture_0, node2_out0_color, node2_out1_alpha);
+	
+	
+	// node: 'Principled BSDF'
+	// type: 'ShaderNodeBsdfPrincipled'
+	// input sockets handling
+	vec4 node3_in0_basecolor = node2_out0_color;
+	float node3_in1_subsurface = float(0.0);
+	vec3 node3_in2_subsurfaceradius = vec3(1.0, 0.20000000298023224,
+		0.10000000149011612);
+	vec4 node3_in3_subsurfacecolor = vec4(0.800000011920929, 0.800000011920929,
+		0.800000011920929, 1.0);
+	float node3_in4_metallic = float(0.0);
+	float node3_in5_specular = float(0.5);
+	float node3_in6_speculartint = float(0.0);
+	float node3_in7_roughness = float(0.5);
+	float node3_in8_anisotropic = float(0.0);
+	float node3_in9_anisotropicrotation = float(0.0);
+	float node3_in10_sheen = float(0.0);
+	float node3_in11_sheentint = float(0.5);
+	float node3_in12_clearcoat = float(0.0);
+	float node3_in13_clearcoatroughness = float(0.029999999329447746);
+	float node3_in14_ior = float(1.4500000476837158);
+	float node3_in15_transmission = float(0.0);
+	float node3_in16_transmissionroughness = float(0.0);
+	vec4 node3_in17_emission = vec4(0.0, 0.0, 0.0, 1.0);
+	float node3_in18_alpha = float(1.0);
+	vec3 node3_in19_normal = NORMAL;
+	vec3 node3_in20_clearcoatnormal = vec3(0.0, 0.0, 0.0);
+	vec3 node3_in21_tangent = TANGENT;
+	// output sockets definitions
+	vec3 node3_bsdf_out0_albedo;
+	float node3_bsdf_out1_sss_strength;
+	float node3_bsdf_out3_specular;
+	float node3_bsdf_out2_metallic;
+	float node3_bsdf_out4_roughness;
+	float node3_bsdf_out5_clearcoat;
+	float node3_bsdf_out6_clearcoat_gloss;
+	float node3_bsdf_out7_anisotropy;
+	float node3_bsdf_out8_transmission;
+	float node3_bsdf_out9_ior;
+	
+	node_bsdf_principled(node3_in0_basecolor, node3_in1_subsurface,
+		node3_in3_subsurfacecolor, node3_in4_metallic, node3_in5_specular,
+		node3_in7_roughness, node3_in12_clearcoat, node3_in13_clearcoatroughness,
+		node3_in8_anisotropic, node3_in15_transmission, node3_in14_ior,
+		node3_bsdf_out0_albedo, node3_bsdf_out1_sss_strength, node3_bsdf_out2_metallic,
+		node3_bsdf_out3_specular, node3_bsdf_out4_roughness, node3_bsdf_out5_clearcoat,
+		node3_bsdf_out6_clearcoat_gloss, node3_bsdf_out7_anisotropy,
+		node3_bsdf_out8_transmission, node3_bsdf_out9_ior);
+	
+	
+	ALBEDO = node3_bsdf_out0_albedo;
+	SSS_STRENGTH = node3_bsdf_out1_sss_strength;
+	SPECULAR = node3_bsdf_out3_specular;
+	METALLIC = node3_bsdf_out2_metallic;
+	ROUGHNESS = node3_bsdf_out4_roughness;
+	CLEARCOAT = node3_bsdf_out5_clearcoat;
+	CLEARCOAT_GLOSS = node3_bsdf_out6_clearcoat_gloss;
+	NORMAL = node3_in19_normal;
+	// uncomment it when you need it
+	// TRANSMISSION = vec3(1.0, 1.0, 1.0) * node3_bsdf_out8_transmission;
+	TANGENT = normalize(cross(cross(node3_in21_tangent, NORMAL), NORMAL));
+	BINORMAL = cross(TANGENT, NORMAL);
+	ANISOTROPY = node3_bsdf_out7_anisotropy;
+}
+"
+
+[sub_resource id=4 type="ShaderMaterial"]
+
+resource_name = ""
+shader = SubResource(3)
+shader_param/texture_0 = ExtResource(2)
+
+[sub_resource id=5 type="ArrayMesh"]
+
+resource_name = "Cube001"
+blend_shape/names = PoolStringArray("bounce", "open")
+blend_shape/mode = 0
+surfaces/0 = {
+	"material":SubResource(2),
+	"primitive":4,
+	"arrays":[
+		Vector3Array(1.0, 1.0, -1.0, -1.0, 1.0, 0.0, 1.0, 1.0, 0.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, -1.0, -1.0, 0.0, -1.0, 1.0, 0.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, -1.0, 0.0, -1.0, -1.0, 0.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 0.0, 1.0, -1.0, 0.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0),
+		Vector3Array(0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0),
+		FloatArray(0.999999, 0.0, 0.00141338, 1.0, 0.999999, 0.0, 0.00132728, 1.0, 0.999999, 0.0, 0.00162777, 1.0, 1.0, 0.0, 8.30457e-05, 1.0, 0.0, 0.999999, 0.00141338, 1.0, 0.0, 0.999999, 0.00132728, 1.0, 0.0, 0.999999, 0.00162777, 1.0, 0.0, 1.0, 8.30457e-05, 1.0, -0.999999, 0.0, 0.00141338, 1.0, -0.999999, 0.0, 0.00132728, 1.0, -0.999999, 0.0, 0.00162777, 1.0, -1.0, 0.0, 8.30457e-05, 1.0, -0.999999, 0.0, 0.00170897, 1.0, -1.0, 0.0, 0.000979632, 1.0, 0.0, 0.999999, 0.00170897, 1.0, 0.0, 1.0, 0.000979632, 1.0, 0.999999, 0.0, 0.00170897, 1.0, 1.0, 0.0, 0.000979632, 1.0, 0.0, -0.999999, 0.00141338, 1.0, 0.0, -0.999999, 0.00132728, 1.0, 0.0, -0.999999, 0.00162777, 1.0, 0.0, -1.0, 8.30457e-05, 1.0, 0.0, -0.999999, 0.00170897, 1.0, 0.0, -1.0, 0.000979632, 1.0),
+		null, ; no Vertex Colors,
+		Vector2Array(1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.00021921, 8.41022e-05, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.43638e-05, 0.999904, 0.99946, 0.998935),
+		null, ; No UV2,
+		null, ; No Bones,
+		null, ; No Weights,
+		IntArray(0, 2, 1, 0, 1, 3, 4, 6, 5, 4, 5, 7, 8, 10, 9, 8, 9, 11, 10, 13, 12, 10, 12, 9, 6, 15, 14, 6, 14, 5, 2, 17, 16, 2, 16, 1, 18, 20, 19, 18, 19, 21, 20, 23, 22, 20, 22, 19)
+	],
+	"morph_arrays":[[
+		Vector3Array(1.0, 1.0, -0.609029, -1.50263, 1.50263, 0.390971, 1.50263, 1.50263, 0.390971, -1.0, 1.0, -0.609029, -1.0, 1.0, -0.609029, -1.50263, -1.50263, 0.390971, -1.50263, 1.50263, 0.390971, -1.0, -1.0, -0.609029, -1.0, -1.0, -0.609029, 1.50263, -1.50263, 0.390971, -1.50263, -1.50263, 0.390971, 1.0, -1.0, -0.609029, 1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -0.609029, 1.50263, 1.50263, 0.390971, 1.50263, -1.50263, 0.390971, 1.0, 1.0, -0.609029, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0),
+		Vector3Array(0.0, 0.893487, -0.449089, 0.0, 0.771264, 0.636516, 0.0, 0.771264, 0.636516, 0.0, 0.893487, -0.449089, -0.893487, 0.0, -0.449089, -0.771264, 0.0, 0.636516, -0.771264, 0.0, 0.636516, -0.893487, 0.0, -0.449089, 0.0, -0.893487, -0.449089, 0.0, -0.771264, 0.636516, 0.0, -0.771264, 0.636516, 0.0, -0.893487, -0.449089, 0.0, -0.771264, 0.636516, 0.0, -0.771264, 0.636516, -0.771264, 0.0, 0.636516, -0.771263, 0.0, 0.636516, 0.0, 0.771264, 0.636516, 0.0, 0.771264, 0.636516, 0.893487, 0.0, -0.449089, 0.771264, 0.0, 0.636516, 0.771264, 0.0, 0.636516, 0.893487, 0.0, -0.449089, 0.771264, 0.0, 0.636516, 0.771263, 0.0, 0.636516),
+		FloatArray(1.0, 4.17426e-05, 8.30492e-05, 1.0, 0.999999, -0.000673361, 0.000815909, 1.0, 0.999999, -0.000673361, 0.000815909, 1.0, 1.0, 4.17426e-05, 8.30492e-05, 1.0, -4.17426e-05, 1.0, 8.30492e-05, 1.0, 0.000673361, 1.0, 0.000815909, 1.0, 0.000673361, 0.999999, 0.000815909, 1.0, -4.17426e-05, 1.0, 8.30492e-05, 1.0, -1.0, -4.17426e-05, 8.30492e-05, 1.0, -0.999999, 0.000673361, 0.000815909, 1.0, -0.999999, 0.000673361, 0.000815909, 1.0, -1.0, -4.17426e-05, 8.30492e-05, 1.0, -1.0, 0.000673361, 0.000815909, 1.0, -1.0, 0.000492643, 0.000596933, 1.0, 0.000673361, 0.999999, 0.000815909, 1.0, 0.000492643, 1.0, 0.000596933, 1.0, 1.0, -0.000673361, 0.000815909, 1.0, 1.0, -0.000492643, 0.000596933, 1.0, 4.17426e-05, -1.0, 8.30492e-05, 1.0, -0.000673361, -1.0, 0.000815909, 1.0, -0.000673361, -0.999999, 0.000815909, 1.0, 4.17426e-05, -1.0, 8.30492e-05, 1.0, -0.000673361, -0.999999, 0.000815909, 1.0, -0.000492643, -1.0, 0.000596933, 1.0),
+		null, ; no Vertex Colors,
+		Vector2Array(1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.00021921, 8.41022e-05, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.43638e-05, 0.999904, 0.99946, 0.998935),
+		null, ; No UV2,
+		null, ; No Bones,
+		null, ; No Weights,
+		null, ; Morph Object
+	],
+[
+		Vector3Array(1.0, 3.01149, 0.974751, -1.0, 2.01149, 0.974751, 1.0, 2.01149, 0.974751, -1.0, 3.01149, 0.974751, -2.98162, 1.0, 0.981672, -1.98162, -1.0, 0.981672, -1.98162, 1.0, 0.981672, -2.98162, -1.0, 0.981672, -1.0, -3.03014, 0.967333, 1.0, -2.03014, 0.967333, -1.0, -2.03014, 0.967333, 1.0, -3.03014, 0.967333, 1.0, -1.03014, 0.967333, -1.0, -1.03014, 0.967333, -0.981615, -1.0, 0.981672, -0.981615, 1.0, 0.981672, -1.0, 1.01149, 0.974751, 1.0, 1.01149, 0.974751, 2.99272, -1.0, 0.992761, 1.99273, 1.0, 0.992761, 1.99273, -1.0, 0.992761, 2.99272, 1.0, 0.992761, 0.992725, 1.0, 0.992761, 0.992725, -1.0, 0.992761),
+		Vector3Array(0.0, 2.38419e-07, 1.0, 0.0, 1.19209e-07, 1.0, 0.0, 1.19209e-07, 1.0, 0.0, 2.38419e-07, 1.0, -5.96046e-08, 0.0, 1.0, -5.96046e-08, 0.0, 1.0, -5.96046e-08, 0.0, 1.0, -5.96046e-08, 0.0, 1.0, 0.0, -2.38419e-07, 1.0, 0.0, -1.19209e-07, 1.0, 0.0, -1.19209e-07, 1.0, 0.0, -2.38419e-07, 1.0, 0.0, -1.19209e-07, 1.0, 0.0, 0.0, 1.0, -5.96046e-08, 0.0, 1.0, -5.96046e-08, 0.0, 1.0, 0.0, 1.19209e-07, 1.0, 0.0, 0.0, 1.0, 5.96046e-08, 0.0, 1.0, 5.96046e-08, 0.0, 1.0, 5.96046e-08, 0.0, 1.0, 5.96046e-08, 0.0, 1.0, 5.96046e-08, 0.0, 1.0, 5.96046e-08, 0.0, 1.0),
+		FloatArray(1.0, -8.30457e-05, 1.97996e-11, 1.0, 0.999998, -0.00200439, 2.38942e-10, 1.0, 0.999998, -0.00198049, 2.36093e-10, 1.0, 1.0, -8.30457e-05, 1.97996e-11, 1.0, 8.30457e-05, 1.0, 4.94991e-12, 1.0, 0.0020144, 0.999998, 1.20068e-10, 1.0, 0.00128506, 0.999999, 7.65957e-11, 1.0, 8.30457e-05, 1.0, 4.94991e-12, 1.0, -1.0, 8.30457e-05, 1.97996e-11, 1.0, -0.999998, 0.00200439, 2.38942e-10, 1.0, -0.999998, 0.00198049, 2.36093e-10, 1.0, -1.0, 8.30457e-05, 1.97996e-11, 1.0, -0.999998, 0.0020144, 2.40135e-10, 1.0, -1.0, 0.000979632, 0.0, 1.0, 0.00170897, 0.999999, 1.01863e-10, 1.0, 0.000979632, 1.0, 5.83906e-11, 1.0, 0.999998, -0.0020144, 2.40135e-10, 1.0, 1.0, -0.000979632, 0.0, 1.0, -8.30457e-05, -1.0, 4.94991e-12, 1.0, -0.0020144, -0.999998, 1.20068e-10, 1.0, -0.00128506, -0.999999, 7.65957e-11, 1.0, -8.30457e-05, -1.0, 4.94991e-12, 1.0, -0.00170897, -0.999999, 1.01863e-10, 1.0, -0.000979632, -1.0, 5.83906e-11, 1.0),
+		null, ; no Vertex Colors,
+		Vector2Array(1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.00021921, 8.41022e-05, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.43638e-05, 0.999904, 0.99946, 0.998935, 1.0, 0.0, 5.03364e-05, 0.506445, 0.999744, 0.504457, 0.000219211, 8.41022e-05, 1.43638e-05, 0.999904, 0.99946, 0.998935),
+		null, ; No UV2,
+		null, ; No Bones,
+		null, ; No Weights,
+		null, ; Morph Object
+	]]
+}
+surfaces/1 = {
+	"material":SubResource(4),
+	"primitive":4,
+	"arrays":[
+		Vector3Array(-1.0, 1.0, -1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, -1.0, 1.0, 1.0),
+		Vector3Array(0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0),
+		FloatArray(0.00052659, -1.0, 0.0, 1.0, 0.00052659, -1.0, 0.0, 1.0, 8.41918e-05, -1.0, 0.0, 1.0, 0.000968988, -1.0, 0.0, 1.0, -0.00052659, -1.0, 0.0, 1.0, -0.00052659, -1.0, 0.0, 1.0, -8.41918e-05, -1.0, 0.0, 1.0, -0.000968988, -1.0, 0.0, 1.0),
+		null, ; no Vertex Colors,
+		Vector2Array(0.00021921, 8.41022e-05, 0.99946, 0.998935, 1.0, 0.0, 1.43639e-05, 0.999904, 0.00021921, 8.41022e-05, 0.99946, 0.998935, 1.0, 0.0, 1.43638e-05, 0.999904),
+		null, ; No UV2,
+		null, ; No Bones,
+		null, ; No Weights,
+		IntArray(0, 2, 1, 0, 1, 3, 4, 6, 5, 4, 5, 7)
+	],
+	"morph_arrays":[[
+		Vector3Array(-1.0, 1.0, -0.609029, 1.0, -1.0, -0.609029, -1.0, -1.0, -0.609029, 1.0, 1.0, -0.609029, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, -1.0, 1.0, 1.0),
+		Vector3Array(0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0),
+		FloatArray(0.00052659, -1.0, 0.0, 1.0, 0.00052659, -1.0, 0.0, 1.0, 8.41918e-05, -1.0, 0.0, 1.0, 0.000968988, -1.0, 0.0, 1.0, -0.00052659, -1.0, 0.0, 1.0, -0.00052659, -1.0, 0.0, 1.0, -8.41918e-05, -1.0, 0.0, 1.0, -0.000968988, -1.0, 0.0, 1.0),
+		null, ; no Vertex Colors,
+		Vector2Array(0.00021921, 8.41022e-05, 0.99946, 0.998935, 1.0, 0.0, 1.43639e-05, 0.999904, 0.00021921, 8.41022e-05, 0.99946, 0.998935, 1.0, 0.0, 1.43638e-05, 0.999904),
+		null, ; No UV2,
+		null, ; No Bones,
+		null, ; No Weights,
+		null, ; Morph Object
+	],
+[
+		Vector3Array(-1.0, 1.0, 0.994368, 1.0, -1.0, 0.994368, -1.0, -1.0, 0.994368, 1.0, 1.0, 0.994368, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, -1.0, 1.0, 1.0),
+		Vector3Array(0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0),
+		FloatArray(0.00052659, -1.0, 0.0, 1.0, 0.00052659, -1.0, 0.0, 1.0, 8.41918e-05, -1.0, 0.0, 1.0, 0.000968988, -1.0, 0.0, 1.0, -0.00052659, -1.0, 0.0, 1.0, -0.00052659, -1.0, 0.0, 1.0, -8.41918e-05, -1.0, 0.0, 1.0, -0.000968988, -1.0, 0.0, 1.0),
+		null, ; no Vertex Colors,
+		Vector2Array(0.00021921, 8.41022e-05, 0.99946, 0.998935, 1.0, 0.0, 1.43639e-05, 0.999904, 0.00021921, 8.41022e-05, 0.99946, 0.998935, 1.0, 0.0, 1.43638e-05, 0.999904),
+		null, ; No UV2,
+		null, ; No Bones,
+		null, ; No Weights,
+		null, ; Morph Object
+	]]
+}
+
+[node type="Spatial" name="Scene"]
+
+[node name="crate" type="MeshInstance" parent="."]
+
+mesh = SubResource(5)
+visible = true
+transform = Transform(1.0, 0.0, 0.0, 0.0, -1.34359e-07, -1.0, 0.0, 1.0, -1.34359e-07, 0.0, 1.0, 1.34359e-07)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="crate"]
+
+root_node = NodePath("..:")

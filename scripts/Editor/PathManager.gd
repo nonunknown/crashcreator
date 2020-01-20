@@ -52,7 +52,16 @@ func SpawnPath():
 	instance.set_owner(self)
 	pathList.append(instance)
 
+func reset():
+	pathList = []
+	var children = get_children()
+	for child in children:
+		child.queue_free()
+	pass
 
+func auto_spawn_path(dir:String):
+	path_to_spawn = load(dir)
+	SpawnPath()
 
 func _on_bt_add_pressed():
 	SpawnPath()

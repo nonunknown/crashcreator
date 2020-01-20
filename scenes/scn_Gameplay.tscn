@@ -6,7 +6,7 @@
 [ext_resource path="res://gui/gameplay/GUI_Clock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/gameplay/GameplayManager.gd" type="Script" id=5]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=8]
 script/source = "extends Spatial
 
 export var p_character:PackedScene
@@ -41,7 +41,7 @@ func _ready():
 script = ExtResource( 5 )
 
 [node name="Player" type="Spatial" parent="."]
-script = SubResource( 1 )
+script = SubResource( 8 )
 p_character = ExtResource( 2 )
 p_camera = ExtResource( 1 )
 

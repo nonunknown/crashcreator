@@ -42,18 +42,43 @@ func save_file() -> bool:
 	var path_manager_children = get_tree().get_nodes_in_group("path_manager")[0].get_children()
 	var crate_manager_children = get_tree().get_nodes_in_group("crate_manager")[0].get_children()
 	var entity_manager_children = get_tree().get_nodes_in_group("entity_manager")[0].get_children()
-	
-	FileManager.save_level(project_name.text,path_manager_children,crate_manager_children,entity_manager_children)
+	save_level(project_name.text,path_manager_children,crate_manager_children,entity_manager_children)
 	return true
-#	packed_scene = PackedScene.new()
-#
-#	var name = project_name.text + ".tscn"
-#	execute_save_system()
-#	var err = ResourceSaver.save("user://projects/"+name,packed_scene)
-#	if (err == OK):
-#		return true
-#	editor_state.manager_editor.logger.logg("Error: SAVING "+str(err))
-#	return false
+
+func save_level(project_name:String, paths:Array,crates:Array,entities:Array):
+	var project:Project = Project.new()
+	save_path(project,paths)
+	save_crates(project,crates)
+	save_entities(project,entities)
+	var save_dir = "user://projects/"+project_name+".cwproj"
+	var save_game = File.new()
+	save_game.open(save_dir, File.WRITE)
+	save_game.store_line(to_json(project.to_dict()))
+	save_game.close()
+
+func save_path(project:Project, paths:Array):
+	if paths.size() == 0: return
+	print(paths.size())
+	for path in paths:
+		var dir = path.file_path
+		project.path_models.append(dir)
+	pass
+
+func save_crates(project:Project, crates:Array):
+	if crates.size() == 0: return
+	for crate in crates:
+		project.crate_ids.append( crate._ID )
+		project.append_crate_pos(crate.translation)
+		project.crate_time_ids.append( crate._time_ID )
+		
+	pass
+
+func save_entities(project:Project, entities:Array):
+	if entities.size() == 0: return
+	for entity in entities:
+		project.entity_ids.append(entity._ID)
+		project.append_entity_pos(entity.translation)
+	pass
 
 func get_paths_array() -> Array:
 	var paths:Array = []

@@ -22,7 +22,7 @@ func _ready():
 
 func set_crate():
 	print("CLICKED")
-	emit_signal("change_crate",ID,texture)
+	emit_signal("change_crate",ID)
 #	var n = get_tree().get_nodes_in_group("crate_manager")[0]
 #	n.set_crate(texture)
 	
