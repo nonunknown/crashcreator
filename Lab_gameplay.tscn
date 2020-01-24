@@ -54,13 +54,13 @@ material/0 = SubResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
 shape = SubResource( 2 )
 
-[node name="obj_Character" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.999939, 0, 0.0110303, 0, 1, 0, -0.0110303, 0, 0.999939, 0, 0, 0 )
-use_debugger = true
-
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0, 0.999698, -0.0245794, -0.791309, 0.0150283, 0.611232, 0.611417, 0.0194499, 0.79107, 0.69347, 5.77228, 5.47832 )
 script = ExtResource( 3 )
+
+[node name="obj_Character" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.999939, 0, 0.0110303, 0, 1, 0, -0.0110303, 0, 0.999939, 0, 0, 0 )
+use_debugger = true
 
 [node name="DebugText" parent="." instance=ExtResource( 2 )]
 

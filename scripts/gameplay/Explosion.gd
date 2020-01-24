@@ -5,6 +5,6 @@ var effect = preload("res://resources/gameplay/explosion.tscn")
 	
 func _init(parent,spawn_pos):
 	var explosion_fx = effect.instance()
-	explosion_fx.global_transform.origin = spawn_pos
+	explosion_fx.translation = spawn_pos
 	parent.add_child(explosion_fx)
 	print("Explosion")

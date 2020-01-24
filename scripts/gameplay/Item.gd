@@ -5,6 +5,11 @@ export var attackable:bool = false
 var picked:bool = false
 
 
+func revive():
+	picked = false
+	$Area/CollisionShape.disabled = false
+	self.visible = true
+
 func _on_Picked(player):
 	if !picked: picked = true
 	else: return

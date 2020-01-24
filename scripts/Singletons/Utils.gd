@@ -103,7 +103,7 @@ func destroy_after(time:float,target:Node):
 
 var ray_dict = {}
 
-enum MASK {Selectable=64,Selectable_crate=1024}
+enum MASK {Selectable=64,Selectable_crate=1024,Player=2,Player_Area=2048}
 var mouse_mask = MASK.Selectable
 func set_mouse_mask(mask:int):
 	mouse_mask = mask
@@ -121,3 +121,18 @@ func find_node_in_group(group_name:String,node_name:String) -> Node:
 				return node
 				break
 	return null
+
+enum EFFECT {FADE_IN, FADE_OUT, BLACK, CLEAN}
+var transition:Transition = null
+func make_transition(effect:int,speed:float=1,target:Node=null):
+	if transition == null:
+		print("loading transition")
+		var t = load("res://Fader/Transition.tscn")
+		transition = t.instance()
+		target.add_child(transition)
+	transition.start_transition(effect,speed)
+	
+func is_player(area)-> bool:
+	if (area.collision_layer == Utils.MASK.Player_Area):
+		return true
+	return false

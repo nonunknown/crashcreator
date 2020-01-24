@@ -1,15 +1,17 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://textures/portals/void.jpg" type="Texture" id=1]
 [ext_resource path="res://sounds/gameplay/portal/fx_cb3_WarpBall_contract_01.ogg" type="AudioStream" id=2]
 [ext_resource path="res://sounds/gameplay/portal/fx_cb3_WarpBall_loop_01.ogg" type="AudioStream" id=3]
 [ext_resource path="res://textures/fx/light.png" type="Texture" id=4]
 [ext_resource path="res://sounds/gameplay/portal/fx_cb3_WarpBall_expand_01.ogg" type="AudioStream" id=5]
+[ext_resource path="res://textures/portals/editor.png" type="Texture" id=6]
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_rotate_y = true
 gravity = Vector3( 0, 0, 0 )
 angular_velocity = 1.0
+hue_variation = -0.05
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_unshaded = true
@@ -37,20 +39,31 @@ rings = 8
 script/source = "extends Particles
 
 
+export var texture:Texture
 export var curve_in:Curve
-export var curve_ou:Curve
+export var curve_out:Curve
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
 
-func _ready():
-	expand()
+
+
+
+
 # Called when the node enters the scene tree for the first time.
 func expand():
 	process_material.set(\"scale\",curve_in.interpolate(1))
+	$portal_expand.play()
+	yield(get_tree().create_timer(.2,false),\"timeout\")
+	$portal_loop.play()
+	$rays.visible = true
 	pass # Replace with function body.
 	
 func contract():
+	$portal_loop.stop()
+	$portal_contract.play()
+	$rays.visible = false
+	process_material.set(\"scale\",curve_out.interpolate(1))
 	pass
 
 
@@ -95,13 +108,14 @@ albedo_texture = ExtResource( 4 )
 material = SubResource( 9 )
 
 [node name="portal" type="Particles"]
-transform = Transform( 0.041893, 0, 0.999122, 0, 1, 0, -0.999122, 0, 0.041893, 39.7363, 4.33703, 11.1211 )
+transform = Transform( 0.041893, 0, 0.999122, 0, 1, 0, -0.999122, 0, 0.041893, 0, 0, 0 )
 amount = 1
 lifetime = 600.0
 visibility_aabb = AABB( -2.49954, -1.86792, -2.94012, 5.22174, 3.73585, 5.88025 )
 process_material = SubResource( 1 )
 draw_pass_1 = SubResource( 3 )
 script = SubResource( 4 )
+texture = ExtResource( 6 )
 curve_in = SubResource( 5 )
 
 [node name="portal_loop" type="AudioStreamPlayer3D" parent="."]

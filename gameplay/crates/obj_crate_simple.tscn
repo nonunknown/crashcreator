@@ -125,3 +125,14 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01462, -0.00259399 )
 shape = SubResource( 8 )
+
+[node name="AreaBottom" type="Area" parent="." groups=[
+"area_crate",
+]]
+monitoring = false
+collision_layer = 256
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="AreaBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00187171, -0.00259399 )
+shape = SubResource( 8 )

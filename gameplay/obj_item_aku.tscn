@@ -98,18 +98,20 @@ extents = Vector3( 0.296585, 0.489961, 0.297879 )
 [node name="obj_item_aku" type="RigidBody" groups=[
 "gp_item",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.319266, 0 )
 collision_mask = 24
+mode = 1
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource( 3 )
+attackable = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498577, 0 )
 shape = SubResource( 1 )
 
 [node name="AkuAku" type="MeshInstance" parent="."]
-transform = Transform( 0.03, 0, 0, 0, -1.31134e-09, -0.03, 0, 0.03, -1.31134e-09, 0, -0.386481, 0 )
+transform = Transform( 0.03, 0, 0, 0, -1.31134e-09, -0.03, 0, 0.03, -1.31134e-09, 0, 0.112096, 0 )
 mesh = SubResource( 2 )
 skin = SubResource( 3 )
 material/0 = null
@@ -121,12 +123,15 @@ anims/anim_item_floating = SubResource( 4 )
 anims/idle = SubResource( 5 )
 
 [node name="sfx_1" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498577, 0 )
 stream = ExtResource( 5 )
 
 [node name="sfx_2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498577, 0 )
 stream = ExtResource( 4 )
 
 [node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498577, 0 )
 collision_layer = 4
 collision_mask = 0
 

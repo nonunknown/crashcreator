@@ -28,11 +28,14 @@ extents = Vector3( 0.283865, 0.335212, 0.298622 )
 [node name="obj_Wumpa" type="RigidBody" groups=[
 "gp_item",
 ]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.355015, 0 )
 collision_mask = 24
+mode = 1
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource( 1 )
+attackable = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -50,7 +53,7 @@ anims/anim_wumpa = SubResource( 2 )
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 4
-collision_mask = 130
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 3 )

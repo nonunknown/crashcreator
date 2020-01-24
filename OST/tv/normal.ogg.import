@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/normal.ogg-e2b6dee4985f8ced1c4d96fc403b50eb.oggstr"
+
+[deps]
+
+source_file="res://OST/tv/normal.ogg"
+dest_files=[ "res://.import/normal.ogg-e2b6dee4985f8ced1c4d96fc403b50eb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

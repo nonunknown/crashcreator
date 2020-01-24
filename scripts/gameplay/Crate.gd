@@ -49,6 +49,7 @@ func SpawnWumpa():
 			var instance = objWumpa.instance()
 			get_parent().add_child(instance)
 			instance.translation = cratePos
+			
 	else:
 		var instance = objWumpa.instance()
 		get_parent().add_child(instance)
@@ -56,6 +57,8 @@ func SpawnWumpa():
 
 func Destroy(change_visibility:bool=true):
 	print("destroying: "+name)
+	$Area/CollisionShape.disabled= true
+	if ($AreaBottom != null): $AreaBottom/CollisionShape.disabled = true
 	$CollisionShape.disabled = true
 	if ($sfx != null): $sfx.play()
 	$Particle.emitting = true
@@ -67,6 +70,8 @@ func Destroy(change_visibility:bool=true):
 
 func revive():
 	$CollisionShape.disabled = false
+	$Area/CollisionShape.disabled = false
+	
 	$Particle.emitting = false
 	$model.visible = true
 	destroyed = false

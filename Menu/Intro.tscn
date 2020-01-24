@@ -1,0 +1,412 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scripts/Menu/MenuManager.gd" type="Script" id=1]
+[ext_resource path="res://OST/menu/menu.ogg" type="AudioStream" id=2]
+[ext_resource path="res://il_fullxfull.844078240_iz85.jpg" type="Texture" id=3]
+[ext_resource path="res://font/dyn_crash.res" type="DynamicFont" id=4]
+[ext_resource path="res://Menu/backgrounds/logo.png" type="Texture" id=5]
+[ext_resource path="res://Menu/backgrounds/worldslogo.png" type="Texture" id=6]
+[ext_resource path="res://Menu/backgrounds/backmain.jpg" type="Texture" id=7]
+[ext_resource path="res://resources/menu/TextButton.res" type="PackedScene" id=8]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Menu
+
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Menu
+
+func start():
+	.start()
+	$AnimationPlayer.play(\"idle\")
+
+func finish():
+	.finish()
+	$AnimationPlayer.stop(true)
+"
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -20.5055, -225.561 ) ]
+}
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Menu
+
+func start():
+	.start()
+	$AnimBackground.play(\"idle\")
+	$AnimTitle.play(\"crash\")
+	$AnimWorld.play(\"start\")
+	yield(get_tree().create_timer($AnimWorld.current_animation.length(),false),\"timeout\")
+	$AnimWorld.play(\"idle\")
+	$AnimTitle.play(\"idle\")
+"
+
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="Animation" id=7]
+length = 60.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("back:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 60 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 212.748, 253.647 ), Vector2( 504.591, 223.76 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("back2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 60 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 414.929, 248.373 ), Vector2( 417.579, 378.225 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "crash"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("title:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4.88527, 4.88527 ), Vector2( 0.7, 0.7 ), Vector2( 0.899676, 0.790122 ), Vector2( 0.7, 0.7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("title:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.25, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -10.6991, 15.1766, 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("title:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362.22, 128.687 ), Vector2( 362.22, 124 ), Vector2( 362.22, 128.687 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "idle"
+length = 7.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("worldslogo:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("worldslogo:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.1, 2.5, 3.5, 4.6, 5.8, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.972549, 0.929412, 0.929412, 1 ), Color( 0.984314, 0.0588235, 0.0588235, 1 ), Color( 0.67451, 0.027451, 0.635294, 1 ), Color( 0.486275, 0.4, 0.819608, 1 ), Color( 0.356863, 0.780392, 0.937255, 1 ), Color( 0.376471, 0.996078, 0.494118, 1 ), Color( 0.870588, 0.905882, 0.0705882, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("worldslogo:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("worldslogo:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 924.809, 235.032 ), Vector2( 472.606, 235.032 ), Vector2( 537.422, 235.032 ) ]
+}
+
+[sub_resource type="GDScript" id=12]
+script/source = "extends TextButton
+
+func _on_TextButton_pressed():
+	print(\"Start\")
+	GameManager.change_scene_async(\"res://scenes/scn_Room.tscn\")
+"
+
+[sub_resource type="GDScript" id=13]
+script/source = "extends TextButton
+
+func _on_TextButton_pressed():
+	get_tree().quit() # default behavior
+"
+
+[node name="Intro" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.541
+autoplay = true
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Disclaimer" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 1.0
+margin_right = -2.0
+margin_bottom = 1.0
+mouse_filter = 2
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+wait_time = 7.0
+
+[node name="line" type="ColorRect" parent="Disclaimer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 73.1304
+margin_top = 72.0
+margin_right = 74.1304
+margin_bottom = -404.0
+rect_scale = Vector2( 0.802336, 1.10787 )
+color = Color( 0, 0.74902, 0.803922, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="line2" type="ColorRect" parent="Disclaimer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 73.1304
+margin_top = 412.167
+margin_right = 74.1304
+margin_bottom = -63.833
+rect_scale = Vector2( 0.802336, 1.10787 )
+color = Color( 0, 0.74902, 0.803922, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Disclaimer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -284.0
+margin_top = -191.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_scale = Vector2( 1.55871, 1.55871 )
+text = "                      This game is still very early!
+ 
+     Which means that any feature you'll see:
+     - May be changed or not present in the final version of the game
+	  - Can find lots of bugs
+	  - Unwanted behaviours
+	  - Lack of features
+	  - Your created maps can be deleted at any moment (due to version changing)
+	  "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+wait_time = 5.0
+
+[node name="TextureRect" type="TextureRect" parent="Logo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -20.0112
+margin_top = -220.123
+margin_right = 1039.99
+margin_bottom = 839.877
+rect_scale = Vector2( 0.681229, 0.681229 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Logo"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -299.086
+margin_top = -67.1581
+margin_right = 210.914
+margin_bottom = 71.8419
+rect_scale = Vector2( 1.10708, 1.10708 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Unknown
+Presents"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Logo"]
+autoplay = "idle"
+anims/idle = SubResource( 3 )
+
+[node name="Main" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+wait_for_input = true
+
+[node name="back" type="Sprite" parent="Main"]
+modulate = Color( 0.937255, 0.937255, 0.937255, 1 )
+position = Vector2( 212.748, 253.647 )
+scale = Vector2( 1.47729, 1.67833 )
+texture = ExtResource( 7 )
+
+[node name="back2" type="Sprite" parent="Main"]
+modulate = Color( 0.937255, 0.937255, 0.937255, 0.403922 )
+material = SubResource( 5 )
+position = Vector2( 414.929, 248.373 )
+scale = Vector2( 1.47729, 1.67833 )
+texture = ExtResource( 3 )
+
+[node name="title" type="Sprite" parent="Main"]
+position = Vector2( 362.22, 128.366 )
+scale = Vector2( 0.469936, 0.469936 )
+texture = ExtResource( 5 )
+
+[node name="worldslogo" type="Sprite" parent="Main"]
+modulate = Color( 0.980392, 0.960784, 0.960784, 1 )
+self_modulate = Color( 0.975758, 0.691979, 0.691979, 1 )
+material = SubResource( 6 )
+position = Vector2( 524.79, 201.348 )
+scale = Vector2( 0.248474, 0.248474 )
+texture = ExtResource( 6 )
+
+[node name="AnimBackground" type="AnimationPlayer" parent="Main"]
+anims/idle = SubResource( 7 )
+
+[node name="AnimTitle" type="AnimationPlayer" parent="Main"]
+anims/crash = SubResource( 8 )
+anims/idle = SubResource( 9 )
+
+[node name="AnimWorld" type="AnimationPlayer" parent="Main"]
+anims/idle = SubResource( 10 )
+anims/start = SubResource( 11 )
+
+[node name="bt_start" parent="Main" instance=ExtResource( 8 )]
+anchor_left = 0.452095
+anchor_top = 0.637707
+anchor_right = 0.452095
+anchor_bottom = 0.637707
+text = "Start Game"
+script = SubResource( 12 )
+
+[node name="bt_options" parent="Main" instance=ExtResource( 8 )]
+anchor_left = 0.463113
+anchor_top = 0.763318
+anchor_right = 0.463113
+anchor_bottom = 0.763318
+disabled = true
+text = "Options"
+
+[node name="bt_exit" parent="Main" instance=ExtResource( 8 )]
+anchor_left = 0.463113
+anchor_top = 0.88893
+anchor_right = 0.463113
+anchor_bottom = 0.88893
+text = "Exit"
+script = SubResource( 13 )

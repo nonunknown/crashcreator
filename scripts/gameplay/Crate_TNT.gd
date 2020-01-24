@@ -24,26 +24,42 @@ func _ready():
 #		pass
 
 func _on_Jumped():
-	Destroy()
+#	Destroy()
 	$Area/CollisionShape.disabled = true
-#	$sfx.play()
+	$sfx_activate.play()
 	$AnimationPlayer.play("activate")
 	yield(get_tree().create_timer(3.52,false),"timeout")
-	Explosion.new(get_parent(),self.global_transform.origin)
-	visible = false	
+	Explosion.new(get_parent(),translation)
+#	visible = false	
+	Destroy()
 #	yield(get_tree().create_timer($sfx.stream.get_length()-3.52,false),"timeout")
 #	queue_free()
 
+func Destroy(change_visibility:bool=true):
+	print("destroying: "+name)
+	$Area/CollisionShape.disabled= true
+	if ($AreaBottom != null): $AreaBottom/CollisionShape.disabled = true
+	$CollisionShape.disabled = true
+	$model.visible = !change_visibility
+	destroyed = true
+	print("destroyed: "+name)
+	
 func revive():
 	.revive()
+	$AnimationPlayer.play("idle")
 	$Area/CollisionShape.disabled = false
+	
 	visible = true
 
 func _on_Exploded():
 	visible = false
-	Explosion.new(get_parent(),self.global_transform.origin)
+#	Explosion.new(get_parent(),self.global_transform.origin)
 #	queue_free()
 	pass
 
 
 
+
+
+func _on_Area_area_entered(area):
+	pass # Replace with function body.

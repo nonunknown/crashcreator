@@ -1,4 +1,5 @@
 extends Spatial
+class_name ManagerGameplay
 
 signal time_trial_activated
 signal time_trial_freeze
@@ -11,13 +12,16 @@ func _ready():
 		GameManager.set_gamemode(GameManager.MODE.PLAY)
 		_gameplay_ready()
 	pass
+
+func trigger_game_restart():
 	
-func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		emit_signal("event_game_restart")
-		print("pressed accept")
-		
-func subscribe_all_children_to_restart(target:Node):
+	yield(get_tree().create_timer(1,false),"timeout")
+	Utils.make_transition(Utils.EFFECT.FADE_IN,2)	
+	yield(get_tree().create_timer(1,false),"timeout")
+	
+	emit_signal("event_game_restart")
+
+func subscribe_all_children_to_restart():
 	print("nodes in restart: "+str(get_tree().get_nodes_in_group("restart")))
 	for child in get_tree().get_nodes_in_group("restart"):
 		print("i am subscribed: "+child.name)
@@ -44,6 +48,9 @@ func _gameplay_ready():
 			if child.has_method("_gameplay_ready"):
 #				print("node with _gameplay_ready method: "+child.name)
 				child._gameplay_ready()
-		subscribe_all_children_to_restart(self)
+		subscribe_all_children_to_restart()
+		connect("event_game_restart",self,"_on_game_restart")
 		
-		
+func _on_game_restart():
+	yield(get_tree().create_timer(1),"timeout")
+	Utils.make_transition(Utils.EFFECT.FADE_OUT)

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.917647, 0.00392157, 0.839216, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends MeshInstance
+
+func _process(delta):
+	translation = lerp(translation,get_viewport().get_camera().translation,.2)
+"
+
+[node name="Node" type="Node"]
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+transform = Transform( 7.84623, 0, 0, 0, 7.84623, 0, 0, 0, 7.84623, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Spatial"]
+transform = Transform( 0.156305, 0, 0, 0, 0.156305, 0, 0, 0, 0.156305, 0, 0.634241, 0 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null
+script = SubResource( 4 )
+
+[node name="Camera" type="Camera" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.829301, 0.558802, 0, -0.558802, 0.829301, 0, 2.13802, 1.93487 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 5.52479, 5.02132 )
+text = "01"

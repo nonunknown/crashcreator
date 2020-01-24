@@ -417,6 +417,7 @@ material = SubResource( 12 )
 extents = Vector3( 0.494565, 0.0116764, 0.4698 )
 
 [node name="obj_crate_checkpoint" type="RigidBody" groups=[
+"checkpoint",
 "crate",
 ]]
 collision_layer = 512
@@ -462,4 +463,15 @@ collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01462, -0.00259399 )
+shape = SubResource( 14 )
+
+[node name="AreaBottom" type="Area" parent="." groups=[
+"area_crate",
+]]
+monitoring = false
+collision_layer = 256
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="AreaBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00170827, -0.00259399 )
 shape = SubResource( 14 )

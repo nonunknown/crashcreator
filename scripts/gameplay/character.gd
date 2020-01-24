@@ -16,6 +16,7 @@ var obj_aku = preload("res://gameplay/obj_akuaku.tscn")
 var aku:Node
 var can_move = true
 var disable_jump = false
+var manager_gameplay:ManagerGameplay = null
 
 
 export var use_debugger:bool = false
@@ -37,13 +38,14 @@ onready var initial_speed:int = speed
 onready var input_move_keys:Array
 onready var animator:AnimationPlayer = get_node("crashbandicoot/AnimationPlayer")
 onready var initial_gravity:float = gravity
+onready var twist_crash:Node = $crashbandicoot/twistcrash
 
 #PowerStuff
 var jumps:int = 1
 var jumps_actual:int = 0
 
 #State Machine
-enum STATE {IDLE,WALK,RUN,JUMP,CROUCH,DASH,JUMP_MOVE,BODY_SLAM,FALLING,ATTACK}
+enum STATE {IDLE,WALK,RUN,JUMP,CROUCH,DASH,JUMP_MOVE,BODY_SLAM,FALLING,ATTACK,PORTAL}
 var machine:Dictionary = {
 	state=null,
 	funcs={
@@ -65,7 +67,8 @@ func register_machine():
 	insert_state_info(STATE.WALK,"walk")
 	insert_state_info(STATE.JUMP,"jump")
 	insert_state_info(STATE.JUMP_MOVE,"jump_move")
-#	insert_state_info(STATE.FALL_GROUND,"fall_ground")
+	insert_state_info(STATE.PORTAL,"portal")
+	insert_state_info(STATE.RUN,"run",true,true)
 	insert_state_info(STATE.BODY_SLAM,"body_slam",true,true)
 	insert_state_info(STATE.CROUCH,"crouch",true,true)
 	insert_state_info(STATE.DASH,"dash",true,true)
@@ -91,74 +94,128 @@ func change_state(to):
 #	yield(get_tree().create_timer(current_animation_length(),true),"timeout")
 #	change_state(to)
 
+func cd_any() -> bool:
+	if cd_idle(): return true
+	elif cd_spin(): return true
+	elif cd_walk(): return true
+	elif cd_jump(): return true
+	elif cd_jump_move(): return true
+	elif cd_falling(): return true
+	elif cd_dash(): return true
+	elif cd_body_slam(): return true
+	elif cd_run(): return true
+	return false
+
+func cd_idle() -> bool:
+	if (velocity_median() < .1 && !check_move_keys()):
+		change_state(STATE.IDLE)
+		return true
+	return false
+
+func cd_spin() -> bool:
+	if (Input.is_action_just_pressed("cmd_attack")):
+		change_state(STATE.ATTACK)
+		return true
+	return false
+
+func cd_dash() -> bool:
+	if Input.is_action_just_pressed("cmd_dash"):
+		change_state(STATE.CROUCH)
+		return true
+	return false
+
+func cd_jump() -> bool:
+	if velocity.y > .3 && !is_grounded:
+		change_state(STATE.JUMP)
+		return true
+	return false
+
+func cd_jump_move() -> bool:
+	if (velocity_median() > 1 && !is_grounded):
+		change_state(STATE.JUMP_MOVE)
+		return true
+	return false
+
+func cd_falling() -> bool:
+	if (velocity.y < 0 && !is_grounded):
+		change_state(STATE.FALLING)
+		return true
+	return false
+
+func cd_walk() -> bool :
+	if (check_move_keys()):
+		change_state(STATE.WALK)
+		return true
+	return false
+	
+func cd_run() -> bool :
+	if (check_move_keys() && Input.is_action_just_pressed("cmd_run")):
+		change_state(STATE.RUN)
+		return true
+	return false
+	
+func cd_body_slam() -> bool:
+	if (Input.is_action_just_pressed("cmd_dash") && !is_grounded):
+		change_state(STATE.BODY_SLAM)
+		return true
+	return false
+
 func st_init_idle():
 	animator.play("Idle",blend_time)
 	animator.playback_speed = 1
 
 func st_update_idle():
-	if (check_move_keys()):
-		change_state(STATE.WALK)
-	elif velocity.y > .3:
-		change_state(STATE.JUMP)
-	elif Input.is_action_just_pressed("cmd_dash"):
-		change_state(STATE.CROUCH)
-	elif Input.is_action_just_pressed("cmd_attack"):
-		change_state(STATE.ATTACK)
+	if cd_walk(): return
+	elif cd_jump(): return
+	elif cd_dash(): return
+	elif cd_spin(): return
 
 func st_init_walk():
 	animator.play("Walk",blend_time)
 	animator.playback_speed = 7
 	
 func st_update_walk():
+	if cd_idle(): return
+	elif cd_jump(): return
+	elif cd_dash(): return
+	elif cd_spin(): return
+	elif cd_run(): return
+
+func st_init_run():
+	animator.play("Run",blend_time)
+	animator.playback_speed = 14
+	speed = initial_speed * 2
+
+func st_update_run():
+	if cd_any(): return
 	
-	if (velocity_median() < .1 && !check_move_keys()):
-		change_state(STATE.IDLE)
-	elif velocity.y > .3 && !is_grounded:
-		change_state(STATE.JUMP)
-	elif Input.is_action_just_pressed("cmd_dash"):
-		change_state(STATE.DASH)
-	elif Input.is_action_just_pressed("cmd_attack"):
-		change_state(STATE.ATTACK)
+func st_exit_run():
+	speed = initial_speed
+	pass
 	
 func st_init_jump():
 	animator.play("Jump",blend_time)
 	animator.playback_speed = 1
 	$crashbandicoot/Sounds/jump.play()
+
 func st_update_jump():
-	
-	if (velocity_median() > 1 and velocity.y < 1):
-		animator.play("Jump-move",.3)
-		animator.playback_speed = 4
-	if (velocity_median() > 1):
-		change_state(STATE.JUMP_MOVE)
-	elif (velocity.y < 0):
-		change_state(STATE.FALLING)
-	elif(Input.is_action_just_pressed("cmd_dash")):
-		change_state(STATE.BODY_SLAM)
+#	if (velocity_median() > 1 and velocity.y < 1):
+#		animator.play("Jump-move",.3)
+#		animator.playback_speed = 4
+	if cd_jump_move(): return
+	elif cd_falling(): return
+	elif cd_body_slam(): return
+	elif cd_spin(): return
 
 func st_init_jump_move():
 	animator.play("Jump-move",blend_time)
 	animator.playback_speed = 3
 
 func st_update_jump_move():
-	if (velocity.y < -3):
-		change_state(STATE.FALLING)
-	elif is_grounded:
-		change_state(STATE.IDLE)
+	if cd_falling(): return
+	elif cd_idle(): return
+	elif cd_spin(): return
 	pass
-#func st_exit_jump_move():
-
-#func st_init_fall_ground():
-#	animator.play("FallGround",blend_time)
-#	animator.playback_speed = 1.5
-#
-#
-#func st_update_fall_ground():
-#	if (velocity_median() > 1):
-#		change_state(STATE.WALK)
-#	elif (animator.current_animation_position > animator.current_animation_length * .9):
-#		change_state(STATE.IDLE)
-#	pass
 
 func st_init_crouch():
 	animator.play("crouch-loop",blend_time)
@@ -168,10 +225,8 @@ func st_init_crouch():
 	pass
 	
 func st_update_crouch():
-	if Input.is_action_just_released("cmd_dash"):
-		change_state(STATE.IDLE)
-	elif (Input.is_action_just_pressed("ui_jump")):
-		change_state(STATE.JUMP)
+	if cd_idle(): return
+	elif cd_jump(): return
 	pass
 	
 func st_exit_crouch():
@@ -187,12 +242,9 @@ func st_init_dash():
 	can_move = false
 	disable_jump = true
 	yield(get_tree().create_timer(dash_duration,false),"timeout")
-	if (velocity_median() < 1):
-		change_state(STATE.IDLE)
-	elif(Input.is_action_pressed("cmd_dash")):
-		change_state(STATE.CROUCH)
-	else:
-		change_state(STATE.WALK)
+	if cd_idle(): return
+	elif cd_dash(): return
+	elif cd_walk(): return
 	
 func st_update_dash():
 	speed = 23
@@ -210,7 +262,7 @@ func st_exit_dash():
 func st_init_body_slam():
 	animator.play("barricata",blend_time)
 	animator.playback_speed = 2
-	velocity.y = 20
+	velocity.y = 15
 	gravity = -50
 	can_move = false
 	dir = Vector3.ZERO
@@ -218,7 +270,7 @@ func st_init_body_slam():
 	
 func st_update_body_slam():
 	if (is_grounded):
-		animator.play("barricata-ground",blend_time)
+#		animator.play("barricata-ground",blend_time)
 		yield(get_tree().create_timer(current_animation_length() ,true),"timeout")
 		change_state(STATE.IDLE)
 	pass
@@ -235,10 +287,7 @@ func st_init_falling():
 func st_update_falling():
 	if (is_grounded):
 		animator.play("FallGround",blend_time)
-		if (velocity_median() < 1):
-			change_state(STATE.IDLE)
-		else:
-			change_state(STATE.WALK)
+		if cd_any(): return
 	pass
 func st_exit_falling():
 	pass
@@ -247,13 +296,23 @@ func st_init_attack():
 	animator.play("Attack",blend_time)
 	animator.playback_speed = 1
 	pass
+	
 func st_update_attack():
-	if animator.current_animation_position == animator.current_animation_length:
-		change_state(STATE.IDLE)
+	if animator.current_animation_position > animator.current_animation_length * .9:
+		if cd_any(): return
 	
 	pass
 func st_exit_attack():
 	pass
+
+func st_init_portal():
+	animator.play("Jump-portal",blend_time)
+	set_process(false)
+	set_physics_process(false)
+	pass
+func st_update_portal():
+	pass
+
 
 #func st_init_():
 #	pass
@@ -279,16 +338,21 @@ func check_move_keys() -> bool:
 	return false
 
 func _ready():
-	if (use_debugger): debug = get_tree().get_nodes_in_group("debug")[0]
+	if (use_debugger and get_tree().get_nodes_in_group("debug") != null): debug = get_tree().get_nodes_in_group("debug")[0]
+#	if get_tree().get_nodes_in_group("gameplay_manager")[0] != null:
+#		manager_gameplay = get_tree().get_nodes_in_group("gameplay_manager")[0]
+#		manager_gameplay.connect("event_game_restart",self,"_on_game_restart")
+#
 	register_machine()
 	set_physics_process(true)
 	aku = obj_aku.instance()
+	aku.set_player(self)
 	aku.visible = false
 	get_parent().call_deferred("add_child",aku)
 	power_init()
 
 func _on_game_restart():
-	print("Restart crash dude")
+	ressurect()
 
 func _process(delta):
 	if (use_debugger):
@@ -334,10 +398,12 @@ func power_init():
 
 # Functions
 func kill():
+	
 	visible = false
 	$sfx/death_woah.play()
 	health = 0
 	set_physics_process(false)
+	manager_gameplay.trigger_game_restart()
 	
 	
 func ressurect():
@@ -455,10 +521,14 @@ func short_angle_dist(from, to):
 func velocity_median() -> float:
 	return (abs(velocity.x) + abs(velocity.z)) * 0.5
 
+func is_invincible() -> bool: return aku.invincible
 
-func health_increase(value:int=1):
-	if (health + 1 <= 3):
-		health += value
+func health_increase(value:int=0):
+	if (health + 1 <= 4):
+		if value == 0:
+			health += 1
+		else:
+			health = value
 		aku._on_char_health_increased(health)
 
 func health_decrease():
@@ -469,6 +539,9 @@ func health_decrease():
 	else: 
 		do_jump()
 	aku._on_char_health_decreased(health)
+
+func action_enter_portal():
+	change_state(STATE.PORTAL)
 
 func _on_Button2_pressed():
 	ressurect()

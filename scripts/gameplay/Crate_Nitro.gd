@@ -14,7 +14,8 @@ func nitro_hop():
 func _on_Exploded():
 	Destroy()
 #	$Particle.emitting = true
-	$Area/CollisionShape.disabled = true
+#	$Area/CollisionShape.disabled = true
+	$AnimationPlayer.play("idle")
 	$sfx_explosion.play()
 	Explosion.new(get_parent(),self.global_transform.origin)
 #	$model.visible = false
@@ -25,6 +26,7 @@ func _on_Exploded():
 func revive():
 	.revive()
 	$Area/CollisionShape.disabled = false
+	nitro_hop()
 	
 	pass
 

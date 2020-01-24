@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/aku_invincibility.wav-449c01a6bb6eb636e4321e3b278af276.sample"
+
+[deps]
+
+source_file="res://OST/mask/aku_invincibility.wav"
+dest_files=[ "res://.import/aku_invincibility.wav-449c01a6bb6eb636e4321e3b278af276.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

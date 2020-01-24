@@ -10,8 +10,9 @@ func _ready():
 
 func _on_Area_explosion_body_entered(body):
 	print("explosion detected: "+body.name)
-	if (body.collision_layer == 2):
-		body.health_decrease()
+	if (body.collision_layer == Utils.MASK.Player):
+		if not body.is_invincible():
+			body.health_decrease()
 	if (body.is_in_group("crate") ):
 		body._on_Exploded()
 

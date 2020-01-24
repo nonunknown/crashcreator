@@ -2,10 +2,33 @@
 a game for crash fans to create and play on their own levels, and free source code ;)
 
 # Working Godot Version
-    - 3.2 beta 5 - Standard
+    - 3.2 RC2 - Standard
 
 # WARNING
 alpha - means not playable... yet!
+
+### Alpha 0.9.9 - Closed Beta Is comming....
+    - Added Game Menu
+    - Added async scene loading
+    - Almost done warp room
+    - Added Portal crash animation
+    - Finished Checkpoint system
+    - Refactorated crate system
+    - List of done objects
+    	- Item Wumpa
+    	- Crate Aku-aku
+    	- Crate bounce
+    - Invicible mask
+    - Stop nitro animation when destroyed
+    - respawn crash on die
+    - break crates on head touch
+    - Checkpoint ID system
+    - Spin attack on all states
+    - Wumpa got animation to iventory
+    - Scene transition (fade-inout)
+    - stop physics process on crash die
+    - refactorated player's state machine
+    - Items receiving null player to insert it on iventory
 
 ### Alpha 0.9.8 - Last Godot 3.2 beta 5 source
     - Finished save/load project system

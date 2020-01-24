@@ -5,16 +5,15 @@
 [node name="obj_Wumpa_collection" type="Spatial"]
 
 [node name="obj_Wumpa" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0390825, 0, -0.202401 )
 
 [node name="obj_Wumpa2" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135607, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51563, 0.355015, 0 )
 
 [node name="obj_Wumpa3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026398, 0, 0.153392 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.277772, 0.355015, 0.339546 )
 
 [node name="obj_Wumpa4" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.225931, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.254923, 0.355015, -0.42926 )
 
 [node name="obj_Wumpa5" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.265274, 0, -0.198982 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.158138, 0.355015, -0.40715 )

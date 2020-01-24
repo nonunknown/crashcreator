@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://scripts/gameplay/Crate.gd"
 }, {
 "base": "Crate",
+"class": "CrateAku",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Crate_Aku.gd"
+}, {
+"base": "Crate",
 "class": "CrateBounce",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Crate_Bounce.gd"
@@ -115,6 +120,11 @@ _global_script_classes=[ {
 "path": "res://scripts/gameplay/Item_Clock.gd"
 }, {
 "base": "Item",
+"class": "ItemLife",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Item_Life.gd"
+}, {
+"base": "Item",
 "class": "ItemWumpa",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Item_Wumpa.gd"
@@ -138,6 +148,21 @@ _global_script_classes=[ {
 "class": "Logger",
 "language": "GDScript",
 "path": "res://scripts/Editor/Logger.gd"
+}, {
+"base": "Spatial",
+"class": "ManagerGameplay",
+"language": "GDScript",
+"path": "res://scripts/gameplay/GameplayManager.gd"
+}, {
+"base": "Control",
+"class": "Menu",
+"language": "GDScript",
+"path": "res://scripts/Menu/Menu.gd"
+}, {
+"base": "Control",
+"class": "MenuManager",
+"language": "GDScript",
+"path": "res://scripts/Menu/MenuManager.gd"
 }, {
 "base": "Resource",
 "class": "PathBase",
@@ -169,15 +194,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Editor/Selectable.gd"
 }, {
+"base": "Button",
+"class": "TextButton",
+"language": "GDScript",
+"path": "res://scripts/Menu/TextButton.gd"
+}, {
 "base": "Node",
 "class": "TimeTrial",
 "language": "GDScript",
 "path": "res://scripts/gameplay/TimeTrial.gd"
+}, {
+"base": "Control",
+"class": "Transition",
+"language": "GDScript",
+"path": "res://Fader/Transition.gd"
+}, {
+"base": "Particles",
+"class": "WarpPortal",
+"language": "GDScript",
+"path": "res://scripts/Warp/WarpPortal.gd"
 } ]
 _global_script_class_icons={
 "ButtonMesh": "",
 "Character": "",
 "Crate": "",
+"CrateAku": "",
 "CrateBounce": "",
 "CrateCheckpoint": "",
 "CrateManager": "",
@@ -196,25 +237,35 @@ _global_script_class_icons={
 "Item": "",
 "ItemAku": "",
 "ItemClock": "",
+"ItemLife": "",
 "ItemWumpa": "",
 "Iventory": "",
 "LevelBuilder": "",
 "LevelManager": "",
 "Logger": "",
+"ManagerGameplay": "",
+"Menu": "",
+"MenuManager": "",
 "PathBase": "",
 "PathManager": "",
 "Placeable": "",
 "Power": "",
 "Project": "",
 "Selectable": "",
-"TimeTrial": ""
+"TextButton": "",
+"TimeTrial": "",
+"Transition": "",
+"WarpPortal": ""
 }
 
 [application]
 
-config/name="CrashCreator"
-run/main_scene="res://scenes/scn_LevelEditor.tscn"
+config/name="Crash Bandicoot Worlds"
+config/description="Crash Fan game, based on psx era for fans ;P"
+run/main_scene="res://Menu/Intro.tscn"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon_256.ico"
 
 [autoload]
 
@@ -225,13 +276,23 @@ SelectionManager="*res://scripts/Editor/SelectionManager.gd"
 FileManager="*res://scripts/Singletons/FileManager.gd"
 IDTable="*res://scripts/Singletons/IDTable.gd"
 
+[compression]
+
+formats/zlib/compression_level=3
+formats/gzip/compression_level=3
+
 [display]
 
 window/size/width=720
 window/size/height=480
 window/size/resizable=false
 window/vsync/use_vsync=false
+mouse_cursor/custom_image="res://cursor/normal.png"
 window/stretch/aspect="keep"
+
+[editor]
+
+convert_text_resources_to_binary_on_export=true
 
 [importer_defaults]
 
@@ -297,7 +358,7 @@ cam_right={
 }
 cmd_dash={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
  ]
 }
 cmd_attack={
@@ -330,6 +391,11 @@ three={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
  ]
 }
+cmd_run={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -344,9 +410,12 @@ three={
 3d_physics/layer_9="Crash_Feet"
 3d_physics/layer_10="Body_Crate"
 3d_physics/layer_11="Selectable_Crate"
+3d_physics/layer_12="Player_Area"
+3d_physics/layer_13="Spin_Area"
 
 [rendering]
 
 quality/2d/use_pixel_snap=true
 threads/thread_model=2
+environment/default_clear_color=Color( 0.243137, 0.243137, 0.243137, 1 )
 environment/default_environment="res://default_env.tres"

@@ -1,6 +1,7 @@
 extends Crate
 class_name CrateSimple
 
+
 func _on_Attacked():
 	SpawnWumpa()
 	Destroy()
