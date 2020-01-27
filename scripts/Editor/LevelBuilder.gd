@@ -1,19 +1,24 @@
 extends Node
 class_name LevelBuilder
 
-
-func start():
+onready var manager = get_node("/root/Main")
+func logg(msg:String):
+	manager.logger.logg(msg)
+func start(compile_only:bool=false):
 	if !level_is_valid(): 
-		printerr("LEVEL VALIDATION ERROR")
+		logg("LEVEL VALIDATION ERROR")
 		return
-	print("SUCCESS - VALIDATED LEVEL")
+	logg("SUCCESS - VALIDATED LEVEL")
 	
 	if !create_game_level():
-		printerr("LEVEL CREATION ERROR")
+		logg("LEVEL CREATION ERROR")
 		return
-	print("SUCCESS - LEVEL CREATED")
+	logg("SUCCESS - LEVEL CREATED")
 	
-	compile_and_play()
+	if (compile_only):
+		compile()
+	else: compile_and_play()
+	
 #	if (!save_game_level()):
 #		printerr("LEVEL FILE SAVE ERROR")
 #		return
@@ -30,13 +35,13 @@ func level_is_valid() -> bool:
 	
 func entity_is_valid() -> bool:
 	if get_tree().get_nodes_in_group("entity_manager")[0].get_child_count() < 2:
-		printerr("At Builder: "+"please place start and finish entities")
+		logg("At Builder: "+"please place start and finish entities")
 		return false
 	return true
 
 func path_is_valid() -> bool:
 	if get_tree().get_nodes_in_group("path_manager")[0].get_child_count() == 0:
-		printerr("At Builder: the level needs at least one path placed")
+		logg("At Builder: the level needs at least one path placed")
 		return false
 	return true
 
@@ -74,6 +79,24 @@ func create_game_level() -> bool:
 #	GameManager.set_gamemode(GameManager.MODE.PLAY)
 #	GameManager.change_scene("Main",game_level)
 	
+func recursive_owner(node:Node,target:Node=null):
+	print("started recursive")
+	for child in node.get_children():
+		child.set_owner(target)
+		print(child.name +"'s owner: "+str(child.owner))
+		if child.get_child_count() > 0:
+			print("has childs:")
+			recursive_owner(child,target)
+		
+func compile():
+	var result = PackedScene.new()
+	result.pack(game_level)
+	var err = ResourceSaver.save("user://custom_level/custom_level.scn",result)
+	if err == OK:
+		logg("COMPILED SUCCESS")
+	else: logg("ERROR: "+str(err))
+	game_level.queue_free()
+
 func compile_and_play():
 	remove_child(game_level)
 	get_tree().root.add_child(game_level)

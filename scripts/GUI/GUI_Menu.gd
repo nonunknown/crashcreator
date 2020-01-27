@@ -58,3 +58,7 @@ func _on_bt_edit_entity_toggled(button_pressed):
 		emit_signal("popup_entity")
 
 
+
+onready var level_builder:LevelBuilder = get_node("/root/Main/Builder") as LevelBuilder
+func _on_bt_edit_export_pressed():
+	level_builder.start(true)

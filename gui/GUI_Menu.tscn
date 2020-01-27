@@ -28,7 +28,9 @@ func _on_bt_warp_pressed():
 
 
 func _on_WarpRoomDialog_confirmed():
-	GameManager.change_scene_forced(IDTable.levels.warp_room,GameManager.MODE.PLAY)
+	var params:Dictionary = LevelParams.get_config()
+	params.portal_id = 0
+	GameManager.change_scene_async(IDTable.levels.warp_room,params)
 	pass # Replace with function body.
 "
 

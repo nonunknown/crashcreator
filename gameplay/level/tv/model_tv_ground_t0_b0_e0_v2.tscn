@@ -82,3 +82,75 @@ material/2 = ExtResource( 1 )
 
 [node name="PosEnd" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0210074, -2.40405, 8.08691 )
+
+[node name="Borders" type="Spatial" parent="."]
+
+[node name="Right" type="Spatial" parent="Borders"]
+
+[node name="Position3D" type="Position3D" parent="Borders/Right" groups=[
+"borders",
+"right",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6317, 2.10161, -6.93377 )
+
+[node name="Position3D2" type="Position3D" parent="Borders/Right" groups=[
+"borders",
+"right",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86266, 0.279886, -0.579311 )
+
+[node name="Position3D4" type="Position3D" parent="Borders/Right" groups=[
+"borders",
+"right",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.64326, -0.318441, 1.39528 )
+
+[node name="Position3D5" type="Position3D" parent="Borders/Right" groups=[
+"borders",
+"right",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44233, -1.01644, 5.05925 )
+
+[node name="Position3D3" type="Position3D" parent="Borders/Right" groups=[
+"borders",
+"right",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6317, -1.84835, 7.40617 )
+
+[node name="Left" type="Spatial" parent="Borders"]
+
+[node name="Position3D" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33777, 2.01868, -6.90299 )
+
+[node name="Position3D4" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.63626, 1.5951, -4.03748 )
+
+[node name="Position3D2" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.82589, 0.00287104, -0.818793 )
+
+[node name="Position3D5" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.18419, -0.921766, 3.83766 )
+
+[node name="Position3D6" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43796, -0.921766, 5.15101 )
+
+[node name="Position3D3" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33777, -1.94844, 7.48186 )

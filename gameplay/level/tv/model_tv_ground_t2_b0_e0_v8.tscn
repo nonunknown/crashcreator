@@ -108,3 +108,33 @@ shape = SubResource( 4 )
 
 [node name="PosEnd" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.689341, 6.6127 )
+
+[node name="Borders" type="Spatial" parent="."]
+
+[node name="Right" type="Spatial" parent="Borders"]
+
+[node name="Position3D" type="Position3D" parent="Borders/Right" groups=[
+"borders",
+"right",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45375, 1.44984, -5.65274 )
+
+[node name="Position3D2" type="Position3D" parent="Borders/Right" groups=[
+"borders",
+"right",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45375, 1.44984, 6.16952 )
+
+[node name="Left" type="Spatial" parent="Borders"]
+
+[node name="Position3D" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.63031, 1.49292, -6.00378 )
+
+[node name="Position3D2" type="Position3D" parent="Borders/Left" groups=[
+"borders",
+"left",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45041, 1.49292, 5.97778 )

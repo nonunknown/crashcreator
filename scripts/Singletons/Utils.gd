@@ -132,7 +132,11 @@ func make_transition(effect:int,speed:float=1,target:Node=null):
 		target.add_child(transition)
 	transition.start_transition(effect,speed)
 	
+	
 func is_player(area)-> bool:
 	if (area.collision_layer == Utils.MASK.Player_Area):
 		return true
 	return false
+
+func get_player()->Character:
+	return get_tree().get_nodes_in_group("player")[0]

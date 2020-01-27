@@ -22,3 +22,7 @@ func to_black():
 	
 func to_clean():
 	$AnimationPlayer.play("alpha")
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	
+	pass # Replace with function body.

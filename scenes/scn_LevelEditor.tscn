@@ -296,7 +296,9 @@ func set_distance(value):
 	distance = max(0, value)
 "
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" groups=[
+"current",
+]]
 script = ExtResource( 5 )
 
 [node name="Builder" type="Node" parent="."]
@@ -361,6 +363,7 @@ group = SubResource( 4 )
 script = SubResource( 5 )
 
 [node name="bt_edit_export" parent="GUI/GUI_Menu/HBoxContainer" index="13"]
+disabled = false
 group = SubResource( 4 )
 
 [node name="bt_edit_settings" parent="GUI/GUI_Menu/HBoxContainer" index="15"]
@@ -523,6 +526,7 @@ mat_time_three = ExtResource( 28 )
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_entity" to="GUI/GUI_Menu" method="_on_bt_edit_entity_toggled"]
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_enemy" to="GUI/GUI_Menu" method="_on_bt_edit_enemy_toggled"]
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_time" to="GUI/GUI_Menu" method="_on_bt_edit_time_toggled"]
+[connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_export" to="GUI/GUI_Menu" method="_on_bt_edit_export_pressed"]
 [connection signal="pressed" from="GUI/GUI_tools_path/Panel/VBoxContainer/bt_add" to="Level/Path" method="_on_bt_add_pressed"]
 
 [editable path="GUI/GUI_Menu"]

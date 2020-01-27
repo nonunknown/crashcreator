@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://font/dyn_crash.res" type="DynamicFont" id=1]
+[ext_resource path="res://sprites/chars/ara.png" type="Texture" id=2]
+[ext_resource path="res://sprites/chars/crash.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Warp/LevelInfo.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("l_title:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -56.5873 ), Vector2( 0, 71.2878 ), Vector2( 0, 20.954 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("rect_boss:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -262.552, 78.6704 ), Vector2( 25.8471, 78.6704 ), Vector2( 0, 78.6704 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("rect_player:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -267.141, 152.911 ), Vector2( 22.6189, 152.911 ), Vector2( -0.507479, 152.911 ) ]
+}
+
+[node name="GUI_LevelInfo" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="l_title" type="Label" parent="."]
+anchor_top = 0.0436541
+anchor_right = 1.0
+anchor_bottom = 0.0436541
+margin_top = -77.5413
+margin_right = 435.0
+margin_bottom = -9.5413
+rect_scale = Vector2( 0.623567, 0.623567 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.866667, 0.572549, 0.258824, 1 )
+text = "Level Name!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="rect_boss" type="ColorRect" parent="."]
+anchor_top = 0.163897
+anchor_right = 0.354167
+anchor_bottom = 0.163897
+margin_left = -262.552
+margin_right = -262.552
+margin_bottom = 60.0
+color = Color( 0, 0, 0, 0.317647 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="spr_boss" type="Sprite" parent="rect_boss"]
+modulate = Color( 0.898039, 0.898039, 0.898039, 1 )
+position = Vector2( 43.2133, 33.241 )
+scale = Vector2( 0.640625, 0.640625 )
+texture = ExtResource( 2 )
+
+[node name="rect_player" type="ColorRect" parent="."]
+anchor_left = -0.000704832
+anchor_top = 0.318565
+anchor_right = 0.353462
+anchor_bottom = 0.318565
+margin_left = -266.633
+margin_right = -266.633
+margin_bottom = 60.0
+color = Color( 0, 0, 0, 0.317647 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="spr_player" type="Sprite" parent="rect_player"]
+modulate = Color( 0.815686, 0.815686, 0.815686, 1 )
+position = Vector2( 43.2133, 33.241 )
+scale = Vector2( 0.640625, 0.640625 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 1 )

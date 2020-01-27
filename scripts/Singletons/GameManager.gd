@@ -43,7 +43,11 @@ var _loader = null
 var _error = false
 var _repeat = true
 signal done
-func change_scene_async(path:String):
+func change_scene_async(path:String,params:Dictionary={}):
+	Utils.make_transition(Utils.EFFECT.FADE_IN,.4,get_tree().root)
+	_loader = null
+	_error = false
+	_repeat = true
 	_loader = ResourceLoader.load_interactive(path)
 	while(_repeat):
 		yield(_update_load(),"completed")
@@ -53,11 +57,18 @@ func change_scene_async(path:String):
 		return
 	print("loading")
 	var root = get_tree().get_root()
-	var current_scene = root.get_child(root.get_child_count()-1)
+	var current_scene = get_tree().get_nodes_in_group("current")[0]
+
 	current_scene.queue_free()
 	var to_scene = _loader.get_resource()
 	current_scene = to_scene.instance()
 	root.add_child(current_scene)
+	
+	Utils.make_transition(Utils.EFFECT.FADE_OUT,1,get_tree().root)
+	
+	if not params.empty():
+		current_scene.start_params(params)
+		
 	print("o/")
 
 
