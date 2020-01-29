@@ -7,6 +7,8 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.11 - Gameplay update
+    - Improved gameplay
 ### Alpha 0.9.10 - The Terrain Generation Update
     - Added terrain generation for toad village based levels
     - Updated Transition System

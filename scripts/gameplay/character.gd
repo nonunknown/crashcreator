@@ -17,7 +17,7 @@ var aku:Node
 var can_move = true
 var disable_jump = false
 var manager_gameplay:ManagerGameplay = null
-
+var is_on_slope:bool = false
 
 export var use_debugger:bool = false
 export var blend_time:float = .1
@@ -43,7 +43,6 @@ onready var twist_crash:Node = $crashbandicoot/twistcrash
 #PowerStuff
 var jumps:int = 1
 var jumps_actual:int = 0
-
 #State Machine
 enum STATE {IDLE,WALK,RUN,JUMP,CROUCH,DASH,JUMP_MOVE,BODY_SLAM,FALLING,ATTACK,PORTAL}
 var machine:Dictionary = {
@@ -120,12 +119,16 @@ func cd_spin() -> bool:
 
 func cd_dash() -> bool:
 	if Input.is_action_just_pressed("cmd_dash"):
-		change_state(STATE.CROUCH)
-		return true
+		if velocity_median() > .5:
+			change_state(STATE.DASH)
+			return true
+		else:
+			change_state(STATE.CROUCH)
+			return true
 	return false
 
 func cd_jump() -> bool:
-	if velocity.y > .3 && !is_grounded:
+	if velocity.y > .3 :
 		change_state(STATE.JUMP)
 		return true
 	return false
@@ -143,13 +146,13 @@ func cd_falling() -> bool:
 	return false
 
 func cd_walk() -> bool :
-	if (check_move_keys()):
+	if (check_move_keys() && is_grounded):
 		change_state(STATE.WALK)
 		return true
 	return false
 	
 func cd_run() -> bool :
-	if (check_move_keys() && Input.is_action_just_pressed("cmd_run")):
+	if (Input.is_action_pressed("cmd_run")):
 		change_state(STATE.RUN)
 		return true
 	return false
@@ -183,18 +186,25 @@ func st_update_walk():
 
 func st_init_run():
 	animator.play("Run",blend_time)
-	animator.playback_speed = 14
+	animator.playback_speed = 12
 	speed = initial_speed * 2
 
 func st_update_run():
-	if cd_any(): return
+	if Input.is_action_just_released("cmd_run") or velocity_median() < .1:
+		change_state(STATE.IDLE)
+	elif cd_jump(): return
+	elif cd_spin(): return
+	elif cd_dash(): return
 	
 func st_exit_run():
 	speed = initial_speed
 	pass
 	
 func st_init_jump():
-	animator.play("Jump",blend_time)
+	if jumps > 1 and jumps_actual == 0 :
+		animator.play("Jump-top",blend_time)
+	else:
+		animator.play("Jump",blend_time)
 	animator.playback_speed = 1
 	$crashbandicoot/Sounds/jump.play()
 
@@ -208,13 +218,21 @@ func st_update_jump():
 	elif cd_spin(): return
 
 func st_init_jump_move():
-	animator.play("Jump-move",blend_time)
-	animator.playback_speed = 3
+	if jumps_actual == 0:
+		animator.play("Jump-top",.3)
+		animator.playback_speed = 2
+		
+	else: 
+		animator.play("Jump-move",blend_time)
+		animator.playback_speed = 3
+		
 
 func st_update_jump_move():
-	if cd_falling(): return
-	elif cd_idle(): return
+	
+	if cd_idle(): return
 	elif cd_spin(): return
+	elif anim_finished:
+		change_state(STATE.FALLING)
 	pass
 
 func st_init_crouch():
@@ -225,8 +243,13 @@ func st_init_crouch():
 	pass
 	
 func st_update_crouch():
-	if cd_idle(): return
+	if Input.is_action_just_released("cmd_dash"):
+		change_state(STATE.IDLE)
+	elif velocity.y < 0:
+		change_state(STATE.FALLING)
+	elif cd_idle(): return
 	elif cd_jump(): return
+	elif cd_falling(): return
 	pass
 	
 func st_exit_crouch():
@@ -238,6 +261,7 @@ func st_exit_crouch():
 
 func st_init_dash():
 	animator.play("Dash",blend_time)
+	$crashbandicoot/Sounds/dash.play()
 	animator.playback_speed = 1.5
 	can_move = false
 	disable_jump = true
@@ -247,9 +271,12 @@ func st_init_dash():
 	elif cd_walk(): return
 	
 func st_update_dash():
-	speed = 23
-	if (animator.current_animation == "Dash" && animator.current_animation_position > ( animator.current_animation_length / animator.playback_speed ) * .9):
+	speed = initial_speed * 3
+	$PPuff.custom_emit()
+	if (animator.current_animation == "Dash" && animator.current_animation_position > ( animator.current_animation_length / animator.playback_speed ) * .7):
 		animator.play("Dash-loop",blend_time)
+		if cd_jump(): return
+		if cd_spin(): return
 #	if velocity_median() < 1:
 #		change_state(STATE.IDLE)
 	
@@ -288,8 +315,11 @@ func st_update_falling():
 	if (is_grounded):
 		animator.play("FallGround",blend_time)
 		if cd_any(): return
+	elif cd_jump(): return
 	pass
 func st_exit_falling():
+	$PPuff.custom_emit()
+	$crashbandicoot/Sounds/step_1.play()
 	pass
 
 func st_init_attack():
@@ -298,10 +328,12 @@ func st_init_attack():
 	pass
 	
 func st_update_attack():
-	if animator.current_animation_position > animator.current_animation_length * .9:
-		if cd_any(): return
 	
+	if anim_finished:
+		if cd_falling(): return
+		else: change_state(STATE.IDLE)
 	pass
+
 func st_exit_attack():
 	pass
 
@@ -360,10 +392,10 @@ func _process(delta):
 		debug.set_text("jumpCount",str(jumps_actual))
 		debug.set_text("health",str(health))
 		debug.set_text("wumpa",str(iventory.wumpa))
-		debug.set_text("dir",str(dir))
-		debug.set_text("cam",str(dashing))
 		debug.set_text("state",str(STATE.keys()[machine.state]))
-		debug.set_text("upBasis: ",str(camera))
+		debug.set_text("anim_finished",str(anim_finished))
+		debug.set_text("grounded",str(is_grounded))
+		debug.set_text("jumps",str(jumps_actual))
 	input_move_keys = [Input.is_action_pressed("ui_left"),Input.is_action_pressed("ui_up"),Input.is_action_pressed("ui_down"),Input.is_action_pressed("ui_right")]
 	camera = get_viewport().get_camera().get_global_transform()
 	
@@ -416,7 +448,12 @@ var last_dir:Vector3 = Vector3.ZERO
 var last_frame:bool = false
 
 func check_grounded():
-	is_grounded = is_on_floor()
+	if is_on_slope: 
+		is_grounded = true
+		velocity.y = 0
+	else:
+		is_grounded = is_on_floor()
+	
 	if is_on_floor():
 		if (last_frame == false):
 			jumps_actual = jumps
@@ -483,8 +520,8 @@ func move_calculation(delta):
 	
 	
 #	check_input()
-	
-	velocity.y += delta * gravity
+	if !is_on_slope:
+		velocity.y += delta * gravity
 	var hv = velocity
 	hv.y = 0
 	var new_pos = dir * speed
@@ -494,7 +531,8 @@ func move_calculation(delta):
 	hv = hv.linear_interpolate(new_pos, accel * delta)
 	velocity.x = hv.x
 	velocity.z = hv.z
-	velocity = move_and_slide(velocity, Vector3(0,1,0),true,4,0.79,false)
+	velocity = move_and_slide(velocity, Vector3(0,1,0),true)
+#	velocity = move_and_slide_with_snap(velocity,Vector3(0,0,0),Vector3.UP,true)
 #		velocity = move_and_collide(velocity)
 	var input:Vector3 = Vector3.ZERO
 
@@ -572,4 +610,12 @@ func crate_collided(area):
 func _on_ItemBody_area_entered(item):
 	if item.is_in_group("item"):
 		item._on_Picked(self)
+	pass # Replace with function body.
+
+var anim_finished:bool = false
+func _on_AnimationPlayer_animation_finished(anim_name):
+	anim_finished = true
+	print("finished")
+	yield(get_tree().create_timer(.1,false),"timeout")
+	anim_finished = false
 	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Debug/DebugText.tscn" type="PackedScene" id=2]
@@ -6,10 +6,13 @@
 
 [sub_resource type="PlaneMesh" id=1]
 
-[sub_resource type="ConcavePolygonShape" id=2]
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.0431373, 0.160784, 0.101961, 1 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
 data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.827451, 0.12549, 0.12549, 1 )
 
 [node name="Spatial" type="Spatial"]
@@ -17,42 +20,34 @@ albedo_color = Color( 0.827451, 0.12549, 0.12549, 1 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 11.7869, 0, 0, 0, 3.07659, 0, 0, 0, 11.7869, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = null
+material/0 = SubResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1.27575, 0, 0, 0, 0.321648, -0.330189, 0, 0.0861853, 1.23228, 0, 0.272899, -3.36757 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance2"]
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/StaticBody"]
-shape = SubResource( 2 )
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( 2.2042, 0, 0, 0, 0.555731, -0.570489, 0, 0.18008, 2.57479, 0, 0.225175, 3.93314 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
-
-[node name="StaticBody" type="StaticBody" parent="MeshInstance3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
+disabled = true
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( 0.637877, 0.165594, 0.90453, 0, 0.272623, -0.732563, -1.10484, 0.0956059, 0.522231, -2.27564, 0.272899, -1.31076 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
+material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance4"]
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
+disabled = true
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0, 0.999698, -0.0245794, -0.791309, 0.0150283, 0.611232, 0.611417, 0.0194499, 0.79107, 0.69347, 5.77228, 5.47832 )
@@ -61,6 +56,7 @@ script = ExtResource( 3 )
 [node name="obj_Character" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.999939, 0, 0.0110303, 0, 1, 0, -0.0110303, 0, 0.999939, 0, 0, 0 )
 use_debugger = true
+power_double_jump = true
 
 [node name="DebugText" parent="." instance=ExtResource( 2 )]
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scripts/gameplay/character.gd" type="Script" id=1]
 [ext_resource path="res://models/characters/crashbandicoot/Dash-loop.anim" type="Animation" id=2]
-[ext_resource path="res://sounds/crash/foot/foot4.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sounds/crash/foot/normal_1.wav" type="AudioStream" id=3]
 [ext_resource path="res://sounds/crash/woah.wav" type="AudioStream" id=4]
 [ext_resource path="res://models/characters/crashbandicoot/barricata-ground.anim" type="Animation" id=5]
 [ext_resource path="res://models/characters/crashbandicoot/Jump-portal.anim" type="Animation" id=6]
@@ -12,20 +12,20 @@
 [ext_resource path="res://models/characters/crashbandicoot/Jump-top.anim" type="Animation" id=10]
 [ext_resource path="res://models/characters/crashbandicoot/barricata.anim" type="Animation" id=11]
 [ext_resource path="res://models/characters/crashbandicoot/Jump-move.anim" type="Animation" id=12]
-[ext_resource path="res://sounds/crash/foot/foot1.ogg" type="AudioStream" id=13]
+[ext_resource path="res://sounds/crash/foot/normal_2.wav" type="AudioStream" id=13]
 [ext_resource path="res://scripts/Character/Step.gd" type="Script" id=14]
 [ext_resource path="res://models/characters/crashbandicoot/Dash.anim" type="Animation" id=15]
 [ext_resource path="res://models/characters/material_1.material" type="Material" id=16]
 [ext_resource path="res://models/characters/crashbandicoot/Walk.anim" type="Animation" id=17]
 [ext_resource path="res://models/characters/Crash/twist.tscn" type="PackedScene" id=18]
-[ext_resource path="res://sounds/crash/foot/foot2.ogg" type="AudioStream" id=19]
+[ext_resource path="res://particles/PPuff.scn" type="PackedScene" id=19]
 [ext_resource path="res://models/characters/crashbandicoot/Jump.anim" type="Animation" id=20]
 [ext_resource path="res://models/characters/crashbandicoot/CrashShoes.material" type="Material" id=21]
 [ext_resource path="res://models/characters/CrashBack.material" type="Material" id=22]
 [ext_resource path="res://models/characters/crashbandicoot/Attack.anim" type="Animation" id=23]
 [ext_resource path="res://models/characters/crashbandicoot/crouch.anim" type="Animation" id=24]
 [ext_resource path="res://models/characters/CrashShoes.material" type="Material" id=25]
-[ext_resource path="res://sounds/crash/foot/foot5.ogg" type="AudioStream" id=26]
+[ext_resource path="res://sounds/crash/dash.wav" type="AudioStream" id=26]
 [ext_resource path="res://sounds/crash/jump.wav" type="AudioStream" id=27]
 [ext_resource path="res://models/characters/crashbandicoot/Idle.anim" type="Animation" id=28]
 [ext_resource path="res://models/characters/crashbandicoot/crouch-loop.anim" type="Animation" id=29]
@@ -36,7 +36,6 @@
 [ext_resource path="res://models/characters/crashbandicoot/material_1.material" type="Material" id=34]
 [ext_resource path="res://models/characters/crashbandicoot/FallGround.anim" type="Animation" id=35]
 [ext_resource path="res://models/characters/crashbandicoot/CrashBack.material" type="Material" id=36]
-[ext_resource path="res://sounds/crash/foot/foot3.ogg" type="AudioStream" id=37]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "ID73"
@@ -201,8 +200,9 @@ func _on_body_entered(body:Node):
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 1, 0.289767, 1 )
 
-[sub_resource type="BoxShape" id=6]
-extents = Vector3( 0.415174, 0.761578, 0.264996 )
+[sub_resource type="CapsuleShape" id=6]
+radius = 0.419921
+height = 1.28392
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.393768, 0.0169715, 0.235733 )
@@ -219,9 +219,16 @@ extents = Vector3( 0.51274, 1.21507, 0.475687 )
 [sub_resource type="GDScript" id=10]
 script/source = "extends RayCast
 
-func _process(delta):
-	if Input.is_action_just_pressed(\"ui_accept\"):
-		print(str(get_collision_normal()))
+var character
+func _ready():
+	character = get_parent()
+	
+func _physics_process(delta):
+	var normal = get_collision_normal()
+	if normal != Vector3.UP:
+		character.is_on_slope = true
+	else:
+		character.is_on_slope = false
 "
 
 [node name="obj_Character" type="KinematicBody" groups=[
@@ -488,6 +495,7 @@ script = SubResource( 4 )
 shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="crashbandicoot"]
+autoplay = "Idle"
 anims/Attack = ExtResource( 23 )
 anims/Dash = ExtResource( 15 )
 anims/Dash-loop = ExtResource( 2 )
@@ -515,31 +523,23 @@ sounds = [ NodePath("../Sounds/metal/step_1"), NodePath("../Sounds/metal/step_2"
 [node name="jump" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds"]
 stream = ExtResource( 27 )
 
+[node name="dash" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds"]
+stream = ExtResource( 26 )
+
 [node name="spin" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds"]
 stream = ExtResource( 8 )
 
 [node name="spin_fail" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds"]
 stream = ExtResource( 9 )
 
-[node name="metal" type="Node" parent="crashbandicoot/Sounds"]
-
-[node name="step_1" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds/metal"]
-stream = ExtResource( 13 )
-
-[node name="step_2" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds/metal"]
-stream = ExtResource( 19 )
-
-[node name="step_3" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds/metal"]
-stream = ExtResource( 37 )
-
-[node name="step_4" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds/metal"]
+[node name="step_1" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds"]
 stream = ExtResource( 3 )
 
-[node name="step_5" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds/metal"]
-stream = ExtResource( 26 )
+[node name="step_2" type="AudioStreamPlayer3D" parent="crashbandicoot/Sounds"]
+stream = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74906, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.981628, 0 )
 shape = SubResource( 6 )
 
 [node name="Feet" type="Area" parent="."]
@@ -586,6 +586,9 @@ shape = SubResource( 9 )
 enabled = true
 collision_mask = 17
 script = SubResource( 10 )
+
+[node name="PPuff" parent="." instance=ExtResource( 19 )]
+[connection signal="animation_finished" from="crashbandicoot/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="Feet" to="." method="_on_Feet_area_entered"]
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 [connection signal="area_entered" from="ItemBody" to="." method="_on_ItemBody_area_entered"]
