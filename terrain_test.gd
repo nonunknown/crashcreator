@@ -98,6 +98,7 @@ func get_borders():
 #			draw_vertex(pos,Color.green)
 		elif border.is_in_group("left"):
 			points_left.push_back(pos)
+#		yield(get_tree().create_timer(.05,true),"timeout")
 #			draw_vertex(pos,Color.green)K
 #			draw_vertex(border.translation,Color.red)
 #		elif border.is_in_group("left"):

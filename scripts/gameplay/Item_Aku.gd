@@ -3,7 +3,7 @@ class_name ItemAku
 
 var character:Character
 
-func _on_Picked(player):
+func _on_Picked(_player):
 	if !picked: picked = true
 	else: return
 	self.visible = false

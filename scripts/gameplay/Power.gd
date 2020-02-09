@@ -3,7 +3,7 @@ class_name Power
 enum {DOUBLE_JUMP}
 var list = {}
 
-func add(power_id:int):
+func add(_power_id:int):
 	list[DOUBLE_JUMP] = DoubleJump.new()
 	pass
 

@@ -55,6 +55,7 @@ func save_level(project_name:String, paths:Array,crates:Array,entities:Array):
 	save_game.open(save_dir, File.WRITE)
 	save_game.store_line(to_json(project.to_dict()))
 	save_game.close()
+	FileManager.filename = project_name+".cwproj"
 
 func save_path(project:Project, paths:Array):
 	if paths.size() == 0: return

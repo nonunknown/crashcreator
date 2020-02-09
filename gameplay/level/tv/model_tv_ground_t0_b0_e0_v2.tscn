@@ -51,13 +51,12 @@ surfaces/2 = {
 }
 
 [node name="model_tv_t0b0e0v2" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021419, -1.59599, 7.63042 )
 script = ExtResource( 4 )
 file_path = "res://gameplay/level/tv/model_tv_ground_t0_b0_e0_v2.tscn"
 show_name = "Downwards"
 
 [node name="StaticBody" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.59691, 7.62646 )
 collision_layer = 16
 collision_mask = 0
 
@@ -65,7 +64,7 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="MouseBody" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.59691, 7.62646 )
 collision_layer = 64
 collision_mask = 0
 script = ExtResource( 5 )
@@ -74,16 +73,17 @@ script = ExtResource( 5 )
 shape = SubResource( 2 )
 
 [node name="model" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.59691, 7.62646 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 3 )
 material/1 = ExtResource( 2 )
 material/2 = ExtResource( 1 )
 
 [node name="PosEnd" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0210074, -2.40405, 8.08691 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0210074, -4.00096, 15.7134 )
 
 [node name="Borders" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.59691, 7.62646 )
 
 [node name="Right" type="Spatial" parent="Borders"]
 

@@ -8,11 +8,15 @@ func _ready():
 	yield(get_tree().create_timer(1,false),"timeout")
 	queue_free()
 
+func play_sound():
+	$sfx.play()
+
 func _on_Area_explosion_body_entered(body):
 	print("explosion detected: "+body.name)
 	if (body.collision_layer == Utils.MASK.Player):
-		if not body.is_invincible():
+			body.death_type = Character.DEATH.BURNED
 			body.health_decrease()
+			
 	if (body.is_in_group("crate") ):
 		body._on_Exploded()
 

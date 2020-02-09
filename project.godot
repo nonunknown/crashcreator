@@ -9,15 +9,40 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "ArrayUtils",
+"language": "GDScript",
+"path": "res://addons/SIsilicon.3d.text/array_utils.gd"
+}, {
+"base": "EditorPlugin",
+"class": "BetterGroups",
+"language": "GDScript",
+"path": "res://addons/better_groups/Main.gd"
+}, {
+"base": "Enemy",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://scripts/gameplay/enemies/Boss.gd"
+}, {
+"base": "Boss",
+"class": "BossAra",
+"language": "GDScript",
+"path": "res://gameplay/bosses/BossAra.gd"
+}, {
 "base": "Control",
 "class": "ButtonMesh",
 "language": "GDScript",
 "path": "res://scripts/Editor/ButtonMesh.gd"
 }, {
-"base": "KinematicBody",
+"base": "KinematicCharacter",
 "class": "Character",
 "language": "GDScript",
 "path": "res://scripts/gameplay/character.gd"
+}, {
+"base": "Reference",
+"class": "CharacterMachine",
+"language": "GDScript",
+"path": "res://scripts/Character/CharacterMachine.gd"
 }, {
 "base": "RigidBody",
 "class": "Crate",
@@ -69,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/Crate_WoodJump.gd"
 }, {
+"base": "RigidBody",
+"class": "Dynamite",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Dynamite.gd"
+}, {
 "base": "Spatial",
 "class": "EditorCrate",
 "language": "GDScript",
@@ -84,6 +114,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Editor/EditorState.gd"
 }, {
+"base": "KinematicCharacter",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scripts/gameplay/enemies/Enemy.gd"
+}, {
+"base": "Enemy",
+"class": "EnemyFrog",
+"language": "GDScript",
+"path": "res://scripts/gameplay/enemies/EnemyFrog.gd"
+}, {
+"base": "Enemy",
+"class": "EnemyKnight",
+"language": "GDScript",
+"path": "res://scripts/gameplay/enemies/EnemyKnigth.gd"
+}, {
+"base": "Spatial",
+"class": "EnemyManager",
+"language": "GDScript",
+"path": "res://scripts/Editor/EnemyManager.gd"
+}, {
 "base": "Spatial",
 "class": "EntityManager",
 "language": "GDScript",
@@ -98,6 +148,11 @@ _global_script_classes=[ {
 "class": "GUI_tools_Manager",
 "language": "GDScript",
 "path": "res://scripts/Editor/GUI_tools_Manager.gd"
+}, {
+"base": "Reference",
+"class": "GameplayEvent",
+"language": "GDScript",
+"path": "res://scripts/gameplay/GameplayEvent.gd"
 }, {
 "base": "Control",
 "class": "GuiToolsBase",
@@ -134,10 +189,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/Iventory.gd"
 }, {
+"base": "KinematicBody",
+"class": "KinematicCharacter",
+"language": "GDScript",
+"path": "res://scripts/Character/KinematicCharacter.gd"
+}, {
 "base": "Node",
 "class": "LevelBuilder",
 "language": "GDScript",
 "path": "res://scripts/Editor/LevelBuilder.gd"
+}, {
+"base": "Node",
+"class": "LevelCFG",
+"language": "GDScript",
+"path": "res://scripts/Editor/LevelCFG.gd"
 }, {
 "base": "Control",
 "class": "LevelInfo",
@@ -159,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Editor/Logger.gd"
 }, {
+"base": "Camera",
+"class": "LookCamera",
+"language": "GDScript",
+"path": "res://scripts/gameplay/LookCamera.gd"
+}, {
 "base": "Spatial",
 "class": "ManagerGameplay",
 "language": "GDScript",
@@ -173,6 +243,11 @@ _global_script_classes=[ {
 "class": "MenuManager",
 "language": "GDScript",
 "path": "res://scripts/Menu/MenuManager.gd"
+}, {
+"base": "Reference",
+"class": "Movement",
+"language": "GDScript",
+"path": "res://scripts/Character/Movement.gd"
 }, {
 "base": "Resource",
 "class": "PathBase",
@@ -204,6 +279,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Editor/Selectable.gd"
 }, {
+"base": "Spatial",
+"class": "TerrainGenerator",
+"language": "GDScript",
+"path": "res://scripts/Editor/TerrainGenerator.gd"
+}, {
 "base": "Button",
 "class": "TextButton",
 "language": "GDScript",
@@ -219,14 +299,24 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Fader/Transition.gd"
 }, {
+"base": "TextureRect",
+"class": "UrlTexture",
+"language": "GDScript",
+"path": "res://scripts/Editor/UrlTexture.gd"
+}, {
 "base": "Spatial",
 "class": "WarpPortal",
 "language": "GDScript",
 "path": "res://scripts/Warp/WarpPortal.gd"
 } ]
 _global_script_class_icons={
+"ArrayUtils": "",
+"BetterGroups": "",
+"Boss": "",
+"BossAra": "",
 "ButtonMesh": "",
 "Character": "",
+"CharacterMachine": "",
 "Crate": "",
 "CrateAku": "",
 "CrateBounce": "",
@@ -237,12 +327,18 @@ _global_script_class_icons={
 "CrateTNT": "",
 "CrateTime": "",
 "CrateWoodJump": "",
+"Dynamite": "",
 "EditorCrate": "",
 "EditorManager": "",
 "EditorState": "",
+"Enemy": "",
+"EnemyFrog": "",
+"EnemyKnight": "",
+"EnemyManager": "",
 "EntityManager": "",
 "Explosion": "",
 "GUI_tools_Manager": "",
+"GameplayEvent": "",
 "GuiToolsBase": "",
 "Item": "",
 "ItemAku": "",
@@ -250,23 +346,29 @@ _global_script_class_icons={
 "ItemLife": "",
 "ItemWumpa": "",
 "Iventory": "",
+"KinematicCharacter": "",
 "LevelBuilder": "",
+"LevelCFG": "",
 "LevelInfo": "",
 "LevelManager": "",
 "LevelParams": "",
 "Logger": "",
+"LookCamera": "",
 "ManagerGameplay": "",
 "Menu": "",
 "MenuManager": "",
+"Movement": "",
 "PathBase": "",
 "PathManager": "",
 "Placeable": "",
 "Power": "",
 "Project": "",
 "Selectable": "",
+"TerrainGenerator": "",
 "TextButton": "",
 "TimeTrial": "",
 "Transition": "",
+"UrlTexture": "",
 "WarpPortal": ""
 }
 
@@ -281,12 +383,12 @@ config/windows_native_icon="res://icon_256.ico"
 
 [autoload]
 
+FileManager="*res://scripts/Singletons/FileManager.gd"
+LoadingManager="*res://scripts/Singletons/LoadingManager.gd"
+IDTable="*res://scripts/Singletons/IDTable.gd"
 GameManager="*res://scripts/Singletons/GameManager.gd"
 Utils="*res://scripts/Singletons/Utils.gd"
-LevelFile="*res://scripts/Singletons/LevelFile.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
-FileManager="*res://scripts/Singletons/FileManager.gd"
-IDTable="*res://scripts/Singletons/IDTable.gd"
 
 [compression]
 
@@ -305,6 +407,10 @@ window/stretch/aspect="keep"
 [editor]
 
 convert_text_resources_to_binary_on_export=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "SIsilicon.3d.text", "simple_water" )
 
 [importer_defaults]
 

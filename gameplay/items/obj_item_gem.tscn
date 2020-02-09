@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://models/items/gem/Clear.png" type="Texture" id=1]
+[ext_resource path="res://models/items/gem/Gem.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://gameplay/items/obj_item_gem.gd" type="Script" id=3]
+[ext_resource path="res://sounds/item/crystal_collect.ogg" type="AudioStream" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_vertex_lighting = true
+vertex_color_use_as_albedo = true
+params_diffuse_mode = 4
+params_specular_mode = 3
+params_cull_mode = 2
+albedo_texture = ExtResource( 1 )
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.19
+refraction_enabled = true
+refraction_scale = 0.8
+refraction_texture_channel = 0
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.754376, 0.798351, 0.777371 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "rotate"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("model:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6, 3.2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 27.762, 0, 0 ), Vector3( 14.5162, 144.652, 6.0176 ), Vector3( -8.94592, 288.217, 11.8192 ), Vector3( 27.762, 360, 0 ) ]
+}
+
+[node name="obj_item_gem" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="model" type="MeshInstance" parent="."]
+transform = Transform( 0.0229172, 0, 0, 0, 0.0202792, -0.0106748, 0, 0.0106748, 0.0202792, 0, 1.01565, 0 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 1 )
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 1.06127, 0 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "rotate"
+anims/rotate = SubResource( 3 )
+
+[node name="sfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]

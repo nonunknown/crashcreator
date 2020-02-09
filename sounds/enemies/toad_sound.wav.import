@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/toad_sound.wav-2253f5979878f1abe3734452da219470.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/toad_sound.wav"
+dest_files=[ "res://.import/toad_sound.wav-2253f5979878f1abe3734452da219470.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

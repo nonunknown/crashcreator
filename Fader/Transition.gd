@@ -10,6 +10,7 @@ func start_transition(id:int,speed:float=1):
 		3: to_clean()
 
 func to_fade_in():
+	print("fadein")
 	$AnimationPlayer.play("fade-in")
 	pass
 	

@@ -222,15 +222,15 @@ func set_distance(value):
 "
 
 [sub_resource type="OpenSimplexNoise" id=2]
-seed = 100
-octaves = 2
-period = 47.3
-persistence = 0.258
-lacunarity = 2.11
+octaves = 6
+period = 38.6
+persistence = 0.387
+lacunarity = 1.86
 
 [sub_resource type="NoiseTexture" id=3]
 width = 1024
 height = 1024
+seamless = true
 noise = SubResource( 2 )
 
 [sub_resource type="StreamTexture" id=4]
@@ -595,6 +595,7 @@ script = ExtResource( 2 )
 material = ExtResource( 7 )
 y_multiplier = 20.0
 uv1_scale = 50
+draw_vertexes = true
 
 [node name="Camera" type="Camera" parent="Spatial"]
 transform = Transform( 1, 0, 0, 0, 0.877071, 0.480361, 0, -0.480361, 0.877071, 0, 0.471764, 0.99968 )

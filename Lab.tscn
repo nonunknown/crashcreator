@@ -136,6 +136,7 @@ shape = SubResource( 5 )
 [node name="obj_Character" parent="Gameplay/Entities" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35639, 0.54602, 2.58163 )
 collision_mask = 190
+jump_force = 9
 use_debugger = true
 
 [node name="Camera" type="Camera" parent="Gameplay/Entities"]

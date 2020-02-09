@@ -19,6 +19,6 @@ func _on_Exploded():
 	_on_Attacked()
 
 
-func _on_Area_area_entered(area):
+func _on_Area_area_entered(_area):
 	
 	pass # Replace with function body.

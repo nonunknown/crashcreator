@@ -62,6 +62,7 @@ func load_project_into_editor():
 	print("loading into editor")
 	editor_state.manager_editor.logger.logg("Loading: project into directory")
 	var project:Project = Project.new()
+	FileManager.editingLevel = FileManager.EditorLevelInfo.new(str( selected_item))
 	var file = File.new()
 	var dir = "user://projects/"+selected_item
 	file.open(dir, file.READ)

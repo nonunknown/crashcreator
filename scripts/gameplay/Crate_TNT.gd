@@ -61,5 +61,5 @@ func _on_Exploded():
 
 
 
-func _on_Area_area_entered(area):
+func _on_Area_area_entered(_area):
 	pass # Replace with function body.

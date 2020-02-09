@@ -14,13 +14,13 @@ func set_gamemode(mode:int):
 func is_mode_play()->bool:
 	if GAME_MODE == MODE.PLAY: return true
 	return false
-
-func change_scene(actual_scene_name:String,new_scene:PackedScene):
-	var root = get_tree().get_root()
-	print(new_scene)
-	print("changing scene")
-#	root.call_deferred("add_child",new_scene.instance())
-	root.call_deferred("remove_child",root.get_node(actual_scene_name))
+#
+#func change_scene(actual_scene_name:String,new_scene:PackedScene):
+#	var root = get_tree().get_root()
+#	print(new_scene)
+#	print("changing scene")
+##	root.call_deferred("add_child",new_scene.instance())
+#	root.call_deferred("remove_child",root.get_node(actual_scene_name))
 	
 func change_scene_forced(path:String,to_gamemode:int):
 	set_gamemode(to_gamemode)
@@ -43,40 +43,35 @@ var _loader = null
 var _error = false
 var _repeat = true
 signal done
+var loaded_scene = null
 func change_scene_async(path:String,params:Dictionary={}):
-	Utils.make_transition(Utils.EFFECT.FADE_IN,.4,get_tree().root)
 	_loader = null
 	_error = false
 	_repeat = true
+	print(path)
 	_loader = ResourceLoader.load_interactive(path)
 	while(_repeat):
 		yield(_update_load(),"completed")
-	print("yield is done")
 	if _error :
 		print("error")
-		return
+		return null
 	print("loading")
-	var root = get_tree().get_root()
-	var current_scene = get_tree().get_nodes_in_group("current")[0]
 
-	current_scene.queue_free()
 	var to_scene = _loader.get_resource()
-	current_scene = to_scene.instance()
-	root.add_child(current_scene)
+	loaded_scene = to_scene.instance()
+	yield(get_tree().create_timer(2,false),"timeout")
+	emit_signal("done")
 	
-	Utils.make_transition(Utils.EFFECT.FADE_OUT,1,get_tree().root)
-	
-	if not params.empty():
-		current_scene.start_params(params)
+#	if not params.empty():
+#		current_scene.start_params(params)
 		
-	print("o/")
+
 
 
 func _update_load() -> Node:
 	if _loader == null:
 		print("stopped loading scene")
 		_error = true
-		emit_signal("done")
 		
 	
 	var t = OS.get_ticks_msec()
@@ -87,7 +82,6 @@ func _update_load() -> Node:
 			_error = false
 			_repeat = false
 			print("loaded")
-			emit_signal("done")
 			break
 		elif err == OK:
 			var progress = float(_loader.get_stage()) / _loader.get_stage_count()
@@ -96,8 +90,7 @@ func _update_load() -> Node:
 			break
 		else:
 			_loader = null
-			print("error: "+err)
+			print("error: "+str( err) )
 			_error = true
 			_repeat = false
-			emit_signal("done")
 	return yield(get_tree(),"idle_frame")

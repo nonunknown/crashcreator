@@ -36,7 +36,7 @@ size = Vector2( 720, 480 )
 handle_input_locally = false
 hdr = false
 usage = 3
-render_target_update_mode = 0
+render_target_update_mode = 3
 gui_disable_input = true
 gui_snap_controls_to_pixels = false
 

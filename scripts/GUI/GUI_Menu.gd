@@ -60,5 +60,8 @@ func _on_bt_edit_entity_toggled(button_pressed):
 
 
 onready var level_builder:LevelBuilder = get_node("/root/Main/Builder") as LevelBuilder
+onready var gui_build = get_parent().get_node("GUI_Build")
 func _on_bt_edit_export_pressed():
-	level_builder.start(true)
+	gui_build.show()
+	gui_build.set_builder(level_builder)
+#	level_builder.start(true)

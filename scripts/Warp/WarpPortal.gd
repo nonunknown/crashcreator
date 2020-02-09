@@ -39,7 +39,7 @@ func emit(activate:bool):
 	visible = activate
 	if activate:
 		portal.lifetime = 600
-	else: portal.lifetime = 0
+	else: portal.lifetime = 1
 	
 	
 # Called when the node enters the scene tree for the first time.

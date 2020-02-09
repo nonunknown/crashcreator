@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/crash_slide.wav-2b5d30d39afa22659b5db74725683e58.sample"
+
+[deps]
+
+source_file="res://sounds/crash/crash_slide.wav"
+dest_files=[ "res://.import/crash_slide.wav-2b5d30d39afa22659b5db74725683e58.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,145 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://gui/UrlTexture.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+onready var manager = get_node(\"/root/Main\")
+onready var le_title:LineEdit = $ConfirmationDialog/VBoxContainer/HBoxContainer2/le_title
+onready var le_url:LineEdit = $ConfirmationDialog/VBoxContainer/HBoxContainer3/le_url
+func show():
+	get_child(0).show()
+	pass # Replace with function body.
+
+var level_builder:LevelBuilder
+func set_builder(builder:LevelBuilder):
+	level_builder = builder
+
+func do_level_cfg() -> Node:
+	var cfg = LevelCFG.new(manager.logger)
+	cfg.generate_level_cfg({title=le_title.text,url=le_url.text})
+	return yield(get_tree(),\"idle_frame\")
+
+func _on_ConfirmationDialog_confirmed():
+	level_builder.start(true,self)
+	pass # Replace with function body.
+"
+
+[node name="GUI_Build" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -188.0
+margin_top = -91.0
+margin_right = 188.0
+margin_bottom = 151.0
+popup_exclusive = true
+window_title = "Export Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ConfirmationDialog/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 24.0
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="ConfirmationDialog/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 36.0
+margin_bottom = 19.0
+size_flags_horizontal = 0
+text = "Title: "
+
+[node name="le_title" type="LineEdit" parent="ConfirmationDialog/VBoxContainer/HBoxContainer2"]
+margin_left = 40.0
+margin_right = 360.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+expand_to_text_length = true
+placeholder_text = "Toad Village"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ConfirmationDialog/VBoxContainer"]
+margin_top = 28.0
+margin_right = 360.0
+margin_bottom = 52.0
+grow_horizontal = 0
+rect_clip_content = true
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="ConfirmationDialog/VBoxContainer/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 110.0
+margin_bottom = 19.0
+text = "Portal Image url: "
+
+[node name="le_url" type="LineEdit" parent="ConfirmationDialog/VBoxContainer/HBoxContainer3"]
+margin_left = 114.0
+margin_right = 235.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "https://image.png"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="ConfirmationDialog/VBoxContainer/HBoxContainer3"]
+margin_left = 239.0
+margin_right = 360.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "preview"
+
+[node name="Panel" type="Panel" parent="ConfirmationDialog/VBoxContainer"]
+margin_top = 56.0
+margin_right = 360.0
+margin_bottom = 198.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="UrlTexture" parent="ConfirmationDialog/VBoxContainer/Panel" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+build_path = NodePath("../../../..")
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="pressed" from="ConfirmationDialog/VBoxContainer/HBoxContainer3/Button" to="ConfirmationDialog/VBoxContainer/Panel/UrlTexture" method="_on_Button_pressed"]

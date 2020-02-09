@@ -59,7 +59,6 @@ func is_timeable(id) -> bool:
 	for _id in timeable_crates:
 		if (_id == id):
 			return true
-			break
 	return false
 
 func get_mat_from_tex_id(id:int) -> SpatialMaterial:

@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://textures/gameplay/boxes-crate-top.png" type="Texture" id=1]
 [ext_resource path="res://textures/gameplay/boxes-crate-side.png" type="Texture" id=2]
 [ext_resource path="res://resources/gui/bt_gp_crates.res" type="ButtonGroup" id=3]
 [ext_resource path="res://scripts/GUI/GUI_tools_crate.gd" type="Script" id=4]
 [ext_resource path="res://scripts/GUI/bt_crate.gd" type="Script" id=5]
-[ext_resource path="res://textures/gameplay/boxes-enforced.png" type="Texture" id=6]
 [ext_resource path="res://textures/gameplay/boxes-wumpa.png" type="Texture" id=7]
 [ext_resource path="res://textures/gameplay/boxes-crate-jump.png" type="Texture" id=8]
 [ext_resource path="res://textures/gameplay/boxes-checkpoint-crate.png" type="Texture" id=9]
@@ -108,7 +107,7 @@ group = ExtResource( 3 )
 texture_normal = ExtResource( 1 )
 script = ExtResource( 5 )
 ID = 4
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="bt_crate_wumpa" type="TextureButton" parent="TabContainer/basic/GridContainer"]
 margin_left = 180.0
@@ -123,6 +122,7 @@ ID = 5
 texture = ExtResource( 7 )
 
 [node name="items" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -165,6 +165,7 @@ ID = 7
 texture = ExtResource( 13 )
 
 [node name="explosives" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -207,6 +208,7 @@ ID = 9
 texture = ExtResource( 12 )
 
 [node name="activation" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

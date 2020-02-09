@@ -7,6 +7,34 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.12 - Boss Update
+    - Added
+        - Enemies editor (Not done)
+        - User now can use custom images for portals (upload)
+            - Url Texture Asset
+        - Bike Level Testing (Not done)
+        - Boss Battle Mode (Not done)
+        - 3D texts
+        - Loading Screen System (one line, full working)
+        - Water Shader to toad village
+        - Crash Burning death animation
+        - Dynamites
+        - Crystal
+        - Gem
+        - Jungle Level for Boss Battle
+        - Character Ara Bandicoot as Boss
+        
+
+    - Tests
+        - Shader Inclusion
+        - Game graphic improvement
+    - Remade
+        - Crash Move System (made from zero)
+            Also the code can be reused for NPCs and Bosses
+        - All Toad village model files
+    - Improved
+        - Level Build System (now uses two files one is for metadata)
+
 ### Alpha 0.9.11 - Gameplay update
     - Improved gameplay
 ### Alpha 0.9.10 - The Terrain Generation Update

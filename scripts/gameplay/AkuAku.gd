@@ -18,7 +18,7 @@ func _ready():
 	aku_head_pos = get_tree().get_nodes_in_group("aku_head")[0]
 	set_process(false)
 	
-func _process(delta):
+func _process(_delta):
 #	var pos = target_pos.global_transform.origin
 	var rot = aku_pos.get_parent().rotation.y
 	if invincible:

@@ -17,6 +17,6 @@ func _process(delta):
 	gui_clock.set_time(time)
 	pass
 
-func _on_freeze(time):
+func _on_freeze(_time):
 	print("freezed time trial")
-	wait_time = time
+	wait_time = _time

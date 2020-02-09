@@ -24,6 +24,7 @@ func _gameplay_ready():
 	iventory.connect("wumpa_added",self,"_on_wumpa_added")
 	iventory.connect("crate_added",self,"_on_crate_added")
 	iventory.connect("life_added",self,"_on_life_added")
+	iventory.connect("collectable_added",self,"_on_collect_added")
 	
 	visible = true
 		
@@ -45,4 +46,8 @@ func _on_crate_added(amt):
 	
 func _on_life_added(amt):
 	t_life.text = str(amt)
+	pass
+
+func _on_collect_added(collect):
+	
 	pass

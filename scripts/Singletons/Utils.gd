@@ -27,6 +27,7 @@ class MachineManager:
 		machine.funcs.update[machine.state].call_func()
 	
 	func change_state(to):
+#		print("state to: "+str(to))
 		if machine.funcs.exit.has(machine.state):
 			machine.funcs.exit[machine.state].call_func()
 		machine.state = to
@@ -35,7 +36,10 @@ class MachineManager:
 		
 	
 	func get_current_state() -> int: return machine.state
-
+	func state_is(state:int) -> bool: 
+		if machine.state == state: 
+			return true
+		else:return false
 const ray_length = 1000
 func ray(world,from,to,collision_mask) -> RayCast:
 	var space_state = world.direct_space_state
@@ -119,24 +123,22 @@ func find_node_in_group(group_name:String,node_name:String) -> Node:
 		for node in get_tree().get_nodes_in_group(group_name):
 			if node.name == node_name:
 				return node
-				break
 	return null
 
 enum EFFECT {FADE_IN, FADE_OUT, BLACK, CLEAN}
 var transition:Transition = null
-func make_transition(effect:int,speed:float=1,target:Node=null):
-	if transition == null:
-		print("loading transition")
-		var t = load("res://Fader/Transition.tscn")
-		transition = t.instance()
-		target.add_child(transition)
+func make_transition(effect:int,speed:float=1):
 	transition.start_transition(effect,speed)
-	
+
 	
 func is_player(area)-> bool:
-	if (area.collision_layer == Utils.MASK.Player_Area):
+	if (area.collision_layer == MASK.Player_Area):
 		return true
 	return false
 
-func get_player()->Character:
+func get_player() -> Character:
 	return get_tree().get_nodes_in_group("player")[0]
+
+func reparent(node,new_parent):
+  node.get_parent().remove_child(node)
+  new_parent.call_deferred("add_child",node)

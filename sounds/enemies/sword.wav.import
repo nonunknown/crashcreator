@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sword.wav-a91b48f5ee320ddc584759bb932bfe77.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/sword.wav"
+dest_files=[ "res://.import/sword.wav-a91b48f5ee320ddc584759bb932bfe77.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

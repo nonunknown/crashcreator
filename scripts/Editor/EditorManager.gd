@@ -13,8 +13,8 @@ var registered_managers = {}
 func _ready():
 	logger =  get_node("GUI/GUI_Logger/Logger")
 	smachine.register_state_array(self,[Utils.EDITOR_STATE.PATH,
-	Utils.EDITOR_STATE.CRATE,Utils.EDITOR_STATE.ENTITY,Utils.EDITOR_STATE.TIME,Utils.EDITOR_STATE.SAVE,Utils.EDITOR_STATE.LOAD,Utils.EDITOR_STATE.NEW],
-	["path","crate","entity","time","save","load","new"])
+	Utils.EDITOR_STATE.CRATE,Utils.EDITOR_STATE.ENTITY,Utils.EDITOR_STATE.TIME,Utils.EDITOR_STATE.SAVE,Utils.EDITOR_STATE.LOAD,Utils.EDITOR_STATE.NEW,Utils.EDITOR_STATE.ENEMY],
+	["path","crate","entity","time","save","load","new","enemy"])
 	connect("change_mode",self,"_on_change_mode")
 	emit_signal("change_mode",Utils.EDITOR_STATE.PATH)
 
@@ -118,4 +118,16 @@ func st_update_new():
 
 func st_exit_new():
 	registered_managers[Utils.EDITOR_STATE.NEW]._exit()
+	pass
+
+func st_init_enemy():
+	registered_managers[Utils.EDITOR_STATE.ENEMY]._enter()
+	pass
+
+func st_update_enemy():
+	registered_managers[Utils.EDITOR_STATE.ENEMY]._update()
+	pass
+
+func st_exit_enemy():
+	registered_managers[Utils.EDITOR_STATE.ENEMY]._exit()
 	pass

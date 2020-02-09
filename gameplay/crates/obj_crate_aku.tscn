@@ -88,6 +88,7 @@ extents = Vector3( 0.494565, 0.0116764, 0.4698 )
 ]]
 collision_layer = 512
 collision_mask = 530
+mode = 3
 script = ExtResource( 5 )
 ID = 6
 item_aku = ExtResource( 8 )

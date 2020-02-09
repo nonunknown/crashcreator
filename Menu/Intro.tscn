@@ -195,7 +195,7 @@ script/source = "extends TextButton
 
 func _on_TextButton_pressed():
 	print(\"Start\")
-	GameManager.change_scene_async(\"res://scenes/scn_Room.tscn\")
+	LoadingManager.load_level(IDTable.levels.warp_room)
 "
 
 [sub_resource type="GDScript" id=13]

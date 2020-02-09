@@ -1,10 +1,13 @@
 extends Node
 class_name LevelBuilder
 
+var target:Node = null
+
 onready var manager = get_node("/root/Main")
 func logg(msg:String):
 	manager.logger.logg(msg)
-func start(compile_only:bool=false):
+func start(compile_only:bool=false,target:Node=null):
+	self.target = target
 	if !level_is_valid(): 
 		logg("LEVEL VALIDATION ERROR")
 		return
@@ -15,8 +18,13 @@ func start(compile_only:bool=false):
 		return
 	logg("SUCCESS - LEVEL CREATED")
 	
+	#clear the gameplay level instance and turn editor back on
+	
+
 	if (compile_only):
 		compile()
+		editor_level.visible = true
+		game_level.call_deferred("free")
 	else: compile_and_play()
 	
 #	if (!save_game_level()):
@@ -49,15 +57,17 @@ func crate_is_valid() -> bool:
 	return true
 
 var game_level = null
+var editor_level = null
 func create_game_level() -> bool:
 	var to_load = load("res://scenes/scn_Gameplay.tscn")
 	game_level = to_load.instance()
-	var editor_level = get_node("/root/Main/Level")
+	editor_level = get_node("/root/Main/Level")
 	editor_level.visible = false
 	add_child(game_level)
 	build_entity()
 	build_path()
 	build_crate()
+#	build_terrain()
 	return true
 
 #func save_game_level() -> bool:
@@ -91,11 +101,14 @@ func recursive_owner(node:Node,target:Node=null):
 func compile():
 	var result = PackedScene.new()
 	result.pack(game_level)
-	var err = ResourceSaver.save("user://custom_level/custom_level.scn",result)
+	var err = ResourceSaver.save("user://custom_level/"+FileManager.editingLevel.filename+".scn",result)
 	if err == OK:
+		yield(target.do_level_cfg(),"completed")
+		
 		logg("COMPILED SUCCESS")
+		
 	else: logg("ERROR: "+str(err))
-	game_level.queue_free()
+#	game_level.queue_free()
 
 func compile_and_play():
 	remove_child(game_level)
@@ -136,3 +149,7 @@ func build_entity():
 		instance.translation = entity.translation
 		entity_manager.add_child(instance)
 		instance.set_owner(game_level)
+
+func build_terrain():
+	var terrain_generator:TerrainGenerator = get_node("../Level/Terrain")
+	terrain_generator.build_terrain()

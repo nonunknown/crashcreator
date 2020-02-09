@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Dynamite.obj-c73b565f3653b64a7adc05c15c83f888.mesh"
+
+[deps]
+
+files=[ "res://.import/Dynamite.obj-c73b565f3653b64a7adc05c15c83f888.mesh" ]
+
+source_file="res://models/items/dynamite/Dynamite.obj"
+dest_files=[ "res://.import/Dynamite.obj-c73b565f3653b64a7adc05c15c83f888.mesh", "res://.import/Dynamite.obj-c73b565f3653b64a7adc05c15c83f888.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

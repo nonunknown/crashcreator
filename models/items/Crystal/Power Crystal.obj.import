@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Power Crystal.obj-ee8ba142c7ba27d7bbb5d21c5e41afaa.mesh"
+
+[deps]
+
+files=[ "res://.import/Power Crystal.obj-ee8ba142c7ba27d7bbb5d21c5e41afaa.mesh" ]
+
+source_file="res://models/items/Crystal/Power Crystal.obj"
+dest_files=[ "res://.import/Power Crystal.obj-ee8ba142c7ba27d7bbb5d21c5e41afaa.mesh", "res://.import/Power Crystal.obj-ee8ba142c7ba27d7bbb5d21c5e41afaa.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

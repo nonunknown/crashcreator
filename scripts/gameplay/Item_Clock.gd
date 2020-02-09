@@ -4,7 +4,7 @@ class_name ItemClock
 onready var time_trial:TimeTrial = TimeTrial.new() 
 
 
-func _player_picked(player):
+func _player_picked(_player):
 	var clock_hud:Node = get_tree().get_nodes_in_group("hud")[0]
 	clock_hud.visible = true
 	add_child(time_trial)

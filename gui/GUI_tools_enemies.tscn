@@ -1,0 +1,191 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/Editor/ButtonMesh.gd" type="Script" id=1]
+[ext_resource path="res://models/enemies/lab_knight/lab_knight/Knight.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://models/enemies/toad/frog/body.mesh" type="ArrayMesh" id=3]
+
+[sub_resource type="World" id=2]
+
+[sub_resource type="Environment" id=1]
+background_energy = 2.76
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="World" id=3]
+
+[node name="GUI_tools_enemy" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_top = 0.694
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.119995
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemies" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Enemies"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/hseparation = 102
+columns = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_knight" type="Control" parent="TabContainer/Enemies/GridContainer"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scn = ExtResource( 2 )
+
+[node name="Background" type="Panel" parent="TabContainer/Enemies/GridContainer/bt_knight"]
+margin_right = 101.0
+margin_bottom = 89.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="TabContainer/Enemies/GridContainer/bt_knight"]
+margin_left = 9.50021
+margin_top = 7.20705
+margin_right = 729.5
+margin_bottom = 487.207
+rect_scale = Vector2( 0.107445, 0.107445 )
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="TabContainer/Enemies/GridContainer/bt_knight/ViewportContainer"]
+size = Vector2( 720, 480 )
+own_world = true
+world = SubResource( 2 )
+handle_input_locally = false
+hdr = false
+usage = 3
+render_target_update_mode = 3
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+
+[node name="MeshInstance" type="MeshInstance" parent="TabContainer/Enemies/GridContainer/bt_knight/ViewportContainer/Viewport"]
+transform = Transform( -1, -8.74228e-08, 3.82137e-15, -8.74228e-08, 1, -1.06581e-14, -3.82137e-15, -1.06581e-14, -1, 0, 0, 0 )
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+
+[node name="Camera" type="Camera" parent="TabContainer/Enemies/GridContainer/bt_knight/ViewportContainer/Viewport"]
+transform = Transform( -0.930699, 0, -0.365787, 0, 1, 0, 0.365787, 0, -0.930699, -1.19662, 1.72144, -2.66406 )
+environment = SubResource( 1 )
+fov = 43.2
+
+[node name="Name" type="Label" parent="TabContainer/Enemies/GridContainer/bt_knight"]
+margin_top = 65.0
+margin_right = 101.0
+margin_bottom = 79.0
+text = "Knight"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="TabContainer/Enemies/GridContainer/bt_knight"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+toggle_mode = true
+flat = true
+
+[node name="bt_toad" type="Control" parent="TabContainer/Enemies/GridContainer"]
+margin_left = 102.0
+margin_right = 102.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scn = ExtResource( 2 )
+
+[node name="Background" type="Panel" parent="TabContainer/Enemies/GridContainer/bt_toad"]
+margin_right = 101.0
+margin_bottom = 89.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="TabContainer/Enemies/GridContainer/bt_toad"]
+margin_left = 9.50021
+margin_top = 7.20705
+margin_right = 729.5
+margin_bottom = 487.207
+rect_scale = Vector2( 0.107445, 0.107445 )
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="TabContainer/Enemies/GridContainer/bt_toad/ViewportContainer"]
+size = Vector2( 720, 480 )
+own_world = true
+world = SubResource( 3 )
+handle_input_locally = false
+hdr = false
+usage = 3
+render_target_update_mode = 3
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+
+[node name="MeshInstance" type="MeshInstance" parent="TabContainer/Enemies/GridContainer/bt_toad/ViewportContainer/Viewport"]
+transform = Transform( -1, -8.74228e-08, 3.82137e-15, -8.74228e-08, 1, -1.06581e-14, -3.82137e-15, -1.06581e-14, -1, 0, -0.284576, 0 )
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+
+[node name="Camera" type="Camera" parent="TabContainer/Enemies/GridContainer/bt_toad/ViewportContainer/Viewport"]
+transform = Transform( -0.930699, 0, -0.365787, 0, 1, 0, 0.365787, 0, -0.930699, -1.19662, 0.931156, -2.66406 )
+environment = SubResource( 1 )
+fov = 43.2
+
+[node name="Name" type="Label" parent="TabContainer/Enemies/GridContainer/bt_toad"]
+margin_top = 65.0
+margin_right = 101.0
+margin_bottom = 79.0
+text = "Toad"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="TabContainer/Enemies/GridContainer/bt_toad"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+toggle_mode = true
+flat = true

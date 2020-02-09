@@ -15,4 +15,5 @@ dest_files=[ "res://.import/Time Trial Stopwatch.obj-0d5c9d608579a2a2a7bd0b56d21
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true
