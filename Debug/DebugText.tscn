@@ -14,7 +14,7 @@ func set_text(id,text):
 	if not labels.has(id):
 		add_text(id)
 	else:
-		labels[id].text = str(id)+\": \"+text
+		labels[id].text = str(id)+\": \"+str(text)
 
 
 func add_text(id):

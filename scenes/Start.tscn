@@ -7,7 +7,7 @@ script/source = "extends Control
 func _ready():
 	yield(get_tree().create_timer(1,false),\"timeout\")
 	LoadingManager.set_start_scene(self)
-	LoadingManager.load_level(IDTable.levels.warp_room)
+	LoadingManager.load_level(IDTable.levels.intro)
 "
 
 [node name="Start" type="Control"]

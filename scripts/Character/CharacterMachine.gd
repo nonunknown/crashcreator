@@ -274,7 +274,7 @@ func st_init_attack():
 	character.animator.playback_speed = 1
 	pass
 
-var timer = 2
+var timer = .3
 func st_update_attack():
 	timer -= .01
 	if timer <= 0:

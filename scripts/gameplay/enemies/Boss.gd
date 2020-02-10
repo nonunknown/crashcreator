@@ -13,9 +13,15 @@ func _ready():
 	character = Utils.get_player()
 	character.connect("died",self,"_on_player_died")
 
+func _on_game_restart():
+	._on_game_restart()
+	health = initial_health
+
 func _on_player_died():
 	pass
-	
+
 func _on_attacked():
-	emit_signal("health_decreased")
+	print("attacked boss")
+	health -= 1
+	emit_signal("health_decreased",health)
 	pass

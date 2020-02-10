@@ -22,9 +22,8 @@ func _ready():
 #
 #	else:
 #		pass
-
-func _on_Jumped():
-#	Destroy()
+func activate():
+	#	Destroy()
 	$Area/CollisionShape.disabled = true
 	$sfx_activate.play()
 	$AnimationPlayer.play("activate")
@@ -34,6 +33,10 @@ func _on_Jumped():
 	Destroy()
 #	yield(get_tree().create_timer($sfx.stream.get_length()-3.52,false),"timeout")
 #	queue_free()
+
+func _on_Jumped():
+	activate()
+
 
 func Destroy(change_visibility:bool=true):
 	print("destroying: "+name)

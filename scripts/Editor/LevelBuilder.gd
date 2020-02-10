@@ -58,10 +58,11 @@ func crate_is_valid() -> bool:
 
 var game_level = null
 var editor_level = null
+export var level_path:NodePath
 func create_game_level() -> bool:
 	var to_load = load("res://scenes/scn_Gameplay.tscn")
 	game_level = to_load.instance()
-	editor_level = get_node("/root/Main/Level")
+	editor_level = get_node(level_path)
 	editor_level.visible = false
 	add_child(game_level)
 	build_entity()

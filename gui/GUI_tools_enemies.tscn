@@ -4,9 +4,9 @@
 [ext_resource path="res://models/enemies/lab_knight/lab_knight/Knight.mesh" type="ArrayMesh" id=2]
 [ext_resource path="res://models/enemies/toad/frog/body.mesh" type="ArrayMesh" id=3]
 
-[sub_resource type="World" id=2]
+[sub_resource type="World" id=1]
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=2]
 background_energy = 2.76
 ambient_light_color = Color( 1, 1, 1, 1 )
 
@@ -79,7 +79,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="TabContainer/Enemies/GridContainer/bt_knight/ViewportContainer"]
 size = Vector2( 720, 480 )
 own_world = true
-world = SubResource( 2 )
+world = SubResource( 1 )
 handle_input_locally = false
 hdr = false
 usage = 3
@@ -106,7 +106,7 @@ material/12 = null
 
 [node name="Camera" type="Camera" parent="TabContainer/Enemies/GridContainer/bt_knight/ViewportContainer/Viewport"]
 transform = Transform( -0.930699, 0, -0.365787, 0, 1, 0, 0.365787, 0, -0.930699, -1.19662, 1.72144, -2.66406 )
-environment = SubResource( 1 )
+environment = SubResource( 2 )
 fov = 43.2
 
 [node name="Name" type="Label" parent="TabContainer/Enemies/GridContainer/bt_knight"]
@@ -171,7 +171,7 @@ material/1 = null
 
 [node name="Camera" type="Camera" parent="TabContainer/Enemies/GridContainer/bt_toad/ViewportContainer/Viewport"]
 transform = Transform( -0.930699, 0, -0.365787, 0, 1, 0, 0.365787, 0, -0.930699, -1.19662, 0.931156, -2.66406 )
-environment = SubResource( 1 )
+environment = SubResource( 2 )
 fov = 43.2
 
 [node name="Name" type="Label" parent="TabContainer/Enemies/GridContainer/bt_toad"]

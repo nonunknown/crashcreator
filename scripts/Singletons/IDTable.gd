@@ -2,7 +2,8 @@ extends Node
 
 var levels:Dictionary = {
 	editor = "res://scenes/scn_LevelEditor.tscn",
-	warp_room = "res://scenes/scn_Room.tscn"
+	warp_room = "res://scenes/scn_Room.tscn",
+	intro = "res://Menu/Intro.tscn"
 }
 
 var crates:Dictionary = {

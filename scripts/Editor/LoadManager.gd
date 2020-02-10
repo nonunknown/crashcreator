@@ -58,6 +58,7 @@ func _on_selected(index:int):
 	editor_state.manager_editor.logger.logg("Selected: "+selected_item)
 	pass
 
+export var level_path:NodePath
 func load_project_into_editor():
 	print("loading into editor")
 	editor_state.manager_editor.logger.logg("Loading: project into directory")
@@ -71,7 +72,7 @@ func load_project_into_editor():
 	project.from_dict(content)
 	file.close()
 #	editor_state.manager_editor.emit_signal("change_mode",Utils.EDITOR_STATE.NEW)
-	var level_manager:LevelManager = get_node("/root/Main/Level")
+	var level_manager:LevelManager = get_node(level_path)
 	project.pretty_print()
 	level_manager.insert_stuff(project)
 	pass

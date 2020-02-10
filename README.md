@@ -7,6 +7,14 @@ a game for crash fans to create and play on their own levels, and free source co
 # WARNING
 alpha - means not playable... yet!
 
+### Alpha 0.9.13
+    -Fixed
+        - Level editor was not playable due to new loading system
+    -Added
+        -Cutscene System to boss battle
+    -Bugs
+        -Minor bugs adjustment
+
 ### Alpha 0.9.12 - Boss Update
     - Added
         - Enemies editor (Not done)

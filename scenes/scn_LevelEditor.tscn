@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://level_editor/entities/ent_clock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Editor/CrateManager.gd" type="Script" id=2]
@@ -32,7 +32,6 @@
 [ext_resource path="res://scripts/Editor/SaveManager.gd" type="Script" id=30]
 [ext_resource path="res://scripts/Editor/LoadManager.gd" type="Script" id=31]
 [ext_resource path="res://gui/GUI_SaveLoad.tscn" type="PackedScene" id=32]
-[ext_resource path="res://icon.png" type="Texture" id=33]
 [ext_resource path="res://scripts/Editor/TerrainGenerator.gd" type="Script" id=34]
 [ext_resource path="res://models/levels/shared/mat_grass.material" type="Material" id=35]
 [ext_resource path="res://gui/GUI_Build.tscn" type="PackedScene" id=36]
@@ -56,7 +55,7 @@ script/source = "extends Button
 # var a = 2
 # var b = \"text\"
 
-
+export var builder_path:NodePath
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect(\"pressed\",self,\"_on_pressed\")
@@ -64,7 +63,7 @@ func _ready():
 
 func _on_pressed():
 #	get_tree().change_scene(\"res://Lab.tscn\")
-	get_node(\"/root/Main/Builder\").start()
+	get_node(builder_path).start()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -99,6 +98,11 @@ script/source = "extends GuiToolsBase
 func _init():
 	_ID = Utils.EDITOR_STATE.ENEMY
 "
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.6, 0.6, 0.6, 0.631373 )
+
+[sub_resource type="StyleBoxEmpty" id=14]
 
 [sub_resource type="GDScript" id=11]
 script/source = "
@@ -328,6 +332,7 @@ script = ExtResource( 5 )
 
 [node name="Builder" type="Node" parent="."]
 script = ExtResource( 22 )
+level_path = NodePath("../Level")
 
 [node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
@@ -373,11 +378,9 @@ group = SubResource( 2 )
 group = SubResource( 3 )
 
 [node name="bt_edit_enemy" parent="GUI/GUI_Menu/HBoxContainer" index="8"]
-disabled = false
 group = SubResource( 2 )
 
 [node name="bt_edit_time" parent="GUI/GUI_Menu/HBoxContainer" index="9"]
-disabled = false
 group = SubResource( 2 )
 
 [node name="bt_edit_light" parent="GUI/GUI_Menu/HBoxContainer" index="11"]
@@ -387,6 +390,7 @@ group = SubResource( 2 )
 disabled = false
 group = SubResource( 4 )
 script = SubResource( 5 )
+builder_path = NodePath("../../../../Builder")
 
 [node name="bt_edit_export" parent="GUI/GUI_Menu/HBoxContainer" index="13"]
 disabled = false
@@ -418,8 +422,13 @@ disabled = true
 [node name="bt_remove" parent="GUI/GUI_tools_path/Panel/VBoxContainer" index="1"]
 disabled = true
 
+[node name="GridContainer" parent="GUI/GUI_tools_path/TabContainer/Built-in/VBoxContainer" index="0"]
+margin_bottom = 20.0
+
 [node name="bt_base" parent="GUI/GUI_tools_path/TabContainer/Built-in/VBoxContainer/GridContainer" index="0"]
+visible = true
 group = SubResource( 7 )
+gui_tools_path = NodePath("../../../../..")
 
 [node name="GUI_tools_crate" parent="GUI" groups=[
 "gui_tool",
@@ -456,6 +465,29 @@ group = SubResource( 9 )
 [node name="bt_crate_nitro" parent="GUI/GUI_tools_crate/TabContainer/explosives/GridContainer" index="1"]
 group = SubResource( 9 )
 
+[node name="GUI_tools_enemy" parent="GUI" instance=ExtResource( 37 )]
+visible = false
+script = SubResource( 10 )
+
+[node name="Viewport" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_knight/ViewportContainer" index="0"]
+render_target_update_mode = 0
+
+[node name="Button" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_knight" index="3"]
+margin_right = 101.0
+margin_bottom = 89.0
+custom_styles/hover = SubResource( 13 )
+custom_styles/normal = SubResource( 14 )
+flat = false
+
+[node name="Viewport" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_toad/ViewportContainer" index="0"]
+render_target_update_mode = 0
+
+[node name="Button" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_toad" index="3"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 101.0
+margin_bottom = 89.0
+
 [node name="GUI_tools_entity" parent="GUI" instance=ExtResource( 19 )]
 visible = false
 margin_top = 29.0
@@ -481,6 +513,7 @@ script = ExtResource( 30 )
 
 [node name="LoadDialog" parent="GUI/GUI_SaveLoad" index="1"]
 script = ExtResource( 31 )
+level_path = NodePath("../../../Level")
 
 [node name="GUI_Build" parent="GUI" instance=ExtResource( 36 )]
 visible = false
@@ -495,10 +528,6 @@ margin_left = 377.0
 margin_top = 29.0
 margin_right = 0.0
 margin_bottom = -358.0
-
-[node name="GUI_tools_enemy" parent="GUI" instance=ExtResource( 37 )]
-visible = false
-script = SubResource( 10 )
 
 [node name="Camera" type="Camera" parent="." groups=[
 "dont_save",
@@ -527,6 +556,7 @@ script = ExtResource( 3 )
 ]]
 script = ExtResource( 2 )
 crate_model = ExtResource( 4 )
+main_path = NodePath("../..")
 
 [node name="Entity" type="Spatial" parent="Level" groups=[
 "entity_manager",
@@ -550,18 +580,10 @@ y_multiplier = 30.0
 noise = SubResource( 12 )
 draw_vertexes = true
 
-[node name="sprite" type="Sprite3D" parent="Level/Terrain"]
-transform = Transform( 0.278067, 0, 0, 0, 0.278067, 0, 0, 0, 0.278067, 0, 0, 0 )
-billboard = 1
-texture = ExtResource( 33 )
-
-[node name="Enemy" type="Spatial" parent="Level"]
+[node name="Enemy" type="Spatial" parent="Level" groups=[
+"enemy_manager",
+]]
 script = ExtResource( 38 )
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 0.280472, 0, 0, 0, 0.280472, 0, 0, 0, 0.280472, 0, 0, 0 )
-billboard = 1
-texture = ExtResource( 33 )
 [connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_new" to="GUI/GUI_Menu" method="_on_bt_edit_new_pressed"]
 [connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_save" to="GUI/GUI_Menu" method="_on_bt_edit_save_pressed"]
 [connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_load" to="GUI/GUI_Menu" method="_on_bt_edit_load_pressed"]
@@ -579,6 +601,8 @@ texture = ExtResource( 33 )
 [editable path="GUI/GUI_tools_path"]
 
 [editable path="GUI/GUI_tools_crate"]
+
+[editable path="GUI/GUI_tools_enemy"]
 
 [editable path="GUI/GUI_tools_entity"]
 

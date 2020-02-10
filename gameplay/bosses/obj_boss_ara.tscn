@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://gameplay/bosses/BossAra.gd" type="Script" id=1]
 [ext_resource path="res://models/characters/AraBandicoot/Ara.mesh" type="ArrayMesh" id=2]
@@ -10,13 +10,17 @@
 [ext_resource path="res://models/characters/AraBandicoot/jump-move-loop.anim" type="Animation" id=8]
 [ext_resource path="res://models/characters/AraBandicoot/jump-ground.anim" type="Animation" id=9]
 [ext_resource path="res://sounds/bosses/ara/laught.wav" type="AudioStream" id=10]
-[ext_resource path="res://sounds/bosses/ara/yata.wav" type="AudioStream" id=11]
+[ext_resource path="res://sounds/bosses/ara/talk_opsie.wav" type="AudioStream" id=11]
 [ext_resource path="res://sounds/bosses/ara/ara_hit2.wav" type="AudioStream" id=12]
-[ext_resource path="res://sounds/bosses/ara/ara_attack.wav" type="AudioStream" id=13]
+[ext_resource path="res://sounds/bosses/ara/ara_attack2.wav" type="AudioStream" id=13]
 [ext_resource path="res://sounds/bosses/ara/ara_hit.wav" type="AudioStream" id=14]
 [ext_resource path="res://models/characters/AraBandicoot/eat.anim" type="Animation" id=15]
+[ext_resource path="res://models/characters/AraBandicoot/start001.anim" type="Animation" id=16]
+[ext_resource path="res://models/characters/AraBandicoot/eat-loop.anim" type="Animation" id=17]
+[ext_resource path="res://models/characters/AraBandicoot/start.anim" type="Animation" id=18]
+[ext_resource path="res://sounds/bosses/ara/ara_talk_start.wav" type="AudioStream" id=19]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
 
 onready var holding = get_node(\"../Holding\")
@@ -26,8 +30,7 @@ func _process(delta):
 	
 "
 
-[sub_resource type="Skin" id=1]
-resource_name = "Skin"
+[sub_resource type="Skin" id=2]
 bind_count = 54
 bind/0/bone = 0
 bind/0/pose = Transform( 1, 0, 0, 0, -0.0170781, 0.999854, 0, -1.00007, -0.0170781, 0.0128928, -0.0169323, 0.0137954 )
@@ -138,7 +141,7 @@ bind/52/pose = Transform( 1, 0, 0, 0, -6.48446e-06, -1, 0, 1.00038, -9.31676e-09
 bind/53/bone = 53
 bind/53/pose = Transform( 1, 0, 0, 0, -0.0218796, 0.999761, 0, -0.999906, -0.0218778, -0.304316, -0.622319, 0.508512 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.410746, 0.841847, 0.408727 )
 
 [sub_resource type="BoxShape" id=4]
@@ -147,10 +150,8 @@ extents = Vector3( 0.644476, 1.75816, 0.833663 )
 [node name="obj_boss_ara" type="KinematicBody"]
 script = ExtResource( 1 )
 
-[node name="AraBandicoot" type="Spatial" parent="." groups=[
-"boss",
-]]
-script = SubResource( 3 )
+[node name="AraBandicoot" type="Spatial" parent="."]
+script = SubResource( 1 )
 
 [node name="ararmature" type="Spatial" parent="AraBandicoot"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.001607, 0.781437, 0.113823 )
@@ -158,37 +159,37 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.00160
 [node name="Skeleton" type="Skeleton" parent="AraBandicoot/ararmature"]
 bones/0/name = "master"
 bones/0/parent = -1
-bones/0/rest = Transform( 1, 0, 0, 0, -0.0170763, -0.999636, 0, 0.999854, -0.0170725, -0.0144998, -0.767935, -0.0966575 )
+bones/0/rest = Transform( -0.999999, -0.00151801, -8.21503e-06, -1.77061e-05, 0.0170761, -0.999636, 0.00151793, -0.999853, -0.0170724, -0.0144998, -0.767935, -0.0966575 )
 bones/0/enabled = true
 bones/0/bound_children = [  ]
 bones/1/name = "base"
 bones/1/parent = 0
-bones/1/rest = Transform( 0.444338, -0.210322, -0.870821, 0.855135, -0.190172, 0.482265, -0.267036, -0.958957, 0.0953528, 0.0321017, -0.029477, -0.834625 )
+bones/1/rest = Transform( 0.922052, -0.225463, 0.314622, -0.107606, 0.631482, 0.767887, -0.371808, -0.741887, 0.557998, 0.0321016, -0.0303612, -0.886404 )
 bones/1/enabled = true
 bones/1/bound_children = [  ]
 bones/2/name = "chest"
 bones/2/parent = 1
-bones/2/rest = Transform( 0.265247, 0.175937, -0.947993, 0.512857, 0.806839, 0.293237, 0.816469, -0.563965, 0.123781, 3.0925e-09, 0.169543, -1.32965e-08 )
+bones/2/rest = Transform( 0.963379, 0.260317, -0.0643059, -0.11158, 0.607256, 0.786632, 0.243824, -0.75065, 0.614064, 3.0925e-09, 0.169543, -1.32965e-08 )
 bones/2/enabled = true
 bones/2/bound_children = [  ]
 bones/3/name = "neck"
 bones/3/parent = 2
-bones/3/rest = Transform( 0.882253, 0.425779, 0.200854, -0.420897, 0.904509, -0.0686268, -0.210894, -0.0239927, 0.977214, -9.8396e-11, 0.420774, -1.12556e-08 )
+bones/3/rest = Transform( 0.804165, 0.408442, -0.43185, -0.537794, 0.809391, -0.23593, 0.253172, 0.421973, 0.870542, -9.8396e-11, 0.420774, -1.12556e-08 )
 bones/3/enabled = true
 bones/3/bound_children = [  ]
 bones/4/name = "head"
 bones/4/parent = 3
-bones/4/rest = Transform( 0.818025, -0.377442, 0.434019, 0.40301, 0.914499, 0.0357087, -0.410388, 0.145704, 0.900195, 2.98023e-08, 0.0523431, 9.31323e-10 )
+bones/4/rest = Transform( 0.826325, -0.344617, 0.44545, 0.38387, 0.923384, 0.00227297, -0.412105, 0.169117, 0.895304, 2.98023e-08, 0.0523431, 9.31323e-10 )
 bones/4/enabled = true
 bones/4/bound_children = [  ]
 bones/5/name = "eyebrowr"
 bones/5/parent = 4
-bones/5/rest = Transform( -0.0807244, 0.958302, 0.274114, 0.231245, -0.249501, 0.940358, 0.969537, 0.139298, -0.201463, -0.113903, 0.273183, 0.184248 )
+bones/5/rest = Transform( 0.0451475, 0.998681, -0.0244105, 0.182222, 0.0157925, 0.98313, 0.982217, -0.0488342, -0.181269, -0.131827, 0.282587, 0.165161 )
 bones/5/enabled = true
 bones/5/bound_children = [  ]
 bones/6/name = "earr"
 bones/6/parent = 4
-bones/6/rest = Transform( 0.499652, -0.771377, 0.394111, 0.308552, 0.583621, 0.751119, -0.809409, -0.253695, 0.529618, -0.161767, 0.296964, 0.00350001 )
+bones/6/rest = Transform( 0.499652, -0.771377, 0.39411, 0.308551, 0.583621, 0.751119, -0.809409, -0.253695, 0.529617, -0.161767, 0.296964, 0.00350001 )
 bones/6/enabled = true
 bones/6/bound_children = [  ]
 bones/7/name = "hairfront_0_r"
@@ -238,7 +239,7 @@ bones/15/enabled = true
 bones/15/bound_children = [  ]
 bones/16/name = "big_haircontrol_r"
 bones/16/parent = 4
-bones/16/rest = Transform( 0.997519, -0.0458689, -0.053409, 0.0458598, -0.152247, 0.987278, -0.0534168, -0.987277, -0.149766, -0.311816, -0.656788, -0.484053 )
+bones/16/rest = Transform( 0.997519, -0.0458689, -0.053409, 0.0458598, -0.152247, 0.987278, -0.0534168, -0.987277, -0.149766, -0.315525, -0.588225, -0.494454 )
 bones/16/enabled = true
 bones/16/bound_children = [  ]
 bones/17/name = "nose"
@@ -248,7 +249,7 @@ bones/17/enabled = true
 bones/17/bound_children = [  ]
 bones/18/name = "earl"
 bones/18/parent = 4
-bones/18/rest = Transform( 0.609182, 0.683298, -0.402491, -0.257567, 0.650498, 0.7145, 0.750037, -0.331592, 0.572267, 0.0915964, 0.308612, -0.0100675 )
+bones/18/rest = Transform( 0.609182, 0.683297, -0.402491, -0.257567, 0.650498, 0.714499, 0.750037, -0.331592, 0.572267, 0.0915964, 0.308612, -0.0100675 )
 bones/18/enabled = true
 bones/18/bound_children = [  ]
 bones/19/name = "hairfront_0_l"
@@ -298,12 +299,12 @@ bones/27/enabled = true
 bones/27/bound_children = [  ]
 bones/28/name = "big_haircontrol_l"
 bones/28/parent = 4
-bones/28/rest = Transform( 0.997519, -0.0458689, -0.053409, 0.0458598, -0.152248, 0.987278, -0.0534168, -0.987277, -0.149766, 0.275461, -0.629789, -0.515501 )
+bones/28/rest = Transform( 0.997519, -0.0458689, -0.053409, 0.0458598, -0.152248, 0.987278, -0.0534168, -0.987277, -0.149766, 0.271752, -0.561226, -0.525902 )
 bones/28/enabled = true
 bones/28/bound_children = [  ]
 bones/29/name = "eyebrowl"
 bones/29/parent = 4
-bones/29/rest = Transform( -0.0731545, -0.918292, -0.389084, -0.25005, -0.36078, 0.898505, -0.965462, 0.163021, -0.203227, 0.0694556, 0.27223, 0.162081 )
+bones/29/rest = Transform( -0.0433041, -0.99543, -0.085096, -0.182115, -0.0758838, 0.980344, -0.98232, 0.0579503, -0.177997, 0.0829772, 0.292463, 0.153659 )
 bones/29/enabled = true
 bones/29/bound_children = [  ]
 bones/30/name = "hair_smallcontrolr"
@@ -328,12 +329,12 @@ bones/33/enabled = true
 bones/33/bound_children = [  ]
 bones/34/name = "handtopr"
 bones/34/parent = 33
-bones/34/rest = Transform( 0.79231, 0.534363, 0.294452, -0.603403, 0.757703, 0.248579, -0.0902755, -0.374624, 0.922771, -7.45058e-09, 0.277098, -3.35276e-08 )
+bones/34/rest = Transform( 0.98775, 0.155037, -0.0176901, -0.155747, 0.986504, -0.0505346, 0.00961657, 0.0526708, 0.998566, -7.45058e-09, 0.277098, -3.35276e-08 )
 bones/34/enabled = true
 bones/34/bound_children = [  ]
 bones/35/name = "handbottomr"
 bones/35/parent = 34
-bones/35/rest = Transform( 0.997413, -0.0523933, -0.0492116, 0.0686126, 0.489865, 0.869094, -0.0214277, -0.870223, 0.492192, 3.72529e-08, 0.112545, 4.47035e-08 )
+bones/35/rest = Transform( 0.0669679, 0.953282, -0.294564, -0.597446, 0.274762, 0.753369, 0.799109, 0.125535, 0.587934, 3.72529e-08, 0.112545, 4.47035e-08 )
 bones/35/enabled = true
 bones/35/bound_children = [  ]
 bones/36/name = "upperarml"
@@ -348,12 +349,12 @@ bones/37/enabled = true
 bones/37/bound_children = [  ]
 bones/38/name = "handtopl"
 bones/38/parent = 37
-bones/38/rest = Transform( 0.982994, -0.123774, 0.135655, 0.0959558, 0.97605, 0.195239, -0.156571, -0.178902, 0.971329, 1.49012e-08, 0.277098, -1.04308e-07 )
+bones/38/rest = Transform( 0.98775, -0.155037, 0.0176901, 0.155746, 0.986504, -0.0505347, -0.00961662, 0.0526708, 0.998566, 1.49012e-08, 0.277098, -1.04308e-07 )
 bones/38/enabled = true
 bones/38/bound_children = [  ]
 bones/39/name = "handbottoml"
 bones/39/parent = 38
-bones/39/rest = Transform( 0.18377, -0.974321, -0.130101, 0.974183, 0.162869, 0.156334, -0.131131, -0.155472, 0.979098, -2.98023e-08, 0.112545, 3.72529e-08 )
+bones/39/rest = Transform( 0.559101, -0.825699, 0.0750091, 0.523891, 0.421957, 0.739926, -0.642607, -0.374397, 0.668493, -2.98023e-08, 0.112545, 3.72529e-08 )
 bones/39/enabled = true
 bones/39/bound_children = [  ]
 bones/40/name = "upperlegr"
@@ -388,68 +389,70 @@ bones/45/enabled = true
 bones/45/bound_children = [  ]
 bones/46/name = "armcontrolr"
 bones/46/parent = 0
-bones/46/rest = Transform( 0.904214, -0.368949, 0.215114, -0.41767, -0.869079, 0.265054, 0.0891592, -0.329512, -0.939932, -0.363495, -0.251308, -0.967728 )
+bones/46/rest = Transform( 0.904214, -0.368949, 0.215114, -0.41767, -0.869079, 0.265054, 0.0891592, -0.329512, -0.939932, -0.176134, 0.0775103, -1.03859 )
 bones/46/enabled = true
 bones/46/bound_children = [  ]
 bones/47/name = "polearmr"
 bones/47/parent = 46
-bones/47/rest = Transform( 0.904211, 0.417236, -0.091196, -0.368937, 0.870652, 0.325348, 0.215147, -0.260538, 0.941186, 0.286932, 0.809625, -0.0399822 )
+bones/47/rest = Transform( 0.904211, 0.417236, -0.091196, -0.368937, 0.870652, 0.325348, 0.215147, -0.260538, 0.941186, -0.517158, 1.13772, -0.231276 )
 bones/47/enabled = true
 bones/47/bound_children = [  ]
 bones/48/name = "armcontroll"
 bones/48/parent = 0
-bones/48/rest = Transform( 0.904214, 0.368949, -0.215114, 0.41767, -0.869079, 0.265054, -0.0891592, -0.329512, -0.939932, 0.0581094, 0.294008, -0.920632 )
+bones/48/rest = Transform( 0.904214, 0.368949, -0.215114, 0.41767, -0.869079, 0.265054, -0.0891592, -0.329512, -0.939932, 0.00226122, 0.301716, -1.35816 )
 bones/48/enabled = true
 bones/48/bound_children = [  ]
 bones/49/name = "polearml"
 bones/49/parent = 48
-bones/49/rest = Transform( 0.904211, -0.417236, 0.091196, 0.368937, 0.870652, 0.325348, -0.215147, -0.260538, 0.941187, 0.284379, 1.04274, -0.175898 )
+bones/49/rest = Transform( 0.904211, -0.417236, 0.091196, 0.368937, 0.870652, 0.325348, -0.215147, -0.260538, 0.941187, 0.145354, -0.63876, -2.49393 )
 bones/49/enabled = true
 bones/49/bound_children = [  ]
 bones/50/name = "legcontrolr"
 bones/50/parent = 0
-bones/50/rest = Transform( -0.166427, 0.986054, -5.56842e-07, 0.98591, 0.166403, -0.0170713, -0.0168358, -0.00284213, -0.999695, 0.152014, -0.430716, -0.0384195 )
+bones/50/rest = Transform( 1, 0, 0, 0, -0.999854, -0.0170767, 0, 0.0170794, -0.999695, -0.276644, -0.130443, -0.0435484 )
 bones/50/enabled = true
 bones/50/bound_children = [  ]
 bones/51/name = "polelegr"
 bones/51/parent = 50
-bones/51/rest = Transform( 1, 0, 0, 0, -0.999761, 0.0218799, 0, -0.0218748, -0.999994, 0.383599, -0.655745, 0.440305 )
+bones/51/rest = Transform( 1, 0, 0, 0, -0.999761, 0.0218799, 0, -0.0218748, -0.999994, 0.25562, -0.745813, 0.435607 )
 bones/51/enabled = true
 bones/51/bound_children = [  ]
 bones/52/name = "legcontroll"
 bones/52/parent = 0
-bones/52/rest = Transform( 0.266481, 0.96384, 2.64546e-06, 0.9637, -0.266442, -0.0170726, -0.0164572, 0.00455279, -0.999693, -0.0158907, 0.405859, -0.0527087 )
+bones/52/rest = Transform( 1, 0, 0, 0, -0.999854, -0.0170767, 0, 0.0170794, -0.999693, 0.351055, -0.130443, -0.0435484 )
 bones/52/enabled = true
 bones/52/bound_children = [  ]
 bones/53/name = "polelegl"
 bones/53/parent = 52
-bones/53/rest = Transform( 1, 0, 0, 0, -0.999761, 0.0218799, 0, -0.0218748, -0.999995, -0.592464, -0.539947, 0.343794 )
+bones/53/rest = Transform( 1, 0, 0, 0, -0.999761, 0.0218799, 0, -0.0218748, -0.999995, -0.033846, -0.745813, 0.435607 )
 bones/53/enabled = true
 bones/53/bound_children = [  ]
 
 [node name="Ara" type="MeshInstance" parent="AraBandicoot/ararmature/Skeleton"]
-use_in_baked_light = true
 mesh = ExtResource( 2 )
-skin = SubResource( 1 )
-blend_shapes/eye_left = 0.0
-blend_shapes/eye_right = 0.0
+skin = SubResource( 2 )
+blend_shapes/close = 0.0
+blend_shapes/face = 0.0
+blend_shapes/happy = 0.0
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AraBandicoot"]
-autoplay = "walk-loop"
-playback_default_blend_time = 0.1
+autoplay = "idle-loop"
 anims/eat = ExtResource( 15 )
+anims/eat-loop = ExtResource( 17 )
 anims/idle-loop = ExtResource( 7 )
 anims/jump-ground = ExtResource( 9 )
 anims/jump-move = ExtResource( 6 )
 anims/jump-move-loop = ExtResource( 8 )
+anims/start = ExtResource( 18 )
+anims/start001 = ExtResource( 16 )
 anims/throw = ExtResource( 4 )
 anims/walk-loop = ExtResource( 5 )
 anims/win-loop = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881484, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Rays" type="Spatial" parent="."]
 
@@ -460,18 +463,40 @@ collision_mask = 17
 
 [node name="voice_laught" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 10 )
+unit_db = 10.0
+unit_size = 5.0
+max_distance = 500.0
 
 [node name="voice_yata" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 11 )
+unit_db = 10.0
+unit_size = 5.0
+max_distance = 500.0
 
 [node name="voice_attack" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 13 )
+unit_db = 10.0
+unit_size = 5.0
+max_distance = 500.0
 
 [node name="voice_hit1" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 14 )
+unit_db = 10.0
+unit_size = 5.0
+max_distance = 500.0
 
 [node name="voice_hit2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 12 )
+unit_db = 10.0
+unit_size = 5.0
+max_distance = 500.0
+
+[node name="voice_start" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 19 )
+attenuation_model = 1
+unit_db = 10.0
+unit_size = 5.0
+max_distance = 500.0
 
 [node name="Holding" type="Position3D" parent="."]
 

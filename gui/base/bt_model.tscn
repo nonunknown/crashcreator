@@ -5,6 +5,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
 
+export var gui_tools_path:NodePath
 var model_name:String = \"\"
 onready var path_manager = get_node(\"/root/Main/Level/Path\")
 #func start(model_name):
@@ -18,7 +19,7 @@ signal set_path_to_spawn
 func _on_bt_base_toggled(button_pressed):
 	if (button_pressed):
 		emit_signal(\"set_path_to_spawn\",text)
-		get_node(\"/root/Main/GUI/GUI_tools_path\").toggle_bt_add(false)
+		get_node(\"../../../../../../GUI_tools_path\").toggle_bt_add(false)
 	pass # Replace with function body.
 "
 

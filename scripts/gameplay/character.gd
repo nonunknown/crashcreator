@@ -65,7 +65,9 @@ func _ready():
 	power_init()
 
 func _on_game_restart():
+	death_node.call_deferred("queue_free")
 	ressurect()
+	translation = initial_pos
 
 func _process(delta):
 	._process(delta)
@@ -103,10 +105,12 @@ func power_init():
 	jumps_actual = jumps
 
 
+var death_node = null
 func play_burned():
-	var node = death_burned.instance()
-	get_parent().add_child(node)
-	node.translation = translation
+	death_node = death_burned.instance()
+	get_parent().add_child(death_node)
+	death_node.translation = translation
+	
 # Functions
 enum DEATH {UNKNOWN,BURNED}
 var death_type = 0
@@ -170,6 +174,9 @@ func health_decrease():
 func action_enter_portal():
 	pass
 #	machine.change_state(machine.PORTAL)
+
+func enable_controls():
+	is_machine_controlled = false
 
 func _on_Button2_pressed():
 	ressurect()

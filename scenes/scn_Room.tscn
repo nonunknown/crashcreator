@@ -1,8 +1,9 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://models/warp/room_001.material" type="Material" id=1]
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Debug/DebugText.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/gameplay/GameplayManager.gd" type="Script" id=4]
 [ext_resource path="res://models/warp/warp_room_1_tga.png" type="Texture" id=5]
 [ext_resource path="res://resources/warp/warp_portal.scn" type="PackedScene" id=6]
 [ext_resource path="res://OST/menu/warproom.ogg" type="AudioStream" id=7]
@@ -11,8 +12,10 @@
 [ext_resource path="res://resources/curves/curve_in.res" type="Curve" id=10]
 [ext_resource path="res://models/warp/mat_wood.material" type="Material" id=11]
 [ext_resource path="res://models/warp/mat_sci_border.material" type="Material" id=12]
+[ext_resource path="res://scripts/gameplay/GameplayCamera.gd" type="Script" id=13]
 [ext_resource path="res://models/warp/mat_brick.material" type="Material" id=14]
 [ext_resource path="res://models/warp/mat_sci_ground.material" type="Material" id=15]
+[ext_resource path="res://gui/gameplay/GUI_Iventory.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scripts/Warp/LevelParams.gd" type="Script" id=17]
 [ext_resource path="res://models/warp/black.material" type="Material" id=19]
 [ext_resource path="res://models/warp/mat_sci_base.material" type="Material" id=20]
@@ -464,78 +467,97 @@ surfaces/0 = {
 [sub_resource type="ConcavePolygonShape" id=25]
 data = PoolVector3Array( -1, 0, -0.5, -0.2539, -0.1466, 0.5, -0.866, -0.5, -0.5, -1, 0, -0.5, -0.2931, 0, 0.5, -0.2539, -0.1466, 0.5, 0, -0.2931, 0.5, 0.5, -0.866, -0.5, 0, -1, -0.5, 0, -0.2931, 0.5, 0.1466, -0.2539, 0.5, 0.5, -0.866, -0.5, 0.1466, -0.2539, 0.5, 0.866, -0.5, -0.5, 0.5, -0.866, -0.5, 0.1466, -0.2539, 0.5, 0.2539, -0.1466, 0.5, 0.866, -0.5, -0.5, 0, 0.2931, 0.5, 0.5, 0.866, -0.5, 0.1466, 0.2539, 0.5, 0, 1, -0.5, 0.5, 0.866, -0.5, 0, 0.2931, 0.5, -0.5, -0.866, -0.5, 0, -0.2931, 0.5, 0, -1, -0.5, -0.1466, -0.2539, 0.5, 0, -0.2931, 0.5, -0.5, -0.866, -0.5, 0.2539, -0.1466, 0.5, 1, 0, -0.5, 0.866, -0.5, -0.5, 0.2931, 0, 0.5, 1, 0, -0.5, 0.2539, -0.1466, 0.5, -1, 0, -0.5, -0.2539, 0.1466, 0.5, -0.2931, 0, 0.5, -1.0099, 0.3562, -0.5, -0.2539, 0.1466, 0.5, -1, 0, -0.5, -0.866, -0.5, -0.5, -0.1466, -0.2539, 0.5, -0.5, -0.866, -0.5, -0.2539, -0.1466, 0.5, -0.1466, -0.2539, 0.5, -0.866, -0.5, -0.5, 0.1466, 0.2539, 0.5, 0.866, 0.5, -0.5, 0.2539, 0.1466, 0.5, 0.5, 0.866, -0.5, 0.866, 0.5, -0.5, 0.1466, 0.2539, 0.5, -0.377, 0.989, -0.5, 0, 0.2931, 0.5, -0.1466, 0.2539, 0.5, -0.377, 0.989, -0.5, 0, 1, -0.5, 0, 0.2931, 0.5, 0.1466, -0.2539, 0.5, 0, -0.2931, 0.5, -0.1466, -0.2539, 0.5, 0.2539, -0.1466, 0.5, 0.1466, -0.2539, 0.5, -0.1466, -0.2539, 0.5, 0.2539, 0.1466, 0.5, 1, 0, -0.5, 0.2931, 0, 0.5, 0.2539, 0.1466, 0.5, 0.866, 0.5, -0.5, 1, 0, -0.5, 0.1466, 0.2539, 0.5, -0.2539, 0.1466, 0.5, -0.1466, 0.2539, 0.5, 0, 0.2931, 0.5, 0.1466, 0.2539, 0.5, -0.1466, 0.2539, 0.5, -0.2539, 0.1466, 0.5, 0.2539, 0.1466, 0.5, -0.2931, 0, 0.5, -0.2539, 0.1466, 0.5, 0.1466, 0.2539, 0.5, 0.2539, 0.1466, 0.5, -0.2931, 0, 0.5, 0.2931, 0, 0.5, -0.2539, -0.1466, 0.5, -0.2931, 0, 0.5, 0.2539, 0.1466, 0.5, 0.2931, 0, 0.5, -0.2539, -0.1466, 0.5, 0.2539, -0.1466, 0.5, -0.1466, -0.2539, 0.5, -0.2539, -0.1466, 0.5, 0.2931, 0, 0.5, 0.2539, -0.1466, 0.5, -1.0099, 0.3562, -0.5, -0.1466, 0.2539, 0.5, -0.2539, 0.1466, 0.5, -1.0099, 0.3562, -0.5, -0.377, 0.989, -0.5, -0.1466, 0.2539, 0.5, 0, -1, -0.5, -0.866, -0.5, -0.5, -0.5, -0.866, -0.5, 0.866, -0.5, -0.5, -0.866, -0.5, -0.5, 0, -1, -0.5, 1, 0, -0.5, -0.866, -0.5, -0.5, 0.866, -0.5, -0.5, 1, 0, -0.5, -1, 0, -0.5, -0.866, -0.5, -0.5, 0.866, 0.5, -0.5, -1, 0, -0.5, 1, 0, -0.5, -1.0099, 0.3562, -0.5, -1, 0, -0.5, -0.377, 0.989, -0.5, 0.866, -0.5, -0.5, 0, -1, -0.5, 0.5, -0.866, -0.5, 0.866, 0.5, -0.5, 0.5, 0.866, -0.5, -1, 0, -0.5, 0.5, 0.866, -0.5, 0, 1, -0.5, -1, 0, -0.5, -1, 0, -0.5, 0, 1, -0.5, -0.377, 0.989, -0.5 )
 
-[node name="scn_Room" type="Spatial" groups=[
-"current",
+[node name="Gameplay" type="Spatial" groups=[
+"gameplay_manager",
+"gameplay_ready",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.506083, 0, -3.79054 )
-script = ExtResource( 17 )
+script = ExtResource( 4 )
 
-[node name="GUI" type="Control" parent="."]
+[node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GUI_LevelInfo_editor" parent="GUI" instance=ExtResource( 9 )]
+[node name="GUI_LevelInfo_editor" parent="HUD" instance=ExtResource( 9 )]
 visible = false
 
-[node name="DebugText" parent="GUI" instance=ExtResource( 3 )]
+[node name="DebugText" parent="HUD" instance=ExtResource( 3 )]
+
+[node name="GUI_Iventory" parent="HUD" groups=[
+"hud",
+] instance=ExtResource( 16 )]
+visible = false
 
 [node name="Player" type="Spatial" parent="."]
 
 [node name="obj_Character" parent="Player" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.7882, -1.65855 )
+is_machine_controlled = false
 use_debugger = true
 
-[node name="Level" type="Spatial" parent="."]
+[node name="Camera" type="Camera" parent="Player" groups=[
+"gameplay_ready",
+]]
+transform = Transform( -1, 0, -8.74228e-08, -9.0714e-09, 0.994602, 0.103765, 8.69509e-08, 0.103765, -0.994602, 0, 1.98677, 0 )
+script = ExtResource( 13 )
+
+[node name="Path" type="Spatial" parent="."]
+
+[node name="Items" type="Spatial" parent="."]
+
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Entities" type="Spatial" parent="."]
+
+[node name="Crate" type="Spatial" parent="."]
+
+[node name="Terrain" type="Spatial" parent="."]
+
+[node name="warp_room" type="Spatial" parent="Terrain"]
 transform = Transform( -3.74519e-08, 0, 0.8568, 0, 0.8568, 0, -0.8568, 0, -3.74519e-08, 0, 0, 0 )
-__meta__ = {
-"_editor_description_": ""
-}
 
-[node name="warp_room" type="Spatial" parent="Level"]
+[node name="Models" type="Spatial" parent="Terrain/warp_room"]
 
-[node name="Models" type="Spatial" parent="Level/warp_room"]
-
-[node name="central" type="MeshInstance" parent="Level/warp_room/Models"]
+[node name="central" type="MeshInstance" parent="Terrain/warp_room/Models"]
 transform = Transform( 7.81617, 0, -7.81617, 0, 11.0537, 0, 7.81617, 0, 7.81617, -4.43343, -0.494127, -0.626646 )
 use_in_baked_light = true
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="StaticBody" type="StaticBody" parent="Level/warp_room/Models/central"]
+[node name="StaticBody" type="StaticBody" parent="Terrain/warp_room/Models/central"]
 collision_layer = 17
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/warp_room/Models/central/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/warp_room/Models/central/StaticBody"]
 transform = Transform( 1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 0, 0, 0 )
 shape = SubResource( 3 )
 
-[node name="Path" type="MeshInstance" parent="Level/warp_room/Models"]
+[node name="Path" type="MeshInstance" parent="Terrain/warp_room/Models"]
 transform = Transform( 0.473375, 0, 8.88178e-15, 0, 0.473375, 0, -8.88178e-15, 0, 0.473375, 6.52799, 0.167791, 0.53009 )
 use_in_baked_light = true
 mesh = SubResource( 4 )
 material/0 = ExtResource( 11 )
 material/1 = null
 
-[node name="StaticBody" type="StaticBody" parent="Level/warp_room/Models/Path"]
+[node name="StaticBody" type="StaticBody" parent="Terrain/warp_room/Models/Path"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/warp_room/Models/Path/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/warp_room/Models/Path/StaticBody"]
 shape = SubResource( 5 )
 
-[node name="Path2" type="MeshInstance" parent="Level/warp_room/Models"]
+[node name="Path2" type="MeshInstance" parent="Terrain/warp_room/Models"]
 transform = Transform( -2.06919e-08, 0, -0.473375, 0, 0.473375, 0, 0.473375, 0, -2.06919e-08, -5.73671, 0.167791, 10.437 )
 use_in_baked_light = true
 mesh = SubResource( 4 )
 material/0 = ExtResource( 11 )
 material/1 = null
 
-[node name="StaticBody" type="StaticBody" parent="Level/warp_room/Models/Path2"]
+[node name="StaticBody" type="StaticBody" parent="Terrain/warp_room/Models/Path2"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/warp_room/Models/Path2/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/warp_room/Models/Path2/StaticBody"]
 shape = SubResource( 5 )
 
-[node name="Room_Sci" type="MeshInstance" parent="Level/warp_room/Models"]
+[node name="Room_Sci" type="MeshInstance" parent="Terrain/warp_room/Models"]
 transform = Transform( 5.77418, 0, -5.77418, 0, 8.16592, 0, 5.77418, 0, 5.77418, 23.5019, -3.45677, -0.622699 )
 use_in_baked_light = true
 mesh = SubResource( 6 )
@@ -543,53 +565,53 @@ material/0 = ExtResource( 20 )
 material/1 = ExtResource( 23 )
 material/2 = ExtResource( 12 )
 
-[node name="Cube000" type="MeshInstance" parent="Level/warp_room/Models/Room_Sci"]
+[node name="Cube000" type="MeshInstance" parent="Terrain/warp_room/Models/Room_Sci"]
 transform = Transform( -0.0897024, 0, 0.0158169, 0, 0.109303, 0, -0.0158169, 0, -0.0897024, 0.165399, 0.588172, -0.916539 )
 use_in_baked_light = true
 mesh = SubResource( 7 )
 material/0 = null
 material/1 = null
 
-[node name="Cube002" type="MeshInstance" parent="Level/warp_room/Models/Room_Sci"]
+[node name="Cube002" type="MeshInstance" parent="Terrain/warp_room/Models/Room_Sci"]
 transform = Transform( -0.0644077, 0, -0.0644077, 0, 0.0910862, 0, 0.0644077, 0, -0.0644077, -0.580348, 0.588172, -0.687497 )
 use_in_baked_light = true
 mesh = SubResource( 8 )
 material/0 = null
 material/1 = null
 
-[node name="Cube006" type="MeshInstance" parent="Level/warp_room/Models/Room_Sci"]
+[node name="Cube006" type="MeshInstance" parent="Terrain/warp_room/Models/Room_Sci"]
 transform = Transform( -0.015817, 0, 0.0897024, 0, 0.109303, 0, -0.0897024, 0, -0.015817, 0.900765, 0.588172, -0.159795 )
 use_in_baked_light = true
 mesh = SubResource( 9 )
 material/0 = null
 material/1 = null
 
-[node name="Cube007" type="MeshInstance" parent="Level/warp_room/Models/Room_Sci"]
+[node name="Cube007" type="MeshInstance" parent="Terrain/warp_room/Models/Room_Sci"]
 transform = Transform( 0.0644077, 0, 0.0644077, 0, 0.0910862, 0, -0.0644077, 0, 0.0644077, 0.661224, 0.588172, 0.559206 )
 use_in_baked_light = true
 mesh = SubResource( 10 )
 material/0 = null
 material/1 = null
 
-[node name="Cube008" type="MeshInstance" parent="Level/warp_room/Models/Room_Sci"]
+[node name="Cube008" type="MeshInstance" parent="Terrain/warp_room/Models/Room_Sci"]
 transform = Transform( -0.0784053, 0, 0.0670179, 0, 0.132682, 0, -0.0784053, 0, -0.0670179, 0.645833, 0.629207, -0.641323 )
 use_in_baked_light = true
 mesh = SubResource( 11 )
 material/0 = null
 material/1 = null
 
-[node name="Plane" type="MeshInstance" parent="Level/warp_room/Models/Room_Sci"]
+[node name="Plane" type="MeshInstance" parent="Terrain/warp_room/Models/Room_Sci"]
 transform = Transform( 0, -0.0644077, 0.0644077, 0.0910862, 5.42916e-09, 0, -5.42916e-09, 0.0644077, 0.0644077, 0.742401, 0.890809, -0.643694 )
 use_in_baked_light = true
 mesh = SubResource( 12 )
 material/0 = null
 
-[node name="StaticBody" type="StaticBody" parent="Level/warp_room/Models/Room_Sci"]
+[node name="StaticBody" type="StaticBody" parent="Terrain/warp_room/Models/Room_Sci"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/warp_room/Models/Room_Sci/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/warp_room/Models/Room_Sci/StaticBody"]
 shape = SubResource( 13 )
 
-[node name="InterpolatedCamera" type="InterpolatedCamera" parent="Level/warp_room"]
+[node name="InterpolatedCamera" type="InterpolatedCamera" parent="Terrain/warp_room"]
 transform = Transform( -5.1017e-08, 0.514766, -1.04748, 2.72222e-15, 1.04748, 0.514766, 1.16713, 2.25011e-08, -4.57868e-08, -4.60835, 7.89204, -0.911878 )
 current = true
 target = NodePath("../Pos_Center")
@@ -597,108 +619,110 @@ speed = 0.88
 enabled = true
 script = SubResource( 14 )
 
-[node name="Pos_Center" type="Position3D" parent="Level/warp_room"]
+[node name="Pos_Center" type="Position3D" parent="Terrain/warp_room"]
 transform = Transform( -5.1017e-08, 0.514766, -1.04748, 2.72222e-15, 1.04748, 0.514766, 1.16713, 2.25011e-08, -4.57868e-08, -4.60835, 4.89592, -0.911878 )
 
-[node name="PosScifi" type="Position3D" parent="Level/warp_room"]
+[node name="PosScifi" type="Position3D" parent="Terrain/warp_room"]
 transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 12.022, 5.167, -0.912 )
 script = SubResource( 15 )
 camera_path = NodePath("../InterpolatedCamera")
 center_path = NodePath("../Pos_Center")
 
-[node name="Area" type="Area" parent="Level/warp_room/PosScifi"]
+[node name="Area" type="Area" parent="Terrain/warp_room/PosScifi"]
 transform = Transform( 1, 0, 4.61853e-14, 0, 1, 0, -4.61853e-14, 0, 1, 13.6408, 0, 5.96046e-07 )
 collision_layer = 0
 collision_mask = 2048
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/warp_room/PosScifi/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/warp_room/PosScifi/Area"]
 shape = SubResource( 16 )
 
-[node name="PosJungle" type="Position3D" parent="Level/warp_room"]
+[node name="PosJungle" type="Position3D" parent="Terrain/warp_room"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.60887, 5.167, 9.98992 )
 script = SubResource( 15 )
 camera_path = NodePath("../InterpolatedCamera")
 center_path = NodePath("../Pos_Center")
 
-[node name="Area" type="Area" parent="Level/warp_room/PosJungle"]
+[node name="Area" type="Area" parent="Terrain/warp_room/PosJungle"]
 transform = Transform( 1, 0, 4.61853e-14, 0, 1, 0, -4.61853e-14, 0, 1, 13.6408, 0, 5.96046e-07 )
 collision_layer = 0
 collision_mask = 2048
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/warp_room/PosJungle/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/warp_room/PosJungle/Area"]
 shape = SubResource( 16 )
 
-[node name="Scifi" type="Spatial" parent="Level"]
+[node name="Scifi" type="Spatial" parent="Terrain"]
+transform = Transform( -3.74519e-08, 0, 0.8568, 0, 0.8568, 0, -0.8568, 0, -3.74519e-08, 0, 0, 0 )
 
-[node name="ButtonArea" type="Area" parent="Level/Scifi"]
+[node name="ButtonArea" type="Area" parent="Terrain/Scifi"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9688, 0, -0.737958 )
 collision_layer = 0
 collision_mask = 2048
 script = SubResource( 17 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/Scifi/ButtonArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Scifi/ButtonArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5043, 0, 0 )
 shape = SubResource( 18 )
 
-[node name="Buttons" type="Spatial" parent="Level/Scifi"]
+[node name="Buttons" type="Spatial" parent="Terrain/Scifi"]
 transform = Transform( 1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 20.9688, 0.656102, -0.52751 )
 script = SubResource( 19 )
 
-[node name="WarpButton" parent="Level/Scifi/Buttons" instance=ExtResource( 28 )]
+[node name="WarpButton" parent="Terrain/Scifi/Buttons" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0 )
-linked_portal = NodePath("../../Portals/PortalEditor")
+linked_portal = NodePath("../../../../Gameplay/Terrain/Scifi/Portals/PortalEditor")
 
-[node name="WarpButton3" parent="Level/Scifi/Buttons" instance=ExtResource( 28 )]
+[node name="WarpButton3" parent="Terrain/Scifi/Buttons" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 1.1322, 0, 3.32602 )
 
-[node name="WarpButton2" parent="Level/Scifi/Buttons" instance=ExtResource( 28 )]
+[node name="WarpButton2" parent="Terrain/Scifi/Buttons" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 1.19168, 0, -3.36109 )
 
-[node name="WarpButton5" parent="Level/Scifi/Buttons" instance=ExtResource( 28 )]
+[node name="WarpButton5" parent="Terrain/Scifi/Buttons" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 4.13348, -0.00263786, 4.59792 )
 
-[node name="WarpButton4" parent="Level/Scifi/Buttons" instance=ExtResource( 28 )]
+[node name="WarpButton4" parent="Terrain/Scifi/Buttons" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.05605, 0, -4.9033 )
 
-[node name="Portals" type="Spatial" parent="Level/Scifi" groups=[
+[node name="Portals" type="Spatial" parent="Terrain/Scifi" groups=[
 "portal_manager",
 ]]
 script = SubResource( 20 )
 
-[node name="PortalEditor" parent="Level/Scifi/Portals" instance=ExtResource( 6 )]
+[node name="PortalEditor" parent="Terrain/Scifi/Portals" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 1.77636e-14, 0, 1, 0, -1.77636e-14, 0, 1, 26.9341, 0.817136, -0.588463 )
 id = 0
-linked_level_info = NodePath("../../../../GUI/GUI_LevelInfo_editor")
+linked_level_info = NodePath("../../../../HUD/GUI_LevelInfo_editor")
 texture = ExtResource( 8 )
 curve_in = ExtResource( 10 )
 curve_out = ExtResource( 29 )
 
-[node name="Model" type="MeshInstance" parent="Level/Scifi"]
+[node name="Model" type="MeshInstance" parent="Terrain/Scifi"]
 transform = Transform( -2.68793, 0, -1.42109e-14, 0, -0.754754, 0, 1.42109e-14, 0, -2.68793, 25.029, 0.429126, -0.844669 )
 use_in_baked_light = true
 mesh = SubResource( 21 )
 material/0 = null
 
-[node name="Jungle" type="Spatial" parent="Level"]
+[node name="Jungle" type="Spatial" parent="Terrain"]
+transform = Transform( -3.74519e-08, 0, 0.8568, 0, 0.8568, 0, -0.8568, 0, -3.74519e-08, 0, 0, 0 )
 
-[node name="jungle" type="MeshInstance" parent="Level/Jungle"]
+[node name="jungle" type="MeshInstance" parent="Terrain/Jungle"]
 transform = Transform( -7.76305, -7.72052, 0.811461, 0, -1.14758, -10.9185, 7.76305, -7.72052, 0.811461, -4.95793, -6.63404, 31.0016 )
 mesh = SubResource( 22 )
 material/0 = null
 material/1 = null
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Jungle/jungle"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Terrain/Jungle/jungle"]
 autoplay = "idle"
 anims/idle = SubResource( 23 )
 
-[node name="jungle_platform" type="MeshInstance" parent="Level/Jungle"]
+[node name="jungle_platform" type="MeshInstance" parent="Terrain/Jungle"]
 transform = Transform( -7.76304, -7.76305, 1.96313e-06, -1.30875e-06, -1.30875e-06, -10.9786, 7.76305, -7.76304, 6.54376e-07, -4.95793, -4.79886, 30.3172 )
 mesh = SubResource( 24 )
 material/0 = null
 
-[node name="StaticBody" type="StaticBody" parent="Level/Jungle/jungle_platform"]
+[node name="StaticBody" type="StaticBody" parent="Terrain/Jungle/jungle_platform"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/Jungle/jungle_platform/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Jungle/jungle_platform/StaticBody"]
 shape = SubResource( 25 )
 
 [node name="Light" type="Node" parent="."]
@@ -747,11 +771,15 @@ visible = false
 stream = ExtResource( 7 )
 volume_db = -14.665
 autoplay = true
-[connection signal="area_entered" from="Level/warp_room/PosScifi/Area" to="Level/warp_room/PosScifi" method="_on_Area_area_entered"]
-[connection signal="area_exited" from="Level/warp_room/PosScifi/Area" to="Level/warp_room/PosScifi" method="_on_Area_area_exited"]
-[connection signal="area_entered" from="Level/warp_room/PosJungle/Area" to="Level/warp_room/PosJungle" method="_on_Area_area_entered"]
-[connection signal="area_exited" from="Level/warp_room/PosJungle/Area" to="Level/warp_room/PosJungle" method="_on_Area_area_exited"]
-[connection signal="area_entered" from="Level/Scifi/ButtonArea" to="Level/Scifi/ButtonArea" method="_on_Area_area_entered"]
-[connection signal="area_exited" from="Level/Scifi/ButtonArea" to="Level/Scifi/ButtonArea" method="_on_Area_area_exited"]
 
-[editable path="Level/Scifi/Portals/PortalEditor"]
+[node name="scn_Room" type="Spatial" parent="." groups=[
+"current",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.506083, 0, -3.79054 )
+script = ExtResource( 17 )
+[connection signal="area_entered" from="Terrain/warp_room/PosScifi/Area" to="Terrain/warp_room/PosScifi" method="_on_Area_area_entered"]
+[connection signal="area_exited" from="Terrain/warp_room/PosScifi/Area" to="Terrain/warp_room/PosScifi" method="_on_Area_area_exited"]
+[connection signal="area_entered" from="Terrain/warp_room/PosJungle/Area" to="Terrain/warp_room/PosJungle" method="_on_Area_area_entered"]
+[connection signal="area_exited" from="Terrain/warp_room/PosJungle/Area" to="Terrain/warp_room/PosJungle" method="_on_Area_area_exited"]
+[connection signal="area_entered" from="Terrain/Scifi/ButtonArea" to="Terrain/Scifi/ButtonArea" method="_on_Area_area_entered"]
+[connection signal="area_exited" from="Terrain/Scifi/ButtonArea" to="Terrain/Scifi/ButtonArea" method="_on_Area_area_exited"]

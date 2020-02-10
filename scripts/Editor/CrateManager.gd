@@ -22,11 +22,11 @@ func _on_changed_mode(_tool):
 func _enter():
 	load_virtual_crate()
 
-
+export var main_path:NodePath
 func load_virtual_crate():
 	if (first_load):
 		crate = crate_model.instance()
-		get_node("/root/Main").add_child(crate)
+		get_node(main_path).add_child(crate)
 		first_load = false
 	else: 
 		crate.visible = true
@@ -43,7 +43,7 @@ func _update():
 	
 	last_pos = pos
 	
-	if Utils.mouse_left_clicked() and selected_crate_id != -1:
+	if Input.is_action_just_pressed("mouse_left_button") and selected_crate_id != -1:
 		spawn_crate()
 	
 	pass

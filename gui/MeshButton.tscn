@@ -1,30 +1,59 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://test_mesh.mesh" type="ArrayMesh" id=1]
-[ext_resource path="res://scripts/Editor/ButtonMesh.gd" type="Script" id=2]
+[ext_resource path="res://gui/MeshButton.gd" type="Script" id=2]
+[ext_resource path="res://models/enemies/lab_knight/lab_knight/Knight.mesh" type="ArrayMesh" id=3]
 
-[node name="ButtonMesh" type="Control"]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.156863, 0.184314, 0.211765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.109804, 0.105882, 0.105882, 1 )
+
+[sub_resource type="ProceduralSky" id=2]
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+ambient_light_color = Color( 0.839216, 0.839216, 0.839216, 1 )
+
+[sub_resource type="World" id=4]
+environment = SubResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+
+[node name="MeshButton" type="Control"]
 anchor_right = 0.14
 anchor_bottom = 0.185
 margin_right = 0.199997
 margin_bottom = 0.199997
+mouse_filter = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+show_mesh = ExtResource( 3 )
+mesh_path = NodePath("ViewportContainer/Viewport/MeshInstance")
 
 [node name="Background" type="Panel" parent="."]
-margin_right = 101.0
-margin_bottom = 89.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-margin_left = 9.50021
-margin_top = 7.20705
-margin_right = 729.5
-margin_bottom = 487.207
+anchor_left = 0.094
+anchor_top = 0.081
+anchor_right = 0.86
+anchor_bottom = 0.66
+margin_left = 0.00620937
+margin_top = -0.00195026
+margin_right = 642.64
+margin_bottom = 428.467
 rect_scale = Vector2( 0.107445, 0.107445 )
 stretch = true
 __meta__ = {
@@ -33,10 +62,14 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 720, 480 )
+own_world = true
+world = SubResource( 4 )
+transparent_bg = true
 handle_input_locally = false
 hdr = false
 usage = 3
-render_target_update_mode = 3
+render_target_clear_mode = 1
+render_target_update_mode = 0
 gui_disable_input = true
 gui_snap_controls_to_pixels = false
 
@@ -51,11 +84,14 @@ material/2 = null
 transform = Transform( -0.796361, 0.349354, -0.493721, -5.04968e-08, 0.816309, 0.577615, 0.604822, 0.45999, -0.650077, -5.86653, 5.84964, -3.65835 )
 
 [node name="Name" type="Label" parent="."]
-margin_top = 65.0
-margin_right = 101.0
-margin_bottom = 79.0
-text = "name"
+anchor_top = 0.73
+anchor_right = 1.0
+anchor_bottom = 0.888
+margin_top = -6.97
+margin_bottom = 6.96799
+text = "Label"
 align = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -63,5 +99,9 @@ __meta__ = {
 [node name="Button" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_styles/hover = SubResource( 5 )
 toggle_mode = true
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

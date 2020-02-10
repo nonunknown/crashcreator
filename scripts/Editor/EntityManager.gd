@@ -34,7 +34,7 @@ func _update():
 	if holding_entity == null: return
 	if  !Utils.ray_dict.empty():
 		holding_entity.translation = Utils.ray_dict.position
-	if Utils.mouse_left_clicked():
+	if Input.is_action_just_pressed("mouse_left_button"):
 		spawn_entity()
 
 func _exit():

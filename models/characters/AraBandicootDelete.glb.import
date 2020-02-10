@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/AraBandicoot.glb-1ef01af559beb57d7d097492dfe72389.scn"
+path="res://.import/AraBandicootDelete.glb-058e07777b45c3afaa08aaa19f6ae264.scn"
 
 [deps]
 
-source_file="res://models/characters/AraBandicoot.glb"
-dest_files=[ "res://.import/AraBandicoot.glb-1ef01af559beb57d7d097492dfe72389.scn" ]
+source_file="res://models/characters/AraBandicootDelete.glb"
+dest_files=[ "res://.import/AraBandicootDelete.glb-058e07777b45c3afaa08aaa19f6ae264.scn" ]
 
 [params]
 
@@ -18,18 +18,18 @@ nodes/custom_script=""
 nodes/storage=0
 materials/location=1
 materials/storage=1
-materials/keep_on_reimport=false
-meshes/compress=false
-meshes/ensure_tangents=false
-meshes/storage=1
+materials/keep_on_reimport=true
+meshes/compress=true
+meshes/ensure_tangents=true
+meshes/storage=0
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.1
-external_files/store_in_subdir=true
+external_files/store_in_subdir=false
 animation/import=true
-animation/fps=24.0
+animation/fps=15
 animation/filter_script=""
-animation/storage=1
-animation/keep_custom_tracks=true
+animation/storage=false
+animation/keep_custom_tracks=false
 animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01

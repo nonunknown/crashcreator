@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/talk_good.wav-b6b33f0fd80815dd79aa37f41622d96c.sample"
+
+[deps]
+
+source_file="res://sounds/bosses/ara/talk_good.wav"
+dest_files=[ "res://.import/talk_good.wav-b6b33f0fd80815dd79aa37f41622d96c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
