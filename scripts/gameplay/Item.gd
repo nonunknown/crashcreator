@@ -1,9 +1,11 @@
-extends Node
+extends RigidBody
 class_name Item
 
 export var attackable:bool = false
 var picked:bool = false
 
+func _ready():
+	set_process(false)
 
 func revive():
 	picked = false
@@ -16,11 +18,9 @@ func _on_Picked(player):
 	if $fx_collect != null:
 		$fx_collect.emitting = true
 	$sfx.play()
-	
-	$Area/CollisionShape.disabled = true
+	$Area/CollisionShape.disabled = true 
 	_player_picked(player)
-	if $model != null:
-		$model.visible = false
+#	self.visible = false
 #	Utils.wait_for_seconds($sfx.stream.get_length())
 #	queue_free()
 	

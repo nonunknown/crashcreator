@@ -4,6 +4,8 @@ class_name LevelManager
 onready var path_manager:PathManager = $Path
 onready var crate_manager:CrateManager = $Crate
 onready var entity_manager:EntityManager = $Entity
+onready var enemy_manager:EnemyManager = $Enemy
+
 var project:Project = null
 
 func insert_stuff(_project:Project):
@@ -32,3 +34,8 @@ func entity_insertion():
 	for i in project.entity_ids.size():
 		entity_manager.set_entity(project.entity_ids[i], project.entity_pos[i])
 	pass
+
+func enemy_insertion():
+	enemy_manager.reset()
+	for i in project.enemy_ids.size():
+		enemy_manager.spawn_enemy(project.enemy_ids[i],project.enemy_pos[i])

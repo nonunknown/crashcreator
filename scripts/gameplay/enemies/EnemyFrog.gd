@@ -15,7 +15,7 @@ func _ready():
 	machine.change_state(STATE.IDLE)
 	config_ai()
 
-func _update():
+func _update(delta):
 	machine.machine_update()
 
 func config_ai():

@@ -111,9 +111,16 @@ resource_name = "idle"
 ]]
 collision_layer = 512
 collision_mask = 530
+mode = 3
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource( 5 )
 ID = 8
 wood_crate = false
+startGravity = false
 affectedByExplosion = true
 
 [node name="model" type="MeshInstance" parent="."]

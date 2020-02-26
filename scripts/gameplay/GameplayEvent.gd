@@ -6,5 +6,6 @@ func _init(_target):
 	target = _target
 	if target.get_tree().get_nodes_in_group("gameplay_manager") != null:
 		manager_gameplay = target.get_tree().get_nodes_in_group("gameplay_manager")[0]
-		manager_gameplay.connect("event_game_restart",target,"_on_game_restart")
-	
+		for i in range(manager_gameplay.methods.size()):
+			if target.has_method(manager_gameplay.methods[i]):
+				manager_gameplay.connect(manager_gameplay.events[i],target,manager_gameplay.methods[i])

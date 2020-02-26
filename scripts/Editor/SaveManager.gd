@@ -42,14 +42,16 @@ func save_file() -> bool:
 	var path_manager_children = get_tree().get_nodes_in_group("path_manager")[0].get_children()
 	var crate_manager_children = get_tree().get_nodes_in_group("crate_manager")[0].get_children()
 	var entity_manager_children = get_tree().get_nodes_in_group("entity_manager")[0].get_children()
-	save_level(project_name.text,path_manager_children,crate_manager_children,entity_manager_children)
+	var enemy_manager_children = get_tree().get_nodes_in_group("enemy_manager")[0].get_children()
+	save_level(project_name.text,path_manager_children,crate_manager_children,entity_manager_children,enemy_manager_children)
 	return true
 
-func save_level(project_name:String, paths:Array,crates:Array,entities:Array):
+func save_level(project_name:String, paths:Array,crates:Array,entities:Array,enemies:Array):
 	var project:Project = Project.new()
 	save_path(project,paths)
 	save_crates(project,crates)
 	save_entities(project,entities)
+	save_enemies(project,enemies)
 	var save_dir = "user://projects/"+project_name+".cwproj"
 	var save_game = File.new()
 	save_game.open(save_dir, File.WRITE)
@@ -80,6 +82,12 @@ func save_entities(project:Project, entities:Array):
 		project.entity_ids.append(entity._ID)
 		project.append_entity_pos(entity.translation)
 	pass
+
+func save_enemies(project:Project,enemies:Array):
+	if enemies.size() == 0: return
+	for enemy in enemies:
+		project.enemy_ids.append(enemy._ID)
+		project.append_enemy_pos(enemy.translation)
 
 func get_paths_array() -> Array:
 	var paths:Array = []

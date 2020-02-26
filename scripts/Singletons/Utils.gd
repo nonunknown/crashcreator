@@ -142,3 +142,8 @@ func get_player() -> Character:
 func reparent(node,new_parent):
   node.get_parent().remove_child(node)
   new_parent.call_deferred("add_child",node)
+
+var global_delta:float = 0
+
+func _process(delta):
+	global_delta = delta

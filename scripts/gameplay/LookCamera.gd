@@ -7,6 +7,9 @@ export var offset:Vector3
 
 func _ready():
 	character = Utils.get_player()
+	if !get_node("../../Cutscene").play_on_ready:
+		can_reparent = true
+		
 
 func _process(delta):
 #	look_at(character.translation + offset,Vector3.UP)

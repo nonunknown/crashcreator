@@ -43,7 +43,7 @@ func _update():
 	
 	last_pos = pos
 	
-	if Input.is_action_just_pressed("mouse_left_button") and selected_crate_id != -1:
+	if Input.is_action_just_pressed("mouse_left_button") and selected_crate_id != -1  && !Utils.ray_dict.empty():
 		spawn_crate()
 	
 	pass

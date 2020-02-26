@@ -1,34 +1,81 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/gameplay/Item_Wumpa.gd" type="Script" id=1]
-[ext_resource path="res://sprites/wumpa.png" type="Texture" id=2]
+[ext_resource path="res://models/items/Wumpa/mat_wumpa.material" type="Material" id=2]
 [ext_resource path="res://sounds/gameplay/item/item_wumpa_collect.wav" type="AudioStream" id=3]
+[ext_resource path="res://models/items/Wumpa/Wumpa.obj" type="ArrayMesh" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.247564, 0.248654, 0.219727 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.283865, 0.335212, 0.298622 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "indle"
+length = 2.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Wumpa:rotation_degrees")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, 13 ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Wumpa:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.261506, -0.0620524 ), Vector3( 0, -0.201, -0.062 ), Vector3( 0, -0.261506, -0.0620524 ) ]
 }
 
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.283865, 0.335212, 0.298622 )
+[sub_resource type="Animation" id=4]
+resource_name = "spawn"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wumpa:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.261506, -0.0620524 ), Vector3( 0, 0.0854174, -0.0620524 ), Vector3( 0, -0.261506, -0.0620524 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_idle"
+} ]
+}
 
 [node name="obj_Wumpa" type="RigidBody" groups=[
 "gp_item",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.355015, 0 )
+collision_layer = 0
 collision_mask = 24
 mode = 1
 axis_lock_angular_x = true
@@ -37,28 +84,26 @@ axis_lock_angular_z = true
 script = ExtResource( 1 )
 attackable = true
 
+[node name="Wumpa" type="MeshInstance" parent="."]
+transform = Transform( 0.0354605, 0, 0, 0, 0.0354605, 0, 0, 0, 0.0354605, 0, -0.261506, -0.0620524 )
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 2 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite3D" parent="."]
-transform = Transform( 1.64161, 0, 0, 0, 1.64161, 0, 0, 0, 1.64161, 0, 0, 0 )
-billboard = 1
-double_sided = false
-texture = ExtResource( 2 )
-hframes = 14
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-autoplay = "anim_wumpa"
-anims/anim_wumpa = SubResource( 2 )
-
 [node name="Area" type="Area" parent="."]
+monitoring = false
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="sfx" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 3 )
-[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn"
+anims/indle = SubResource( 3 )
+anims/spawn = SubResource( 4 )

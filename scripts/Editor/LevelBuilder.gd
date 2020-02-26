@@ -69,6 +69,7 @@ func create_game_level() -> bool:
 	build_path()
 	build_crate()
 #	build_terrain()
+	build_enemy()
 	return true
 
 #func save_game_level() -> bool:
@@ -151,6 +152,16 @@ func build_entity():
 		entity_manager.add_child(instance)
 		instance.set_owner(game_level)
 
+func build_enemy():
+	var enemies = get_tree().get_nodes_in_group("enemy_manager")[0].get_children()
+	var enemy_manager = game_level.get_node("Enemies")
+	for enemy in enemies:
+		var game_enemy:PackedScene = IDTable.enemies[enemy._ID]
+		print(enemy._ID)
+		var instance = game_enemy.instance()
+		instance.translation = enemy.translation
+		enemy_manager.add_child(instance)
+		instance.set_owner(game_level)
 func build_terrain():
 	var terrain_generator:TerrainGenerator = get_node("../Level/Terrain")
 	terrain_generator.build_terrain()

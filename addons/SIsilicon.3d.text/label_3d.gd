@@ -1,11 +1,12 @@
 tool
 extends Spatial
+class_name Label3D
 
 export(String, MULTILINE) var text = "Text" setget set_text
 export(float) var text_scale = 0.01 setget set_text_scale
 export(float) var extrude = 0.0 setget set_extrude
 export(Font) var font setget set_font;
-
+export var custom_material:Material
 export(int, "Left", "Right", "Center", "Fill") var align setget set_align
 
 export(Color) var color = Color(0.6, 0.6, 0.6) setget set_color

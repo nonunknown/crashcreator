@@ -6,7 +6,7 @@ export var _timeID:int = 0
 export var wood_crate:bool = true
 export var startGravity:bool = true
 export var affectedByExplosion:bool
-
+export var gravity:float = -20
 # ---- WUMPA
 export var hasWumpa:bool
 export var amtWumpa:int
@@ -24,10 +24,15 @@ func _init():
 func _ready():
 	if !startGravity:
 		sleeping = true
+		mode = MODE_KINEMATIC
+	else:
+		enable_physics()
 	if hasWumpa: wumpa_ready()
 	print(str( get_groups() ))
 
-
+func enable_physics():
+	sleeping = false
+	mode = MODE_RIGID
 
 func _gameplay_ready():
 	if IDTable.is_timeable(ID):

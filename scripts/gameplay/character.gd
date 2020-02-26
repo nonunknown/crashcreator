@@ -10,6 +10,7 @@ export var blend_time:float = .1
 export var dash_duration:float = 1.5
 export var power_double_jump:bool = false
 export var onjump_raycast_to:float = -1
+export var material_black:SpatialMaterial
 
 var dashing = false
 var attacking:bool = false
@@ -19,20 +20,21 @@ var death_burned = preload("res://deaths/obj_death_burned.tscn")
 var aku:Node
 var debug = null
 var cam_target:Node
-var initial_raycast:float = -1
 var event_gameplay:GameplayEvent
-
 
 onready var power:Power = Power.new()
 onready var iventory:Iventory = Iventory.new()
 onready var input_move_keys:Array
 onready var animator:AnimationPlayer = get_node("crashbandicoot/AnimationPlayer")
 onready var twist_crash:Node = $crashbandicoot/twistcrash
+onready var armature = $crashbandicoot/Armature
 onready var machine:CharacterMachine = CharacterMachine.new(self)
 onready var pos_future = $PosFuture
+onready var mesh:MeshInstance = $crashbandicoot/Armature/Skeleton/Crash
 #PowerStuff
 var jumps:int = 1
 var jumps_actual:int = 0
+var jump_enabled:bool = true
 
 
 func wait_and_play_animation(animation:String):	
@@ -52,7 +54,6 @@ func check_move_keys() -> bool:
 
 func _ready():
 	._ready()
-	initial_raycast = $Rays/RayCast.cast_to.y
 	event_gameplay = GameplayEvent.new(self)
 	if (use_debugger and get_tree().get_nodes_in_group("debug") != null): debug = get_tree().get_nodes_in_group("debug")[0]
 	
@@ -65,7 +66,8 @@ func _ready():
 	power_init()
 
 func _on_game_restart():
-	death_node.call_deferred("queue_free")
+	if (death_node != null):
+		death_node.call_deferred("queue_free")
 	ressurect()
 	translation = initial_pos
 
@@ -76,20 +78,26 @@ func _process(delta):
 		debug.set_text("Vvelocity",str(linear_velocity.y))
 		debug.set_text("health",str(health))
 		debug.set_text("wumpa",str(iventory.wumpa))
+		debug.set_text("exitdash",machine.exit_dash)
 #		debug.set_text("state",str(machine..keys()[machine.state]))
 		debug.set_text("jumpattempt",str(jump_attempt))
 		debug.set_text("grounded",str(is_grounded))
 		debug.set_text("jumps",str(jumps_actual))
 	input_move_keys = [Input.is_action_pressed("ui_left"),Input.is_action_pressed("ui_up"),Input.is_action_pressed("ui_down"),Input.is_action_pressed("ui_right")]
-	is_grounded = $Rays/RayCast.is_colliding()
-	if is_grounded: $Rays/RayCast.cast_to.y = initial_raycast
-	if is_grounded && Input.is_action_just_pressed("ui_jump"):
+	is_grounded = is_rays_colliding()
+	if is_grounded && Input.is_action_just_pressed("ui_jump") && jump_enabled:
 		do_jump()
 	machine.do_update()
 	if Input.is_action_just_pressed("ui_accept"):
 		print(translation)
 	pos_future.translation = lerp(Vector3.ZERO,Vector3.BACK * max_speed, virtual_hspeed * .1)
-	
+
+func is_rays_colliding() -> bool:
+	for ray in $Rays.get_children():
+		if ray.is_colliding():
+			return true
+	return false
+
 func do_jump():
 	.do_jump()
 	if virtual_hspeed > 0:
@@ -107,6 +115,8 @@ func power_init():
 
 var death_node = null
 func play_burned():
+#	mesh.set_material_override(material_black)
+	visible = false
 	death_node = death_burned.instance()
 	get_parent().add_child(death_node)
 	death_node.translation = translation
@@ -116,8 +126,12 @@ enum DEATH {UNKNOWN,BURNED}
 var death_type = 0
 func kill():
 	emit_signal("died")
-	visible = false
+#	visible = false
 	machine.manager.change_state(machine.IDLE)
+	animator.playback_speed = 0
+	var old_rot:Vector3 = rotation_degrees
+	look_at(get_viewport().get_camera().get_global_transform().origin,Vector3.UP)
+	rotation_degrees = ( rotation_degrees * Vector3(0,1,0) ) + ( old_rot * Vector3(1,0,1) )
 	$sfx/death_woah.play()
 	health = 0
 	set_physics_process(false)
@@ -127,6 +141,8 @@ func kill():
 	
 
 func ressurect():
+	visible = true
+	mesh.set_material_override(null)
 	set_physics_process(true)
 	health_increase(1)
 	visible = true
@@ -175,8 +191,9 @@ func action_enter_portal():
 	pass
 #	machine.change_state(machine.PORTAL)
 
-func enable_controls():
-	is_machine_controlled = false
+func enable_controls(enabled:bool=false):
+	is_machine_controlled = !enabled
+	jump_enabled = enabled
 
 func _on_Button2_pressed():
 	ressurect()
@@ -184,10 +201,13 @@ func _on_Button2_pressed():
 
 
 func _on_Feet_area_entered(area):
-#	if (area.is_in_group("area_crate") && velocity.y < 1.3):
-#		do_jump()
-#		crate_collided(area)
-	print("implement on_feet_entered")
+	if (area.is_in_group("area_crate") && linear_velocity.y < 1.3):
+		if Input.is_action_pressed("ui_jump"):
+			extra_jump_force = 1.3
+		do_jump()
+		
+		crate_collided(area)
+#	print("implement on_feet_entered")
 		
 
 func _on_Head_area_entered(area):
@@ -205,10 +225,8 @@ func crate_collided(area):
 	crate._on_Jumped()
 
 
-func _on_ItemBody_area_entered(item):
-	if item.is_in_group("item"):
-		item._on_Picked(self)
-	pass # Replace with function body.
+func _on_ItemBody_area_entered(area):
+		area.get_parent()._on_Picked(self)
 
 var anim_finished:bool = false
 func _on_AnimationPlayer_animation_finished(anim_name):

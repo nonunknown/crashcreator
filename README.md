@@ -7,6 +7,8 @@ a game for crash fans to create and play on their own levels, and free source co
 # Note
 alpha means not playable!
 
+### Alpha 0.10.0 - Wild West Update
+
 ### Alpha 0.9.13
     -Fixed
         - Level editor was not playable due to new loading system

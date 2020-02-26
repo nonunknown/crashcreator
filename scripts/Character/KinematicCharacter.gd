@@ -11,7 +11,7 @@ export var air_idle_deaccel = false
 export var keep_jump_inertia = true
 export var can_move_on_air = true
 export var is_machine_controlled:bool = true
-
+export var is_global_axis_controlled:bool = false
 var camera:Transform
 var initial_pos:Vector3
 var is_grounded:bool = false
@@ -22,17 +22,66 @@ var movement_dir = Vector3()
 var jumping = false
 var linear_velocity=Vector3()
 var jump_attempt = false
+var extra_jump_force:float = 1
 var inputs:Array = []
 var last_hspeed:float = 0.0 
+var input_update:FuncRef
+
 onready var initial_maxspeed:float = max_speed
+
 func _ready():
 	initial_pos = translation
-	pass
-
+	if !is_machine_controlled:
+		if is_global_axis_controlled:
+			input_update = funcref(self,"input_update_axis")
+		else:
+			input_update = funcref(self,"input_update_normal")
+	else:
+		input_update = funcref(self,"input_update_machine")
+		
+	
 func _process(delta):
 	if playable:
 		camera = get_viewport().get_camera().get_global_transform()
 	pass
+
+func input_update_machine(dir,cam_xform):
+	dir = Vector3.ZERO
+	return dir
+
+func input_update_normal(dir,cam_xform):
+	inputs = [Input.is_action_pressed("ui_up"),
+	Input.is_action_pressed("ui_down"),
+	Input.is_action_pressed("ui_left"),
+	Input.is_action_pressed("ui_right")
+	]
+	
+	if !is_machine_controlled:
+		if inputs[0]:
+			dir += -cam_xform.basis[2]
+		if inputs[1]:
+			dir += cam_xform.basis[2]
+		if inputs[2]:
+			dir += -cam_xform.basis[0]
+		if inputs[3]:
+			dir += cam_xform.basis[0]
+	return dir
+
+func input_update_axis(dir,cam_xform):
+	inputs = [Input.is_action_pressed("ui_up"),
+	Input.is_action_pressed("ui_down"),
+	Input.is_action_pressed("ui_left"),
+	Input.is_action_pressed("ui_right")
+	]
+	if inputs[0]:
+		dir += Vector3.RIGHT
+	if inputs[1]:
+		dir += Vector3.LEFT
+	if inputs[2]:
+		dir += Vector3.FORWARD
+	if inputs[3]:
+		dir += Vector3.BACK
+	return dir
 
 func adjust_facing(p_facing, p_target, p_step, p_adjust_rate, current_gn):
 	var n = p_target # Normal
@@ -75,21 +124,8 @@ func _physics_process(delta):
 	dir = Vector3.ZERO # Where does the player intend to walk to
 
 	var cam_xform = get_viewport().get_camera().get_global_transform()
-	inputs = [Input.is_action_pressed("ui_up"),
-	Input.is_action_pressed("ui_down"),
-	Input.is_action_pressed("ui_left"),
-	Input.is_action_pressed("ui_right")
-	]
 	
-	if !is_machine_controlled:
-		if inputs[0]:
-			dir += -cam_xform.basis[2]
-		if inputs[1]:
-			dir += cam_xform.basis[2]
-		if inputs[2]:
-			dir += -cam_xform.basis[0]
-		if inputs[3]:
-			dir += cam_xform.basis[0]
+	dir = input_update.call_funcv([dir,cam_xform])
 	
 	var target_dir = (dir - up * dir.dot(up)).normalized()
 	
@@ -120,9 +156,10 @@ func _physics_process(delta):
 
 	if is_grounded:
 		if not jumping and jump_attempt:
-			vv = jump_force
+			vv = jump_force * extra_jump_force
 			jumping = true
 			jump_attempt = false
+			extra_jump_force = 1
 	else:
 		
 		# var hs
@@ -171,6 +208,7 @@ func short_angle_dist(from, to):
 
 func do_jump():
 	jump_attempt = true
+	
 	pass
 
 func move_forward():

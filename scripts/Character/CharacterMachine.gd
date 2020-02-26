@@ -23,6 +23,9 @@ func do_update():
 	manager.machine_update()
 	
 
+func stop():
+	animator.stop(false)
+
 func cd_any() -> bool:
 	if cd_idle(): return true
 	elif cd_spin(): return true
@@ -93,7 +96,7 @@ func cd_body_slam() -> bool:
 	return false
 
 func st_init_idle():
-	character.animator.play("Idle",blend_time)
+	character.animator.play("idle",blend_time)
 	character.animator.playback_speed = 1
 
 func st_update_idle():
@@ -107,8 +110,8 @@ func st_exit_idle():
 	return
 
 func st_init_walk():
-	character.animator.play("Walk",blend_time)
-	character.animator.playback_speed =  4
+	character.animator.play("walk-loop",blend_time)
+	character.animator.playback_speed =  3
 	
 func st_update_walk():
 	if cd_idle(): return
@@ -122,8 +125,8 @@ func st_exit_walk():
 	return
 
 func st_init_run():
-	character.animator.play("Run",blend_time)
-	character.animator.playback_speed = 12
+	character.animator.play("run-loop",blend_time)
+	character.animator.playback_speed = 5
 	character.max_speed = character.initial_maxspeed * 1.5
 
 func st_update_run():
@@ -132,7 +135,8 @@ func st_update_run():
 		else: manager.change_state(IDLE)
 	elif cd_jump(): return
 	elif cd_spin(): return
-#	elif cd_dash(): return
+	elif cd_dash(): return
+	elif cd_falling(): return
 	
 func st_exit_run():
 	character.max_speed = character.initial_maxspeed
@@ -144,13 +148,14 @@ func st_init_jump():
 	
 	character.get_node("crashbandicoot/Sounds/jump").play()
 	if cd_jump_move(): return
-	character.animator.play("Jump",blend_time)
+	character.animator.play("jump",blend_time)
 	character.animator.playback_speed = 1
 
 func st_update_jump():
 	if cd_falling(): return
 	elif cd_idle():return
 	elif cd_walk(): return
+	if cd_jump_move(): return
 #	elif cd_body_slam(): return
 #	elif cd_spin(): return
 
@@ -163,8 +168,8 @@ func st_init_jump_move():
 #		animator.playback_speed = 2
 #
 #	else: 
-	character.animator.play("Jump-move",blend_time)
-	character.animator.playback_speed = 2
+	character.animator.play("jump-move",blend_time)
+	character.animator.playback_speed = 2.5
 		
 
 func st_update_jump_move():
@@ -201,17 +206,15 @@ func st_exit_crouch():
 	character.can_move = true
 	
 #	yield(get_tree().create_timer(animator.current_animation_length,false),"timeout")
-
+var exit_dash:bool = false
 func st_init_dash():
+	character.enable_controls(false)
+	character.linear_velocity += character.get_global_transform().basis.z * 15
 	character.animator.play("Dash",blend_time)
 	character.get_node("crashbandicoot/Sounds/dash").play()
 	character.animator.playback_speed = 1.5
-#	movement.can_move = false
-#	movement.disable_jump = true
 	yield(character.get_tree().create_timer(character.dash_duration,false),"timeout")
-	if cd_idle(): return
-#	elif cd_dash(): return
-	elif cd_walk(): return
+	exit_dash = true
 	
 func st_update_dash():
 #	character.max_speed = character.max_speed * 2
@@ -219,10 +222,16 @@ func st_update_dash():
 	if (character.animator.current_animation == "Dash" && 
 		character.animator.current_animation_position > ( character.animator.current_animation_length / character.animator.playback_speed ) * .7):
 		character.animator.play("Dash-loop",blend_time)
-		if cd_jump(): return
-		if cd_spin(): return
+		if (character.jump_attempt): #TODO: Can jump on dash
+			character.do_jump()
+	if exit_dash:
+		if cd_walk(): return
+		elif cd_idle(): return
+		elif cd_jump_move(): return
 	
 func st_exit_dash():
+	exit_dash = false
+	character.enable_controls(true)
 #	character.max_speed = character.initial_maxspeed
 	pass
 #	movement.can_move = true
@@ -252,8 +261,8 @@ func st_exit_body_slam():
 	
 
 func st_init_falling():
-	character.animator.play("Fall",blend_time)
-	character.animator.playback_speed = 1.4
+	character.animator.play("fall",blend_time)
+	character.animator.playback_speed = 1
 	pass
 	
 func st_update_falling():
@@ -269,21 +278,30 @@ func st_exit_falling():
 	character.get_node("crashbandicoot/Sounds/step_1").play()
 	pass
 
+var timer = .4
+var sound_twist:AudioStreamPlayer3D
 func st_init_attack():
-	character.animator.play("Attack",blend_time)
-	character.animator.playback_speed = 1
+	sound_twist = character.get_node("sfx/twist")
+#	character.animator.play("Attack",blend_time)
+#	character.animator.playback_speed = 1
+	sound_twist.play()
+	timer = sound_twist.stream.get_length()
+	character.armature.visible = false
+	character.twist_crash.visible = true
+	
 	pass
 
-var timer = .3
 func st_update_attack():
-	timer -= .01
+	character.twist_crash.rotate_y(-.7)
+	timer -= Utils.global_delta
 	if timer <= 0:
 		if cd_falling(): return
 		elif cd_idle(): return
 		elif cd_walk(): return
 
 func st_exit_attack():
-	timer = 2
+	character.armature.visible = true
+	character.twist_crash.visible = false
 	return
 
 func st_init_portal():

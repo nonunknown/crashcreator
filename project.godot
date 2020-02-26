@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gameplay/bosses/BossAra.gd"
 }, {
+"base": "Spatial",
+"class": "Builder",
+"language": "GDScript",
+"path": "res://scripts/Builder.gd"
+}, {
 "base": "Control",
 "class": "ButtonMesh",
 "language": "GDScript",
@@ -119,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/enemies/Enemy.gd"
 }, {
+"base": "KinematicBody",
+"class": "EnemyCow",
+"language": "GDScript",
+"path": "res://scripts/gameplay/enemies/EnemyCow.gd"
+}, {
 "base": "Enemy",
 "class": "EnemyFrog",
 "language": "GDScript",
@@ -159,7 +169,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Editor/GuiToolsBase.gd"
 }, {
-"base": "Node",
+"base": "RigidBody",
 "class": "Item",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Item.gd"
@@ -193,6 +203,11 @@ _global_script_classes=[ {
 "class": "KinematicCharacter",
 "language": "GDScript",
 "path": "res://scripts/Character/KinematicCharacter.gd"
+}, {
+"base": "Spatial",
+"class": "Label3D",
+"language": "GDScript",
+"path": "res://addons/SIsilicon.3d.text/label_3d.gd"
 }, {
 "base": "Node",
 "class": "LevelBuilder",
@@ -248,6 +263,21 @@ _global_script_classes=[ {
 "class": "MeshButton",
 "language": "GDScript",
 "path": "res://gui/MeshButton.gd"
+}, {
+"base": "Resource",
+"class": "MixMode",
+"language": "GDScript",
+"path": "res://addons/modifiers/mix_mode.gd"
+}, {
+"base": "Resource",
+"class": "MixModesCollection",
+"language": "GDScript",
+"path": "res://addons/modifiers/mix_modes_collection.gd"
+}, {
+"base": "Node",
+"class": "Modifiers",
+"language": "GDScript",
+"path": "res://addons/modifiers/modifiers.gd"
 }, {
 "base": "Reference",
 "class": "Movement",
@@ -319,6 +349,7 @@ _global_script_class_icons={
 "BetterGroups": "",
 "Boss": "",
 "BossAra": "",
+"Builder": "",
 "ButtonMesh": "",
 "Character": "",
 "CharacterMachine": "",
@@ -337,6 +368,7 @@ _global_script_class_icons={
 "EditorManager": "",
 "EditorState": "",
 "Enemy": "",
+"EnemyCow": "",
 "EnemyFrog": "",
 "EnemyKnight": "",
 "EnemyManager": "",
@@ -352,6 +384,7 @@ _global_script_class_icons={
 "ItemWumpa": "",
 "Iventory": "",
 "KinematicCharacter": "",
+"Label3D": "",
 "LevelBuilder": "",
 "LevelCFG": "",
 "LevelInfo": "",
@@ -363,6 +396,9 @@ _global_script_class_icons={
 "Menu": "",
 "MenuManager": "",
 "MeshButton": "",
+"MixMode": "res://addons/modifiers/icon_modifiers.svg",
+"MixModesCollection": "res://addons/modifiers/icon_modifiers.svg",
+"Modifiers": "res://addons/modifiers/icon_modifiers.svg",
 "Movement": "",
 "PathBase": "",
 "PathManager": "",
@@ -382,7 +418,7 @@ _global_script_class_icons={
 
 config/name="Crash Bandicoot Worlds"
 config/description="Crash Fan game, based on psx era for fans ;P"
-run/main_scene="res://scenes/Start.tscn"
+run/main_scene="res://gameplay/level/bosss/scn_jungle.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon_256.ico"
@@ -395,20 +431,25 @@ IDTable="*res://scripts/Singletons/IDTable.gd"
 GameManager="*res://scripts/Singletons/GameManager.gd"
 Utils="*res://scripts/Singletons/Utils.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
+gd_types="*res://addons/godot_db_manager/core/db_type.gd"
+NodeFinder="*res://addons/NodeFinder/NodeFinder.gd"
 
 [compression]
 
 formats/zlib/compression_level=3
 formats/gzip/compression_level=3
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
-window/size/width=720
+window/size/width=640
 window/size/height=480
 window/size/resizable=false
 window/vsync/use_vsync=false
 mouse_cursor/custom_image="res://cursor/normal.png"
-window/stretch/aspect="keep"
 
 [editor]
 
@@ -416,7 +457,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SIsilicon.3d.text", "simple_water" )
+enabled=PoolStringArray( "NodeFinder", "QuickPluginManager", "ResolutionManager", "SIsilicon.3d.text", "godot_db_manager", "godot_sheets", "modifiers", "simple_water" )
 
 [importer_defaults]
 
@@ -453,8 +494,7 @@ ui_up={
 }
 ui_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
@@ -533,6 +573,11 @@ mouse_left_button={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+cam_back={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -554,5 +599,17 @@ mouse_left_button={
 
 quality/2d/use_pixel_snap=true
 threads/thread_model=2
+quality/filters/anisotropic_filter_level=1
+quality/directional_shadow/size=256
+quality/directional_shadow/size.mobile=256
+quality/shadow_atlas/size=256
+quality/shadow_atlas/size.mobile=256
+quality/shadow_atlas/quadrant_1_subdiv=1
+quality/shadow_atlas/quadrant_2_subdiv=2
+quality/shadow_atlas/quadrant_3_subdiv=3
+quality/reflections/texture_array_reflections=false
+quality/filters/use_nearest_mipmap_filter=true
+quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 0.243137, 0.243137, 0.243137, 1 )
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"

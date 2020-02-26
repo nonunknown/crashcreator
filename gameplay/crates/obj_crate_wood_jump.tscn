@@ -101,8 +101,11 @@ tracks/0/keys = {
 ]]
 collision_layer = 512
 collision_mask = 18
+mode = 3
+sleeping = true
 script = ExtResource( 6 )
 ID = 3
+startGravity = false
 affectedByExplosion = true
 hasWumpa = true
 amtWumpa = 1

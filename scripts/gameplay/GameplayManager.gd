@@ -4,6 +4,10 @@ class_name ManagerGameplay
 signal time_trial_activated
 signal time_trial_freeze
 signal event_game_restart
+signal event_boss_wait
+
+var methods = ["_on_game_restart","_on_boss_wait"]
+var events = ["event_game_restart","event_boss_wait"]
 
 export var simulate_ready = false
 
@@ -12,6 +16,9 @@ func _ready():
 		GameManager.set_gamemode(GameManager.MODE.PLAY)
 		_gameplay_ready()
 	pass
+
+func trigger_boss_wait(started:bool=true):
+	emit_signal("event_boss_wait",started)
 
 func trigger_game_restart(wait:float=2):
 	
@@ -51,3 +58,4 @@ func _gameplay_ready():
 func _on_game_restart():
 	yield(get_tree().create_timer(1),"timeout")
 	Utils.make_transition(Utils.EFFECT.FADE_OUT)
+

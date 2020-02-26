@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://level_editor/entities/ent_clock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Editor/CrateManager.gd" type="Script" id=2]
@@ -95,14 +95,24 @@ func _on_toggled(pressed):
 [sub_resource type="GDScript" id=10]
 script/source = "extends GuiToolsBase
 
+export var path_enemy_manager:NodePath
+var enemy_manager
+
 func _init():
 	_ID = Utils.EDITOR_STATE.ENEMY
+
+func _ready():
+	enemy_manager = get_node(path_enemy_manager)	
+
+func _on_btfrog_pressed():
+	enemy_manager._on_set_enemy(0)
+	pass # Replace with function body.
+
+
+func _on_btknight_pressed():
+	enemy_manager._on_set_enemy(1)
+	pass # Replace with function body.
 "
-
-[sub_resource type="StyleBoxFlat" id=13]
-bg_color = Color( 0.6, 0.6, 0.6, 0.631373 )
-
-[sub_resource type="StyleBoxEmpty" id=14]
 
 [sub_resource type="GDScript" id=11]
 script/source = "
@@ -131,7 +141,7 @@ export (float, 0.0, 0.0, 1.0) var deceleration = 0.1
 export var max_speed = Vector3(1.0, 1.0, 1.0)
 export var local = true
 export var forward_action = \"cam_fw\"
-export var backward_action = \"ui_down\"
+export var backward_action = \"cam_back\"
 export var left_action = \"cam_left\"
 export var right_action = \"cam_right\"
 export var up_action = \"ui_page_up\"
@@ -468,25 +478,13 @@ group = SubResource( 9 )
 [node name="GUI_tools_enemy" parent="GUI" instance=ExtResource( 37 )]
 visible = false
 script = SubResource( 10 )
+path_enemy_manager = NodePath("../../Level/Enemy")
 
-[node name="Viewport" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_knight/ViewportContainer" index="0"]
+[node name="Viewport" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/MeshButton/ViewportContainer" index="0"]
 render_target_update_mode = 0
 
-[node name="Button" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_knight" index="3"]
-margin_right = 101.0
-margin_bottom = 89.0
-custom_styles/hover = SubResource( 13 )
-custom_styles/normal = SubResource( 14 )
-flat = false
-
-[node name="Viewport" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_toad/ViewportContainer" index="0"]
+[node name="Viewport" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/MeshButton2/ViewportContainer" index="0"]
 render_target_update_mode = 0
-
-[node name="Button" parent="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/bt_toad" index="3"]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 101.0
-margin_bottom = 89.0
 
 [node name="GUI_tools_entity" parent="GUI" instance=ExtResource( 19 )]
 visible = false
@@ -595,6 +593,8 @@ script = ExtResource( 38 )
 [connection signal="toggled" from="GUI/GUI_Menu/HBoxContainer/bt_edit_time" to="GUI/GUI_Menu" method="_on_bt_edit_time_toggled"]
 [connection signal="pressed" from="GUI/GUI_Menu/HBoxContainer/bt_edit_export" to="GUI/GUI_Menu" method="_on_bt_edit_export_pressed"]
 [connection signal="pressed" from="GUI/GUI_tools_path/Panel/VBoxContainer/bt_add" to="Level/Path" method="_on_bt_add_pressed"]
+[connection signal="pressed" from="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/MeshButton/Button" to="GUI/GUI_tools_enemy" method="_on_btknight_pressed"]
+[connection signal="pressed" from="GUI/GUI_tools_enemy/TabContainer/Enemies/GridContainer/MeshButton2/Button" to="GUI/GUI_tools_enemy" method="_on_btfrog_pressed"]
 
 [editable path="GUI/GUI_Menu"]
 

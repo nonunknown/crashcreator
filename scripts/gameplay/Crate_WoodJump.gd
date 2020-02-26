@@ -14,5 +14,3 @@ func _on_Attacked():
 func _on_Jumped():
 	$Anim.play("bounce")
 	$sfx_bounce.play()
-	
-

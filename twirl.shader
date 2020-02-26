@@ -1,7 +1,7 @@
 shader_type canvas_item;
 void fragment(){
     vec2 position = UV;
-    float pi = 3.14;
+    float pi = 3.141516;
     float distance_to_center = distance(position, vec2(0.5, 0.5));
     float rotation_index = 3.0 * distance_to_center * pi * sin(TIME/20.0); // 6 is rotation speed
     
@@ -14,7 +14,7 @@ void fragment(){
     position = position * rotation_matrix;
 
     // move back
-    position += vec2(0.5, 0.5);
+    position += vec2(0.1, 0.5);
     
     COLOR = texture(TEXTURE, position);
 }

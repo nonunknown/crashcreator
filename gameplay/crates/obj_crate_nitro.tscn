@@ -140,8 +140,15 @@ extents = Vector3( 0.533807, 0.5179, 0.538385 )
 ]]
 collision_layer = 512
 collision_mask = 18
+mode = 3
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource( 5 )
 ID = 9
+startGravity = false
 affectedByExplosion = true
 
 [node name="model" type="MeshInstance" parent="."]

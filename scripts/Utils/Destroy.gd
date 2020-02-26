@@ -8,6 +8,9 @@ func _ready():
 	yield(get_tree().create_timer(1,false),"timeout")
 	queue_free()
 
+func set_radius(value:float):
+	$Area_explosion/CollisionShape.shape.radius = value
+
 func play_sound():
 	$sfx.play()
 

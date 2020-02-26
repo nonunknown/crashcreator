@@ -34,9 +34,21 @@ var crates_texture:Dictionary = {
 	9: load("res://textures/gameplay/boxes-nitro-side.png"),
 	10: load("res://textures/gameplay/boxes-time-top.png"),
 }
+
 var items:Dictionary = {
 	0: load("res://gameplay/obj_item_clock.tscn"),
 	1: load("res://gameplay/obj_item_aku.tscn")
+}
+
+var enemies:Dictionary = {
+	-1: null,
+	0: load("res://gameplay/enemies/obj_enemy_frog.tscn"),
+	1: load("res://gameplay/enemies/obj_enemy_lab-knight.tscn")
+}
+
+var enemies_mesh:Dictionary = {
+	0: load("res://models/enemies/toad/frog/body.mesh"),
+	1: load("res://models/enemies/lab_knight/lab_knight/Knight.mesh")
 }
 
 var character = load("res://gameplay/obj_Character.tscn")

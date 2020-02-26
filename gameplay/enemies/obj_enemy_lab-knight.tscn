@@ -1132,7 +1132,8 @@ extents = Vector3( 0.235841, 1.20796, 0.262989 )
 extents = Vector3( 0.612193, 1.14199, 0.640619 )
 
 [node name="lab_knight" type="KinematicBody"]
-collision_mask = 0
+collision_layer = 32
+collision_mask = 16
 script = ExtResource( 18 )
 
 [node name="Armature" type="Spatial" parent="."]

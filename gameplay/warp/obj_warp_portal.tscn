@@ -42,11 +42,19 @@ script/source = "extends Particles
 export var texture:Texture
 export var curve_in:Curve
 export var curve_out:Curve
+export var start_type:int = 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
 
-
+func _ready():
+	match(start_type):
+		1:
+			expand()
+			yield(get_tree().create_timer(1,false),\"timeout\")
+			contract()
+		0:
+			contract()
 
 
 

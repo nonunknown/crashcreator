@@ -6,6 +6,7 @@
 [ext_resource path="res://textures/gameplay/boxes-particles.png" type="Texture" id=4]
 [ext_resource path="res://sounds/crate/crate_break.wav" type="AudioStream" id=5]
 [ext_resource path="res://textures/gameplay/materials/mat_time_zero.material" type="Material" id=6]
+[ext_resource path="res://resources/gameplay/crate_collide_area.res" type="PackedScene" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "crate"
@@ -78,14 +79,12 @@ uv1_scale = Vector3( 2, 1, 1 )
 [sub_resource type="QuadMesh" id=7]
 material = SubResource( 6 )
 
-[sub_resource type="BoxShape" id=8]
-extents = Vector3( 0.494565, 0.0116764, 0.4698 )
-
 [node name="obj_crate_time" type="RigidBody" groups=[
 "crate",
 ]]
 collision_layer = 512
 collision_mask = 530
+mode = 3
 script = ExtResource( 1 )
 wood_crate = false
 startGravity = false
@@ -113,25 +112,4 @@ draw_pass_1 = SubResource( 7 )
 [node name="sfx" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 5 )
 
-[node name="Area" type="Area" parent="." groups=[
-"area_crate",
-]]
-monitoring = false
-collision_layer = 256
-collision_mask = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01462, -0.00259399 )
-shape = SubResource( 8 )
-
-[node name="AreaBottom" type="Area" parent="." groups=[
-"area_crate",
-]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.022, 0 )
-monitoring = false
-collision_layer = 256
-collision_mask = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="AreaBottom"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01462, -0.00259399 )
-shape = SubResource( 8 )
+[node name="Area" parent="." instance=ExtResource( 7 )]
