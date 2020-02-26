@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Ruins_Pillar_3.obj-94105d0b9bcd5c8722e5fc1fc184b7df.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Ruins_Pillar_3.obj-94105d0b9bcd5c8722e5fc1fc184b7df.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Prop_Ruins_Pillar_3.obj"
+dest_files=[ "res://.import/Hilly_Prop_Ruins_Pillar_3.obj-94105d0b9bcd5c8722e5fc1fc184b7df.mesh", "res://.import/Hilly_Prop_Ruins_Pillar_3.obj-94105d0b9bcd5c8722e5fc1fc184b7df.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

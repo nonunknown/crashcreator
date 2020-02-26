@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Terrain_Waterfall_Water_Mid_Edge.obj-14488b32be7ff83175059f582c0a6b0d.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Terrain_Waterfall_Water_Mid_Edge.obj-14488b32be7ff83175059f582c0a6b0d.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cliff_Terrain_Waterfall_Water_Mid_Edge.obj"
+dest_files=[ "res://.import/Cliff_Terrain_Waterfall_Water_Mid_Edge.obj-14488b32be7ff83175059f582c0a6b0d.mesh", "res://.import/Cliff_Terrain_Waterfall_Water_Mid_Edge.obj-14488b32be7ff83175059f582c0a6b0d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

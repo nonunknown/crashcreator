@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Railway_Hill_Gentle.obj-74290bfca3de6d3f0ec9613a05661c4b.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Railway_Hill_Gentle.obj-74290bfca3de6d3f0ec9613a05661c4b.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Hill_Gentle.obj"
+dest_files=[ "res://.import/Cave_Prop_Railway_Hill_Gentle.obj-74290bfca3de6d3f0ec9613a05661c4b.mesh", "res://.import/Cave_Prop_Railway_Hill_Gentle.obj-74290bfca3de6d3f0ec9613a05661c4b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

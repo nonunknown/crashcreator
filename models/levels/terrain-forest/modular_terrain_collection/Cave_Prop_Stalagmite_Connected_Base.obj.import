@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Stalagmite_Connected_Base.obj-313e5b816d6fd02a487b896554d0d75e.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Stalagmite_Connected_Base.obj-313e5b816d6fd02a487b896554d0d75e.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Stalagmite_Connected_Base.obj"
+dest_files=[ "res://.import/Cave_Prop_Stalagmite_Connected_Base.obj-313e5b816d6fd02a487b896554d0d75e.mesh", "res://.import/Cave_Prop_Stalagmite_Connected_Base.obj-313e5b816d6fd02a487b896554d0d75e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

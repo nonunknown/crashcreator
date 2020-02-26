@@ -2,35 +2,33 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/warp_room_1_tga.png-0cdc610d01907e6c9fabbe17c88a140d.s3tc.stex"
-path.etc2="res://.import/warp_room_1_tga.png-0cdc610d01907e6c9fabbe17c88a140d.etc2.stex"
+path="res://.import/warp_room_1_tga.png-0cdc610d01907e6c9fabbe17c88a140d.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://models/warp/textures/warp_room_1_tga.png"
-dest_files=[ "res://.import/warp_room_1_tga.png-0cdc610d01907e6c9fabbe17c88a140d.s3tc.stex", "res://.import/warp_room_1_tga.png-0cdc610d01907e6c9fabbe17c88a140d.etc2.stex" ]
+dest_files=[ "res://.import/warp_room_1_tga.png-0cdc610d01907e6c9fabbe17c88a140d.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=true
+flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

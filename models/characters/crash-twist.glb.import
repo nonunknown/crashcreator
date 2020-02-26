@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/AraBandicoot.glb.gltf-0f919431e1f0fc5ceeadb78fb59ec078.scn"
+path="res://.import/crash-twist.glb-32cc917c6df0c5a162dedb1b0f79bcbc.scn"
 
 [deps]
 
-source_file="res://models/characters/AraBandicoot.glb.gltf"
-dest_files=[ "res://.import/AraBandicoot.glb.gltf-0f919431e1f0fc5ceeadb78fb59ec078.scn" ]
+source_file="res://models/characters/crash-twist.glb"
+dest_files=[ "res://.import/crash-twist.glb-32cc917c6df0c5a162dedb1b0f79bcbc.scn" ]
 
 [params]
 
@@ -19,18 +19,18 @@ nodes/storage=0
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
-meshes/compress=false
-meshes/ensure_tangents=false
+meshes/compress=true
+meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.1
-external_files/store_in_subdir=true
+external_files/store_in_subdir=false
 animation/import=true
-animation/fps=24.0
+animation/fps=15
 animation/filter_script=""
-animation/storage=1
-animation/keep_custom_tracks=true
-animation/optimizer/enabled=false
+animation/storage=false
+animation/keep_custom_tracks=false
+animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01
 animation/optimizer/max_angle=22

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/warproom.ogg-771b8b8038a90fad8b9746e56cbd1080.oggstr
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

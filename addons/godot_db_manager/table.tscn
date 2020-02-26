@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/godot_db_manager/dlgs/error_dlg.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/godot_db_manager/table.gd" type="Script" id=3]
+
+[node name="table" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1450, 0 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path_tab_properties = NodePath("tabs/Properties")
+path_tab_data = NodePath("tabs/Data")
+
+[node name="tabs" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Properties" type="Tabs" parent="tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="new_property_btn" type="Button" parent="tabs/Properties"]
+margin_left = -4.0
+margin_top = -2.0
+margin_right = 85.0
+margin_bottom = 21.0
+text = "New property"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="tabs/Properties"]
+margin_top = 25.0
+margin_right = 64.0
+margin_bottom = 42.0
+text = "Properties:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="properties" type="VBoxContainer" parent="tabs/Properties"]
+margin_left = -1.0
+margin_top = 46.0
+margin_right = 999.0
+margin_bottom = 846.0
+rect_min_size = Vector2( 1000, 800 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Data" type="Tabs" parent="tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="data_holder" type="VBoxContainer" parent="tabs/Data"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="data_header" type="HBoxContainer" parent="tabs/Data/data_holder"]
+margin_right = 1442.0
+
+[node name="data_container" type="VBoxContainer" parent="tabs/Data/data_holder"]
+margin_top = 4.0
+margin_right = 1442.0
+margin_bottom = 4.0
+
+[node name="error_dlg" parent="." instance=ExtResource( 1 )]

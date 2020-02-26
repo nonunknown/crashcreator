@@ -1,0 +1,47 @@
+# Material file for mushroom.obj
+
+newmtl material_12
+	Ns 0
+	d 1
+	illum 2
+	Kd 1.0 1.0 1.0
+	Ks 1.0 1.0 1.0
+	Ka 0.2 0.2 0.2
+	map_Kd 614F6E7F_c.png
+
+newmtl material_13
+	Ns 0
+	d 1
+	illum 2
+	Kd 1.0 1.0 1.0
+	Ks 1.0 1.0 1.0
+	Ka 0.2 0.2 0.2
+	map_Kd 698BD1FB_c.png
+
+newmtl material_14
+	Ns 0
+	d 1
+	illum 2
+	Kd 1.0 1.0 1.0
+	Ks 1.0 1.0 1.0
+	Ka 0.2 0.2 0.2
+	map_Kd 1E1E16F3_c.png
+
+newmtl material_15
+	Ns 0
+	d 1
+	illum 2
+	Kd 1.0 1.0 1.0
+	Ks 1.0 1.0 1.0
+	Ka 0.2 0.2 0.2
+	map_Kd 75BD026C_c.png
+
+newmtl material_16
+	Ns 0
+	d 1
+	illum 2
+	Kd 1.0 1.0 1.0
+	Ks 1.0 1.0 1.0
+	Ka 0.2 0.2 0.2
+	map_Kd 53736C56_c.png
+

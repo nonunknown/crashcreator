@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Beach_Prop_Docks_Steps.obj-e639c22c3fe8633410ba751915cbdec7.mesh"
+
+[deps]
+
+files=[ "res://.import/Beach_Prop_Docks_Steps.obj-e639c22c3fe8633410ba751915cbdec7.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Beach_Prop_Docks_Steps.obj"
+dest_files=[ "res://.import/Beach_Prop_Docks_Steps.obj-e639c22c3fe8633410ba751915cbdec7.mesh", "res://.import/Beach_Prop_Docks_Steps.obj-e639c22c3fe8633410ba751915cbdec7.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

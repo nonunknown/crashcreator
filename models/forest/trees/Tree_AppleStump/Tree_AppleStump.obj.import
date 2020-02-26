@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Tree_AppleStump.obj-5aa7b67f8520600f7afaf02c8e54b358.mesh"
+
+[deps]
+
+files=[ "res://.import/Tree_AppleStump.obj-5aa7b67f8520600f7afaf02c8e54b358.mesh" ]
+
+source_file="res://models/forest/trees/Tree_AppleStump/Tree_AppleStump.obj"
+dest_files=[ "res://.import/Tree_AppleStump.obj-5aa7b67f8520600f7afaf02c8e54b358.mesh", "res://.import/Tree_AppleStump.obj-5aa7b67f8520600f7afaf02c8e54b358.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

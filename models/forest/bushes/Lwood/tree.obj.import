@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/tree.obj-af3ba4938c3d8985e8c4771b727d180d.mesh"
+
+[deps]
+
+files=[ "res://.import/tree.obj-af3ba4938c3d8985e8c4771b727d180d.mesh" ]
+
+source_file="res://models/forest/bushes/Lwood/tree.obj"
+dest_files=[ "res://.import/tree.obj-af3ba4938c3d8985e8c4771b727d180d.mesh", "res://.import/tree.obj-af3ba4938c3d8985e8c4771b727d180d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

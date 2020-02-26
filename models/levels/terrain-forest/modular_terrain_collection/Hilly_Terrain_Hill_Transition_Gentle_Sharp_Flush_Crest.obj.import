@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Terrain_Hill_Transition_Gentle_Sharp_Flush_Crest.obj-e731984d8866de608e3f5a2a48c08719.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Terrain_Hill_Transition_Gentle_Sharp_Flush_Crest.obj-e731984d8866de608e3f5a2a48c08719.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Terrain_Hill_Transition_Gentle_Sharp_Flush_Crest.obj"
+dest_files=[ "res://.import/Hilly_Terrain_Hill_Transition_Gentle_Sharp_Flush_Crest.obj-e731984d8866de608e3f5a2a48c08719.mesh", "res://.import/Hilly_Terrain_Hill_Transition_Gentle_Sharp_Flush_Crest.obj-e731984d8866de608e3f5a2a48c08719.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

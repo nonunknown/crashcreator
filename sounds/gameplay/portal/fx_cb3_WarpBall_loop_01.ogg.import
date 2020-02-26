@@ -11,5 +11,5 @@ dest_files=[ "res://.import/fx_cb3_WarpBall_loop_01.ogg-47cca72d3dd33a20f964a84e
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

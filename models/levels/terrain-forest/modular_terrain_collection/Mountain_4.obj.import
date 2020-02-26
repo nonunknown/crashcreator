@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Mountain_4.obj-ef4cbd2f95f5f0f45b8690f553e9293c.mesh"
+
+[deps]
+
+files=[ "res://.import/Mountain_4.obj-ef4cbd2f95f5f0f45b8690f553e9293c.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Mountain_4.obj"
+dest_files=[ "res://.import/Mountain_4.obj-ef4cbd2f95f5f0f45b8690f553e9293c.mesh", "res://.import/Mountain_4.obj-ef4cbd2f95f5f0f45b8690f553e9293c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

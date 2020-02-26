@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Terrain_Path_Corner_Outer_4x4.obj-2c8f465b1ced4b53df5906329f2cf91d.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Terrain_Path_Corner_Outer_4x4.obj-2c8f465b1ced4b53df5906329f2cf91d.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Terrain_Path_Corner_Outer_4x4.obj"
+dest_files=[ "res://.import/Hilly_Terrain_Path_Corner_Outer_4x4.obj-2c8f465b1ced4b53df5906329f2cf91d.mesh", "res://.import/Hilly_Terrain_Path_Corner_Outer_4x4.obj-2c8f465b1ced4b53df5906329f2cf91d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

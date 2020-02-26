@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Terrain_Hill_Sharp_Base.obj-d5d88c1015d449e8280a0b410a322ea8.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Terrain_Hill_Sharp_Base.obj-d5d88c1015d449e8280a0b410a322ea8.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cliff_Terrain_Hill_Sharp_Base.obj"
+dest_files=[ "res://.import/Cliff_Terrain_Hill_Sharp_Base.obj-d5d88c1015d449e8280a0b410a322ea8.mesh", "res://.import/Cliff_Terrain_Hill_Sharp_Base.obj-d5d88c1015d449e8280a0b410a322ea8.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

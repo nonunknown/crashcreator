@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Flower_Rose.obj-751e17ec2b7b3ff1640da3291ba21edf.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Flower_Rose.obj-751e17ec2b7b3ff1640da3291ba21edf.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Prop_Flower_Rose.obj"
+dest_files=[ "res://.import/Hilly_Prop_Flower_Rose.obj-751e17ec2b7b3ff1640da3291ba21edf.mesh", "res://.import/Hilly_Prop_Flower_Rose.obj-751e17ec2b7b3ff1640da3291ba21edf.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

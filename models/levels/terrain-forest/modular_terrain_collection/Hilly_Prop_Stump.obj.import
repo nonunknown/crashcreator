@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Stump.obj-787ae993ca2d085590a2c334a6e01c2d.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Stump.obj-787ae993ca2d085590a2c334a6e01c2d.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Prop_Stump.obj"
+dest_files=[ "res://.import/Hilly_Prop_Stump.obj-787ae993ca2d085590a2c334a6e01c2d.mesh", "res://.import/Hilly_Prop_Stump.obj-787ae993ca2d085590a2c334a6e01c2d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

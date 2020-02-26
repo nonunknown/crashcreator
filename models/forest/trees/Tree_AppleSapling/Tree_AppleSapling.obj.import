@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Tree_AppleSapling.obj-32434fb37c8b04d26db93b3683f09d0e.mesh"
+
+[deps]
+
+files=[ "res://.import/Tree_AppleSapling.obj-32434fb37c8b04d26db93b3683f09d0e.mesh" ]
+
+source_file="res://models/forest/trees/Tree_AppleSapling/Tree_AppleSapling.obj"
+dest_files=[ "res://.import/Tree_AppleSapling.obj-32434fb37c8b04d26db93b3683f09d0e.mesh", "res://.import/Tree_AppleSapling.obj-32434fb37c8b04d26db93b3683f09d0e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

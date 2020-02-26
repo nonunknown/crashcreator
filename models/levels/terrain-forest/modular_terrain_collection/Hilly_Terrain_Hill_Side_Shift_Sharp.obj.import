@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Terrain_Hill_Side_Shift_Sharp.obj-d4aa2a6a30b6c064efb6c2931cc7e05e.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Terrain_Hill_Side_Shift_Sharp.obj-d4aa2a6a30b6c064efb6c2931cc7e05e.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Terrain_Hill_Side_Shift_Sharp.obj"
+dest_files=[ "res://.import/Hilly_Terrain_Hill_Side_Shift_Sharp.obj-d4aa2a6a30b6c064efb6c2931cc7e05e.mesh", "res://.import/Hilly_Terrain_Hill_Side_Shift_Sharp.obj-d4aa2a6a30b6c064efb6c2931cc7e05e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

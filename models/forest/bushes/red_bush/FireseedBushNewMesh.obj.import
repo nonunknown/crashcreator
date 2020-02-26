@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/FireseedBushNewMesh.obj-1536615aba3e706888102f975978b960.mesh"
+
+[deps]
+
+files=[ "res://.import/FireseedBushNewMesh.obj-1536615aba3e706888102f975978b960.mesh" ]
+
+source_file="res://models/forest/bushes/red_bush/FireseedBushNewMesh.obj"
+dest_files=[ "res://.import/FireseedBushNewMesh.obj-1536615aba3e706888102f975978b960.mesh", "res://.import/FireseedBushNewMesh.obj-1536615aba3e706888102f975978b960.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

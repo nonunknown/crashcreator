@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Pick_Large.obj-565308af550e43c4e19d27d79970d653.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Pick_Large.obj-565308af550e43c4e19d27d79970d653.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Pick_Large.obj"
+dest_files=[ "res://.import/Cave_Prop_Pick_Large.obj-565308af550e43c4e19d27d79970d653.mesh", "res://.import/Cave_Prop_Pick_Large.obj-565308af550e43c4e19d27d79970d653.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

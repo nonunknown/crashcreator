@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Fence_Post_4.obj-c7513b721c259d0165e3b6ebc1039e4d.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Fence_Post_4.obj-c7513b721c259d0165e3b6ebc1039e4d.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Prop_Fence_Post_4.obj"
+dest_files=[ "res://.import/Hilly_Prop_Fence_Post_4.obj-c7513b721c259d0165e3b6ebc1039e4d.mesh", "res://.import/Hilly_Prop_Fence_Post_4.obj-c7513b721c259d0165e3b6ebc1039e4d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

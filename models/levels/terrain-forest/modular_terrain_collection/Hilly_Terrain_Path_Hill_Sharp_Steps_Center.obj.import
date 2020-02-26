@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Terrain_Path_Hill_Sharp_Steps_Center.obj-9a3c2adb1eeef6c670545b07c0980a07.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Terrain_Path_Hill_Sharp_Steps_Center.obj-9a3c2adb1eeef6c670545b07c0980a07.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Terrain_Path_Hill_Sharp_Steps_Center.obj"
+dest_files=[ "res://.import/Hilly_Terrain_Path_Hill_Sharp_Steps_Center.obj-9a3c2adb1eeef6c670545b07c0980a07.mesh", "res://.import/Hilly_Terrain_Path_Hill_Sharp_Steps_Center.obj-9a3c2adb1eeef6c670545b07c0980a07.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

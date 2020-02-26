@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Escarpment_Terrain_Corner_Outer_2x2_Base.obj-1f0467f61d8528e944597b82fcf79bfe.mesh"
+
+[deps]
+
+files=[ "res://.import/Escarpment_Terrain_Corner_Outer_2x2_Base.obj-1f0467f61d8528e944597b82fcf79bfe.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Escarpment_Terrain_Corner_Outer_2x2_Base.obj"
+dest_files=[ "res://.import/Escarpment_Terrain_Corner_Outer_2x2_Base.obj-1f0467f61d8528e944597b82fcf79bfe.mesh", "res://.import/Escarpment_Terrain_Corner_Outer_2x2_Base.obj-1f0467f61d8528e944597b82fcf79bfe.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

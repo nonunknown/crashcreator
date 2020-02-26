@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Poison Mushroom.obj-92c0d1a8056d4102f61c63610d17bc23.mesh"
+
+[deps]
+
+files=[ "res://.import/Poison Mushroom.obj-92c0d1a8056d4102f61c63610d17bc23.mesh" ]
+
+source_file="res://models/forest/mushrooms/Poison Mushroom/Poison Mushroom.obj"
+dest_files=[ "res://.import/Poison Mushroom.obj-92c0d1a8056d4102f61c63610d17bc23.mesh", "res://.import/Poison Mushroom.obj-92c0d1a8056d4102f61c63610d17bc23.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

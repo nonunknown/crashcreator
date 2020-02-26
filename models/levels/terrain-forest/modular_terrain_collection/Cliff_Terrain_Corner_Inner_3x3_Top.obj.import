@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Terrain_Corner_Inner_3x3_Top.obj-6412fe3563cca9c019e79371a0599a1c.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Terrain_Corner_Inner_3x3_Top.obj-6412fe3563cca9c019e79371a0599a1c.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cliff_Terrain_Corner_Inner_3x3_Top.obj"
+dest_files=[ "res://.import/Cliff_Terrain_Corner_Inner_3x3_Top.obj-6412fe3563cca9c019e79371a0599a1c.mesh", "res://.import/Cliff_Terrain_Corner_Inner_3x3_Top.obj-6412fe3563cca9c019e79371a0599a1c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

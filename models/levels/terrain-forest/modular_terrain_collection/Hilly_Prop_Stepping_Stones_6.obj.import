@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Stepping_Stones_6.obj-cb8f92ced0e6b00f6c1cda4f86047c5e.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Stepping_Stones_6.obj-cb8f92ced0e6b00f6c1cda4f86047c5e.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Prop_Stepping_Stones_6.obj"
+dest_files=[ "res://.import/Hilly_Prop_Stepping_Stones_6.obj-cb8f92ced0e6b00f6c1cda4f86047c5e.mesh", "res://.import/Hilly_Prop_Stepping_Stones_6.obj-cb8f92ced0e6b00f6c1cda4f86047c5e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

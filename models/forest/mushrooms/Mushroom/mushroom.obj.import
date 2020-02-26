@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/mushroom.obj-92a61ed8afb64538f931c5d152634059.mesh"
+
+[deps]
+
+files=[ "res://.import/mushroom.obj-92a61ed8afb64538f931c5d152634059.mesh" ]
+
+source_file="res://models/forest/mushrooms/Mushroom/mushroom.obj"
+dest_files=[ "res://.import/mushroom.obj-92a61ed8afb64538f931c5d152634059.mesh", "res://.import/mushroom.obj-92a61ed8afb64538f931c5d152634059.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

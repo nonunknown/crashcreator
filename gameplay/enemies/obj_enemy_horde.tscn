@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gameplay/enemies/obj_enemy_cow.tscn" type="PackedScene" id=1]
+
+[node name="obj_enemy_horde" type="Spatial"]
+
+[node name="obj_enemy_cow" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, 0 )
+
+[node name="obj_enemy_cow2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -0.961709 )
+
+[node name="obj_enemy_cow3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, 0.594324 )
+
+[node name="obj_enemy_cow6" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -5.47793 )
+
+[node name="obj_enemy_cow5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -6.43964 )
+
+[node name="obj_enemy_cow4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -4.88361 )
+
+[node name="obj_enemy_cow9" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -10.7425 )
+
+[node name="obj_enemy_cow8" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -11.7042 )
+
+[node name="obj_enemy_cow7" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -10.1482 )
+
+[node name="obj_enemy_cow12" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -16.1023 )
+
+[node name="obj_enemy_cow11" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -17.064 )
+
+[node name="obj_enemy_cow10" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -15.508 )
+
+[node name="obj_enemy_cow15" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -21.3829 )
+
+[node name="obj_enemy_cow14" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -22.3446 )
+
+[node name="obj_enemy_cow13" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -20.7885 )
+
+[node name="obj_enemy_cow18" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -26.7529 )
+
+[node name="obj_enemy_cow17" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -27.7147 )
+
+[node name="obj_enemy_cow16" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -26.1586 )
+
+[node name="obj_enemy_cow21" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -32.0761 )
+
+[node name="obj_enemy_cow20" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -33.0378 )
+
+[node name="obj_enemy_cow19" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -31.4818 )
+
+[node name="obj_enemy_cow24" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -37.6051 )
+
+[node name="obj_enemy_cow23" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -38.5668 )
+
+[node name="obj_enemy_cow22" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -37.0108 )
+
+[node name="obj_enemy_cow27" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.16947, 0, -42.5857 )
+
+[node name="obj_enemy_cow26" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.406084, 0, -43.5475 )
+
+[node name="obj_enemy_cow25" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.44376, 0, -41.9914 )

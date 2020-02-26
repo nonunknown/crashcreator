@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://models/enemies/cow/cow.glb" type="PackedScene" id=1]
+[ext_resource path="res://scripts/gameplay/enemies/EnemyCow.gd" type="Script" id=2]
+[ext_resource path="res://models/enemies/cow/cow_00_0.png" type="Texture" id=3]
+[ext_resource path="res://particles/PPuff.scn" type="PackedScene" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource( 3 )
+metallic_specular = 0.0
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.93352, 1.90986, 4.47332 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1.98465, 0.104984, 4.4597 )
+
+[node name="obj_enemy_cow" type="KinematicBody"]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
+collision_layer = 32
+script = ExtResource( 2 )
+
+[node name="cow" parent="." instance=ExtResource( 1 )]
+
+[node name="cow" parent="cow" index="0"]
+material/0 = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96624, 0.932341 )
+shape = SubResource( 2 )
+
+[node name="Walkable" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.38483, 0 )
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Walkable"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.621362, 0.932999 )
+shape = SubResource( 3 )
+
+[node name="PPuff" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.797024, 0.147597, -2.39554 )
+emitting = true
+lifetime = 2.44
+one_shot = false
+preprocess = 1.56
+explosiveness = 0.0
+randomness = 0.0
+
+[node name="PPuff2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.797024, 0.147597, 1.53054 )
+emitting = true
+lifetime = 2.44
+one_shot = false
+preprocess = 1.56
+explosiveness = 0.0
+randomness = 0.0
+
+[node name="PPuff4" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.767504, 0.147597, -2.39554 )
+emitting = true
+lifetime = 2.44
+one_shot = false
+preprocess = 1.56
+explosiveness = 0.0
+randomness = 0.0
+
+[node name="PPuff3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.767504, 0.147597, 1.53054 )
+emitting = true
+lifetime = 2.44
+one_shot = false
+preprocess = 1.56
+explosiveness = 0.0
+randomness = 0.0
+
+[editable path="cow"]

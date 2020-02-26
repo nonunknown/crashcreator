@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Escarpment_Terrain_Hill_Crest_Top.obj-0f747f154e2b014780b77b5c80c15da0.mesh"
+
+[deps]
+
+files=[ "res://.import/Escarpment_Terrain_Hill_Crest_Top.obj-0f747f154e2b014780b77b5c80c15da0.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Escarpment_Terrain_Hill_Crest_Top.obj"
+dest_files=[ "res://.import/Escarpment_Terrain_Hill_Crest_Top.obj-0f747f154e2b014780b77b5c80c15da0.mesh", "res://.import/Escarpment_Terrain_Hill_Crest_Top.obj-0f747f154e2b014780b77b5c80c15da0.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

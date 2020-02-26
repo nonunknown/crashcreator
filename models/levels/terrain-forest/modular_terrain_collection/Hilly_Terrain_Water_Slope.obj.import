@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Terrain_Water_Slope.obj-72d201adb0ec3b9738a5464edaf8fdc2.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Terrain_Water_Slope.obj-72d201adb0ec3b9738a5464edaf8fdc2.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Terrain_Water_Slope.obj"
+dest_files=[ "res://.import/Hilly_Terrain_Water_Slope.obj-72d201adb0ec3b9738a5464edaf8fdc2.mesh", "res://.import/Hilly_Terrain_Water_Slope.obj-72d201adb0ec3b9738a5464edaf8fdc2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

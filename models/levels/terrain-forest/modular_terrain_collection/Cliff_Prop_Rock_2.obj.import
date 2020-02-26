@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Prop_Rock_2.obj-749f1141c5f8e3116768029d7970d64b.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Prop_Rock_2.obj-749f1141c5f8e3116768029d7970d64b.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cliff_Prop_Rock_2.obj"
+dest_files=[ "res://.import/Cliff_Prop_Rock_2.obj-749f1141c5f8e3116768029d7970d64b.mesh", "res://.import/Cliff_Prop_Rock_2.obj-749f1141c5f8e3116768029d7970d64b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

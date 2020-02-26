@@ -1,0 +1,46 @@
+# Blender3D MTL File: Poison Mushroom.blend
+# Material Count: 4
+newmtl material0_mkinoko_1.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd mkinoko_1.png
+
+
+newmtl material1_mkinoko_2.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.790588 0.790588 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd mkinoko_2.png
+
+
+newmtl material3_mkinoko_0.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.558431 0.558431 0.558431
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd mkinoko_0.png
+
+
+newmtl material2_mkinoko_2.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.790588 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd mkinoko_2.png
+
+

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Beach_Prop_Docks_Corner_Supports.obj-94ea97ac20df5b82f797629db4f0d55a.mesh"
+
+[deps]
+
+files=[ "res://.import/Beach_Prop_Docks_Corner_Supports.obj-94ea97ac20df5b82f797629db4f0d55a.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Beach_Prop_Docks_Corner_Supports.obj"
+dest_files=[ "res://.import/Beach_Prop_Docks_Corner_Supports.obj-94ea97ac20df5b82f797629db4f0d55a.mesh", "res://.import/Beach_Prop_Docks_Corner_Supports.obj-94ea97ac20df5b82f797629db4f0d55a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Terrain_Floor_Normal.obj-e9b3a83a6f7d13a048c5b305b7f7e5ad.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Terrain_Floor_Normal.obj-e9b3a83a6f7d13a048c5b305b7f7e5ad.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Terrain_Floor_Normal.obj"
+dest_files=[ "res://.import/Cave_Terrain_Floor_Normal.obj-e9b3a83a6f7d13a048c5b305b7f7e5ad.mesh", "res://.import/Cave_Terrain_Floor_Normal.obj-e9b3a83a6f7d13a048c5b305b7f7e5ad.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

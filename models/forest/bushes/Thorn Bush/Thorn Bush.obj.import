@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Thorn Bush.obj-9821ee73c7cbae027107ed21f205dec2.mesh"
+
+[deps]
+
+files=[ "res://.import/Thorn Bush.obj-9821ee73c7cbae027107ed21f205dec2.mesh" ]
+
+source_file="res://models/forest/bushes/Thorn Bush/Thorn Bush.obj"
+dest_files=[ "res://.import/Thorn Bush.obj-9821ee73c7cbae027107ed21f205dec2.mesh", "res://.import/Thorn Bush.obj-9821ee73c7cbae027107ed21f205dec2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -2,35 +2,33 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Crystal Texture Vertex Colors.png-228db328a9c504fbec1c9e41e0168332.s3tc.stex"
-path.etc2="res://.import/Crystal Texture Vertex Colors.png-228db328a9c504fbec1c9e41e0168332.etc2.stex"
+path="res://.import/Crystal Texture Vertex Colors.png-228db328a9c504fbec1c9e41e0168332.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://models/items/Crystal/Crystal Texture Vertex Colors.png"
-dest_files=[ "res://.import/Crystal Texture Vertex Colors.png-228db328a9c504fbec1c9e41e0168332.s3tc.stex", "res://.import/Crystal Texture Vertex Colors.png-228db328a9c504fbec1c9e41e0168332.etc2.stex" ]
+dest_files=[ "res://.import/Crystal Texture Vertex Colors.png-228db328a9c504fbec1c9e41e0168332.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=true
+flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

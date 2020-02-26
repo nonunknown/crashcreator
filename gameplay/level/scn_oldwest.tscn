@@ -1,0 +1,572 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://scenes/scn_Gameplay.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Bumpstop.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://textures/lv_toadvillage/tex_ground.png" type="Texture" id=4]
+[ext_resource path="res://gameplay/crates/obj_crate_simple.tscn" type="PackedScene" id=5]
+[ext_resource path="res://models/characters/crash3/jump-top.anim" type="Animation" id=6]
+[ext_resource path="res://gameplay/crates/obj_crate_wood_jump.tscn" type="PackedScene" id=7]
+[ext_resource path="res://gameplay/crates/obj_crate_question.tscn" type="PackedScene" id=8]
+[ext_resource path="res://gameplay/crates/obj_crate_life.tscn" type="PackedScene" id=9]
+[ext_resource path="res://gameplay/crates/obj_crate_tnt.tscn" type="PackedScene" id=10]
+[ext_resource path="res://gameplay/enemies/obj_enemy_cowboy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/Utils/RailroadGenerator.gd" type="Script" id=12]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Switch.obj" type="ArrayMesh" id=13]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Curve_Small.obj" type="ArrayMesh" id=14]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Curve_Large.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Hill_Gentle.obj" type="ArrayMesh" id=16]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Hill_Sharp.obj" type="ArrayMesh" id=17]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_1.obj" type="ArrayMesh" id=18]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Intersection.obj" type="ArrayMesh" id=19]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_3.obj" type="ArrayMesh" id=20]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_2.obj" type="ArrayMesh" id=21]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_4.obj" type="ArrayMesh" id=22]
+[ext_resource path="res://gameplay/enemies/obj_enemy_cow.tscn" type="PackedScene" id=23]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+vertex_color_use_as_albedo = true
+albedo_color = Color( 0.855469, 0.608185, 0.427734, 1 )
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 100, 100, 50 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="ConcavePolygonShape" id=5]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.596078, 0.784314, 0.572549, 1 )
+
+[sub_resource type="Curve3D" id=7]
+bake_interval = 0.85
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.0272436, 7.62939e-06, 166.771, 0, 0, 0, 0, 0, 0, -0.11, 0.2, 178.03, 0, 0, 0, 0, 0, 0, 1.36295, 3.03882, 184.881 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[node name="scn_oldwest" type="Spatial"]
+
+[node name="Gameplay" parent="." instance=ExtResource( 1 )]
+
+[node name="GUI_Iventory" parent="Gameplay/HUD" index="0"]
+g_wumpa = NodePath("../../../../scn_oldwest/Gameplay/HUD/GUI_Iventory/GridContainer/Wumpa/amt")
+g_life = NodePath("../../../../scn_oldwest/Gameplay/HUD/GUI_Iventory/GridContainer/Life/amt")
+g_crate = NodePath("../../../../scn_oldwest/Gameplay/HUD/GUI_Iventory/GridContainer/Crate/amt")
+
+[node name="Camera" parent="Gameplay/Player" index="0"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -8.77929, 1.63073, 0.908752 )
+fov = 45.9
+simulate_ready = true
+cam_type_side = true
+offset = Vector3( -7, -1, 5 )
+
+[node name="obj_Character" parent="Gameplay/Player" index="1" instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.492677, 0.637833 )
+jump_force = 10
+is_global_axis_controlled = true
+
+[node name="Crash" parent="Gameplay/Player/obj_Character/crashbandicoot/Armature/Skeleton" index="1"]
+transform = Transform( 1.125, 0, 1.96701e-07, 0, 1.125, 0, -1.96701e-07, 0, 1.125, 0, 0, 0 )
+
+[node name="AnimationPlayer" parent="Gameplay/Player/obj_Character/crashbandicoot" index="2"]
+anims/jump-top = ExtResource( 6 )
+
+[node name="CollisionShape" parent="Gameplay/Player/obj_Character/Head" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0018518, 0 )
+
+[node name="RayCast" parent="Gameplay/Player/obj_Character/Rays" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.469601, -0.0725007 )
+
+[node name="obj_enemy_cow" parent="Gameplay/Player" index="2" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, 2.2835, -0.00386512, 209.464 )
+
+[node name="obj_enemy_cow2" parent="Gameplay/Player" index="3" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, 0.0824206, -0.00386512, 210.44 )
+
+[node name="obj_enemy_cow3" parent="Gameplay/Player" index="4" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, -2.11928, -0.00386512, 209.32 )
+
+[node name="obj_enemy_cow6" parent="Gameplay/Player" index="5" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, 2.2835, -0.00386512, 214.831 )
+
+[node name="obj_enemy_cow5" parent="Gameplay/Player" index="6" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, 0.0824206, -0.00386512, 215.807 )
+
+[node name="obj_enemy_cow4" parent="Gameplay/Player" index="7" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, -2.11928, -0.00386512, 214.687 )
+
+[node name="obj_enemy_cow9" parent="Gameplay/Player" index="8" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, 2.2835, -0.00386512, 219.892 )
+
+[node name="obj_enemy_cow8" parent="Gameplay/Player" index="9" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, 0.0824206, -0.00386512, 220.869 )
+
+[node name="obj_enemy_cow7" parent="Gameplay/Player" index="10" instance=ExtResource( 23 )]
+transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, -2.11928, -0.00386512, 219.748 )
+
+[node name="obj_enemy_cowboy" parent="Gameplay/Enemies" index="0" instance=ExtResource( 11 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.10913, 20.5338 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Gameplay/Entities" index="0"]
+
+[node name="obj_crate_wood_jump" parent="Gameplay/Crate" index="0" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9938, 2.77807, 5.3345 )
+collision_mask = 19
+
+[node name="obj_crate_simple" parent="Gameplay/Crate" index="1" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 6.63931, 9.70239 )
+
+[node name="obj_crate_simple2" parent="Gameplay/Crate" index="2" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 7.63931, 9.70239 )
+
+[node name="obj_crate_simple3" parent="Gameplay/Crate" index="3" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 7.63931, 8.70239 )
+
+[node name="obj_crate_simple4" parent="Gameplay/Crate" index="4" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 6.62724, 8.70239 )
+
+[node name="obj_crate_simple8" parent="Gameplay/Crate" index="5" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 6.63931, 9.70239 )
+
+[node name="obj_crate_simple7" parent="Gameplay/Crate" index="6" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 7.63931, 9.70239 )
+
+[node name="obj_crate_simple6" parent="Gameplay/Crate" index="7" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 7.63931, 8.70239 )
+
+[node name="obj_crate_simple5" parent="Gameplay/Crate" index="8" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 6.62724, 8.70239 )
+
+[node name="obj_crate_life" parent="Gameplay/Crate" index="9" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07753, 6.39973, -0.630845 )
+
+[node name="obj_crate_life2" parent="Gameplay/Crate" index="10" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, -0.00161302, 14.5951 )
+
+[node name="obj_crate_life3" parent="Gameplay/Crate" index="11" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, 0.998387, 14.5951 )
+
+[node name="obj_crate_life4" parent="Gameplay/Crate" index="12" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, 2.01808, 14.5951 )
+
+[node name="obj_crate_question2" parent="Gameplay/Crate" index="13" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, -0.00161302, 18.2972 )
+
+[node name="obj_crate_tnt" parent="Gameplay/Crate" index="14" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, -0.00161302, 21.7786 )
+
+[node name="obj_crate_question3" parent="Gameplay/Crate" index="15" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, 0.998387, 18.2972 )
+
+[node name="obj_crate_question" parent="Gameplay/Crate" index="16" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33071, 12.3676, 9.16838 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Gameplay/Terrain" index="0"]
+transform = Transform( 83.927, 0, 0, 0, 1, 0, 0, 0, -65.0709, -0.0613861, -1.90735e-06, 39.237 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/MeshInstance/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Gameplay/Terrain" index="1"]
+transform = Transform( 83.927, 0, 0, 0, 1, 0, 0, 0, -65.0709, -0.0613861, -1.90735e-06, 214.46 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/MeshInstance2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="charrete" type="MeshInstance" parent="Gameplay/Terrain" index="2"]
+transform = Transform( 3.04496, -0.188804, 0, 0.585429, 0.982015, 0, 0, 0, 1.99977, 0, 1.16501, 6.66564 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/charrete"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/charrete/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="charrete2" type="MeshInstance" parent="Gameplay/Terrain" index="3"]
+transform = Transform( 3.10072, 0, 0, 0, 1, 0, 0, 0, 1.99977, -1.25939, 1.16501, 21.0941 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/charrete2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/charrete2/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="charrete3" type="MeshInstance" parent="Gameplay/Terrain" index="4"]
+transform = Transform( 3.10072, 0, 0, 0, 1, 0, 0, 0, 1.99977, -1.25939, 1.16501, 37.663 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/charrete3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/charrete3/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="silo" type="MeshInstance" parent="Gameplay/Terrain" index="5"]
+transform = Transform( 3.10072, 0, 0, 0, 1, 0, 0, 0, 4.91818, -1.25939, 1.16501, 58.2017 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/silo"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/silo/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="sallon" type="MeshInstance" parent="Gameplay/Terrain" index="6"]
+transform = Transform( 3.1569, 0, 0, 0, 6.60879, 0, 0, 0, 5.3718, 8.57276, 5.67205, 6.02065 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/sallon"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/sallon/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar" type="MeshInstance" parent="Gameplay/Terrain" index="7"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 12.8801 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar2" type="MeshInstance" parent="Gameplay/Terrain" index="8"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 16.3257 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar2/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar3" type="MeshInstance" parent="Gameplay/Terrain" index="9"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 20.0098 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar3/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar4" type="MeshInstance" parent="Gameplay/Terrain" index="10"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 23.4655 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar4/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar8" type="MeshInstance" parent="Gameplay/Terrain" index="11"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 27.4906 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar8/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar7" type="MeshInstance" parent="Gameplay/Terrain" index="12"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 30.9363 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar7/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar6" type="MeshInstance" parent="Gameplay/Terrain" index="13"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 34.6203 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar6/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar5" type="MeshInstance" parent="Gameplay/Terrain" index="14"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 38.076 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar5/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar9" type="MeshInstance" parent="Gameplay/Terrain" index="15"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 41.9919 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar9"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar9/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar10" type="MeshInstance" parent="Gameplay/Terrain" index="16"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 45.5974 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar10"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar10/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar11" type="MeshInstance" parent="Gameplay/Terrain" index="17"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 48.9974 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar11"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar11/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar12" type="MeshInstance" parent="Gameplay/Terrain" index="18"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 52.3974 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar12"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar12/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="pillar13" type="MeshInstance" parent="Gameplay/Terrain" index="19"]
+transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 55.4652 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar13"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar13/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="sallon_platform" type="MeshInstance" parent="Gameplay/Terrain" index="20"]
+transform = Transform( 2.5014, 0, 0, 0, 0.303349, 0, 0, 0, 21.5123, 5.27826, 6.33146, 22.3754 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 6 )
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/sallon_platform"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/sallon_platform/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="sallon_platform2" type="MeshInstance" parent="Gameplay/Terrain" index="21"]
+transform = Transform( 2.5014, 0, 0, 0, 0.303349, 0, 0, 0, 6.93744, 5.27826, 4.30773, 50.1774 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 6 )
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/sallon_platform2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/sallon_platform2/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="cabana_cavalo" type="MeshInstance" parent="Gameplay/Terrain" index="22"]
+transform = Transform( 3.10072, 0, 0, 0, 3.81666, 0, 0, 0, 4.91818, 5.01963, 3.97029, 70.1656 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/cabana_cavalo"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/cabana_cavalo/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="cabana_cavalo2" type="MeshInstance" parent="Gameplay/Terrain" index="23"]
+transform = Transform( 3.10072, 0, 0, 0, 3.81666, 0, 0, 0, 4.91818, 5.01963, 3.97029, 81.8047 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/cabana_cavalo2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/cabana_cavalo2/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="ponte" type="MeshInstance" parent="Gameplay/Terrain" index="24"]
+transform = Transform( 3.10072, 0, 0, 0, 0.380839, 1.54802, 0, -0.12629, 4.6682, -1.92016, 0.828857, 99.0791 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/ponte"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/ponte/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="ponte3" type="MeshInstance" parent="Gameplay/Terrain" index="25"]
+transform = Transform( 3.101, 0, 0, 0, 0.401, 0, 0, 0, 24.211, -1.92, 2.356, 127.776 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/ponte3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/ponte3/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="ponte2" type="MeshInstance" parent="Gameplay/Terrain" index="26"]
+transform = Transform( -3.10072, 1.10406e-08, -4.08107e-07, 0, 0.380839, 1.54802, 2.71074e-07, 0.12629, -4.6682, -1.92016, 0.828857, 156.528 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/ponte2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/ponte2/StaticBody"]
+transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="Railway" type="Spatial" parent="Gameplay"]
+
+[node name="Cave_Prop_Railway_Bumpstop" type="MeshInstance" parent="Gameplay/Railway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1.4, 170.1 )
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+
+[node name="Cave_Prop_Railway_Curve_Large" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0952001, -0.901356, 0.911499 )
+mesh = ExtResource( 15 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+
+[node name="Cave_Prop_Railway_Curve_Small" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.61831, -1.4, 2.82761 )
+mesh = ExtResource( 14 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+
+[node name="Cave_Prop_Railway_Hill_Gentle" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.413367, -1.41854, 4.95695 )
+mesh = ExtResource( 16 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+
+[node name="Cave_Prop_Railway_Hill_Sharp" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34281, -1.43592, 5.64618 )
+mesh = ExtResource( 17 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+
+[node name="Cave_Prop_Railway_Intersection" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84123, -1.4, 9.40619 )
+mesh = ExtResource( 19 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+
+[node name="Cave_Prop_Railway_Straight_1" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90722, -1.4, -0.763504 )
+mesh = ExtResource( 18 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+
+[node name="Cave_Prop_Railway_Straight_2" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02642, -1.1408, -1.85345 )
+mesh = ExtResource( 21 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+
+[node name="Cave_Prop_Railway_Straight_3" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93946, -0.403175, -2.28677 )
+mesh = ExtResource( 20 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+
+[node name="Cave_Prop_Railway_Straight_4" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15115, 0.0869087, -1.726 )
+mesh = ExtResource( 22 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+
+[node name="Cave_Prop_Railway_Switch" type="MeshInstance" parent="Gameplay/Railway/Cave_Prop_Railway_Bumpstop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.594042, -0.782054, 3.84781 )
+mesh = ExtResource( 13 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 7 )
+script = ExtResource( 12 )
+rail_straigt = ExtResource( 18 )
+
+[editable path="Gameplay"]
+
+[editable path="Gameplay/Player/obj_Character"]

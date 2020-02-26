@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Flower_Lily_Blue.obj-afe692b712a93f50daf0b02914ba7f11.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Flower_Lily_Blue.obj-afe692b712a93f50daf0b02914ba7f11.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Hilly_Prop_Flower_Lily_Blue.obj"
+dest_files=[ "res://.import/Hilly_Prop_Flower_Lily_Blue.obj-afe692b712a93f50daf0b02914ba7f11.mesh", "res://.import/Hilly_Prop_Flower_Lily_Blue.obj-afe692b712a93f50daf0b02914ba7f11.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

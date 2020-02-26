@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Railway_Straight_4.obj-b55c02020bcac84c7fb08e7a38aec1b7.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Railway_Straight_4.obj-b55c02020bcac84c7fb08e7a38aec1b7.mesh" ]
+
+source_file="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_4.obj"
+dest_files=[ "res://.import/Cave_Prop_Railway_Straight_4.obj-b55c02020bcac84c7fb08e7a38aec1b7.mesh", "res://.import/Cave_Prop_Railway_Straight_4.obj-b55c02020bcac84c7fb08e7a38aec1b7.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
