@@ -7,6 +7,11 @@ a game for crash fans to create and play on their own levels, and free source co
 # Note
 alpha means not playable!
 
+
+### Alpha 0.11.0 - Mobile Update
+    -Added Support for Mobile Controlling
+        -Tkx to AlecSantos(HappyDoggo)
+
 ### Alpha 0.10.0 - Wild West Update
 
 ### Alpha 0.9.13
