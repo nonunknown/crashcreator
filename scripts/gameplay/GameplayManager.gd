@@ -15,6 +15,8 @@ func _ready():
 	if (simulate_ready): 
 		GameManager.set_gamemode(GameManager.MODE.PLAY)
 		_gameplay_ready()
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		self.add_child(load("res://mobile/MobileUI.tscn").instance())
 	pass
 
 func trigger_boss_wait(started:bool=true):
