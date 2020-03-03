@@ -7,6 +7,11 @@ a game for crash fans to create and play on their own levels, and free source co
 # Note
 alpha means not playable!
 
+### Alpha 0.12.1
+    - Fixed MachineManager class
+
+### Alpha 0.12.0 - CTR Update
+    -Added Crash team racing features
 
 ### Alpha 0.11.0 - Mobile Update
     -Added Support for Mobile Controlling

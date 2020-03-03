@@ -2,44 +2,6 @@ extends Spatial
 
 enum EDITOR_STATE {NEW,SAVE,LOAD,PATH,CRATE,ITEM,ENTITY,ENEMY,TIME,LIGHT,TEST,BUILD,SETTINGS}
 
-#class MachineManager:
-#	var machine:Dictionary = {
-#		state=null,
-#		funcs={
-#			init={},
-#			update={},
-#			exit={}
-#			}
-#		}
-#
-#	func register_state(target,state_const:int,name:String,has_init:bool=true,has_exit:bool=false):
-#		if (has_init):
-#			machine.funcs.init[state_const] = funcref(target,"st_init_"+name)
-#		machine.funcs.update[state_const] = funcref(target,"st_update_"+name)
-#		if (has_exit):
-#			machine.funcs.exit[state_const] = funcref(target,"st_exit_"+name)
-#
-#	func register_state_array(target,states_const:Array,names:Array):
-#		for i in states_const.size():
-#			register_state(target,states_const[i],names[i],true,true)
-#
-#	func machine_update():
-#		machine.funcs.update[machine.state].call_func()
-#
-#	func change_state(to):
-##		print("state to: "+str(to))
-#		if machine.funcs.exit.has(machine.state):
-#			machine.funcs.exit[machine.state].call_func()
-#		machine.state = to
-#		if machine.funcs.init.has(machine.state):
-#			machine.funcs.init[to].call_func() #call the init function of next states
-#
-#
-#	func get_current_state() -> int: return machine.state
-#	func state_is(state:int) -> bool: 
-#		if machine.state == state: 
-#			return true
-#		else:return false
 const ray_length = 1000
 func ray(world,from,to,collision_mask) -> RayCast:
 	var space_state = world.direct_space_state
