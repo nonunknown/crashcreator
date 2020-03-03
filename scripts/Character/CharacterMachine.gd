@@ -1,7 +1,7 @@
 class_name CharacterMachine
 
 var character
-var manager = Utils.MachineManager.new()
+var manager = MachineManager.new(self)
 
 var blend_time
 var animator
@@ -10,7 +10,7 @@ var movement
 func _init(_target):
 	character = _target
 	blend_time = character.blend_time
-	manager.register_state_array(self,[IDLE,
+	manager.register_state_array([IDLE,
 	WALK,RUN,JUMP,CROUCH,DASH,JUMP_MOVE,BODY_SLAM,FALLING,ATTACK,PORTAL],[
 		"idle","walk","run","jump","crouch","dash","jump_move","body_slam","falling","attack","portal"
 	])

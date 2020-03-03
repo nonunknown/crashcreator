@@ -1,7 +1,7 @@
 extends Enemy
 class_name EnemyFrog
 
-var machine:Utils.MachineManager
+var machine:MachineManager 
 var animator:AnimationPlayer
 var blend_time:float = 0.1
 var ray_position:RayCast
@@ -9,9 +9,9 @@ var look_target:Vector3
 var area_move:Area
 enum STATE {IDLE,JUMP}
 func _ready():
-	machine = Utils.MachineManager.new()
+	machine = MachineManager.new(self)
 	animator = $AnimationPlayer
-	machine.register_state_array(self,[STATE.IDLE,STATE.JUMP],["idle","jump"])
+	machine.register_state_array([STATE.IDLE,STATE.JUMP],["idle","jump"])
 	machine.change_state(STATE.IDLE)
 	config_ai()
 
