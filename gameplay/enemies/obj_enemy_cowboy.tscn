@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://models/enemies/lab_cowboy/material_297.material" type="Material" id=1]
 [ext_resource path="res://models/enemies/lab_cowboy/hat_tengallonMt_mat.material" type="Material" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://models/enemies/lab_cowboy/material_306.material" type="Material" id=4]
 [ext_resource path="res://models/enemies/lab_cowboy/material_300.material" type="Material" id=5]
 [ext_resource path="res://models/enemies/lab_cowboy/material_315.material" type="Material" id=6]
+[ext_resource path="res://models/enemies/lab_cowboy/lab_assistant/shoot.anim" type="Animation" id=7]
+[ext_resource path="res://models/objects/pistol.fbx" type="PackedScene" id=8]
+[ext_resource path="res://scripts/gameplay/enemies/EnemyCowboy.gd" type="Script" id=9]
+[ext_resource path="res://gameplay/obj_bullet.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Lab Assistant"
@@ -543,7 +547,15 @@ tracks/27/imported = false
 tracks/27/enabled = true
 tracks/27/keys = PoolRealArray( 0, 1, -0.0948931, -0.447918, -0.102764, 1.22935e-07, -1.62981e-09, 3.72529e-09, 1, 1, 1, 1 )
 
-[node name="obj_enemy_cowboy" type="Spatial"]
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.266536, 1.44463, 0.19346 )
+
+[node name="obj_enemy_cowboy" type="KinematicBody"]
+script = ExtResource( 9 )
+obj_bullet = ExtResource( 10 )
+
+[node name="pistol" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.270891, 0.0999744, 2.52433e-08, 0.0999745, -0.270891, 2.3682e-08, 3.18815e-08, -1.34772e-08, -0.28875, 0.136044, 1.22911, -0.100321 )
 
 [node name="model" type="Spatial" parent="."]
 
@@ -707,3 +719,8 @@ material/5 = ExtResource( 2 )
 autoplay = "idle"
 anims/idle = SubResource( 3 )
 anims/none = SubResource( 4 )
+anims/shoot = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4062, 0 )
+shape = SubResource( 5 )

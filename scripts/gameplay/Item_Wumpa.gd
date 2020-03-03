@@ -2,6 +2,7 @@ extends Item
 class_name ItemWumpa
 
 func _player_picked(player:Character):
+	print("picked")
 	if (player == null): return
 	player.iventory.add_wumpa(1)
 #	self.visible = false

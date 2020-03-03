@@ -147,3 +147,18 @@ var global_delta:float = 0
 
 func _process(delta):
 	global_delta = delta
+
+func _d(node,new_node):
+	if node.get_child_count() <= 0: return
+	for child in node.get_children():
+		var new_child = child.duplicate()
+		new_node.add_child(new_child)
+		_d(child,new_child)
+		pass
+	pass
+
+func duplicate_with_children(node,new_parent):
+	var new_node:Node
+	new_node = node.duplicate()
+	new_parent.add_child(new_node)
+	_d(node,new_node)

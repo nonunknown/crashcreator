@@ -40,12 +40,12 @@ func _ready():
 		input_update = funcref(self,"input_update_machine")
 		
 	
-func _process(delta):
+func _process(_delta):
 	if playable:
 		camera = get_viewport().get_camera().get_global_transform()
 	pass
 
-func input_update_machine(dir,cam_xform):
+func input_update_machine(dir,_cam_xform):
 	dir = Vector3.ZERO
 	return dir
 
@@ -67,7 +67,7 @@ func input_update_normal(dir,cam_xform):
 			dir += cam_xform.basis[0]
 	return dir
 
-func input_update_axis(dir,cam_xform):
+func input_update_axis(dir,_cam_xform):
 	inputs = [Input.is_action_pressed("ui_up"),
 	Input.is_action_pressed("ui_down"),
 	Input.is_action_pressed("ui_left"),

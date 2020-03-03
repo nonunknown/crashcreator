@@ -1,8 +1,8 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scripts/gameplay/character.gd" type="Script" id=1]
 [ext_resource path="res://models/characters/crash3/idle.anim" type="Animation" id=2]
-[ext_resource path="res://sounds/crash/foot/normal_1.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/crash/step_dirt1.wav" type="AudioStream" id=3]
 [ext_resource path="res://sounds/crash/woah.wav" type="AudioStream" id=4]
 [ext_resource path="res://models/characters/crash3/walk-loop.anim" type="Animation" id=5]
 [ext_resource path="res://models/characters/crash3/run-loop.anim" type="Animation" id=6]
@@ -11,6 +11,7 @@
 [ext_resource path="res://sounds/crash/twist_fail.wav" type="AudioStream" id=9]
 [ext_resource path="res://models/characters/crash3/jump-move.anim" type="Animation" id=10]
 [ext_resource path="res://models/characters/crash3/fall.anim" type="Animation" id=11]
+[ext_resource path="res://models/characters/crash3/dash.anim" type="Animation" id=12]
 [ext_resource path="res://sounds/crash/foot/normal_2.wav" type="AudioStream" id=13]
 [ext_resource path="res://scripts/Character/Step.gd" type="Script" id=14]
 [ext_resource path="res://models/characters/crash3/2.mesh" type="ArrayMesh" id=16]
@@ -455,6 +456,7 @@ shape = SubResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="crashbandicoot"]
 root_node = NodePath("../Armature")
 autoplay = "idle"
+anims/dash = ExtResource( 12 )
 anims/fall = ExtResource( 11 )
 anims/idle = ExtResource( 2 )
 anims/jump = ExtResource( 7 )

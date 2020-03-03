@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Builder.gd"
 }, {
+"base": "Spatial",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://scripts/gameplay/Bullet.gd"
+}, {
 "base": "Control",
 "class": "ButtonMesh",
 "language": "GDScript",
@@ -48,6 +53,11 @@ _global_script_classes=[ {
 "class": "CharacterMachine",
 "language": "GDScript",
 "path": "res://scripts/Character/CharacterMachine.gd"
+}, {
+"base": "Spatial",
+"class": "Chunk",
+"language": "GDScript",
+"path": "res://scripts/Utils/Chunk.gd"
 }, {
 "base": "RigidBody",
 "class": "Crate",
@@ -128,6 +138,11 @@ _global_script_classes=[ {
 "class": "EnemyCow",
 "language": "GDScript",
 "path": "res://scripts/gameplay/enemies/EnemyCow.gd"
+}, {
+"base": "Enemy",
+"class": "EnemyCowboy",
+"language": "GDScript",
+"path": "res://scripts/gameplay/enemies/EnemyCowboy.gd"
 }, {
 "base": "Enemy",
 "class": "EnemyFrog",
@@ -309,6 +324,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/editor/Project.gd"
 }, {
+"base": "EditorScript",
+"class": "ReferenceCollector",
+"language": "GDScript",
+"path": "res://godot-scripts/ReferenceCollector.gd"
+}, {
 "base": "Spatial",
 "class": "Selectable",
 "language": "GDScript",
@@ -350,9 +370,11 @@ _global_script_class_icons={
 "Boss": "",
 "BossAra": "",
 "Builder": "",
+"Bullet": "",
 "ButtonMesh": "",
 "Character": "",
 "CharacterMachine": "",
+"Chunk": "",
 "Crate": "",
 "CrateAku": "",
 "CrateBounce": "",
@@ -369,6 +391,7 @@ _global_script_class_icons={
 "EditorState": "",
 "Enemy": "",
 "EnemyCow": "",
+"EnemyCowboy": "",
 "EnemyFrog": "",
 "EnemyKnight": "",
 "EnemyManager": "",
@@ -405,6 +428,7 @@ _global_script_class_icons={
 "Placeable": "",
 "Power": "",
 "Project": "",
+"ReferenceCollector": "",
 "Selectable": "",
 "TerrainGenerator": "",
 "TextButton": "",
@@ -418,7 +442,7 @@ _global_script_class_icons={
 
 config/name="Crash Bandicoot Worlds"
 config/description="Crash Fan game, based on psx era for fans ;P"
-run/main_scene="res://gameplay/level/bosss/scn_jungle.tscn"
+run/main_scene="res://gameplay/level/scn_oldwest.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon_256.ico"

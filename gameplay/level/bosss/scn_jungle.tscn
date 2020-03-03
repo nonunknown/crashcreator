@@ -521,6 +521,7 @@ script = ExtResource( 12 )
 simulate_ready = true
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -647,7 +648,6 @@ transform = Transform( 1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 1.62199, 0 )
 
 [node name="obj_Character" parent="Player" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50592, 1.08571, -8.65957 )
-is_machine_controlled = true
 
 [node name="CameraGimbal" type="Spatial" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.683, 0 )
@@ -867,6 +867,7 @@ material/1 = null
 transform = Transform( 3.97031, 0, 0, 0, 3.97031, 0, 0, 0, 3.97031, -36.9457, -0.396, 32.725 )
 multimesh = SubResource( 26 )
 script = ExtResource( 7 )
+render = false
 rows = 20
 columns = 8
 check_dist = 0.8
@@ -875,6 +876,7 @@ check_dist = 0.8
 transform = Transform( 3.97031, 0, 0, 0, 3.97031, 0, 0, 0, 3.97031, -30.2668, -0.396008, -55.3635 )
 multimesh = SubResource( 26 )
 script = ExtResource( 7 )
+render = false
 rows = 20
 columns = 8
 check_dist = 0.8
@@ -883,6 +885,7 @@ check_dist = 0.8
 transform = Transform( -1.73548e-07, 0, -3.97031, 0, 3.97031, 0, 3.97031, 0, -1.73548e-07, -30.5771, -0.396008, -47.8469 )
 multimesh = SubResource( 26 )
 script = ExtResource( 7 )
+render = false
 rows = 20
 columns = 8
 check_dist = 0.8
@@ -891,6 +894,7 @@ check_dist = 0.8
 transform = Transform( -1.73548e-07, 0, -3.97031, 0, 3.97031, 0, 3.97031, 0, -1.73548e-07, 51.7058, -0.396008, -39.9559 )
 multimesh = SubResource( 26 )
 script = ExtResource( 7 )
+render = false
 rows = 20
 columns = 8
 check_dist = 0.8

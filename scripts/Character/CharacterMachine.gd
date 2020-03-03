@@ -128,6 +128,7 @@ func st_init_run():
 	character.animator.play("run-loop",blend_time)
 	character.animator.playback_speed = 5
 	character.max_speed = character.initial_maxspeed * 1.5
+	character.particle_puff.emitting = true
 
 func st_update_run():
 	if Input.is_action_just_released("cmd_run"):
@@ -140,6 +141,8 @@ func st_update_run():
 	
 func st_exit_run():
 	character.max_speed = character.initial_maxspeed
+	character.particle_puff.emitting = false
+	
 	pass
 	
 func st_init_jump():
@@ -210,7 +213,7 @@ var exit_dash:bool = false
 func st_init_dash():
 	character.enable_controls(false)
 	character.linear_velocity += character.get_global_transform().basis.z * 15
-	character.animator.play("Dash",blend_time)
+	character.animator.play("dash",blend_time)
 	character.get_node("crashbandicoot/Sounds/dash").play()
 	character.animator.playback_speed = 1.5
 	yield(character.get_tree().create_timer(character.dash_duration,false),"timeout")
@@ -218,13 +221,14 @@ func st_init_dash():
 	
 func st_update_dash():
 #	character.max_speed = character.max_speed * 2
-	character.get_node("PPuff").custom_emit()
+	character.get_node("PPuff").emitting = true
 	if (character.animator.current_animation == "Dash" && 
 		character.animator.current_animation_position > ( character.animator.current_animation_length / character.animator.playback_speed ) * .7):
 		character.animator.play("Dash-loop",blend_time)
 		if (character.jump_attempt): #TODO: Can jump on dash
 			character.do_jump()
 	if exit_dash:
+		character.get_node("PPuff").emitting = false
 		if cd_walk(): return
 		elif cd_idle(): return
 		elif cd_jump_move(): return

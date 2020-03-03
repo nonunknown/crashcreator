@@ -28,6 +28,7 @@ onready var input_move_keys:Array
 onready var animator:AnimationPlayer = get_node("crashbandicoot/AnimationPlayer")
 onready var twist_crash:Node = $crashbandicoot/twistcrash
 onready var armature = $crashbandicoot/Armature
+onready var particle_puff = $PPuff
 onready var machine:CharacterMachine = CharacterMachine.new(self)
 onready var pos_future = $PosFuture
 onready var mesh:MeshInstance = $crashbandicoot/Armature/Skeleton/Crash
@@ -226,6 +227,7 @@ func crate_collided(area):
 
 
 func _on_ItemBody_area_entered(area):
+	if area.is_in_group("item"):
 		area.get_parent()._on_Picked(self)
 
 var anim_finished:bool = false

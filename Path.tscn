@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/Utils/RailroadGenerator.gd" type="Script" id=1]
+[ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_1.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, -0.0499084, -0.00446659, 0, 0, 0, 0, 0, 0, 0, -0.0499084, -1.84647, 0, 0, 0, 0, 0, 0, 0, -0.0248577, -7.07609, 0, 0, 0, 0, 0, 0, 0, -0.0576407, -11.8296, 0, 0, 0, 0, 0, 0, -9.81692, -0.0576172, -19.5751, 0, 0, 0, 0, 0, 0, -19.925, -0.0576172, -27.1, 0, 0, 0, 0, 0, 0, -28.3223, -0.0576172, -33.698, 0, 0, 0, 0, 0, 0, -22.7066, -0.0576172, -38.752, 0, 0, 0, 0, 0, 0, -11.7, -0.0576172, -40.4367, 0, 0, 0, 0, 0, 0, 3.34983, -0.0576172, -39.4259, 0, 0, 0, 0, 0, 0, 1.75574, -0.0576172, -50.7623, 0, 0, 0, 0, 0, 0, -6.10612, -0.0576172, -55.9287, 0, 0, 0, 0, 0, 0, -17.225, -0.0576172, -58.9611, 0, 0, 0, 0, 0, 0, -25.1992, -0.0576172, -56.4903 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Area
+
+
+
+
+func _on_Area_body_entered(body):
+	get_parent().call_deferred(\"add_child\",body)
+	pass # Replace with function body.
+"
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1, 2.02806, 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Camera
+
+export var path_pos:NodePath
+export var path_look:NodePath
+var pos
+var look
+
+func _ready():
+	pos = get_node(path_pos)
+	look = get_node(path_look)
+func _process(delta):
+	translation = lerp(translation,pos.get_global_transform().origin,0.03)
+	look_at(look.get_global_transform().origin,Vector3.UP)
+"
+
+[node name="Path" type="Path"]
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+rail_straigt = ExtResource( 2 )
+
+[node name="PathFollow" type="PathFollow" parent="."]
+transform = Transform( 0.690298, 0.00896392, 0.723471, -0.0126234, 0.999921, -0.000344611, -0.723417, -0.00889476, 0.690355, 0, -0.0499084, -0.00446659 )
+loop = false
+
+[node name="Offset" type="Spatial" parent="PathFollow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.993523, 0 )
+
+[node name="Position3D" type="Position3D" parent="PathFollow/Offset"]
+transform = Transform( 1, 1.86265e-09, 0, 0, 1, 0, 0, 2.79397e-09, 1, 1.30938, 3.70773, 4.63914 )
+
+[node name="MeshInstance" type="MeshInstance" parent="PathFollow/Offset"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="PathFollow/Offset/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="PathFollow/Offset/MeshInstance/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="Area" type="Area" parent="PathFollow/Offset/MeshInstance"]
+collision_layer = 0
+collision_mask = 2
+script = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PathFollow/Offset/MeshInstance/Area"]
+shape = SubResource( 6 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.915009, 0.403434, 0, -0.403434, 0.915009, 0, 6.33093, 0 )
+script = SubResource( 3 )
+path_pos = NodePath("../PathFollow/Offset/Position3D")
+path_look = NodePath("../PathFollow/Offset/MeshInstance")
+[connection signal="body_entered" from="PathFollow/Offset/MeshInstance/Area" to="PathFollow/Offset/MeshInstance/Area" method="_on_Area_body_entered"]

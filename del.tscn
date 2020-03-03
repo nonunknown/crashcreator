@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Path.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.662745, 0.309804, 0.309804, 1 )
+
+[sub_resource type="ConcavePolygonShape" id=5]
+data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="obj_Character" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77542, -4.7286 )
+
+[node name="Path" parent="." instance=ExtResource( 1 )]
+
+[node name="PathFollow" parent="Path" index="0"]
+transform = Transform( 0.983927, 0.00430986, -0.178529, -0.00580704, 0.999953, -0.00786443, 0.178487, 0.00877475, 0.983904, 0, -0.0499084, -0.00446659 )
+
+[node name="MeshInstance" parent="Path/PathFollow/Offset" index="1"]
+transform = Transform( 0.65, 2.32831e-10, -3.72529e-08, -2.21189e-09, 0.65, 0, 1.49012e-08, 0, 0.65, 0.00179534, -0.309152, 0.00243142 )
+material/0 = SubResource( 1 )
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+transform = Transform( 122.1, 0, 0, 0, 122.1, 0, 0, 0, 122.1, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Spatial/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial/MeshInstance/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0133, 2.23943, -6.25035 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.92641, 2.23943, -13.613 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance4" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.58888, 2.23943, -8.60976 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance5" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4945, 2.23943, -10.3597 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance6" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.36778, 2.23943, -24.1442 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance7" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4154, 2.23943, -39.5301 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance8" type="MeshInstance" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.70118, 2.23943, -71.2261 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[editable path="Path"]

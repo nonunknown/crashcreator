@@ -10,6 +10,7 @@ export var cam_type_side:bool = false
 export var offset:Vector3
 var character:Character = null
 var update_func:FuncRef
+onready var initial_offset:Vector3 = offset
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if simulate_ready:
@@ -34,6 +35,9 @@ func update_cam():
 	translation = lerp(translation,character.cam_target.translation,0.03)
 
 func update_cam_side():
-#	var target:Vector3 = character.get_global_transform().origin
-#	look_at(target+Vector3(0,2,0),Vector3.UP)
+	if Input.is_action_just_pressed("ui_right"):
+		offset = initial_offset + Vector3(0,0,2)
+	elif Input.is_action_just_pressed("ui_left"):
+		offset = initial_offset + Vector3(0,0,-2)
 	translation = lerp(translation,character.cam_target.translation + offset,0.07)
+	

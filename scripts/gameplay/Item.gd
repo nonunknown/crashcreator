@@ -5,6 +5,7 @@ export var attackable:bool = false
 var picked:bool = false
 
 func _ready():
+	add_to_group("item")
 	set_process(false)
 
 func revive():
