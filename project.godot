@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/Crate_WoodJump.gd"
 }, {
+"base": "HBoxContainer",
+"class": "DebuggContaine",
+"language": "GDScript",
+"path": "res://CTR/Scripts/DebuggerContainer.gd"
+}, {
 "base": "RigidBody",
 "class": "Dynamite",
 "language": "GDScript",
@@ -215,6 +220,16 @@ _global_script_classes=[ {
 "path": "res://scripts/gameplay/Iventory.gd"
 }, {
 "base": "KinematicBody",
+"class": "KartControl",
+"language": "GDScript",
+"path": "res://CTR/Scripts/KartControl.gd"
+}, {
+"base": "KartControl",
+"class": "KartState",
+"language": "GDScript",
+"path": "res://CTR/Scripts/KartState.gd"
+}, {
+"base": "KinematicBody",
 "class": "KinematicCharacter",
 "language": "GDScript",
 "path": "res://scripts/Character/KinematicCharacter.gd"
@@ -259,6 +274,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/gameplay/LookCamera.gd"
 }, {
+"base": "Reference",
+"class": "MachineManager",
+"language": "GDScript",
+"path": "res://CTR/Scripts/FSM.gd"
+}, {
 "base": "Spatial",
 "class": "ManagerGameplay",
 "language": "GDScript",
@@ -278,21 +298,6 @@ _global_script_classes=[ {
 "class": "MeshButton",
 "language": "GDScript",
 "path": "res://gui/MeshButton.gd"
-}, {
-"base": "Resource",
-"class": "MixMode",
-"language": "GDScript",
-"path": "res://addons/modifiers/mix_mode.gd"
-}, {
-"base": "Resource",
-"class": "MixModesCollection",
-"language": "GDScript",
-"path": "res://addons/modifiers/mix_modes_collection.gd"
-}, {
-"base": "Node",
-"class": "Modifiers",
-"language": "GDScript",
-"path": "res://addons/modifiers/modifiers.gd"
 }, {
 "base": "Reference",
 "class": "Movement",
@@ -323,11 +328,6 @@ _global_script_classes=[ {
 "class": "Project",
 "language": "GDScript",
 "path": "res://resources/editor/Project.gd"
-}, {
-"base": "EditorScript",
-"class": "ReferenceCollector",
-"language": "GDScript",
-"path": "res://godot-scripts/ReferenceCollector.gd"
 }, {
 "base": "Spatial",
 "class": "Selectable",
@@ -385,6 +385,7 @@ _global_script_class_icons={
 "CrateTNT": "",
 "CrateTime": "",
 "CrateWoodJump": "",
+"DebuggContaine": "",
 "Dynamite": "",
 "EditorCrate": "",
 "EditorManager": "",
@@ -406,6 +407,8 @@ _global_script_class_icons={
 "ItemLife": "",
 "ItemWumpa": "",
 "Iventory": "",
+"KartControl": "",
+"KartState": "",
 "KinematicCharacter": "",
 "Label3D": "",
 "LevelBuilder": "",
@@ -415,20 +418,17 @@ _global_script_class_icons={
 "LevelParams": "",
 "Logger": "",
 "LookCamera": "",
+"MachineManager": "",
 "ManagerGameplay": "",
 "Menu": "",
 "MenuManager": "",
 "MeshButton": "",
-"MixMode": "res://addons/modifiers/icon_modifiers.svg",
-"MixModesCollection": "res://addons/modifiers/icon_modifiers.svg",
-"Modifiers": "res://addons/modifiers/icon_modifiers.svg",
 "Movement": "",
 "PathBase": "",
 "PathManager": "",
 "Placeable": "",
 "Power": "",
 "Project": "",
-"ReferenceCollector": "",
 "Selectable": "",
 "TerrainGenerator": "",
 "TextButton": "",
@@ -481,7 +481,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "NodeFinder", "QuickPluginManager", "ResolutionManager", "SIsilicon.3d.text", "godot_db_manager", "godot_sheets", "modifiers", "simple_water" )
+enabled=PoolStringArray( "QuickPluginManager", "ResolutionManager", "SIsilicon.3d.text", "simple_water" )
 
 [importer_defaults]
 

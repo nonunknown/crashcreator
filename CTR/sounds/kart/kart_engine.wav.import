@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/kart_engine.wav-3d4a0ebbe5fa2c8ee79f4d4e167d8de2.sample"
+
+[deps]
+
+source_file="res://CTR/sounds/kart/kart_engine.wav"
+dest_files=[ "res://.import/kart_engine.wav-3d4a0ebbe5fa2c8ee79f4d4e167d8de2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=1
