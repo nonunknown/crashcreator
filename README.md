@@ -7,6 +7,10 @@ a game for crash fans to create and play on their own levels, and free source co
 # Note
 alpha means not playable!
 
+### Alpha 0.12.2
+    - Changed Boss level to more basic
+    - More fixes on MachineManager
+
 ### Alpha 0.12.1
     - Fixed MachineManager class
 

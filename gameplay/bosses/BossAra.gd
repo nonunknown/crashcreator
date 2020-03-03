@@ -15,15 +15,15 @@ onready var remaining_throw = actual_throw
 onready var debug = get_tree().get_nodes_in_group("debug")[0]
 
 var player_died = false
-var machine:Utils.MachineManager
+var machine:MachineManager
 var animator:AnimationPlayer
 var next_state:int = STATE.IDLE
 func _ready():
 	._ready()
 	animator = $AraBandicoot/AnimationPlayer
 	
-	machine = Utils.MachineManager.new()
-	machine.register_state_array(self,[STATE.IDLE,STATE.ATTACK,STATE.WIN,STATE.ATTACKED,STATE.NULL,STATE.WAIT],["idle","attack","win","attacked","null","wait"])
+	machine = MachineManager.new(self)
+	machine.register_state_array([STATE.IDLE,STATE.ATTACK,STATE.WIN,STATE.ATTACKED,STATE.NULL,STATE.WAIT],["idle","attack","win","attacked","null","wait"])
 	machine.change_state(next_state)
 
 func play_cutscene():
