@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/chunkenizer/ChunkConfig.gd" type="Script" id=2]
+[ext_resource path="res://addons/chunkenizer/ChunkyActivator.scn" type="PackedScene" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Camera
+
+
+func _process(delta):
+	look_at(get_node(\"../ChunkConfig/ChunkyActivator\").get_global_transform().origin,Vector3.UP)
+"
+
+[node name="ChunkTest" type="Spatial"]
+
+[node name="ChunkConfig" type="Spatial" parent="."]
+script = ExtResource( 2 )
+chunk_repeat = Vector3( 3, 3, 3 )
+chunk_extents = Vector3( 3, 3, 3 )
+
+[node name="ChunkyActivator" parent="ChunkConfig" instance=ExtResource( 4 )]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.594907, 0, -0.803795, 0, 1, 0, 0.803795, 0, -0.594907, -7.11893, 4.04352, -3.62557 )
+script = SubResource( 1 )

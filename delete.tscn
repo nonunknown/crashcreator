@@ -1,0 +1,367 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/chunkenizer/ChunkConfig.gd" type="Script" id=1]
+[ext_resource path="res://resources/editor/crate.res" type="PackedScene" id=2]
+[ext_resource path="res://addons/chunkenizer/chunky.scn" type="PackedScene" id=3]
+[ext_resource path="res://chunks.gd" type="Script" id=4]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="CapsuleMesh" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="ChunkConfig" type="Spatial" parent="."]
+script = ExtResource( 1 )
+chunk_repeat = Vector3( 4, 3, 7 )
+chunk_extents = Vector3( 3, 3, 3 )
+
+[node name="chunks" type="Spatial" parent="ChunkConfig"]
+script = ExtResource( 4 )
+
+[node name="ChunkArea_0" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+
+[node name="ChunkArea_1" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
+
+[node name="ChunkArea_2" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12 )
+
+[node name="ChunkArea_3" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18 )
+
+[node name="ChunkArea_4" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24 )
+
+[node name="ChunkArea_5" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30 )
+
+[node name="ChunkArea_6" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 36 )
+
+[node name="ChunkArea_7" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
+
+[node name="ChunkArea_8" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 6 )
+
+[node name="ChunkArea_9" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 12 )
+
+[node name="ChunkArea_10" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 18 )
+
+[node name="ChunkArea_11" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 24 )
+
+[node name="ChunkArea_12" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 30 )
+
+[node name="ChunkArea_13" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 36 )
+
+[node name="ChunkArea_14" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0 )
+
+[node name="ChunkArea_15" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 6 )
+
+[node name="ChunkArea_16" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 12 )
+
+[node name="ChunkArea_17" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 18 )
+
+[node name="ChunkArea_18" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 24 )
+
+[node name="ChunkArea_19" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 30 )
+
+[node name="ChunkArea_20" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 36 )
+
+[node name="ChunkArea_21" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
+
+[node name="ChunkArea_22" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6 )
+
+[node name="ChunkArea_23" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 12 )
+
+[node name="ChunkArea_24" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 18 )
+
+[node name="ChunkArea_25" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 24 )
+
+[node name="ChunkArea_26" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 30 )
+
+[node name="ChunkArea_27" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 36 )
+
+[node name="ChunkArea_28" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 0 )
+
+[node name="ChunkArea_29" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 6 )
+
+[node name="ChunkArea_30" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 12 )
+
+[node name="ChunkArea_31" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 18 )
+
+[node name="ChunkArea_32" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 24 )
+
+[node name="ChunkArea_33" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 30 )
+
+[node name="ChunkArea_34" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 36 )
+
+[node name="ChunkArea_35" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 12, 0 )
+
+[node name="ChunkArea_36" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 12, 6 )
+
+[node name="ChunkArea_37" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 12, 12 )
+
+[node name="ChunkArea_38" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 12, 18 )
+
+[node name="ChunkArea_39" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 12, 24 )
+
+[node name="ChunkArea_40" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 12, 30 )
+
+[node name="ChunkArea_41" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 12, 36 )
+
+[node name="ChunkArea_42" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
+
+[node name="ChunkArea_43" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 6 )
+
+[node name="ChunkArea_44" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 12 )
+
+[node name="ChunkArea_45" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 18 )
+
+[node name="ChunkArea_46" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 24 )
+
+[node name="ChunkArea_47" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 30 )
+
+[node name="ChunkArea_48" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 36 )
+
+[node name="ChunkArea_49" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 0 )
+
+[node name="ChunkArea_50" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 6 )
+
+[node name="ChunkArea_51" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 12 )
+
+[node name="ChunkArea_52" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 18 )
+
+[node name="ChunkArea_53" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 24 )
+
+[node name="ChunkArea_54" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 30 )
+
+[node name="ChunkArea_55" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 36 )
+
+[node name="ChunkArea_56" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 0 )
+
+[node name="ChunkArea_57" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 6 )
+
+[node name="ChunkArea_58" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 12 )
+
+[node name="ChunkArea_59" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 18 )
+
+[node name="ChunkArea_60" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 24 )
+
+[node name="ChunkArea_61" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 30 )
+
+[node name="ChunkArea_62" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 12, 36 )
+
+[node name="ChunkArea_63" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0 )
+
+[node name="ChunkArea_64" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 6 )
+
+[node name="ChunkArea_65" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 12 )
+
+[node name="ChunkArea_66" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 18 )
+
+[node name="ChunkArea_67" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 24 )
+
+[node name="ChunkArea_68" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 30 )
+
+[node name="ChunkArea_69" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 36 )
+
+[node name="ChunkArea_70" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 6, 0 )
+
+[node name="ChunkArea_71" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 6, 6 )
+
+[node name="ChunkArea_72" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 6, 12 )
+
+[node name="ChunkArea_73" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 6, 18 )
+
+[node name="ChunkArea_74" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 6, 24 )
+
+[node name="ChunkArea_75" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 6, 30 )
+
+[node name="ChunkArea_76" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 6, 36 )
+
+[node name="ChunkArea_77" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, 0 )
+
+[node name="ChunkArea_78" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, 6 )
+
+[node name="ChunkArea_79" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, 12 )
+
+[node name="ChunkArea_80" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, 18 )
+
+[node name="ChunkArea_81" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, 24 )
+
+[node name="ChunkArea_82" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, 30 )
+
+[node name="ChunkArea_83" parent="ChunkConfig/chunks" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, 36 )
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="player" type="Spatial" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3323, 9.53674e-07, 11.2699 )
+
+[node name="ColShape" type="StaticBody" parent="Spatial/player"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0 )
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial/player/ColShape"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/player"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Spatial" type="Spatial" parent="Spatial"]
+
+[node name="crate" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+
+[node name="crate2" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7873, 0, 0 )
+
+[node name="crate3" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8907, 0, 0 )
+
+[node name="crate4" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8907, 0, 6.46409 )
+
+[node name="crate5" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25432, 0, 6.46409 )
+
+[node name="crate6" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.611558, 0, 6.46409 )
+
+[node name="crate7" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.611558, 0, 11.8217 )
+
+[node name="crate8" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68536, 0, 11.8217 )
+
+[node name="crate9" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5986, 0, 11.8217 )
+
+[node name="crate10" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5986, 0, 17.8264 )
+
+[node name="crate11" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5986, 0, 23.4038 )
+
+[node name="crate12" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06288, 0, 23.4038 )
+
+[node name="crate13" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06288, 0, 17.7422 )
+
+[node name="crate14" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.319043, 0, 17.7422 )
+
+[node name="crate15" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.319043, 0, 23.7297 )
+
+[node name="crate16" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6092, 0, 23.7297 )
+
+[node name="crate17" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6092, 0, 17.6255 )
+
+[node name="crate18" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6092, 0, 11.7039 )
+
+[node name="crate19" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6092, 0, 5.42922 )
+
+[node name="crate20" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6092, 0, 0.463045 )
+
+[node name="crate25" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0557, 0, 23.7297 )
+
+[node name="crate24" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0557, 0, 17.6255 )
+
+[node name="crate23" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0557, 0, 11.7039 )
+
+[node name="crate22" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0557, 0, 5.42922 )
+
+[node name="crate21" parent="Spatial/Spatial" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0557, 0, 0.463045 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.398173, 0.303517, -0.865642, 0, 0.943674, 0.330877, 0.91731, 0.131746, -0.375745, -5.23051, 4.53386, 0 )

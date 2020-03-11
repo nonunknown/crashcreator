@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/body_trn.obj-62ff22a109a62a7dbbf2913b9a307f6b.mesh"
+
+[deps]
+
+files=[ "res://.import/body_trn.obj-62ff22a109a62a7dbbf2913b9a307f6b.mesh" ]
+
+source_file="res://models/levels/lv_wwest/Barrel Train/body_trn.obj"
+dest_files=[ "res://.import/body_trn.obj-62ff22a109a62a7dbbf2913b9a307f6b.mesh", "res://.import/body_trn.obj-62ff22a109a62a7dbbf2913b9a307f6b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

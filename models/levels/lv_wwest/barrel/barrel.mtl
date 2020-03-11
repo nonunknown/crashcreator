@@ -1,0 +1,16 @@
+newmtl Material4
+Ka 0 0 0
+Kd 0.972549 0.972549 0.972549
+d 1
+Tr 1
+map_Ka Material4.png
+map_Kd Material4.png
+map_d Material4.png
+newmtl Material5
+Ka 0 0 0
+Kd 0.972549 0.972549 0.972549
+d 1
+Tr 1
+map_Ka Material5.png
+map_Kd Material5.png
+map_d Material5.png

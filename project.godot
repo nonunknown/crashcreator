@@ -59,6 +59,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Utils/Chunk.gd"
 }, {
+"base": "Spatial",
+"class": "ChunkConfig",
+"language": "GDScript",
+"path": "res://addons/chunkenizer/ChunkConfig.gd"
+}, {
+"base": "Area",
+"class": "Chunky",
+"language": "GDScript",
+"path": "res://addons/chunkenizer/Chunky.gd"
+}, {
 "base": "RigidBody",
 "class": "Crate",
 "language": "GDScript",
@@ -375,6 +385,8 @@ _global_script_class_icons={
 "Character": "",
 "CharacterMachine": "",
 "Chunk": "",
+"ChunkConfig": "",
+"Chunky": "",
 "Crate": "",
 "CrateAku": "",
 "CrateBounce": "",
@@ -443,6 +455,7 @@ _global_script_class_icons={
 config/name="Crash Bandicoot Worlds"
 config/description="Crash Fan game, based on psx era for fans ;P"
 run/main_scene="res://gameplay/level/scn_oldwest.tscn"
+run/low_processor_mode=true
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon_256.ico"
@@ -457,15 +470,24 @@ Utils="*res://scripts/Singletons/Utils.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
 gd_types="*res://addons/godot_db_manager/core/db_type.gd"
 NodeFinder="*res://addons/NodeFinder/NodeFinder.gd"
+Debugger="*res://CTR/Scripts/Debugger.gd"
+AdvancedBackgroundLoader="*res://addons/Advanced Background Loader/background_load.gd"
 
 [compression]
 
-formats/zlib/compression_level=3
-formats/gzip/compression_level=3
+formats/zstd/compression_level=22
+formats/zlib/compression_level=9
+formats/gzip/compression_level=9
 
 [debug]
 
 settings/fps/force_fps=60
+gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/unused_variable=false
+gdscript/warnings/shadowed_variable=false
+disable_stdout=false
+/max_remote_stdout_chars_per_second=2147483647
+settings/max_remote_stdout_chars_per_second=1000
 
 [display]
 
@@ -481,7 +503,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "QuickPluginManager", "ResolutionManager", "SIsilicon.3d.text", "simple_water" )
+enabled=PoolStringArray( "Advanced Background Loader", "QuickPluginManager", "ResolutionManager", "SIsilicon.3d.text", "chunkenizer", "simple_water" )
 
 [importer_defaults]
 
@@ -618,6 +640,10 @@ cam_back={
 3d_physics/layer_11="Selectable_Crate"
 3d_physics/layer_12="Player_Area"
 3d_physics/layer_13="Spin_Area"
+
+[memory]
+
+limits/message_queue/max_size_kb=2096
 
 [rendering]
 

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/hay.obj-373395944f49e584352c90a0be0d0362.mesh"
+
+[deps]
+
+files=[ "res://.import/hay.obj-373395944f49e584352c90a0be0d0362.mesh" ]
+
+source_file="res://models/levels/lv_wwest/Bail Of Hay/hay.obj"
+dest_files=[ "res://.import/hay.obj-373395944f49e584352c90a0be0d0362.mesh", "res://.import/hay.obj-373395944f49e584352c90a0be0d0362.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

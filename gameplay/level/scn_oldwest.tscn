@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/scn_Gameplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/obj_Character.tscn" type="PackedScene" id=2]
@@ -9,8 +9,9 @@
 [ext_resource path="res://gameplay/crates/obj_crate_wood_jump.tscn" type="PackedScene" id=7]
 [ext_resource path="res://gameplay/crates/obj_crate_question.tscn" type="PackedScene" id=8]
 [ext_resource path="res://gameplay/crates/obj_crate_life.tscn" type="PackedScene" id=9]
-[ext_resource path="res://gameplay/crates/obj_crate_tnt.tscn" type="PackedScene" id=10]
-[ext_resource path="res://gameplay/enemies/obj_enemy_cowboy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://decoration/wwest/dr_church.scn" type="PackedScene" id=10]
+[ext_resource path="res://decoration/wwest/dr_house4.tscn" type="PackedScene" id=11]
+[ext_resource path="res://decoration/wwest/dr_house2.tscn" type="PackedScene" id=12]
 [ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Switch.obj" type="ArrayMesh" id=13]
 [ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Curve_Small.obj" type="ArrayMesh" id=14]
 [ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Curve_Large.obj" type="ArrayMesh" id=15]
@@ -22,6 +23,8 @@
 [ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_2.obj" type="ArrayMesh" id=21]
 [ext_resource path="res://models/levels/terrain-forest/modular_terrain_collection/Cave_Prop_Railway_Straight_4.obj" type="ArrayMesh" id=22]
 [ext_resource path="res://gameplay/enemies/obj_enemy_cow.tscn" type="PackedScene" id=23]
+[ext_resource path="res://decoration/wwest/dr_charrete.scn" type="PackedScene" id=24]
+[ext_resource path="res://decoration/wwest/dr_charrete2.scn" type="PackedScene" id=25]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -39,8 +42,8 @@ data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0,
 [sub_resource type="ConcavePolygonShape" id=5]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="SpatialMaterial" id=6]
-albedo_color = Color( 0.596078, 0.784314, 0.572549, 1 )
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.0116944, 0.452643, 0.13683 )
 
 [node name="scn_oldwest" type="Spatial"]
 
@@ -102,9 +105,6 @@ transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0,
 [node name="obj_enemy_cow7" parent="Gameplay/Player" index="10" instance=ExtResource( 23 )]
 transform = Transform( -0.590599, 0, -0.00378299, 0, 0.590611, 0, 0.00378299, 0, -0.590599, -2.11928, 2.40967, 96.2539 )
 
-[node name="obj_enemy_cowboy" parent="Gameplay/Enemies" index="0" instance=ExtResource( 11 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.10913, 20.5338 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Gameplay/Entities" index="0"]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Gameplay/Entities/WorldEnvironment"]
@@ -113,55 +113,37 @@ visible = false
 shadow_enabled = true
 
 [node name="obj_crate_wood_jump" parent="Gameplay/Crate" index="0" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9938, 2.77807, 5.3345 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9938, 2.0519, 4.35906 )
 collision_mask = 19
 
 [node name="obj_crate_simple" parent="Gameplay/Crate" index="1" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 6.63931, 9.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 7.78833, 9.70239 )
 
 [node name="obj_crate_simple2" parent="Gameplay/Crate" index="2" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 7.63931, 9.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 8.78833, 9.70239 )
 
 [node name="obj_crate_simple3" parent="Gameplay/Crate" index="3" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 7.63931, 8.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 8.78833, 8.70239 )
 
 [node name="obj_crate_simple4" parent="Gameplay/Crate" index="4" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 6.62724, 8.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46174, 7.77626, 8.70239 )
 
 [node name="obj_crate_simple8" parent="Gameplay/Crate" index="5" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 6.63931, 9.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 7.78833, 9.70239 )
 
 [node name="obj_crate_simple7" parent="Gameplay/Crate" index="6" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 7.63931, 9.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 8.78833, 9.70239 )
 
 [node name="obj_crate_simple6" parent="Gameplay/Crate" index="7" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 7.63931, 8.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 8.78833, 8.70239 )
 
 [node name="obj_crate_simple5" parent="Gameplay/Crate" index="8" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 6.62724, 8.70239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46174, 7.77626, 8.70239 )
 
 [node name="obj_crate_life" parent="Gameplay/Crate" index="9" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07753, 6.39973, -0.630845 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07646, 7.84711, -1.37483 )
 
-[node name="obj_crate_life2" parent="Gameplay/Crate" index="10" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, -0.00161302, 14.5951 )
-
-[node name="obj_crate_life3" parent="Gameplay/Crate" index="11" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, 0.998387, 14.5951 )
-
-[node name="obj_crate_life4" parent="Gameplay/Crate" index="12" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, 2.01808, 14.5951 )
-
-[node name="obj_crate_question2" parent="Gameplay/Crate" index="13" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, -0.00161302, 18.2972 )
-
-[node name="obj_crate_tnt" parent="Gameplay/Crate" index="14" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, -0.00161302, 21.7786 )
-
-[node name="obj_crate_question3" parent="Gameplay/Crate" index="15" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.08628, 0.998387, 18.2972 )
-
-[node name="obj_crate_question" parent="Gameplay/Crate" index="16" instance=ExtResource( 8 )]
+[node name="obj_crate_question" parent="Gameplay/Crate" index="10" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33071, 12.3676, 9.16838 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Gameplay/Terrain" index="0"]
@@ -174,40 +156,7 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/MeshInstance/StaticBody"]
 shape = SubResource( 3 )
 
-[node name="charrete" type="MeshInstance" parent="Gameplay/Terrain" index="1"]
-transform = Transform( 3.04496, -0.188804, 0, 0.585429, 0.982015, 0, 0, 0, 1.99977, 0, 1.16501, 6.66564 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/charrete"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/charrete/StaticBody"]
-transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 5 )
-
-[node name="charrete2" type="MeshInstance" parent="Gameplay/Terrain" index="2"]
-transform = Transform( 3.10072, 0, 0, 0, 1, 0, 0, 0, 1.99977, -1.25939, 1.16501, 21.0941 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/charrete2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/charrete2/StaticBody"]
-transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 5 )
-
-[node name="charrete3" type="MeshInstance" parent="Gameplay/Terrain" index="3"]
-transform = Transform( 3.10072, 0, 0, 0, 1, 0, 0, 0, 1.99977, -1.25939, 1.16501, 37.663 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/charrete3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/charrete3/StaticBody"]
-transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 5 )
-
-[node name="silo" type="MeshInstance" parent="Gameplay/Terrain" index="4"]
+[node name="silo" type="MeshInstance" parent="Gameplay/Terrain" index="1"]
 transform = Transform( 3.10072, 0, 0, 0, 1, 0, 0, 0, 4.91818, -1.25939, 1.16501, 58.2017 )
 mesh = SubResource( 4 )
 material/0 = null
@@ -218,167 +167,7 @@ material/0 = null
 transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 
-[node name="sallon" type="MeshInstance" parent="Gameplay/Terrain" index="5"]
-transform = Transform( 3.1569, 0, 0, 0, 6.60879, 0, 0, 0, 5.3718, 8.57276, 5.67205, 6.02065 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/sallon"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/sallon/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar" type="MeshInstance" parent="Gameplay/Terrain" index="6"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 12.8801 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar2" type="MeshInstance" parent="Gameplay/Terrain" index="7"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 16.3257 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar2/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar3" type="MeshInstance" parent="Gameplay/Terrain" index="8"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 20.0098 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar3/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar4" type="MeshInstance" parent="Gameplay/Terrain" index="9"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 23.4655 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar4/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar8" type="MeshInstance" parent="Gameplay/Terrain" index="10"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 27.4906 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar8/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar7" type="MeshInstance" parent="Gameplay/Terrain" index="11"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 30.9363 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar7/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar6" type="MeshInstance" parent="Gameplay/Terrain" index="12"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 34.6203 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar6/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar5" type="MeshInstance" parent="Gameplay/Terrain" index="13"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 38.076 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar5/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar9" type="MeshInstance" parent="Gameplay/Terrain" index="14"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 2.36219, 41.9919 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar9"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar9/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar10" type="MeshInstance" parent="Gameplay/Terrain" index="15"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 45.5974 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar10"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar10/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar11" type="MeshInstance" parent="Gameplay/Terrain" index="16"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 48.9974 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar11"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar11/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar12" type="MeshInstance" parent="Gameplay/Terrain" index="17"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 52.3974 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar12"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar12/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="pillar13" type="MeshInstance" parent="Gameplay/Terrain" index="18"]
-transform = Transform( 1.00148, 0, 0, 0, 3.86333, 0, 0, 0, 1.19578, 3.7789, 0.586061, 55.4652 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/pillar13"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/pillar13/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="sallon_platform" type="MeshInstance" parent="Gameplay/Terrain" index="19"]
-transform = Transform( 2.5014, 0, 0, 0, 0.303349, 0, 0, 0, 21.5123, 5.27826, 6.33146, 22.3754 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 6 )
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/sallon_platform"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/sallon_platform/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="sallon_platform2" type="MeshInstance" parent="Gameplay/Terrain" index="20"]
-transform = Transform( 2.5014, 0, 0, 0, 0.303349, 0, 0, 0, 6.93744, 5.27826, 4.30773, 50.1774 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 6 )
-
-[node name="StaticBody" type="StaticBody" parent="Gameplay/Terrain/sallon_platform2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Terrain/sallon_platform2/StaticBody"]
-shape = SubResource( 5 )
-
-[node name="cabana_cavalo" type="MeshInstance" parent="Gameplay/Terrain" index="21"]
+[node name="cabana_cavalo" type="MeshInstance" parent="Gameplay/Terrain" index="2"]
 transform = Transform( 3.10072, 0, 0, 0, 3.81666, 0, 0, 0, 4.91818, 5.01963, 3.97029, 70.1656 )
 mesh = SubResource( 4 )
 material/0 = null
@@ -389,7 +178,7 @@ material/0 = null
 transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 
-[node name="cabana_cavalo2" type="MeshInstance" parent="Gameplay/Terrain" index="22"]
+[node name="cabana_cavalo2" type="MeshInstance" parent="Gameplay/Terrain" index="3"]
 transform = Transform( 3.10072, 0, 0, 0, 3.81666, 0, 0, 0, 4.91818, 5.01963, 3.97029, 81.8047 )
 mesh = SubResource( 4 )
 material/0 = null
@@ -400,7 +189,7 @@ material/0 = null
 transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 
-[node name="ponte" type="MeshInstance" parent="Gameplay/Terrain" index="23"]
+[node name="ponte" type="MeshInstance" parent="Gameplay/Terrain" index="4"]
 transform = Transform( 3.10072, 0, 0, 0, 0.380839, 1.54802, 0, -0.12629, 4.6682, -1.92016, 0.828857, 99.0791 )
 mesh = SubResource( 4 )
 material/0 = null
@@ -411,7 +200,7 @@ material/0 = null
 transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 
-[node name="ponte3" type="MeshInstance" parent="Gameplay/Terrain" index="24"]
+[node name="ponte3" type="MeshInstance" parent="Gameplay/Terrain" index="5"]
 transform = Transform( 3.101, 0, 0, 0, 0.401, 0, 0, 0, 24.211, -1.92, 2.356, 127.776 )
 mesh = SubResource( 4 )
 material/0 = null
@@ -422,7 +211,7 @@ material/0 = null
 transform = Transform( 1, 0, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 
-[node name="ponte2" type="MeshInstance" parent="Gameplay/Terrain" index="25"]
+[node name="ponte2" type="MeshInstance" parent="Gameplay/Terrain" index="6"]
 transform = Transform( -3.10072, 1.10406e-08, -4.08107e-07, 0, 0.380839, 1.54802, 2.71074e-07, 0.12629, -4.6682, -1.92016, 0.828857, 156.528 )
 mesh = SubResource( 4 )
 material/0 = null
@@ -548,6 +337,38 @@ material/3 = null
 material/4 = null
 material/5 = null
 material/6 = null
+
+[node name="Scene" type="Spatial" parent="Gameplay"]
+
+[node name="dr_charrete" parent="Gameplay/Scene" instance=ExtResource( 24 )]
+transform = Transform( -9.17006e-08, 4.33807, -0.527346, -1.14581e-07, 0.527346, 4.33807, 4.37, 1.04857e-07, 1.02678e-07, 1.26989, 0.0711674, 1.87555 )
+
+[node name="StaticBody" type="StaticBody" parent="Gameplay/Scene/dr_charrete"]
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Gameplay/Scene/dr_charrete/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 1.42109e-14, 5.32907e-15, 0.999999, 2.98023e-08, 1.77636e-15, -2.98023e-08, 0.999999, 0.63017, -0.48899, 0.0907141 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Gameplay/Scene/dr_charrete/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 1.42109e-14, 5.32907e-15, 0.999999, 2.98023e-08, 1.77636e-15, -2.98023e-08, 0.999999, 0.776334, -0.280463, 0.397451 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Gameplay/Scene/dr_charrete/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 1.42109e-14, 5.32907e-15, 0.999999, 2.98023e-08, 1.77636e-15, -2.98023e-08, 0.999999, 0.463016, -0.35807, 0.35591 )
+shape = SubResource( 6 )
+
+[node name="dr_house2" parent="Gameplay/Scene" instance=ExtResource( 12 )]
+transform = Transform( -0.174311, 1.99239, 3.24601e-07, 0, -3.25841e-07, 2, 1.99239, 0.174311, 2.83989e-08, 8.27621, 7.12742, 8.18953 )
+
+[node name="Object4655" parent="Gameplay/Scene" instance=ExtResource( 11 )]
+transform = Transform( 1.12655e-06, 4.5, 7.33143e-07, 0, -7.33143e-07, 4.5, 4.5, -1.12655e-06, -1.83538e-13, 9.47482, 5.1529, 16.6928 )
+
+[node name="dr_charrete2" parent="Gameplay/Scene" instance=ExtResource( 25 )]
+transform = Transform( -2.17023e-07, 4.96491, 2.17023e-07, 0, -2.17023e-07, 4.96492, 4.96491, 2.17023e-07, 9.48639e-15, 2.01529, 0.193949, 17.7661 )
+
+[node name="dr_church" parent="Gameplay/Scene" instance=ExtResource( 10 )]
+transform = Transform( 2.18557e-07, 5, -2.18557e-07, 0, 2.18557e-07, 5, -5, 2.18557e-07, -9.55343e-15, 6.36648, 0.0543213, -30.691 )
 
 [editable path="Gameplay"]
 
