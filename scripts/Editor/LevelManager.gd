@@ -1,10 +1,10 @@
 extends Spatial
 class_name LevelManager
 
-onready var path_manager:PathManager = $Path
-onready var crate_manager:CrateManager = $Crate
-onready var entity_manager:EntityManager = $Entity
-onready var enemy_manager:EnemyManager = $Enemy
+onready var path_manager = $Path
+onready var crate_manager = $Crate
+onready var entity_manager = $Entity
+onready var enemy_manager = $Enemy
 
 var project:Project = null
 

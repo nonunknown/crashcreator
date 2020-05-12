@@ -14,11 +14,11 @@ func st_init_selected():
 	print("selected")
 	$model.set_material_override(mat_selection)
 	
-var manager:Utils.MachineManager
+var manager:StateMachine
 func _on_ready():
-	manager = Utils.MachineManager.new()
-	manager.register_state(self,ST.SELECTED,"selected")
-	manager.register_state(self,ST.UNSELECTED,"unselected")
+	manager = StateMachine.new(self)
+	manager.register_state(ST.SELECTED,"selected")
+	manager.register_state(ST.UNSELECTED,"unselected")
 	
 	# manager.states[ST_SELECTED] = St_selected.new(manager)
 

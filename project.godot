@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/SIsilicon.3d.text/array_utils.gd"
 }, {
-"base": "EditorPlugin",
-"class": "BetterGroups",
-"language": "GDScript",
-"path": "res://addons/better_groups/Main.gd"
-}, {
 "base": "Enemy",
 "class": "Boss",
 "language": "GDScript",
@@ -58,16 +53,6 @@ _global_script_classes=[ {
 "class": "Chunk",
 "language": "GDScript",
 "path": "res://scripts/Utils/Chunk.gd"
-}, {
-"base": "Spatial",
-"class": "ChunkConfig",
-"language": "GDScript",
-"path": "res://addons/chunkenizer/ChunkConfig.gd"
-}, {
-"base": "Area",
-"class": "Chunky",
-"language": "GDScript",
-"path": "res://addons/chunkenizer/Chunky.gd"
 }, {
 "base": "RigidBody",
 "class": "Crate",
@@ -118,11 +103,6 @@ _global_script_classes=[ {
 "class": "CrateWoodJump",
 "language": "GDScript",
 "path": "res://scripts/gameplay/Crate_WoodJump.gd"
-}, {
-"base": "HBoxContainer",
-"class": "DebuggContaine",
-"language": "GDScript",
-"path": "res://CTR/Scripts/DebuggerContainer.gd"
 }, {
 "base": "RigidBody",
 "class": "Dynamite",
@@ -230,16 +210,6 @@ _global_script_classes=[ {
 "path": "res://scripts/gameplay/Iventory.gd"
 }, {
 "base": "KinematicBody",
-"class": "KartControl",
-"language": "GDScript",
-"path": "res://CTR/Scripts/KartControl.gd"
-}, {
-"base": "KartControl",
-"class": "KartState",
-"language": "GDScript",
-"path": "res://CTR/Scripts/KartState.gd"
-}, {
-"base": "KinematicBody",
 "class": "KinematicCharacter",
 "language": "GDScript",
 "path": "res://scripts/Character/KinematicCharacter.gd"
@@ -283,11 +253,6 @@ _global_script_classes=[ {
 "class": "LookCamera",
 "language": "GDScript",
 "path": "res://scripts/gameplay/LookCamera.gd"
-}, {
-"base": "Reference",
-"class": "MachineManager",
-"language": "GDScript",
-"path": "res://CTR/Scripts/FSM.gd"
 }, {
 "base": "Spatial",
 "class": "ManagerGameplay",
@@ -344,6 +309,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Editor/Selectable.gd"
 }, {
+"base": "Reference",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://scripts/StateMachine.gd"
+}, {
 "base": "Spatial",
 "class": "TerrainGenerator",
 "language": "GDScript",
@@ -376,7 +346,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ArrayUtils": "",
-"BetterGroups": "",
 "Boss": "",
 "BossAra": "",
 "Builder": "",
@@ -385,8 +354,6 @@ _global_script_class_icons={
 "Character": "",
 "CharacterMachine": "",
 "Chunk": "",
-"ChunkConfig": "",
-"Chunky": "",
 "Crate": "",
 "CrateAku": "",
 "CrateBounce": "",
@@ -397,7 +364,6 @@ _global_script_class_icons={
 "CrateTNT": "",
 "CrateTime": "",
 "CrateWoodJump": "",
-"DebuggContaine": "",
 "Dynamite": "",
 "EditorCrate": "",
 "EditorManager": "",
@@ -419,8 +385,6 @@ _global_script_class_icons={
 "ItemLife": "",
 "ItemWumpa": "",
 "Iventory": "",
-"KartControl": "",
-"KartState": "",
 "KinematicCharacter": "",
 "Label3D": "",
 "LevelBuilder": "",
@@ -430,7 +394,6 @@ _global_script_class_icons={
 "LevelParams": "",
 "Logger": "",
 "LookCamera": "",
-"MachineManager": "",
 "ManagerGameplay": "",
 "Menu": "",
 "MenuManager": "",
@@ -442,6 +405,7 @@ _global_script_class_icons={
 "Power": "",
 "Project": "",
 "Selectable": "",
+"StateMachine": "",
 "TerrainGenerator": "",
 "TextButton": "",
 "TimeTrial": "",
@@ -454,7 +418,7 @@ _global_script_class_icons={
 
 config/name="Crash Bandicoot Worlds"
 config/description="Crash Fan game, based on psx era for fans ;P"
-run/main_scene="res://gameplay/level/scn_oldwest.tscn"
+run/main_scene="res://Lab.tscn"
 run/low_processor_mode=true
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
@@ -468,9 +432,6 @@ IDTable="*res://scripts/Singletons/IDTable.gd"
 GameManager="*res://scripts/Singletons/GameManager.gd"
 Utils="*res://scripts/Singletons/Utils.gd"
 SelectionManager="*res://scripts/Editor/SelectionManager.gd"
-gd_types="*res://addons/godot_db_manager/core/db_type.gd"
-NodeFinder="*res://addons/NodeFinder/NodeFinder.gd"
-Debugger="*res://CTR/Scripts/Debugger.gd"
 AdvancedBackgroundLoader="*res://addons/Advanced Background Loader/background_load.gd"
 
 [compression]
@@ -503,7 +464,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "Advanced Background Loader", "QuickPluginManager", "ResolutionManager", "SIsilicon.3d.text", "chunkenizer", "simple_water" )
+enabled=PoolStringArray( "Advanced Background Loader", "QuickPluginManager", "SIsilicon.3d.text", "simple_water" )
 
 [importer_defaults]
 

@@ -1,7 +1,7 @@
 class_name CharacterMachine
 
 var character
-var manager = MachineManager.new(self)
+var manager = StateMachine.new(self)
 
 var blend_time
 var animator

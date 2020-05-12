@@ -2,7 +2,7 @@ extends Spatial
 
 export var linked_portal:NodePath = ""
 
-var machine_manager:Utils.MachineManager
+var machine_manager:StateMachine
 var _portal:WarpPortal = null
 enum {EMERGE,SUBMERGE,RELEASED,PRESSED,INACTIVE,IDLE}
 func _ready():
@@ -12,8 +12,8 @@ func _ready():
 	else:
 		disable()
 		return
-	machine_manager = Utils.MachineManager.new()
-	machine_manager.register_state_array(self,[EMERGE, 
+	machine_manager = StateMachine.new(self)
+	machine_manager.register_state_array([EMERGE, 
 	SUBMERGE,RELEASED,PRESSED,INACTIVE,IDLE
 	], ["emerge",
 	"submerge","released","pressed", "inactive","idle"

@@ -1,3 +1,0 @@
-[Custom Resolutions]
-
-Test_Resolution_1="600x400"

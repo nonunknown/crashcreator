@@ -5,7 +5,14 @@ a game for crash fans to create and play on their own levels, and free source co
     - 3.2 Official - Standard
 
 # Note
-alpha means not playable!
+* alpha means not playable!
+* All scenes named with "scn_*.tscn" are intended to be playable/testable
+ 
+### Alpha 0.12.3.1
+* Removed CTR Module (due to heavy files)
+* Corrected all issues with project opening
+* Made Lab.tscn as the main scene
+
 
 ### Alpha 0.12.3
     -Minor Changes

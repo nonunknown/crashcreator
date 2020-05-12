@@ -6,13 +6,13 @@ signal tool_changed
 signal tool_exited
 signal tool_started
 
-onready var smachine:Utils.MachineManager = Utils.MachineManager.new()
+onready var smachine:StateMachine = StateMachine.new(self)
 var logger:Logger
 var registered_managers = {}
 
 func _ready():
 	logger =  get_node("GUI/GUI_Logger/Logger")
-	smachine.register_state_array(self,[Utils.EDITOR_STATE.PATH,
+	smachine.register_state_array([Utils.EDITOR_STATE.PATH,
 	Utils.EDITOR_STATE.CRATE,Utils.EDITOR_STATE.ENTITY,Utils.EDITOR_STATE.TIME,Utils.EDITOR_STATE.SAVE,Utils.EDITOR_STATE.LOAD,Utils.EDITOR_STATE.NEW,Utils.EDITOR_STATE.ENEMY],
 	["path","crate","entity","time","save","load","new","enemy"])
 	connect("change_mode",self,"_on_change_mode")

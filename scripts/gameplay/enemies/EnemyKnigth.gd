@@ -1,12 +1,12 @@
 extends Enemy
 class_name EnemyKnight
 
-var machine:MachineManager
+var machine:StateMachine
 var animator:AnimationPlayer
 var blend_time:float = 0.1
 enum STATE {IDLE,ATTACK}
 func _ready():
-	machine = MachineManager.new(self)
+	machine = StateMachine.new(self)
 	animator = $AnimationPlayer
 	machine.register_state_array([STATE.IDLE,STATE.ATTACK],["idle","attack"])
 	machine.change_state(STATE.IDLE)
